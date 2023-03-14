@@ -7,7 +7,7 @@
 <link href="EPIB705-Bias-Analysis-2023_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="EPIB705-Bias-Analysis-2023_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="EPIB705-Bias-Analysis-2023_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.280">
+  <meta name="generator" content="quarto-1.2.269">
 
   <title>Bias Analysis</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -335,12 +335,30 @@
 
 </div>
 </section>
+<section id="overview" class="slide level2">
+<h2>Overview</h2>
+<ul>
+<li>Why?</li>
+<li>Deterministic Bias Analysis
+<ul>
+<li>Unmeasured confounding<br>
+</li>
+<li>Measurement <span class="red">error</span><br>
+</li>
+<li>Selection bias<br>
+</li>
+</ul></li>
+<li>Probabilistic Bias Analysis</li>
+<li>Record-level Implementation</li>
+<li>Summary</li>
+</ul>
+</section>
 <section id="introduction" class="slide level2">
 <h2>Introduction</h2>
 <p>How do misclassification, selection bias, and unmeasured confounding create bias in parameter estimation?</p>
 <div>
 <blockquote>
-<p>“By assuming that all errors are random and that any modeling assumptions (such as homogeneity) are correct, all uncertainty about the effect of errors on estimates is subsumed within conventional standard deviations for the estimates (standard errors)” (RGL, p.346)</p>
+<p>By assuming that all errors are random and that any modeling assumptions (such as homogeneity) are correct, all uncertainty about the effect of errors on estimates is subsumed within conventional standard deviations for the estimates (standard errors), such as those given in earlier chapters (which assume no measurement error), and any discrepancy between an observed association and the target effect may be attributed to chance alone - (RGL, p.346)</p>
 </blockquote>
 <ul>
 <li class="fragment">Bias analysis is an attempt to “safeguard against failure to attribute effects to exposure rather than systematic error”</li>
@@ -366,7 +384,7 @@
 <h2></h2>
 <p>Intuitions are difficult to overcome.</p>
 
-<img data-src="images/illusion-2.png" class="r-stretch"></section>
+<img data-src="images/illusion-2.png" width="965" class="r-stretch"></section>
 <section id="record-level-implementation" class="slide level2">
 <h2>Record level implementation</h2>
 <ul>
@@ -425,6 +443,7 @@
 </section>
 <section id="unmeasured-confounding-1" class="slide level2">
 <h2>Unmeasured Confounding</h2>
+<p><br></p>
 <div class="columns">
 <div class="column" style="width:52%;">
 <table>
@@ -464,6 +483,7 @@
 <span class="math inline">\(OR_{DX+}=\frac{(45\times945)}{(94\times257)}=1.76\)</span></p>
 </div>
 </div>
+<p><br></p>
 <ul>
 <li><p>Likely confounded by smoking <span class="math inline">\((Z)\)</span>, but we did not measure it.</p></li>
 <li><p>How can we quantify failing to adjust for <span class="math inline">\(Z\)</span>?</p></li>
@@ -566,6 +586,25 @@
 </div>
 </div>
 </section>
+<section id="where-did-this-come-from" class="slide level2">
+<h2>Where did this come from?</h2>
+<div class="columns">
+<div class="column" style="width:65%;">
+<blockquote>
+<p>If a causal agent, <em>A</em>, with no causal effect upon the risk of a disease, nevertheless, because of a positive correlation with some other causal agent, <em>B</em>, shows an apparent risk, <em>r</em>, for those exposed to <em>A</em>, relative to those not so exposed, then the prevalence of <em>B</em>, among those exposed to <em>A</em>, relative to the prevalence among those not so exposed, must be greater than <em>r</em>.</p>
+</blockquote>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:30%;">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="images/cornfield.png" style="width:150.0%"></p>
+</div>
+</div>
+<p>Contribution of Cornfield et al.&nbsp;(1959, J Nat Canc Inst).</p>
+</div>
+</div>
+</section>
 <section id="data-layout-for-dichotomous-unmeasured-confounder-1" class="slide level2">
 <h2>Data Layout for Dichotomous Unmeasured Confounder</h2>
 <div class="columns">
@@ -665,6 +704,106 @@
 </ul>
 <p><span class="math inline">\(OR_{DX_{Z=1}}=\dfrac{A_{11}B_{01}}{A_{01}B_{11}}\)</span></p>
 <p><span class="math inline">\(OR_{DX_{Z=0}}=\dfrac{\left(A_{1+}-A_{11}\right)\left(B_{0+}-B_{01}\right)}{\left(A_{0+}-A_{01}\right)\left(B_{1+}-B_{11}\right)}\)</span></p>
+</section>
+<section id="data-layout-for-dichotomous-unmeasured-confounder-2" class="slide level2">
+<h2>Data Layout for Dichotomous Unmeasured Confounder</h2>
+<div class="columns">
+<div class="column" style="width:35%;">
+<table>
+<caption><strong>Z=1 Smokers</strong></caption>
+<thead>
+<tr class="header">
+<th></th>
+<th>X=1</th>
+<th>X=0</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>D=1</td>
+<td><mark>A<sub>11</sub></mark></td>
+<td><mark>A<sub>01</sub></mark></td>
+<td>M<sub>11</sub></td>
+</tr>
+<tr class="even">
+<td>D=0</td>
+<td><mark>B<sub>11</sub></mark></td>
+<td><mark>B<sub>01</sub></mark></td>
+<td>M<sub>01</sub></td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td>N<sub>11</sub></td>
+<td>N<sub>01</sub></td>
+<td>N<sub>+1</sub></td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="width:40%;">
+<table>
+<caption><strong>Z=0 Non-smokers</strong></caption>
+<thead>
+<tr class="header">
+<th>X=1</th>
+<th>X=0</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A<sub>1+</sub> - A<sub>11</sub></td>
+<td>A<sub>0+</sub> - A<sub>01</sub></td>
+<td>M<sub>A+</sub> - M<sub>11</sub></td>
+</tr>
+<tr class="even">
+<td>B<sub>1+</sub> - B<sub>11</sub></td>
+<td>B<sub>0+</sub> - B<sub>01</sub></td>
+<td>M<sub>B+</sub> - M<sub>01</sub></td>
+</tr>
+<tr class="odd">
+<td>N<sub>1+</sub> - N<sub>11</sub></td>
+<td>N<sub>0+</sub> - N<sub>01</sub></td>
+<td>N<sub>++</sub> - N<sub>+1</sub></td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="width:25%;">
+<table>
+<caption><strong>Total</strong></caption>
+<thead>
+<tr class="header">
+<th>X=1</th>
+<th>X=0</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>45</td>
+<td>94</td>
+<td>139</td>
+</tr>
+<tr class="even">
+<td>257</td>
+<td>945</td>
+<td>1202</td>
+</tr>
+<tr class="odd">
+<td>302</td>
+<td>1039</td>
+<td>1341</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>We already know the marginal totals, so only 4 quantities to estimate.</p>
+<ul>
+<li><p>These values may be generated by specifying values for the prevalence of smoking in each exposure group and the association between smoking and disease.</p></li>
+<li><p>The (unknown) smoking prevalence in exposure strata are:</p>
+<p><span class="math inline">\(P_{Z1}=N_{11}/N_{1+}\)</span> and <span class="math inline">\(P_{Z0}=N_{01}/N_{0+}\)</span></p></li>
+</ul>
 <div class="footer footer-default">
 
 </div>
