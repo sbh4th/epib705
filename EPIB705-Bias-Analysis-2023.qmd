@@ -1,0 +1,188 @@
+---
+title: "Bias Analysis"
+format: 
+  revealjs:
+    width: 1600
+    height: 900
+    slide-number: true
+    html-math-method: mathjax
+editor: visual
+---
+```{r setup}
+library(here)
+```
+
+## Introduction
+
+How do misclassification, selection bias, and unmeasured confounding
+create bias in parameter estimation?
+
+::: {.incremental}
+
+> "By assuming that all errors are random and that any modeling assumptions (such as homogeneity) are correct, all uncertainty about the effect of errors on estimates is subsumed within conventional standard deviations for the estimates (standard errors)" (RGL, p.346)
+
+- Bias analysis is an attempt to "safeguard against failure to attribute effects to exposure rather than systematic error"
+
+:::
+
+## What are we concerned about?
+```{r, echo=F, out.width="80%"}
+knitr::include_graphics(here("images", "bias-DAG.pdf"))
+```
+
+##
+::: center
+Which line is longer?
+:::
+```{r, echo=F, out.width="80%"}
+knitr::include_graphics(here("images", "illusion-1.jpg"))
+```
+
+##
+Intuitions are difficult to overcome.
+```{r, echo=F}
+knitr::include_graphics(here("images", "illusion-2.png"))
+```
+
+## Record level implementation
+- Step 1: Identify the Source of Bias
+- Step 2: Select the Bias Parameters
+- Step 3: Assign Probability Distributions to Each Bias Parameter
+- Step 4: Use Simple Bias Analysis Methods to Incorporate Uncertainty in the Bias Parameters and Random Error
+  - Step 4a: Randomly Sample from the Bias Parameter Distributions
+  - Step 4b: Use Simple Bias Analysis Methods and Incorporate Uncertainty and Conventional Random Error
+  - Step 4c: Sample the Bias-Adjusted Effect Estimate
+- Step 5: Save the Bias-Adjusted Estimate and Repeat Steps 4a–c
+
+## Unmeasured Confounding
+Example of Sensitivity Analysis for Unmeasured Confounding
+
+-   Crude OR: $OR_{DX+}=(45\times945)/(94\times257)=1.76$
+
+|   Disease Status | X=1 |  X=0 | Total |
+| -----------------|-----|------|-------|
+|    Cases (D=1)   |  45 |   94 |    139 |
+|   Controls (D=0) | 257 |  945 |   1202 |
+|       Total      | 302 | 1039 |  1341  |
+
+- We think this is confounded by smoking $(Z)$, but we did not measure
+    it.
+
+-   How can we quantify the potential effect of failing to adjust for
+    $Z$?
+    
+## Unmeasured Confounding
+:::: {.columns}
+
+::: {.column width="52%"}
+|   Disease Status | X=1 |  X=0 | Total |
+| -----------------|-----|------|-------|
+|    Cases (D=1)   |  45 |   94 |    139 |
+|   Controls (D=0) | 257 |  945 |   1202 |
+|       Total      | 302 | 1039 |  1341  |
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="46%"}
+Crude OR:  
+$OR_{DX+}=\frac{(45\times945)}{(94\times257)}=1.76$  
+:::
+
+::::
+
+- Likely confounded by smoking $(Z)$, but we did not measure it.
+
+- How can we quantify failing to adjust for $Z$?
+
+## Example: Sensitivity Analysis for Unmeasured Confounding
+
+## Data Layout for Dichotomous Unmeasured Confounder 
+
+:::: {.columns}
+
+::: {.column width="35%"}
+|    | X=1 | X=0 | Total |
+|----|------|------|------|
+|D=1 | A~11~    | A~01~    | M~11~    |
+|D=0 | B~11~    | B~01~    | M~01~    |
+|Total | N~11~    | N~01~    | N~+1~    |
+
+: **Z=1 Smokers**
+
+:::
+
+::: {.column width="40%"}
+| X=1 | X=0 | Total |
+|------|------|------|
+| A~1+~ - A~11~ | A~0+~ - A~01~ | M~A+~ - M~11~ |
+| B~1+~ - B~11~ | B~0+~ - B~01~ | M~B+~ - M~01~ |
+| N~1+~ - N~11~ | N~0+~ - N~01~ | N~++~ - N~+1~ |
+
+: **Z=0 Non-smokers**
+
+:::
+
+::: {.column width="25%"}
+| X=1 | X=0 | Total |
+|------|------|------|
+| A~1+~    | A~0+~    | M~A+~    |
+| B~1+~    | B~0+~    | M~B+~ |
+| N~1+~    | N~0+~    | N~++~ |
+
+: **Total**
+:::
+
+::::
+
+## Data Layout for Dichotomous Unmeasured Confounder 
+
+:::: {.columns}
+
+::: {.column width="35%"}
+|    | X=1 | X=0 | Total |
+|----|------|------|------|
+|D=1 | A~11~    | A~01~    | M~11~    |
+|D=0 | B~11~    | B~01~    | M~01~    |
+|Total | N~11~    | N~01~    | N~+1~    |
+
+: **Z=1 Smokers**
+
+:::
+
+::: {.column width="40%"}
+| X=1 | X=0 | Total |
+|------|------|------|
+| A~1+~ - A~11~ | A~0+~ - A~01~ | M~A+~ - M~11~ |
+| B~1+~ - B~11~ | B~0+~ - B~01~ | M~B+~ - M~01~ |
+| N~1+~ - N~11~ | N~0+~ - N~01~ | N~++~ - N~+1~ |
+
+: **Z=0 Non-smokers**
+
+:::
+
+::: {.column width="25%"}
+| X=1 | X=0 | Total |
+|------|------|------|
+| A~1+~    | A~0+~    | M~A+~    |
+| B~1+~    | B~0+~    | M~B+~ |
+| N~1+~    | N~0+~    | N~++~ |
+
+: **Total**
+:::
+
+::::
+- To adjust for smoking we need stratum-specific ORs.
+
+- We can write the exposure-disease OR \textbf{within strata} of $Z$
+$\left(OR_{DXZ}\right)$ as:
+
+$OR_{DX_{Z=1}}=\dfrac{A_{11}B_{01}}{A_{01}B_{11}}$  
+
+$OR_{DX_{Z=0}}=\dfrac{\left(A_{1+}-A_{11}\right)\left(B_{0+}-B_{01}\right)}{\left(A_{0+}-A_{01}\right)\left(B_{1+}-B_{11}\right)}$
+
+
+
+
+
