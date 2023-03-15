@@ -8,21 +8,33 @@ format:
     slide-number: true
     html-math-method: mathjax
 editor: visual
+bibliography: bias-analysis.bib
 ---
 
-```{r setup}
+```{r setup, echo=F}
 library(here)
 ```
 
-## Overview
-- Why?
-- Deterministic Bias Analysis  
-  - Unmeasured confounding  
-  - Measurement [error]{.red}  
-  - Selection bias  
-- Probabilistic Bias Analysis
-- Record-level Implementation
-- Summary
+## Overview{.h2center}
+
+### Why Bias Analysis?
+<br>
+
+### Deterministic Bias Analysis  
+#### Unmeasured confounding  
+#### Measurement error  
+#### Selection bias  
+<br>
+
+### Probabilistic Bias Analysis
+<br>
+
+### Record-level Implementation
+<br>
+
+### Summary
+
+## Unmeasured Confounding
 
 ## Introduction
 
@@ -39,6 +51,14 @@ How do misclassification, selection bias, and unmeasured confounding create bias
 ```{r, echo=F, out.width="80%"}
 knitr::include_graphics(here("images", "bias-DAG.pdf"))
 ```
+
+## Example
+
+
+
+> Several potential limitations of the present investigation must be considered in drawing conclusions from the results. In particular, AMD was ascertained only in one eye, resulting in a possible underestimation of AMD cases; however, studies have shown that AMD development is typically symmetric. Further, AMD was identified using nonmydriatic fundus photography without dilating the pupils, which may have led to potential misclassification of cases. In estimating milk and fish intake, the food frequency questionnaire used in this study was not validated and the measurement error was unknown. The serum 25-hydroxyvitamin D values would reflect sun exposure and food intake over recent weeks, rather than years, which would have enhanced random measurement error. Therefore, **associations reported are likely to be biased toward the null.**[^*]
+
+[^*]: See @Parekh:2007aa
 
 ## 
 
@@ -68,6 +88,25 @@ knitr::include_graphics(here("images", "illusion-2.png"))
     -   Step 4b: Use Simple Bias Analysis Methods and Incorporate Uncertainty and Conventional Random Error
     -   Step 4c: Sample the Bias-Adjusted Effect Estimate
 -   Step 5: Save the Bias-Adjusted Estimate and Repeat Steps 4a--c
+
+## Overview{.h2center}
+
+### [Why Bias Analysis?]{.gray}
+<br>
+
+### **Deterministic Bias Analysis**  
+#### **Unmeasured confounding**  
+#### [Measurement error]{.gray}  
+#### [Selection bias]{.gray}  
+<br>
+
+### [Probabilistic Bias Analysis]{.gray}
+<br>
+
+### [Record-level Implementation]{.gray}
+<br>
+
+### [Summary]{.gray}
 
 ## Unmeasured Confounding
 
@@ -251,3 +290,19 @@ We already know the marginal totals, so only 4 quantities to estimate.
 - The (unknown) smoking prevalence in exposure strata are:  
 
     $P_{Z1}=N_{11}/N_{1+}$ and $P_{Z0}=N_{01}/N_{0+}$ 
+    
+## Ex
+```{r tab}
+z1 <- rep(1,9)
+x1 <- rep(seq(1:3),3)
+d1 <- rep(seq(1:3), each=3)
+c1 <- c("A11", "A01", "M11",
+        "B11", "B01", "M01",
+        "N11", "N01", "N+1")
+df <- data.frame(z1, x1, d1, c1)
+df1 <- df %>% 
+  pivot_wider(names_from = x1, values_from = c1)
+```
+
+## References
+

@@ -27,6 +27,25 @@
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
     }
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
   </style>
   <link rel="stylesheet" href="EPIB705-Bias-Analysis-2023_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <link href="EPIB705-Bias-Analysis-2023_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -335,23 +354,23 @@
 
 </div>
 </section>
-<section id="overview" class="slide level2">
+<section id="overview" class="slide level2 h2center">
 <h2>Overview</h2>
-<ul>
-<li>Why?</li>
-<li>Deterministic Bias Analysis
-<ul>
-<li>Unmeasured confounding<br>
-</li>
-<li>Measurement <span class="red">error</span><br>
-</li>
-<li>Selection bias<br>
-</li>
-</ul></li>
-<li>Probabilistic Bias Analysis</li>
-<li>Record-level Implementation</li>
-<li>Summary</li>
-</ul>
+<h3 id="why-bias-analysis">Why Bias Analysis?</h3>
+<p><br></p>
+<h3 id="deterministic-bias-analysis">Deterministic Bias Analysis</h3>
+<h4 id="unmeasured-confounding">Unmeasured confounding</h4>
+<h4 id="measurement-error">Measurement error</h4>
+<h4 id="selection-bias">Selection bias</h4>
+<p><br></p>
+<h3 id="probabilistic-bias-analysis">Probabilistic Bias Analysis</h3>
+<p><br></p>
+<h3 id="record-level-implementation">Record-level Implementation</h3>
+<p><br></p>
+<h3 id="summary">Summary</h3>
+</section>
+<section id="unmeasured-confounding-1" class="slide level2">
+<h2>Unmeasured Confounding</h2>
 </section>
 <section id="introduction" class="slide level2">
 <h2>Introduction</h2>
@@ -373,6 +392,12 @@
 </div>
 </div>
 </section>
+<section id="example" class="slide level2">
+<h2>Example</h2>
+<blockquote>
+<p>Several potential limitations of the present investigation must be considered in drawing conclusions from the results. In particular, AMD was ascertained only in one eye, resulting in a possible underestimation of AMD cases; however, studies have shown that AMD development is typically symmetric. Further, AMD was identified using nonmydriatic fundus photography without dilating the pupils, which may have led to potential misclassification of cases. In estimating milk and fish intake, the food frequency questionnaire used in this study was not validated and the measurement error was unknown. The serum 25-hydroxyvitamin D values would reflect sun exposure and food intake over recent weeks, rather than years, which would have enhanced random measurement error. Therefore, <strong>associations reported are likely to be biased toward the null.</strong><sup>1</sup></p>
+</blockquote>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>See <span class="citation" data-cites="Parekh:2007aa">Parekh et al. (<a href="#/references" role="doc-biblioref" onclick="">2007</a>)</span></p></li></ol></aside></section>
 <section id="section" class="slide level2">
 <h2></h2>
 <div class="center">
@@ -385,7 +410,7 @@
 <p>Intuitions are difficult to overcome.</p>
 
 <img data-src="images/illusion-2.png" width="965" class="r-stretch"></section>
-<section id="record-level-implementation" class="slide level2">
+<section id="record-level-implementation-1" class="slide level2">
 <h2>Record level implementation</h2>
 <ul>
 <li>Step 1: Identify the Source of Bias</li>
@@ -400,7 +425,22 @@
 <li>Step 5: Save the Bias-Adjusted Estimate and Repeat Steps 4a–c</li>
 </ul>
 </section>
-<section id="unmeasured-confounding" class="slide level2">
+<section id="overview-1" class="slide level2 h2center">
+<h2>Overview</h2>
+<h3 id="why-bias-analysis-1"><span class="gray">Why Bias Analysis?</span></h3>
+<p><br></p>
+<h3 id="deterministic-bias-analysis-1"><strong>Deterministic Bias Analysis</strong></h3>
+<h4 id="unmeasured-confounding-2"><strong>Unmeasured confounding</strong></h4>
+<h4 id="measurement-error-1"><span class="gray">Measurement error</span></h4>
+<h4 id="selection-bias-1"><span class="gray">Selection bias</span></h4>
+<p><br></p>
+<h3 id="probabilistic-bias-analysis-1"><span class="gray">Probabilistic Bias Analysis</span></h3>
+<p><br></p>
+<h3 id="record-level-implementation-2"><span class="gray">Record-level Implementation</span></h3>
+<p><br></p>
+<h3 id="summary-1"><span class="gray">Summary</span></h3>
+</section>
+<section id="unmeasured-confounding-3" class="slide level2">
 <h2>Unmeasured Confounding</h2>
 <p>Example of Sensitivity Analysis for Unmeasured Confounding</p>
 <ul>
@@ -441,7 +481,7 @@
 <li><p>How can we quantify the potential effect of failing to adjust for <span class="math inline">\(Z\)</span>?</p></li>
 </ul>
 </section>
-<section id="unmeasured-confounding-1" class="slide level2">
+<section id="unmeasured-confounding-4" class="slide level2">
 <h2>Unmeasured Confounding</h2>
 <p><br></p>
 <div class="columns">
@@ -804,10 +844,19 @@
 <li><p>The (unknown) smoking prevalence in exposure strata are:</p>
 <p><span class="math inline">\(P_{Z1}=N_{11}/N_{1+}\)</span> and <span class="math inline">\(P_{Z0}=N_{01}/N_{0+}\)</span></p></li>
 </ul>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
 <div class="footer footer-default">
 
 </div>
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-Parekh:2007aa" class="csl-entry" role="doc-biblioentry">
+Parekh, Niyati, Richard J Chappell, Amy E Millen, Daniel M Albert, and Julie A Mares. 2007. <span>“Association Between Vitamin d and Age-Related Macular Degeneration in the Third National Health and Nutrition Examination Survey, 1988 Through 1994.”</span> <em>Arch Ophthalmol</em> 125 (5): 661–69. <a href="https://doi.org/10.1001/archopht.125.5.661">https://doi.org/10.1001/archopht.125.5.661</a>.
+</div>
+</div>
 </section>
+
     </div>
   </div>
 

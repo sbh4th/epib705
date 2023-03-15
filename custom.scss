@@ -1,6 +1,7 @@
 /*-- scss:defaults --*/
 $theme-blue: #377eb8;
 $theme-red: #e41a1c;
+$theme-gray: #cccccc;
 
 /*-- scss:rules --*/
 
@@ -10,4 +11,14 @@ $theme-red: #e41a1c;
 
 .red {
   color: $theme-red;
+}
+
+.gray {
+  color: $theme-gray;
+}
+
+/* alignment */
+
+.h2center h2 {
+  text-align: center;
 }
