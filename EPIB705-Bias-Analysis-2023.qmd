@@ -19,21 +19,28 @@ library(tidyverse)
 library(kableExtra)
 ```
 
-## Overview{.h2center}
+## Overview {.h2center}
 
 ### Why Bias Analysis?
+
 <br>
 
-### Deterministic Bias Analysis  
-#### Unmeasured confounding  
-#### Misclassification 
-#### Selection bias  
+### Deterministic Bias Analysis
+
+#### Unmeasured confounding
+
+#### Misclassification
+
+#### Selection bias
+
 <br>
 
 ### Probabilistic Bias Analysis
+
 <br>
 
 ### Record-level Implementation
+
 <br>
 
 ### Summary
@@ -58,11 +65,9 @@ knitr::include_graphics(here("images", "bias-DAG.pdf"))
 
 ## Example
 
+> Several potential limitations of the present investigation must be considered in drawing conclusions from the results. In particular, AMD was ascertained only in one eye, resulting in a possible underestimation of AMD cases; however, studies have shown that AMD development is typically symmetric. Further, AMD was identified using nonmydriatic fundus photography without dilating the pupils, which may have led to potential misclassification of cases. In estimating milk and fish intake, the food frequency questionnaire used in this study was not validated and the measurement error was unknown. The serum 25-hydroxyvitamin D values would reflect sun exposure and food intake over recent weeks, rather than years, which would have enhanced random measurement error. Therefore, **associations reported are likely to be biased toward the null.**[^1]
 
-
-> Several potential limitations of the present investigation must be considered in drawing conclusions from the results. In particular, AMD was ascertained only in one eye, resulting in a possible underestimation of AMD cases; however, studies have shown that AMD development is typically symmetric. Further, AMD was identified using nonmydriatic fundus photography without dilating the pupils, which may have led to potential misclassification of cases. In estimating milk and fish intake, the food frequency questionnaire used in this study was not validated and the measurement error was unknown. The serum 25-hydroxyvitamin D values would reflect sun exposure and food intake over recent weeks, rather than years, which would have enhanced random measurement error. Therefore, **associations reported are likely to be biased toward the null.**[^*]
-
-[^*]: See @Parekh:2007aa
+[^1]: See @Parekh:2007aa
 
 ## 
 
@@ -93,21 +98,28 @@ knitr::include_graphics(here("images", "illusion-2.png"))
     -   Step 4c: Sample the Bias-Adjusted Effect Estimate
 -   Step 5: Save the Bias-Adjusted Estimate and Repeat Steps 4a--c
 
-## Overview{.h2center}
+## Overview {.h2center}
 
 ### [Why Bias Analysis?]{.gray}
+
 <br>
 
-### **Deterministic Bias Analysis**  
-#### **Unmeasured confounding**  
-#### [Measurement error]{.gray}  
-#### [Selection bias]{.gray}  
+### **Deterministic Bias Analysis**
+
+#### **Unmeasured confounding**
+
+#### [Measurement error]{.gray}
+
+#### [Selection bias]{.gray}
+
 <br>
 
 ### [Probabilistic Bias Analysis]{.gray}
+
 <br>
 
 ### [Record-level Implementation]{.gray}
+
 <br>
 
 ### [Summary]{.gray}
@@ -193,11 +205,10 @@ $OR_{DX+}=\frac{(45\times945)}{(94\times257)}=1.76$
 :::
 
 ## Where did this come from?
+
 ::: columns
 ::: {.column width="65%"}
-
 > If a causal agent, *A*, with no causal effect upon the risk of a disease, nevertheless, because of a positive correlation with some other causal agent, *B*, shows an apparent risk, *r*, for those exposed to *A*, relative to those not so exposed, then the prevalence of *B*, among those exposed to *A*, relative to the prevalence among those not so exposed, must be greater than *r*.
-
 :::
 
 ::: {.column width="5%"}
@@ -207,6 +218,7 @@ $OR_{DX+}=\frac{(45\times945)}{(94\times257)}=1.76$
 ```{r, echo=F, out.width="150%"}
 knitr::include_graphics(here("images", "cornfield.png"))
 ```
+
 Contribution of Cornfield et al. (1959, J Nat Canc Inst).
 :::
 :::
@@ -249,19 +261,26 @@ Contribution of Cornfield et al. (1959, J Nat Canc Inst).
 
 -   We can write the exposure-disease OR \textbf{within strata} of $Z$ $\left(OR_{DXZ}\right)$ as:
 
-$OR_{DX_{Z=1}}=\dfrac{A_{11}B_{01}}{A_{01}B_{11}}$
+:::columns
 
+::: {.column width="35%"}
+$OR_{DX_{Z=1}}=\dfrac{A_{11}B_{01}}{A_{01}B_{11}}$
+:::
+::: {.column width="65%"}
 $OR_{DX_{Z=0}}=\dfrac{\left(A_{1+}-A_{11}\right)\left(B_{0+}-B_{01}\right)}{\left(A_{0+}-A_{01}\right)\left(B_{1+}-B_{11}\right)}$
+:::
+
+:::
 
 ## Data Layout for Dichotomous Unmeasured Confounder
 
 ::: columns
 ::: {.column width="35%"}
-|       | X=1   | X=0   | Total |
-|-------|-------|-------|-------|
+|       | X=1                | X=0                | Total |
+|-------|--------------------|--------------------|-------|
 | D=1   | <mark>A~11~</mark> | <mark>A~01~</mark> | M~11~ |
 | D=0   | <mark>B~11~</mark> | <mark>B~01~</mark> | M~01~ |
-| Total | N~11~ | N~01~ | N~+1~ |
+| Total | N~11~              | N~01~              | N~+1~ |
 
 : **Z=1 Smokers**
 :::
@@ -277,11 +296,11 @@ $OR_{DX_{Z=0}}=\dfrac{\left(A_{1+}-A_{11}\right)\left(B_{0+}-B_{01}\right)}{\lef
 :::
 
 ::: {.column width="25%"}
-| X=1   | X=0   | Total |
-|-------|-------|-------|
-| 45 | 94 | 139 |
-| 257 | 945 | 1202 |
-| 302 | 1039 | 1341 |
+| X=1 | X=0  | Total |
+|-----|------|-------|
+| 45  | 94   | 139   |
+| 257 | 945  | 1202  |
+| 302 | 1039 | 1341  |
 
 : **Total**
 :::
@@ -289,13 +308,14 @@ $OR_{DX_{Z=0}}=\dfrac{\left(A_{1+}-A_{11}\right)\left(B_{0+}-B_{01}\right)}{\lef
 
 We already know the marginal totals, so only 4 quantities to estimate.
 
-- These values may be generated by specifying values for the prevalence of smoking in each exposure group and the association between smoking and disease.
+-   These values may be generated by specifying values for the prevalence of smoking in each exposure group and the association between smoking and disease.
 
-- The (unknown) smoking prevalence in exposure strata are:  
+-   The (unknown) smoking prevalence in exposure strata are:
 
-    $P_{Z1}=N_{11}/N_{1+}$ and $P_{Z0}=N_{01}/N_{0+}$ 
-    
+    $P_{Z1}=N_{11}/N_{1+}$ and $P_{Z0}=N_{01}/N_{0+}$
+
 ## Ex
+
 ```{r tab, echo=F, include=F}
 z1 <- rep(1,9)
 x1 <- rep(seq(1:3),3)
@@ -338,8 +358,9 @@ kbl(tuc, col.names = c("Case", "X=1", "X=0",
 
 ## Worked example
 
-- Suppose we know from external studies that the prevalence of smoking is 70% among those occupationally exposed to resins and 50% among those unexposed in this population.
+-   Suppose we know from external studies that the prevalence of smoking is 70% among those occupationally exposed to resins and 50% among those unexposed in this population.
 
+```{=tex}
 \begin{tabular}{cccccccccccc}
 \hline 
  & \multicolumn{3}{c}{{\small{}Z=1 Smokers}} &  & \multicolumn{3}{c}{{\small{}Z=0 Non-smokers}} &  & \multicolumn{3}{c}{{\small{}Total}}\tabularnewline
@@ -352,16 +373,16 @@ kbl(tuc, col.names = c("Case", "X=1", "X=0",
 {\small{}Total} & {\small{}${\scriptstyle N_{11}}$} & {\small{}${\scriptstyle N_{01}}$} & {\small{}${\scriptstyle N_{+1}}$} &  & {\small{}${\scriptstyle 302-N_{11}}$} & {\small{}${\scriptstyle 1039-N_{01}}$} & {\small{}${\scriptstyle 1341-N_{+1}}$} &  & 302 & 1039 & 1341\tabularnewline
 & & & & & & & & & & & \tabularnewline
 \end{tabular}
-
+```
 -   Our estimates of $B_{11}$ and $B_{01}$ are now:
 
 $B_{11}=P_{Z1}B_{1+}=(.7)(257)\approx180$
 
 $B_{01}=P_{Z0}B_{0+}=(.5)(945)\approx473$
 
-
 ## Will this work?
 
+```{=tex}
 \begin{tabular}{cccccccccccc}
 \hline 
  & \multicolumn{3}{c}{{\small{}Z=1 Smokers}} &  & \multicolumn{3}{c}{{\small{}Z=0 Non-smokers}} &  & \multicolumn{3}{c}{{\small{}Total}}\tabularnewline
@@ -376,22 +397,29 @@ $B_{01}=P_{Z0}B_{0+}=(.5)(945)\approx473$
 \multicolumn{12}{l}{{\scriptsize{}{*}Note: Row and column totals in Z strata may not sum
 because of rounding.}}\tabularnewline
 \end{tabular}
-
-## Overview{.h2center}
+```
+## Overview {.h2center}
 
 ### [Why Bias Analysis?]{.gray}
+
 <br>
 
-### **Deterministic Bias Analysis**  
-#### [Unmeasured confounding]{.gray}  
-#### **Misclassification**  
-#### [Selection bias]{.gray}  
+### **Deterministic Bias Analysis**
+
+#### [Unmeasured confounding]{.gray}
+
+#### **Misclassification**
+
+#### [Selection bias]{.gray}
+
 <br>
 
 ### [Probabilistic Bias Analysis]{.gray}
+
 <br>
 
 ### [Record-level Implementation]{.gray}
+
 <br>
 
 ### [Summary]{.gray}
@@ -402,26 +430,36 @@ because of rounding.}}\tabularnewline
 
 > "In epidemiology, victories are few and at this point a whole field may be on the verge of propagating pathological science, which means they cannot get good enough resolution to identify the effects they're studying. Epidemiologists may be seeing and reporting that there are canals on Mars because they're looking at Mars through Galileo's telescope. And that's the nature of the field and all the statistical wizardry in the world isn't going to change that" -Gary Taubes, quoted in Koepsell and Weiss (2004)
 
-## Table Example
+## Basic quantities you already know
 
-\begin{center}
-\begin{tabular}{|l|l|l|}
-\hline
-Var           & Class  & Description\\
-\hline
-$x $             &  numeric      &   xyz \\
-$y$            &  numeric      &   xzh \\
-$z $          &  integer      &   xlp \\
-\hline
+Exposure or disease classification table:
+
+\begin{tabular}{ccc}
+\hline 
+ & \multicolumn{2}{c}{True Status of Exposure or Disease}\tabularnewline
+\cline{2-3} \cline{3-3} 
+Measured Exposure (Dx) Status & Positive & Negative\tabularnewline
+\hline 
+Positive & a & b\tabularnewline
+Negative & c & d\tabularnewline
+& & \tabularnewline
 \end{tabular}
-\end{center}
 
-## Relation between "true" and expected data
+<br>
 
-The number of individuals expected to be observed in a given study
-is a function of the "true" exposure status and the bias parameters
-(i.e., sensitivity and specificity):
+- Sensitivity (Se) = a / (a + c)
 
+- Specificity (Sp) = d / (b + d)
+
+- Positive Predictive Value (PPV) = a / (a + b)
+
+- Negative Predictive Value (NPV) = d / (c + d)
+
+## Relation between "true" and expected observed data
+
+The number of individuals expected to be observed in a given study is a function of the "true" exposure status and the bias parameters (i.e., sensitivity and specificity):
+
+```{=tex}
 \begin{tabular}{cccccc}
 \hline 
  & \multicolumn{2}{c}{True} &  & \multicolumn{2}{c}{Expected observed cells}\tabularnewline
@@ -432,13 +470,74 @@ is a function of the "true" exposure status and the bias parameters
 {\small{}$D_{0}$} & {\small{}$C$} & {\small{}$D$} &  & {\small{}$c=C(Se_{D_{0}})+D(1-Sp_{D_{0}})$} & {\small{}$d=C(1-Se_{D_{0}})+D(Sp_{D_{0}})$}\tabularnewline
 & & & & & \tabularnewline
 \end{tabular}
-
+```
 Who is in the observed "$a$" cell? It is a mixture of:
 
-- Truly exposed individuals correctly classified: $A(Se_{D_{1}})$
+-   Truly exposed individuals correctly classified: $A(Se_{D_{1}})$
 
-- Truly unexposed individuals misclassified as exposed:
-    $B(1-Sp_{D_{1}})$
+-   Truly unexposed individuals misclassified as exposed: $B(1-Sp_{D_{1}})$
+
+## 
+- Suppose we have 85% Se and 95% Sp, which is [non-differential]{.red} with respect to disease:
+
+\begin{tabular}{cccccc}
+\hline 
+ & \multicolumn{2}{c}{True} &  & \multicolumn{2}{c}{Expected observed cells}\tabularnewline
+\cline{1-3} \cline{2-3} \cline{3-3} \cline{5-6} \cline{6-6} 
+ & {\small{}$E_{1}$} & {\small{}$E_{0}$} &  & {\small{}$E_{1}$} & {\small{}$E_{0}$}\tabularnewline
+\hline 
+{\small{}$D_{1}$} & $200$ & {\small{}$100$} &  & {\small{}$200(.85)+100(.05)=175$} & {\small{}$200(.15)+100(.95)=125$}\tabularnewline
+{\small{}$D_{0}$} & $800$ & {\small{}$900$} &  & {\small{}$800(.85)+900(.05)=725$} & {\small{}$800(.15)+900(.95)=975$}\tabularnewline
+\hline 
+ & $1000$ & $1000$ &  & $900$ & $1100$\tabularnewline
+& & & & & \tabularnewline
+\end{tabular}
+
+The observed $a$ cell has 175 individuals, of which:
+
+- 170 ($200\times0.85$) are truly exposed and correctly classified:
+    $A(Se_{D_{1}})$
+
+- 5 $(100\times0.05)$ are truly unexposed but misclassified:
+    $B(1-Sp_{D_{0}})$
+
+$RR_{true}=\dfrac{200/1000}{100/900}=2.0$,
+$RR_{obs}=\dfrac{175/900}{125/1100}=1.7$
+
+## Going from observed to "true" data
+
+- We often have "observed" data and want to know what the corrected effect would be.
+
+- Re-arrange the equations above to go from "observed" to "true" cells:
+
+- Recall that the observed $a$ cell is: $a=A(Se_{D_{1}})+B(1-Sp_{D_{1}})$, and we know that the "true" B cell must be $B=D_{1Tot}-A$
+
+- Now we can substitute and write $a=A(Se_{D_{1}})+(D_{1tot}-A)(1-Sp_{D_{1}})$ and solve for $A$:
+
+<br>
+
+ $\begin{aligned}
+a & = A(Se_{D1})+D_{1Tot}-A-D_{1Tot}(Sp_{D1})+A(Sp_{D1})\\
+a-D_{1Tot}+D_{1Tot}(Sp_{D1}) & = A(Se_{D1})-A+A(Sp_{D1})\\
+a-D_{1Tot}(1-Sp_{D1}) & = A(Se_{D1}-1+Sp_{D1})\\
+\frac{a-D_{1Tot}(1-Sp_{D1})}{(Se_{D1}-1+Sp_{D1})} & = A\end{aligned}$
+
+## Going from observed to "true" data
+
+\begin{tabular}{ccccccc}
+\hline 
+ & \multicolumn{3}{c}{Observed} &  & \multicolumn{2}{c}{Corrected}\tabularnewline
+\cline{1-4} \cline{2-4} \cline{3-4} \cline{4-4} \cline{6-7} \cline{7-7} 
+ & {\small{}$E_{1}$} & {\small{}$E_{0}$} & Total &  & {\small{}$E_{1}$} & {\small{}$E_{0}$}\tabularnewline
+\hline 
+{\small{}$D_{1}$} & {\small{}$a$} & {\small{}$b$} & {\small{}$D_{1Tot}$} &  & $\dfrac{a-D_{1Tot}(1-Sp_{D_{1}})}{Se_{D_{1}}-(1-Sp_{D_{1}})}$ & {\small{}$D_{1Tot}-A$}\tabularnewline
+{\small{}$D_{0}$} & {\small{}$c$} & {\small{}$d$} & {\small{}$D_{0Tot}$} &  & $\dfrac{c-D_{0Tot}(1-Sp_{D_{0}})}{Se_{D_{0}}-(1-Sp_{D_{0}})}$ & {\small{}$D_{0T}-C$}\tabularnewline
+& & & & & & \tabularnewline
+\end{tabular}
+
+In our earlier example Se=85% and Sp=95%, we observed $a=175$, so to get
+the "true" estimate we have:
+
+$$A=\frac{a-D_{1Tot}(1-Sp_{D1})}{(Se_{D1}-1+Sp_{D1})}=\frac{175-300(0.05)}{(0.85-1+0.95)}=200$$
 
 ## References
-

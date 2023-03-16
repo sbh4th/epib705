@@ -7,7 +7,7 @@
 <link href="EPIB705-Bias-Analysis-2023_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="EPIB705-Bias-Analysis-2023_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="EPIB705-Bias-Analysis-2023_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.269">
+  <meta name="generator" content="quarto-1.2.280">
 
   <title>Bias Analysis</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -412,7 +412,7 @@
 <h2></h2>
 <p>Intuitions are difficult to overcome.</p>
 
-<img data-src="images/illusion-2.png" width="965" class="r-stretch"></section>
+<img data-src="images/illusion-2.png" class="r-stretch"></section>
 <section id="record-level-implementation-1" class="slide level2">
 <h2>Record level implementation</h2>
 <ul>
@@ -745,8 +745,13 @@
 <li><p>To adjust for smoking we need stratum-specific ORs.</p></li>
 <li><p>We can write the exposure-disease OR <strong>within strata</strong> of <span class="math inline">\(Z\)</span> <span class="math inline">\(\left(OR_{DXZ}\right)\)</span> as:</p></li>
 </ul>
+<div class="columns">
+<div class="column" style="width:35%;">
 <p><span class="math inline">\(OR_{DX_{Z=1}}=\dfrac{A_{11}B_{01}}{A_{01}B_{11}}\)</span></p>
+</div><div class="column" style="width:65%;">
 <p><span class="math inline">\(OR_{DX_{Z=0}}=\dfrac{\left(A_{1+}-A_{11}\right)\left(B_{0+}-B_{01}\right)}{\left(A_{0+}-A_{01}\right)\left(B_{1+}-B_{11}\right)}\)</span></p>
+</div>
+</div>
 </section>
 <section id="data-layout-for-dichotomous-unmeasured-confounder-2" class="slide level2">
 <h2>Data Layout for Dichotomous Unmeasured Confounder</h2>
@@ -1044,39 +1049,49 @@
 <p>“In epidemiology, victories are few and at this point a whole field may be on the verge of propagating pathological science, which means they cannot get good enough resolution to identify the effects they’re studying. Epidemiologists may be seeing and reporting that there are canals on Mars because they’re looking at Mars through Galileo’s telescope. And that’s the nature of the field and all the statistical wizardry in the world isn’t going to change that” -Gary Taubes, quoted in Koepsell and Weiss (2004)</p>
 </blockquote>
 </section>
-<section id="table-example" class="slide level2">
-<h2>Table Example</h2>
-<div class="center">
+<section id="basic-quantities-you-already-know" class="slide level2">
+<h2>Basic quantities you already know</h2>
+<p>Exposure or disease classification table:</p>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Var</th>
-<th style="text-align: left;">Class</th>
-<th style="text-align: left;">Description</th>
+<th style="text-align: center;"></th>
+<th colspan="2" style="text-align: center;">True Status of Exposure or Disease</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><span class="math inline">\(x\)</span></td>
-<td style="text-align: left;">numeric</td>
-<td style="text-align: left;">xyz</td>
+<td style="text-align: center;">Measured Exposure (Dx) Status</td>
+<td style="text-align: center;">Positive</td>
+<td style="text-align: center;">Negative</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><span class="math inline">\(y\)</span></td>
-<td style="text-align: left;">numeric</td>
-<td style="text-align: left;">xzh</td>
+<td style="text-align: center;">Positive</td>
+<td style="text-align: center;">a</td>
+<td style="text-align: center;">b</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><span class="math inline">\(z\)</span></td>
-<td style="text-align: left;">integer</td>
-<td style="text-align: left;">xlp</td>
+<td style="text-align: center;">Negative</td>
+<td style="text-align: center;">c</td>
+<td style="text-align: center;">d</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 </tbody>
 </table>
-</div>
+<p><br></p>
+<ul>
+<li><p>Sensitivity (Se) = a / (a + c)</p></li>
+<li><p>Specificity (Sp) = d / (b + d)</p></li>
+<li><p>Positive Predictive Value (PPV) = a / (a + b)</p></li>
+<li><p>Negative Predictive Value (NPV) = d / (c + d)</p></li>
+</ul>
 </section>
-<section id="relation-between-true-and-expected-data" class="slide level2">
-<h2>Relation between “true” and expected data</h2>
+<section id="relation-between-true-and-expected-observed-data" class="slide level2">
+<h2>Relation between “true” and expected observed data</h2>
 <p>The number of individuals expected to be observed in a given study is a function of the “true” exposure status and the bias parameters (i.e., sensitivity and specificity):</p>
 <table>
 <thead>
@@ -1127,6 +1142,134 @@
 <li><p>Truly exposed individuals correctly classified: <span class="math inline">\(A(Se_{D_{1}})\)</span></p></li>
 <li><p>Truly unexposed individuals misclassified as exposed: <span class="math inline">\(B(1-Sp_{D_{1}})\)</span></p></li>
 </ul>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<ul>
+<li>Suppose we have 85% Se and 95% Sp, which is <span class="red">non-differential</span> with respect to disease:</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th colspan="2" style="text-align: center;">True</th>
+<th style="text-align: center;"></th>
+<th colspan="2" style="text-align: center;">Expected observed cells</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\(E_{1}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\(E_{0}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\(E_{1}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\(E_{0}\)</span></span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span><span class="math inline">\(D_{1}\)</span></span></td>
+<td style="text-align: center;"><span class="math inline">\(200\)</span></td>
+<td style="text-align: center;"><span><span class="math inline">\(100\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\(200(.85)+100(.05)=175\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\(200(.15)+100(.95)=125\)</span></span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span><span class="math inline">\(D_{0}\)</span></span></td>
+<td style="text-align: center;"><span class="math inline">\(800\)</span></td>
+<td style="text-align: center;"><span><span class="math inline">\(900\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\(800(.85)+900(.05)=725\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\(800(.15)+900(.95)=975\)</span></span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(1000\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1000\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(900\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1100\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p>The observed <span class="math inline">\(a\)</span> cell has 175 individuals, of which:</p>
+<ul>
+<li><p>170 (<span class="math inline">\(200\times0.85\)</span>) are truly exposed and correctly classified: <span class="math inline">\(A(Se_{D_{1}})\)</span></p></li>
+<li><p>5 <span class="math inline">\((100\times0.05)\)</span> are truly unexposed but misclassified: <span class="math inline">\(B(1-Sp_{D_{0}})\)</span></p></li>
+</ul>
+<p><span class="math inline">\(RR_{true}=\dfrac{200/1000}{100/900}=2.0\)</span>, <span class="math inline">\(RR_{obs}=\dfrac{175/900}{125/1100}=1.7\)</span></p>
+</section>
+<section id="going-from-observed-to-true-data" class="slide level2">
+<h2>Going from observed to “true” data</h2>
+<ul>
+<li><p>We often have “observed” data and want to know what the corrected effect would be.</p></li>
+<li><p>Re-arrange the equations above to go from “observed” to “true” cells:</p></li>
+<li><p>Recall that the observed <span class="math inline">\(a\)</span> cell is: <span class="math inline">\(a=A(Se_{D_{1}})+B(1-Sp_{D_{1}})\)</span>, and we know that the “true” B cell must be <span class="math inline">\(B=D_{1Tot}-A\)</span></p></li>
+<li><p>Now we can substitute and write <span class="math inline">\(a=A(Se_{D_{1}})+(D_{1tot}-A)(1-Sp_{D_{1}})\)</span> and solve for <span class="math inline">\(A\)</span>:</p></li>
+</ul>
+<p><br></p>
+<p><span class="math inline">\(\begin{aligned} a &amp; = A(Se_{D1})+D_{1Tot}-A-D_{1Tot}(Sp_{D1})+A(Sp_{D1})\\ a-D_{1Tot}+D_{1Tot}(Sp_{D1}) &amp; = A(Se_{D1})-A+A(Sp_{D1})\\ a-D_{1Tot}(1-Sp_{D1}) &amp; = A(Se_{D1}-1+Sp_{D1})\\ \frac{a-D_{1Tot}(1-Sp_{D1})}{(Se_{D1}-1+Sp_{D1})} &amp; = A\end{aligned}\)</span></p>
+</section>
+<section id="going-from-observed-to-true-data-1" class="slide level2">
+<h2>Going from observed to “true” data</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th colspan="3" style="text-align: center;">Observed</th>
+<th style="text-align: center;"></th>
+<th colspan="2" style="text-align: center;">Corrected</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\(E_{1}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\(E_{0}\)</span></span></td>
+<td style="text-align: center;">Total</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\(E_{1}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\(E_{0}\)</span></span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span><span class="math inline">\(D_{1}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\(a\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\(b\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\(D_{1Tot}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\dfrac{a-D_{1Tot}(1-Sp_{D_{1}})}{Se_{D_{1}}-(1-Sp_{D_{1}})}\)</span></td>
+<td style="text-align: center;"><span><span class="math inline">\(D_{1Tot}-A\)</span></span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span><span class="math inline">\(D_{0}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\(c\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\(d\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\(D_{0Tot}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(\dfrac{c-D_{0Tot}(1-Sp_{D_{0}})}{Se_{D_{0}}-(1-Sp_{D_{0}})}\)</span></td>
+<td style="text-align: center;"><span><span class="math inline">\(D_{0T}-C\)</span></span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p>In our earlier example Se=85% and Sp=95%, we observed <span class="math inline">\(a=175\)</span>, so to get the “true” estimate we have:</p>
+<p><span class="math display">\[A=\frac{a-D_{1Tot}(1-Sp_{D1})}{(Se_{D1}-1+Sp_{D1})}=\frac{175-300(0.05)}{(0.85-1+0.95)}=200\]</span></p>
 </section>
 <section id="references" class="slide level2 smaller scrollable">
 <h2>References</h2>
