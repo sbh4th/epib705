@@ -473,9 +473,13 @@ The number of individuals expected to be observed in a given study is a function
 ```
 Who is in the observed "$a$" cell? It is a mixture of:
 
--   Truly exposed individuals correctly classified: $A(Se_{D_{1}})$
+- Truly exposed individuals correctly classified: $A(Se_{D_{1}})$
 
--   Truly unexposed individuals misclassified as exposed: $B(1-Sp_{D_{1}})$
+- Truly unexposed individuals misclassified as exposed: $B(1-Sp_{D_{1}})$
+
+:::{style="text-align: center;"}
+[Note that observed data *implicitly* assumes 100% Se and Sp]{.red}
+:::
 
 ## 
 - Suppose we have 85% Se and 95% Sp, which is [non-differential]{.red} with respect to disease:
@@ -501,8 +505,14 @@ The observed $a$ cell has 175 individuals, of which:
 - 5 $(100\times0.05)$ are truly unexposed but misclassified:
     $B(1-Sp_{D_{0}})$
 
-$RR_{true}=\dfrac{200/1000}{100/900}=2.0$,
+:::columns
+::: {.column width="35%"}
+$RR_{true}=\dfrac{200/1000}{100/900}=2.0$
+:::
+::: {.column width="65%"}
 $RR_{obs}=\dfrac{175/900}{125/1100}=1.7$
+:::
+:::
 
 ## Going from observed to "true" data
 
@@ -512,7 +522,7 @@ $RR_{obs}=\dfrac{175/900}{125/1100}=1.7$
 
 - Recall that the observed $a$ cell is: $a=A(Se_{D_{1}})+B(1-Sp_{D_{1}})$, and we know that the "true" B cell must be $B=D_{1Tot}-A$
 
-- Now we can substitute and write $a=A(Se_{D_{1}})+(D_{1tot}-A)(1-Sp_{D_{1}})$ and solve for $A$:
+- Now we can substitute and write $a=A(Se_{D_{1}})+(D_{1Tot}-A)(1-Sp_{D_{1}})$ and solve for $A$:
 
 <br>
 
@@ -535,9 +545,96 @@ a-D_{1Tot}(1-Sp_{D1}) & = A(Se_{D1}-1+Sp_{D1})\\
 & & & & & & \tabularnewline
 \end{tabular}
 
-In our earlier example Se=85% and Sp=95%, we observed $a=175$, so to get
-the "true" estimate we have:
+In our earlier example Se=85% and Sp=95%, we observed $a=175$, so to get the "true" estimate we have:
 
 $$A=\frac{a-D_{1Tot}(1-Sp_{D1})}{(Se_{D1}-1+Sp_{D1})}=\frac{175-300(0.05)}{(0.85-1+0.95)}=200$$
+
+## What can be done about misclassification?
+
+- Validation study
+  - Measurement using a "gold standard" on a random sub-sample.
+  - Need to make assumptions about who "complies" with additional measurements and participation.
+  - Might still be infeasible to conduct a validation study for other reasons (e.g., data already collected).
+  - However, for many kinds of exposures (e.g., Personality tests, social class, etc.) there are no "gold standard" tests.
+
+
+- One option in these cases is to try and quantify the potential role that misclassification may have played in your study.
+- Example of coronary heart disease and personality types (Western Collaborative Group Study):
+- If misclassification is ignored entirely, you are assuming 100%
+        Sensitivity and 100% Specificity.
+        
+## Example: non-differential misclassification of exposure
+
+Example of coronary heart disease ($D$) and personality types ($E$):
+
+\begin{tabular}{ccccccc}
+\hline 
+ & \multicolumn{2}{c}{True} &  & \multicolumn{2}{c}{Observed cells} & \tabularnewline
+\cline{1-3} \cline{2-3} \cline{3-3} \cline{5-7} \cline{6-7} \cline{7-7} 
+ & {\small{}$E_{1}$} & {\small{}$E_{0}$} &  & {\small{}$E_{1}$} & {\small{}$E_{0}$} & Total\tabularnewline
+\hline 
+{\small{}$D_{1}$} & {\small{}$A$} & {\small{}$B$} &  & 150 & 107 & 257\tabularnewline
+{\small{}$D_{0}$} & {\small{}$C$} & {\small{}$D$} &  & 1277 & 1620 & 2897\tabularnewline
+& & & & \tabularnewline
+\end{tabular}
+
+$$RR_{obs}=(150/1427)/(107/1727)=1.7$$
+
+- Suppose we have good reasons for assuming 80% Se and 90% Sp.
+
+- What is the true association?
+
+## Calculating "true" values from observed
+
+In our example Se=80% and Sp=90%, we observed $a=150$, so to get the "true" estimate for $A$ we have:
+
+$$A=\frac{a-D_{1Tot}(1-Sp_{D1})}{(Se_{D1}-1+Sp_{D1})}=\frac{150-257(0.10)}{(0.80-1+0.90)}=177.6$$
+<br>
+
+Similar calculations for "true" $C$:
+
+$$C=\frac{c-D_{0Tot}(1-Sp_{D0})}{(Se_{D0}-1+Sp_{D0})}=\frac{1277-2897(0.10)}{(0.80-1+0.90)}=1410.4$$
+
+## Example: non-differential misclassification of exposure
+
+- True $B$ and $D$ are then calculated by subtraction from marginal
+    totals:
+
+$B=D_{1Tot}-a=257-177.5=79.4$
+
+$D=D_{0Tot}-b=2897-1410.4=1486.6$
+
+- Now fill in the "true" table:
+
+\begin{tabular}{ccccccc}
+\hline 
+ & \multicolumn{2}{c}{True} &  & \multicolumn{2}{c}{Observed cells} & \tabularnewline
+\cline{1-3} \cline{2-3} \cline{3-3} \cline{5-7} \cline{6-7} \cline{7-7} 
+ & {\small{}$E_{1}$} & {\small{}$E_{0}$} &  & {\small{}$E_{1}$} & {\small{}$E_{0}$} & Total\tabularnewline
+\hline 
+{\small{}$D_{1}$} & 177.6 & 79.4 &  & 150 & 107 & 257\tabularnewline
+{\small{}$D_{0}$} & 1410.4 & 1486.6 &  & 1277 & 1620 & 2897\tabularnewline
+& & & & & & \tabularnewline
+\end{tabular}
+<br>
+
+$$RR_{true}=(177.6/1588)/(79.4/1566)=2.2$$
+
+## Simple implementation via `episensr`
+
+```{r, echo=T}
+#| output-location: fragment
+library(episensr)
+misclassification(matrix(c(150, 107, 1277, 1620),
+  dimnames = list(c("D+", "D-"),
+  c("E+", "E- ")),
+  nrow = 2, byrow = TRUE),
+  type = "exposure",
+  bias_parms = c(0.80, 0.80, 0.90, 0.90))
+```
+
+
+
+
 
 ## References
