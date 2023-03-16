@@ -9,10 +9,14 @@ format:
     html-math-method: mathjax
 editor: visual
 bibliography: bias-analysis.bib
+filters:
+  - parse-latex
 ---
 
 ```{r setup, echo=F}
 library(here)
+library(tidyverse)
+library(kableExtra)
 ```
 
 ## Overview{.h2center}
@@ -22,7 +26,7 @@ library(here)
 
 ### Deterministic Bias Analysis  
 #### Unmeasured confounding  
-#### Measurement error  
+#### Misclassification 
 #### Selection bias  
 <br>
 
@@ -292,17 +296,149 @@ We already know the marginal totals, so only 4 quantities to estimate.
     $P_{Z1}=N_{11}/N_{1+}$ and $P_{Z0}=N_{01}/N_{0+}$ 
     
 ## Ex
-```{r tab}
+```{r tab, echo=F, include=F}
 z1 <- rep(1,9)
 x1 <- rep(seq(1:3),3)
-d1 <- rep(seq(1:3), each=3)
-c1 <- c("A11", "A01", "M11",
+d <- rep(seq(1:3), each=3)
+c1 <- c("A~11~", "A01", "M11",
         "B11", "B01", "M01",
         "N11", "N01", "N+1")
-df <- data.frame(z1, x1, d1, c1)
+df <- data.frame(z1, x1, d, c1)
 df1 <- df %>% 
-  pivot_wider(names_from = x1, values_from = c1)
+  pivot_wider(names_from = x1, values_from = c(c1,z1)) %>%
+  select(d:c1_3)
+z0 <- rep(0,9)
+c0 <- c("A11", "A01", "M11",
+        "B11", "B01", "M01",
+        "N11", "N01", "N+1")
+
+df <- data.frame(z0, x1, d, c0)
+df0 <- df %>%
+  pivot_wider(names_from = x1, values_from = c(c0,z0)) %>%
+  select(d:c0_3)
+zt <- rep(2,9)
+ct <- c("A11", "A01", "M11",
+        "B11", "B01", "M01",
+        "N11", "N01", "N+1")
+
+df <- data.frame(zt, x1, d, ct)
+dft <- df %>%
+  pivot_wider(names_from = x1, values_from = c(ct,zt)) %>%
+  select(d:ct_3)
+
+tuc <- df1 %>%
+  inner_join(df0) %>%
+  inner_join(dft)
+
+kbl(tuc, col.names = c("Case", "X=1", "X=0", 
+  "Total", "X=1", "X=0", "Total", "X=1", "X=0", "Total")) %>% kable_styling() %>%
+    add_header_above(c(" " = 1, "Z=1 Smokers" = 3, 
+      "Z=0 Non-smokers" = 3, "Total" = 3))
 ```
+
+## Worked example
+
+- Suppose we know from external studies that the prevalence of smoking is 70% among those occupationally exposed to resins and 50% among those unexposed in this population.
+
+\begin{tabular}{cccccccccccc}
+\hline 
+ & \multicolumn{3}{c}{{\small{}Z=1 Smokers}} &  & \multicolumn{3}{c}{{\small{}Z=0 Non-smokers}} &  & \multicolumn{3}{c}{{\small{}Total}}\tabularnewline
+\cline{2-4} \cline{3-4} \cline{4-4} \cline{6-8} \cline{7-8} \cline{8-8} \cline{10-12} \cline{11-12} \cline{12-12} 
+ & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total}\tabularnewline
+\hline 
+{\small{}D=1} & \textbf{\small{}$\mathbf{{\scriptstyle A_{11}}}$} & \textbf{\small{}$\mathbf{{\scriptstyle A_{01}}}$} & {\small{}${\scriptstyle M_{11}}$} &  & {\small{}${\scriptstyle 45-A_{11}}$} & {\small{}${\scriptstyle 94-A_{01}}$} & {\small{}${\scriptstyle 139-M_{11}}$} &  & 45 & 94 & 139\tabularnewline
+{\small{}D=0} & \textbf{\textcolor{red}{\small{}$\mathbf{{\scriptstyle B_{11}}}$}} & \textbf{\textcolor{blue}{\small{}$\mathbf{{\scriptstyle B_{01}}}$}} & {\small{}${\scriptstyle M_{01}}$} &  & {\small{}${\scriptstyle 257-B_{11}}$} & {\small{}${\scriptstyle 945-B_{01}}$} & {\small{}${\scriptstyle 1202-M_{01}}$} &  & \textcolor{red}{257} & \textcolor{blue}{945} & 1202\tabularnewline
+\hline 
+{\small{}Total} & {\small{}${\scriptstyle N_{11}}$} & {\small{}${\scriptstyle N_{01}}$} & {\small{}${\scriptstyle N_{+1}}$} &  & {\small{}${\scriptstyle 302-N_{11}}$} & {\small{}${\scriptstyle 1039-N_{01}}$} & {\small{}${\scriptstyle 1341-N_{+1}}$} &  & 302 & 1039 & 1341\tabularnewline
+& & & & & & & & & & & \tabularnewline
+\end{tabular}
+
+-   Our estimates of $B_{11}$ and $B_{01}$ are now:
+
+$B_{11}=P_{Z1}B_{1+}=(.7)(257)\approx180$
+
+$B_{01}=P_{Z0}B_{0+}=(.5)(945)\approx473$
+
+
+## Will this work?
+
+\begin{tabular}{cccccccccccc}
+\hline 
+ & \multicolumn{3}{c}{{\small{}Z=1 Smokers}} &  & \multicolumn{3}{c}{{\small{}Z=0 Non-smokers}} &  & \multicolumn{3}{c}{{\small{}Total}}\tabularnewline
+\cline{2-4} \cline{3-4} \cline{4-4} \cline{6-8} \cline{7-8} \cline{8-8} \cline{10-12} \cline{11-12} \cline{12-12} 
+ & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total}\tabularnewline
+\hline 
+{\small{}D=1} & {\small{}41} & {\small{}78} & {\small{}120} &  & {\small{}4} & {\small{}16} & {\small{}19} &  & {\small{}45} & {\small{}94} & {\small{}139}\tabularnewline
+{\small{}D=0} & \textcolor{red}{\small{}180} & {\small{}473} & {\small{}652} &  & \textcolor{red}{\small{}77} & {\small{}473} & {\small{}550} &  & {\small{}257} & {\small{}945} & {\small{}1202}\tabularnewline
+\hline 
+{\small{}Total{*}} & {\small{}221} & {\small{}551} & {\small{}772} &  & {\small{}81} & {\small{}488} & {\small{}569} &  & {\small{}302} & {\small{}1039} & {\small{}1341}\tabularnewline
+\hline 
+\multicolumn{12}{l}{{\scriptsize{}{*}Note: Row and column totals in Z strata may not sum
+because of rounding.}}\tabularnewline
+\end{tabular}
+
+## Overview{.h2center}
+
+### [Why Bias Analysis?]{.gray}
+<br>
+
+### **Deterministic Bias Analysis**  
+#### [Unmeasured confounding]{.gray}  
+#### **Misclassification**  
+#### [Selection bias]{.gray}  
+<br>
+
+### [Probabilistic Bias Analysis]{.gray}
+<br>
+
+### [Record-level Implementation]{.gray}
+<br>
+
+### [Summary]{.gray}
+
+## Bias analysis for misclassification
+
+<br>
+
+> "In epidemiology, victories are few and at this point a whole field may be on the verge of propagating pathological science, which means they cannot get good enough resolution to identify the effects they're studying. Epidemiologists may be seeing and reporting that there are canals on Mars because they're looking at Mars through Galileo's telescope. And that's the nature of the field and all the statistical wizardry in the world isn't going to change that" -Gary Taubes, quoted in Koepsell and Weiss (2004)
+
+## Table Example
+
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+Var           & Class  & Description\\
+\hline
+$x $             &  numeric      &   xyz \\
+$y$            &  numeric      &   xzh \\
+$z $          &  integer      &   xlp \\
+\hline
+\end{tabular}
+\end{center}
+
+## Relation between "true" and expected data
+
+The number of individuals expected to be observed in a given study
+is a function of the "true" exposure status and the bias parameters
+(i.e., sensitivity and specificity):
+
+\begin{tabular}{cccccc}
+\hline 
+ & \multicolumn{2}{c}{True} &  & \multicolumn{2}{c}{Expected observed cells}\tabularnewline
+\cline{1-3} \cline{2-3} \cline{3-3} \cline{5-6} \cline{6-6} 
+ & {\small{}$E_{1}$} & {\small{}$E_{0}$} &  & {\small{}$E_{1}$} & {\small{}$E_{0}$}\tabularnewline
+\hline 
+{\small{}$D_{1}$} & {\small{}$A$} & {\small{}$B$} &  & {\small{}$a=A(Se_{D_{1}})+B(1-Sp_{D_{1}})$} & {\small{}$b=A(1-Se_{D_{1}})+B(Sp_{D_{1}})$}\tabularnewline
+{\small{}$D_{0}$} & {\small{}$C$} & {\small{}$D$} &  & {\small{}$c=C(Se_{D_{0}})+D(1-Sp_{D_{0}})$} & {\small{}$d=C(1-Se_{D_{0}})+D(Sp_{D_{0}})$}\tabularnewline
+& & & & & \tabularnewline
+\end{tabular}
+
+Who is in the observed "$a$" cell? It is a mixture of:
+
+- Truly exposed individuals correctly classified: $A(Se_{D_{1}})$
+
+- Truly unexposed individuals misclassified as exposed:
+    $B(1-Sp_{D_{1}})$
 
 ## References
 
