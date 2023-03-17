@@ -622,9 +622,29 @@ $$RR_{true}=(177.6/1588)/(79.4/1566)=2.2$$
 
 ## Simple implementation via `episensr`
 
-```{r, echo=T}
-#| output-location: fragment
+:::: {.columns}
+
+::: {.column width="35%"}
+```{r, echo=T, results='hide'}
 library(episensr)
+# observed data
+misclassification(
+  matrix(c(150, 107, 
+           1277, 1620),
+  dimnames = list(c("D+", "D-"),
+  c("E+", "E- ")),
+  nrow = 2, byrow = TRUE),
+  type = "exposure",
+
+# bias parameters
+  bias_parms = c(0.80, 0.80, 
+                 0.90, 0.90))
+```
+:::
+
+::: {.column width="65%"}
+
+```{r, echo=F}
 misclassification(matrix(c(150, 107, 1277, 1620),
   dimnames = list(c("D+", "D-"),
   c("E+", "E- ")),
@@ -632,9 +652,61 @@ misclassification(matrix(c(150, 107, 1277, 1620),
   type = "exposure",
   bias_parms = c(0.80, 0.80, 0.90, 0.90))
 ```
+:::
 
+::::
 
+## Misclassification of confounders
 
+-   Even if both exposure and disease are measured with 100% Sensitivity
+    and 100% Specificity, if confounding is present misclassification of
+    confounding variables may also lead to biased estimates.
 
+- If the confounding is strong and the exposure-disease
+    relation is weak or null, confounder misclassification can produce misleading results, even if independent and non-differential.
+
+-   Example: Effect of coffee consumption on bladder cancer 
+    
+```{r, engine = 'tikz'}
+#| fig.align: center
+\begin{tikzpicture}[shorten > = 1pt, line width=1pt]
+\tikzstyle{every node} = [rectangle, fill=white, draw=none]
+\node (st) at  (0,0) [align=center] {Smoke\textsubscript{True}};
+\node (so) at  (0,2) [align=center] {Smoke*\textsubscript{Obs}};
+\node (a) at  (2.5,0) [align=center] {Coffee};
+\node (y) at (5,0) [align=center] {Cancer};
+\foreach \from/\to in {st/so, st/a, a/y}
+  \draw [->] (\from) -- (\to);
+\draw [->] (st) to [bend left=35] (y);
+\end{tikzpicture}
+```
+
+## Overview {.h2center}
+
+### [Why Bias Analysis?]{.gray}
+
+<br>
+
+### **Deterministic Bias Analysis**
+
+#### [Unmeasured confounding]{.gray}
+
+#### [Misclassification]{.gray}
+
+#### **Selection bias**
+
+<br>
+
+### [Probabilistic Bias Analysis]{.gray}
+
+<br>
+
+### [Record-level Implementation]{.gray}
+
+<br>
+
+### [Summary]{.gray}
+
+## Bias analysis for selection bias
 
 ## References

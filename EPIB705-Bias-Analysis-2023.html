@@ -1488,17 +1488,25 @@
 </section>
 <section id="simple-implementation-via-episensr" class="slide level2">
 <h2>Simple implementation via <code>episensr</code></h2>
+<div class="columns">
+<div class="column" style="width:35%;">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(episensr)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">misclassification</span>(</span>
-<span id="cb1-3"><a href="#cb1-3"></a>  <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">150</span>, <span class="dv">107</span>, <span class="dv">1277</span>, <span class="dv">1620</span>),</span>
-<span id="cb1-4"><a href="#cb1-4"></a>  <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"D+"</span>, <span class="st">"D-"</span>),</span>
-<span id="cb1-5"><a href="#cb1-5"></a>  <span class="fu">c</span>(<span class="st">"E+"</span>, <span class="st">"E- "</span>)),</span>
-<span id="cb1-6"><a href="#cb1-6"></a>  <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb1-7"><a href="#cb1-7"></a>  <span class="at">type =</span> <span class="st">"exposure"</span>,</span>
-<span id="cb1-8"><a href="#cb1-8"></a>  <span class="at">bias_parms =</span> <span class="fu">c</span>(<span class="fl">0.80</span>, <span class="fl">0.80</span>, <span class="fl">0.90</span>, <span class="fl">0.90</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># observed data</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">misclassification</span>(</span>
+<span id="cb1-4"><a href="#cb1-4"></a>  <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">150</span>, <span class="dv">107</span>, </span>
+<span id="cb1-5"><a href="#cb1-5"></a>           <span class="dv">1277</span>, <span class="dv">1620</span>),</span>
+<span id="cb1-6"><a href="#cb1-6"></a>  <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"D+"</span>, <span class="st">"D-"</span>),</span>
+<span id="cb1-7"><a href="#cb1-7"></a>  <span class="fu">c</span>(<span class="st">"E+"</span>, <span class="st">"E- "</span>)),</span>
+<span id="cb1-8"><a href="#cb1-8"></a>  <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb1-9"><a href="#cb1-9"></a>  <span class="at">type =</span> <span class="st">"exposure"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="co"># bias parameters</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>  <span class="at">bias_parms =</span> <span class="fu">c</span>(<span class="fl">0.80</span>, <span class="fl">0.80</span>, </span>
+<span id="cb1-13"><a href="#cb1-13"></a>                 <span class="fl">0.90</span>, <span class="fl">0.90</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment">
+</div><div class="column" style="width:65%;">
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>--Observed data-- 
          Outcome: D+ 
@@ -1517,6 +1525,35 @@ Misclassification Bias Corrected Relative Risk: 2.204640
    Misclassification Bias Corrected Odds Ratio: 2.356302 1.554052 3.572700</code></pre>
 </div>
 </div>
+</div>
+</div>
+</section>
+<section id="misclassification-of-confounders" class="slide level2">
+<h2>Misclassification of confounders</h2>
+<ul>
+<li><p>Even if both exposure and disease are measured with 100% Sensitivity and 100% Specificity, if confounding is present misclassification of confounding variables may also lead to biased estimates.</p></li>
+<li><p>If the confounding is strong and the exposure-disease relation is weak or null, confounder misclassification can produce misleading results, even if independent and non-differential.</p></li>
+<li><p>Example: Effect of coffee consumption on bladder cancer</p></li>
+</ul>
+
+<img data-src="EPIB705-Bias-Analysis-2023_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<section id="overview-3" class="slide level2 h2center">
+<h2>Overview</h2>
+<h3 id="why-bias-analysis-3"><span class="gray">Why Bias Analysis?</span></h3>
+<p><br></p>
+<h3 id="deterministic-bias-analysis-3"><strong>Deterministic Bias Analysis</strong></h3>
+<h4 id="unmeasured-confounding-6"><span class="gray">Unmeasured confounding</span></h4>
+<h4 id="misclassification-2"><span class="gray">Misclassification</span></h4>
+<h4 id="selection-bias-3"><strong>Selection bias</strong></h4>
+<p><br></p>
+<h3 id="probabilistic-bias-analysis-3"><span class="gray">Probabilistic Bias Analysis</span></h3>
+<p><br></p>
+<h3 id="record-level-implementation-4"><span class="gray">Record-level Implementation</span></h3>
+<p><br></p>
+<h3 id="summary-3"><span class="gray">Summary</span></h3>
+</section>
+<section id="bias-analysis-for-selection-bias" class="slide level2">
+<h2>Bias analysis for selection bias</h2>
 </section>
 <section id="references" class="slide level2 smaller scrollable">
 <h2>References</h2>
