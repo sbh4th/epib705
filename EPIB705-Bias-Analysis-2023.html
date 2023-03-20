@@ -7,7 +7,7 @@
 <link href="EPIB705-Bias-Analysis-2023_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="EPIB705-Bias-Analysis-2023_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="EPIB705-Bias-Analysis-2023_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.269">
+  <meta name="generator" content="quarto-1.2.280">
 
   <title>Bias Analysis</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -403,6 +403,8 @@
   
   <script src="EPIB705-Bias-Analysis-2023_files/libs/kePrint-0.0.1/kePrint.js"></script>
   <link href="EPIB705-Bias-Analysis-2023_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+  <link href="EPIB705-Bias-Analysis-2023_files/libs/countdown-0.4.0/countdown.css" rel="stylesheet">
+  <script src="EPIB705-Bias-Analysis-2023_files/libs/countdown-0.4.0/countdown.js"></script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -476,7 +478,7 @@
 <h2></h2>
 <p>Intuitions are difficult to overcome.</p>
 
-<img data-src="images/illusion-2.png" width="965" class="r-stretch"></section>
+<img data-src="images/illusion-2.png" class="r-stretch"></section>
 <section id="record-level-implementation-1" class="slide level2">
 <h2>Record level implementation</h2>
 <ul>
@@ -1487,7 +1489,7 @@
 <p><span class="math display">\[RR_{true}=(177.6/1588)/(79.4/1566)=2.2\]</span></p>
 </section>
 <section id="simple-implementation-via-episensr" class="slide level2">
-<h2>Simple implementation via <code>episensr</code></h2>
+<h2>Simple implementation via <code>episensr</code><sup>1</sup></h2>
 <div class="columns">
 <div class="column" style="width:35%;">
 <div class="cell">
@@ -1527,18 +1529,65 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 </div>
 </div>
 </div>
-</section>
+<aside><ol class="aside-footnotes"><li id="fn2"><p>See package by <span class="citation" data-cites="Haine:2021aa">Haine (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span></p></li></ol></aside></section>
 <section id="misclassification-of-confounders" class="slide level2">
 <h2>Misclassification of confounders</h2>
 <ul>
-<li><p>Even if both exposure and disease are measured with 100% Sensitivity and 100% Specificity, if confounding is present misclassification of confounding variables may also lead to biased estimates.</p></li>
+<li><p>Even if exposure and disease have 100% Se and 100% Sp, misclassification of confounders can lead to biased estimates.</p></li>
 <li><p>If the confounding is strong and the exposure-disease relation is weak or null, confounder misclassification can produce misleading results, even if independent and non-differential.</p></li>
-<li><p>Example: Effect of coffee consumption on bladder cancer</p></li>
+<li><p>Need bias parameters for misclassified confounder data (validation, literature, etc.)</p></li>
 </ul>
-
-<img data-src="EPIB705-Bias-Analysis-2023_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch quarto-figure-center"></section>
-<section id="overview-3" class="slide level2 h2center">
-<h2>Overview</h2>
+</section>
+<section id="stratified-analysis-implementation" class="slide level2">
+<h2>Stratified analysis implementation</h2>
+<ul>
+<li>Estimates for Se and Sp are applied to measurement of confounder rather than exposure.<sup>1</sup></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/fox-misclass-conf.png"></p>
+</figure>
+</div>
+</div>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn3"><p>See examples in Ch.6 of <span class="citation" data-cites="Fox:2022aa">Fox et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>.</p></li></ol></aside></section>
+<section id="example-effect-of-coffee-consumption-on-bladder-cancer" class="slide level2">
+<h2>Example: Effect of coffee consumption on bladder cancer<sup>1</sup></h2>
+<p>We might draw a model like this, indicating that true smoking status is unmeasured but may still confound the association between coffee and bladder cancer:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="EPIB705-Bias-Analysis-2023_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn4"><p>In line note.</p></li></ol></aside></section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/coffee-cancer-crude.png"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span class="math display">\[OR_{crude}=1.8\quad \textrm{and} \quad OR_{MHadj}=1.5\quad 95\%\text{CI}=[1.1,2.0]\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/coffee-cancer-adj.png"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span class="math display">\[OR_{MHadj}=1.3\quad 95\%\text{CI}=[0.95,1.7]\]</span> ## Overview {.h2center}</p>
 <h3 id="why-bias-analysis-3"><span class="gray">Why Bias Analysis?</span></h3>
 <p><br></p>
 <h3 id="deterministic-bias-analysis-3"><strong>Deterministic Bias Analysis</strong></h3>
@@ -1555,14 +1604,619 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 <section id="bias-analysis-for-selection-bias" class="slide level2">
 <h2>Bias analysis for selection bias</h2>
 </section>
+<section id="differential-baseline-participation" class="slide level2">
+<h2>Differential baseline participation</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p>What do you need?</p>
+<ul>
+<li>Selection probabilities<br>
+</li>
+<li>Ideally, by exposure <em>and</em> disease status.</li>
+</ul>
+<p>Where can you get it?</p>
+<ul>
+<li>Validation (internal or external).</li>
+<li>Internal probably better.</li>
+<li>Educated guesses (largely based on experience or prior data).</li>
+</ul>
+</div><div class="column" style="width:60%;">
+<p>Example: mobile phone use and uveal melanoma<sup>1</sup></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/stang.png" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn5"><p>Example from <span class="citation" data-cites="Stang:2009aa">Stang et al. (<a href="#/references" role="doc-biblioref" onclick="">2009</a>)</span> described in <span class="citation" data-cites="Fox:2022aa">Fox et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span></p></li></ol></aside></section>
+<section id="section-4" class="slide level2">
+<h2></h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th colspan="2" style="text-align: center;">Participants</th>
+<th style="text-align: center;"></th>
+<th colspan="2" style="text-align: center;">Non-participants+Q</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;">Refusals</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">E+</td>
+<td style="text-align: center;">E-</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">E+</td>
+<td style="text-align: center;">E-</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">?</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Cases</td>
+<td style="text-align: center;">136</td>
+<td style="text-align: center;">107</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">17</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Controls</td>
+<td style="text-align: center;">297</td>
+<td style="text-align: center;">165</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">72</td>
+<td style="text-align: center;">212</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">379</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>OR among participants: (136/297)/(107/165) = 0.71</p></li>
+<li><p>OR among non-participants w/Q: (3/72)/(7/212) = 1.25</p></li>
+<li><p>Who’s missing? 3 exposed cases we know from the questionnaire, but what about the other non-participants? Assume the exposure distribution similar to the other non-participants (3/10)*17. Same for controls.</p></li>
+<li><p>Now we can get an adjusted OR:</p></li>
+</ul>
+<p><span class="math inline">\(OR_{adj}=\dfrac{136+3+(3/10)*17}{297+72+(72/284)*379}/\dfrac{107+7+(7/10)*17}{165+212+(212/284)*379}=1.62\)</span></p>
+</section>
+<section id="using-selection-probabilities" class="slide level2">
+<h2>Using selection probabilities</h2>
+<ul>
+<li><p>More generally, if we know or can estimate, or have reasonable guesses about the selection probabilities, we can create an adjusted OR using the selection probabilities:</p>
+<ul>
+<li><p>E+ Cases = 136/(136+3+(3/10)*17) = 0.96</p></li>
+<li><p>E- Cases = 107/(107+7+(7/10)*17) = 0.85</p></li>
+<li><p>E+ Controls = 297/(297+72+(72/284)*379) = 0.64</p></li>
+<li><p>E- Controls = 165/(165+212+(212/294)*379) = 0.25</p></li>
+</ul></li>
+</ul>
+<p><span class="math display">\[OR_{adj}=\hat{OR}\times\dfrac{S_{caseE-}\times S_{controlE+}}{S_{caseE+}\times S_{controlE-}}\]</span></p>
+<p><span class="math display">\[OR_{adj}=0.71\times\dfrac{0.85\times0.64}{0.94\times0.25}=1.63\]</span></p>
+</section>
+<section id="using-inverse-probability-of-selection-weighting" class="slide level2">
+<h2>Using inverse-probability of selection weighting</h2>
+<ul>
+<li><p>More generally, if we know or can estimate, or have reasonable guesses about the selection probabilities, we can create an adjusted OR using the selection probabilities:</p>
+<ul>
+<li><p>E+ Cases = 136/(136+3+(3/10)*17) = 0.96</p></li>
+<li><p>E- Cases = 107/(107+7+(7/10)*17) = 0.85</p></li>
+<li><p>E+ Controls = 297/(297+72+(72/284)*379) = 0.64</p></li>
+<li><p>E- Controls = 165/(165+212+(212/294)*379) = 0.25</p></li>
+</ul></li>
+</ul>
+<p><span class="math display">\[OR_{adj}=\hat{OR}\times\dfrac{S_{caseE-}\times S_{controlE+}}{S_{caseE+}\times S_{controlE-}}\]</span></p>
+<p><span class="math display">\[OR_{adj}=0.71\times\dfrac{0.85\times0.64}{0.94\times0.25}=1.63\]</span></p>
+</section>
+<section id="differential-loss-to-follow-up" class="slide level2">
+<h2>Differential loss-to-follow up</h2>
+<ul>
+<li><p>How to account for potential bias among those lost?</p></li>
+<li><p>Example of impact of treatment guidelines on breast cancer mortality.</p></li>
+<li><p>Overall loss-to-follow of 13%, initial baseline treatment status of those lost is known.</p></li>
+</ul>
+
+<img data-src="EPIB705-Bias-Analysis-2023_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<section id="section-5" class="slide level2">
+<h2></h2>
+<p>How to estimate the rates among those lost?</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th colspan="2" style="text-align: center;">With follow-up</th>
+<th style="text-align: center;"></th>
+<th colspan="2" style="text-align: center;">Lost to follow-up</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">E+</td>
+<td style="text-align: center;">E-</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">E+</td>
+<td style="text-align: center;">E-</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Deaths</td>
+<td style="text-align: center;">40</td>
+<td style="text-align: center;">65</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Persons</td>
+<td style="text-align: center;">104</td>
+<td style="text-align: center;">286</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">46</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Person-years</td>
+<td style="text-align: center;">687</td>
+<td style="text-align: center;">2560</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Crude rate</td>
+<td style="text-align: center;">5.8/100py</td>
+<td style="text-align: center;">2.5/100py</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Crude RD</td>
+<td style="text-align: center;">3.3/100py</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Crude RR</td>
+<td style="text-align: center;">2.3</td>
+<td style="text-align: center;">1.0</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<ul>
+<li>First, let’s assume that they would have accrued similar person years as those with follow-up:</li>
+</ul>
+</section>
+<section id="section-6" class="slide level2">
+<h2></h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th colspan="2" style="text-align: center;">With follow-up</th>
+<th style="text-align: center;"></th>
+<th colspan="2" style="text-align: center;">Lost to follow-up</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">E+</td>
+<td style="text-align: center;">E-</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">E+</td>
+<td style="text-align: center;">E-</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Deaths</td>
+<td style="text-align: center;">40</td>
+<td style="text-align: center;">65</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Persons</td>
+<td style="text-align: center;"><span style="color: red">104</span></td>
+<td style="text-align: center;"><span style="color: blue">286</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">46</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Person-years</td>
+<td style="text-align: center;"><span style="color: red">687</span></td>
+<td style="text-align: center;"><span style="color: blue">2560</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span style="color: red">85.9</span></td>
+<td style="text-align: center;"><span style="color: blue">411.7</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Crude rate</td>
+<td style="text-align: center;">5.8/100py</td>
+<td style="text-align: center;">2.5/100py</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Crude RD</td>
+<td style="text-align: center;">3.3/100py</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Crude RR</td>
+<td style="text-align: center;">2.3</td>
+<td style="text-align: center;">1.0</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<div style="text-align: center;">
+<p><span class="math inline">\(PY_{E+}=\color{red}{(687/104)\times{13}=85.9py}\)</span></p>
+<p><span class="math inline">\(PY_{E-}=\color{blue}{(2560/286)\times{46}=411.7py}\)</span></p>
+</div>
+<ul>
+<li>What should we assume about their mortality risks?</li>
+<li>What if we assume similar to those with follow-up?</li>
+</ul>
+</section>
+<section id="section-7" class="slide level2">
+<h2></h2>
+<ul>
+<li>Missing individuals were diagnosed at 2 specific hospitals, so use <span class="blue">observed rates</span> among those non-missing in hospitals where those LTF were diagnosed</li>
+</ul>
+<div style="text-align: center;">
+<p><span class="math inline">\(Deaths_{E+}=\color{blue}{.049}\color{black}{\times{85.9}=}\color{red}{4.2}\)</span></p>
+<p><span class="math inline">\(Deaths_{E-}=\color{blue}{.045}\color{black}{\times{411.7}=}\color{red}{18.7}\)</span></p>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th colspan="2" style="text-align: center;">At 2 hospitals</th>
+<th style="text-align: center;"></th>
+<th colspan="2" style="text-align: center;">Estimated for those lost</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">E+</td>
+<td style="text-align: center;">E-</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">E+</td>
+<td style="text-align: center;">E-</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Deaths</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span style="color: red">4.2</span></td>
+<td style="text-align: center;"><span style="color: red">18.7</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Person-years</td>
+<td style="text-align: center;">60.8</td>
+<td style="text-align: center;">110.2</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">85.9</td>
+<td style="text-align: center;">411.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Crude rate</td>
+<td style="text-align: center;"><span style="color: blue">4.9/100py</span></td>
+<td style="text-align: center;"><span style="color: blue">4.5/100py</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Crude RD</td>
+<td style="text-align: center;">0.4/100py</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Crude RR</td>
+<td style="text-align: center;">1.1</td>
+<td style="text-align: center;">1.0</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="bias-corrected-estimates-with-assumptions" class="slide level2">
+<h2>Bias-corrected estimates (with assumptions)</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th colspan="2" style="text-align: center;">With follow-up</th>
+<th style="text-align: center;"></th>
+<th colspan="2" style="text-align: center;">Lost to follow-up</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">E+</td>
+<td style="text-align: center;">E-</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">E+</td>
+<td style="text-align: center;">E-</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Deaths</td>
+<td style="text-align: center;">40</td>
+<td style="text-align: center;">65</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">4.2</td>
+<td style="text-align: center;">18.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Persons</td>
+<td style="text-align: center;">104</td>
+<td style="text-align: center;">286</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">46</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Person-years</td>
+<td style="text-align: center;">687</td>
+<td style="text-align: center;">2560</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">85.9</td>
+<td style="text-align: center;">411.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Crude rate</td>
+<td style="text-align: center;">5.8/100py</td>
+<td style="text-align: center;">2.5/100py</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Crude RD</td>
+<td style="text-align: center;">3.3/100py</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Crude RR</td>
+<td style="text-align: center;">2.3</td>
+<td style="text-align: center;">1.0</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<div style="text-align: center;">
+<p><span class="math inline">\(IR_{E+}=(40 + 4.2)/(687py+85.9py) = 5.7/100py\)</span></p>
+<p><span class="math inline">\(IR_{E-}=(65+18.7)(2560py+411.7py)=2.8/100py\)</span></p>
+<p><span class="math inline">\(RD=2.9/100py\quad \text{and} \quad RR=2.0\)</span></p>
+</div>
+</section>
+<section id="bias-corrected-estimates-bounds" class="slide level2">
+<h2>Bias-corrected estimates (bounds)</h2>
+<ul>
+<li>Worst case scenario still suggests some impact.</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th colspan="2" style="text-align: center;">With follow-up</th>
+<th style="text-align: center;"></th>
+<th colspan="2" style="text-align: center;">Lost to follow-up</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">E+</td>
+<td style="text-align: center;">E-</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">E+</td>
+<td style="text-align: center;">E-</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Deaths</td>
+<td style="text-align: center;">40</td>
+<td style="text-align: center;">65</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span style="color: blue">0</span></td>
+<td style="text-align: center;"><span style="color: blue">46</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Persons</td>
+<td style="text-align: center;">104</td>
+<td style="text-align: center;">286</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">46</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Person-years</td>
+<td style="text-align: center;">687</td>
+<td style="text-align: center;">2560</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">85.9</td>
+<td style="text-align: center;">411.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Crude rate</td>
+<td style="text-align: center;">5.8/100py</td>
+<td style="text-align: center;">2.5/100py</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Crude RD</td>
+<td style="text-align: center;">3.3/100py</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Crude RR</td>
+<td style="text-align: center;">2.3</td>
+<td style="text-align: center;">1.0</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<div style="text-align: center;">
+<p><span class="math inline">\(IR_{E+}=(40 + 0)/(687py+85.9py) = 5.2/100py\)</span></p>
+<p><span class="math inline">\(IR_{E-}=(65+46)(2560py+411.7py)=3.7/100py\)</span></p>
+<p><span class="math inline">\(RD=1.4/100py\quad \text{and} \quad RR=1.4\)</span></p>
+</div>
+</section>
+<section id="ip-weighting-for-selection-bias" class="slide level2">
+<h2>IP weighting for selection bias</h2>
+<p>[lash figure]</p>
+</section>
+<section id="break" class="slide level2 h2center">
+<h2>Break! ☕</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div class="countdown" id="timer_10bfb73d" data-update-every="1" tabindex="0" style="top:15%;right:0;bottom:15%;left:0;margin:5%;padding:50px;font-size:7em;">
+<div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
+<code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+</div>
+</div>
+</section>
+<section id="overview-3" class="slide level2 h2center">
+<h2>Overview</h2>
+<h3 id="why-bias-analysis-4"><span class="gray">Why Bias Analysis?</span></h3>
+<p><br></p>
+<h3 id="deterministic-bias-analysis-4"><span class="gray">Deterministic Bias Analysis</span></h3>
+<h4 id="unmeasured-confounding-7"><span class="gray">Unmeasured confounding</span></h4>
+<h4 id="misclassification-3"><span class="gray">Misclassification</span></h4>
+<h4 id="selection-bias-4"><span class="gray">Selection bias</span></h4>
+<p><br></p>
+<h3 id="probabilistic-bias-analysis-4"><strong>Probabilistic Bias Analysis</strong></h3>
+<p><br></p>
+<h3 id="record-level-implementation-5"><span class="gray">Record-level Implementation</span></h3>
+<p><br></p>
+<h3 id="summary-4"><span class="gray">Summary</span></h3>
+</section>
+<section id="multidimensional-bias-analysis" class="slide level2">
+<h2>Multidimensional bias analysis</h2>
+<ul>
+<li><p>Often, bias parameters are only educated guesses.</p></li>
+<li><p>Multidimensional bias analysis uses a range of plausible values for bias parameters.</p></li>
+<li><p>Especially useful if there are no known validation data for your parameters of interest.</p></li>
+</ul>
+<div class="fragment">
+<p>What to vary?</p>
+<ul>
+<li><p>Unmeasured confounding</p>
+<ul>
+<li>Vary strength of Z-Exp and Z-Dis associations.</li>
+</ul></li>
+<li><p>Misclassification:</p>
+<ul>
+<li>Range of Se/Sp values, including differential.</li>
+</ul></li>
+<li><p>Selection bias</p>
+<ul>
+<li>Range of different selection proportions or selection bias factor.</li>
+</ul></li>
+</ul>
+</div>
+</section>
 <section id="references" class="slide level2 smaller scrollable">
 <h2>References</h2>
 <div class="footer footer-default">
 
 </div>
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-Fox:2022aa" class="csl-entry" role="doc-biblioentry">
+Fox MP, MacLehose RF, Lash TL. Applying quantitative bias analysis to epidemiologic data. Springer; 2022.
+</div>
+<div id="ref-Haine:2021aa" class="csl-entry" role="doc-biblioentry">
+Haine D. The episensr package: Basic sensitivity analysis of epidemiological results [Internet]. 2021. Available from: <a href="https://dhaine.github.io/episensr/">https://dhaine.github.io/episensr/</a>
+</div>
 <div id="ref-Parekh:2007aa" class="csl-entry" role="doc-biblioentry">
-Parekh, Niyati, Richard J Chappell, Amy E Millen, Daniel M Albert, and Julie A Mares. 2007. <span>“Association Between Vitamin d and Age-Related Macular Degeneration in the Third National Health and Nutrition Examination Survey, 1988 Through 1994.”</span> <em>Arch Ophthalmol</em> 125 (5): 661–69. <a href="https://doi.org/10.1001/archopht.125.5.661">https://doi.org/10.1001/archopht.125.5.661</a>.
+Parekh N, Chappell RJ, Millen AE, Albert DM, Mares JA. <a href="https://doi.org/10.1001/archopht.125.5.661">Association between vitamin d and age-related macular degeneration in the third national health and nutrition examination survey, 1988 through 1994</a>. Arch Ophthalmol. 2007 May;125(5):661–9.
+</div>
+<div id="ref-Stang:2009aa" class="csl-entry" role="doc-biblioentry">
+Stang A, Schmidt-Pokrzywniak A, Lash TL, Lommatzsch PK, Taubert G, Bornfeld N, et al. <a href="https://doi.org/10.1093/jnci/djn441">Mobile phone use and risk of uveal melanoma: Results of the risk factors for uveal melanoma case-control study</a>. J Natl Cancer Inst. 2009 Jan;101(2):120–3.
 </div>
 </div>
 </section>

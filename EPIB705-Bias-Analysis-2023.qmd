@@ -9,6 +9,7 @@ format:
     html-math-method: mathjax
 editor: visual
 bibliography: bias-analysis.bib
+csl: vancouver-author-date.csl
 filters:
   - parse-latex
 ---
@@ -17,6 +18,9 @@ filters:
 library(here)
 library(tidyverse)
 library(kableExtra)
+library(episensr)
+library(countdown)
+library(emo)
 ```
 
 ## Overview {.h2center}
@@ -620,7 +624,7 @@ $D=D_{0Tot}-b=2897-1410.4=1486.6$
 
 $$RR_{true}=(177.6/1588)/(79.4/1566)=2.2$$
 
-## Simple implementation via `episensr`
+## Simple implementation via `episensr`^[See package by @Haine:2021aa]
 
 :::: {.columns}
 
@@ -658,14 +662,24 @@ misclassification(matrix(c(150, 107, 1277, 1620),
 
 ## Misclassification of confounders
 
--   Even if both exposure and disease are measured with 100% Sensitivity
-    and 100% Specificity, if confounding is present misclassification of
-    confounding variables may also lead to biased estimates.
+- Even if exposure and disease have 100% Se and 100% Sp, misclassification of confounders can lead to biased estimates.
 
-- If the confounding is strong and the exposure-disease
-    relation is weak or null, confounder misclassification can produce misleading results, even if independent and non-differential.
+- If the confounding is strong and the exposure-disease relation is weak or null, confounder misclassification can produce misleading results, even if independent and non-differential.
 
--   Example: Effect of coffee consumption on bladder cancer 
+- Need bias parameters for misclassified confounder data (validation, literature, etc.)
+
+## Stratified analysis implementation
+
+- Estimates for Se and Sp are applied to measurement of confounder rather than exposure.^[See examples in Ch.6 of @Fox:2022aa.]
+
+```{r}
+#| fig-align: center
+knitr::include_graphics(here("images", "fox-misclass-conf.png"))
+```
+
+## Example: Effect of coffee consumption on bladder cancer^[In line note.] 
+
+We might draw a model like this, indicating that true smoking status is unmeasured but may still confound the association between coffee and bladder cancer:
     
 ```{r, engine = 'tikz'}
 #| fig.align: center
@@ -681,6 +695,17 @@ misclassification(matrix(c(150, 107, 1277, 1620),
 \end{tikzpicture}
 ```
 
+## 
+```{r}
+#| fig-align: center
+knitr::include_graphics(here("images", "coffee-cancer-crude.png"))
+```
+$$OR_{crude}=1.8\quad \textrm{and} \quad OR_{MHadj}=1.5\quad 95\%\text{CI}=[1.1,2.0]$$
+```{r}
+#| fig-align: center
+knitr::include_graphics(here("images", "coffee-cancer-adj.png"))
+```
+$$OR_{MHadj}=1.3\quad 95\%\text{CI}=[0.95,1.7]$$
 ## Overview {.h2center}
 
 ### [Why Bias Analysis?]{.gray}
@@ -709,4 +734,329 @@ misclassification(matrix(c(150, 107, 1277, 1620),
 
 ## Bias analysis for selection bias
 
+## Differential baseline participation
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+What do you need?
+
+- Selection probabilities  
+- Ideally, by exposure *and* disease status.  
+
+Where can you get it?
+
+- Validation (internal or external).
+- Internal probably better.
+- Educated guesses (largely based on experience or prior data).
+
+:::
+
+::: {.column width="60%"}
+Example: mobile phone use and uveal melanoma^[Example from @Stang:2009aa described in @Fox:2022aa]
+```{r}
+#| fig-align: center
+#| out-width: 80%
+knitr::include_graphics(here("images", "stang.png"))
+```
+:::
+
+::::
+
+##
+\begin{tabular}{cccccccc}
+\hline 
+ & \multicolumn{2}{c}{Participants} &  & \multicolumn{2}{c}{Non-participants+Q} &  & Refusals\tabularnewline
+\cline{2-3} \cline{3-3} \cline{5-6} \cline{6-6} \cline{8-8} 
+ & E+ & E- &  & E+ & E- &  & ?\tabularnewline
+\hline 
+Cases & 136 & 107 &  & 3 & 7 &  & 17\tabularnewline
+Controls & 297 & 165 &  & 72 & 212 &  & 379\tabularnewline
+\hline 
+\end{tabular}
+
+- OR among participants: (136/297)/(107/165) = 0.71
+
+- OR among non-participants w/Q: (3/72)/(7/212) = 1.25
+
+- Who's missing? 3 exposed cases we know from the questionnaire, but what about the other non-participants? Assume the exposure distribution similar to the other non-participants (3/10)\*17. Same for controls.
+
+- Now we can get an adjusted OR:
+
+$OR_{adj}=\dfrac{136+3+(3/10)*17}{297+72+(72/284)*379}/\dfrac{107+7+(7/10)*17}{165+212+(212/284)*379}=1.62$
+
+## Using selection probabilities
+
+- More generally, if we know or can estimate, or have reasonable guesses about the selection probabilities, we can create an adjusted OR using the selection probabilities:
+
+    -   E+ Cases = 136/(136+3+(3/10)\*17) = 0.96
+
+    -   E- Cases = 107/(107+7+(7/10)\*17) = 0.85
+
+    -   E+ Controls = 297/(297+72+(72/284)\*379) = 0.64
+
+    -   E- Controls = 165/(165+212+(212/294)\*379) = 0.25
+
+$$OR_{adj}=\hat{OR}\times\dfrac{S_{caseE-}\times S_{controlE+}}{S_{caseE+}\times S_{controlE-}}$$
+
+$$OR_{adj}=0.71\times\dfrac{0.85\times0.64}{0.94\times0.25}=1.63$$
+
+## Using inverse-probability of selection weighting
+
+- More generally, if we know or can estimate, or have reasonable guesses about the selection probabilities, we can create an adjusted OR using the selection probabilities:
+
+    -   E+ Cases = 136/(136+3+(3/10)\*17) = 0.96
+
+    -   E- Cases = 107/(107+7+(7/10)\*17) = 0.85
+
+    -   E+ Controls = 297/(297+72+(72/284)\*379) = 0.64
+
+    -   E- Controls = 165/(165+212+(212/294)\*379) = 0.25
+
+$$OR_{adj}=\hat{OR}\times\dfrac{S_{caseE-}\times S_{controlE+}}{S_{caseE+}\times S_{controlE-}}$$
+
+$$OR_{adj}=0.71\times\dfrac{0.85\times0.64}{0.94\times0.25}=1.63$$
+
+## Differential loss-to-follow up
+
+- How to account for potential bias among those lost?
+
+- Example of impact of treatment guidelines on breast cancer mortality.
+
+- Overall loss-to-follow of 13%, initial baseline treatment status of those lost is known.
+
+```{r, engine = 'tikz'}
+#| fig.align: center
+\begin{tikzpicture}[shorten > = 1pt, line width=1pt]
+\tikzstyle{every node} = [rectangle, fill=white, draw=none]
+\node (l) at  (3.5,1.5) [align=center, draw=black] {Not\\Lost};
+\node (h) at  (0,1.5) [align=center] {Hospital\\type};
+\node (t) at  (2,0) [align=center] {Treatment\\guidelines};
+\node (y) at (5,0) [align=center] {Breast\\Cancer};
+\foreach \from/\to in {t/y, h/l, t/l, h/t}
+  \draw [->] (\from) -- (\to);
+\draw [->] (h) to [bend right=60] (y);
+\end{tikzpicture}
+```
+
+## 
+How to estimate the rates among those lost?
+
+\begin{tabular}{cccccc}
+\hline 
+ & \multicolumn{2}{c}{With follow-up} &  & \multicolumn{2}{c}{Lost to follow-up}\tabularnewline
+\cline{2-3} \cline{3-3} \cline{5-6} \cline{6-6} 
+ & E+ & E- &  & E+ & E-\tabularnewline
+\hline 
+Deaths & 40 & 65 &  &  & \tabularnewline
+Persons & 104 & 286 &  & 13 & 46\tabularnewline
+Person-years & 687 & 2560 &  &  & \tabularnewline
+Crude rate & 5.8/100py & 2.5/100py &  &  & \tabularnewline
+Crude RD & 3.3/100py & 0 &  &  & \tabularnewline
+Crude RR & 2.3 & 1.0 &  &  & \tabularnewline
+& & & & & \tabularnewline
+\end{tabular}
+
+<br>
+
+- First, let's assume that they would have accrued similar person
+    years as those with follow-up:
+
+##
+\begin{tabular}{cccccc}
+\hline 
+ & \multicolumn{2}{c}{With follow-up} &  & \multicolumn{2}{c}{Lost to follow-up}\tabularnewline
+\cline{2-3} \cline{3-3} \cline{5-6} \cline{6-6} 
+ & E+ & E- &  & E+ & E-\tabularnewline
+\hline 
+Deaths & 40 & 65 &  &  & \tabularnewline
+Persons & \textcolor{red}{104} & \textcolor{blue}{286} &  & 13 & 46\tabularnewline
+Person-years & \textcolor{red}{687} & \textcolor{blue}{2560} &  & \textcolor{red}{85.9} & \textcolor{blue}{411.7} \tabularnewline
+Crude rate & 5.8/100py & 2.5/100py &  &  & \tabularnewline
+Crude RD & 3.3/100py & 0 &  &  & \tabularnewline
+Crude RR & 2.3 & 1.0 &  &  & \tabularnewline
+& & & & & \tabularnewline
+\end{tabular}
+
+:::{style="text-align: center;"}
+$PY_{E+}=\color{red}{(687/104)\times{13}=85.9py}$ 
+
+$PY_{E-}=\color{blue}{(2560/286)\times{46}=411.7py}$
+:::
+
+- What should we assume about their mortality risks?
+- What if we assume similar to those with follow-up?
+
+## 
+- Missing individuals were diagnosed at 2 specific hospitals, so use [observed rates]{.blue} among those non-missing in hospitals where those LTF were diagnosed
+
+:::{style="text-align: center;"}
+$Deaths_{E+}=\color{blue}{.049}\color{black}{\times{85.9}=}\color{red}{4.2}$ 
+
+$Deaths_{E-}=\color{blue}{.045}\color{black}{\times{411.7}=}\color{red}{18.7}$ 
+:::
+
+\begin{tabular}{cccccc}
+\hline 
+ & \multicolumn{2}{c}{At 2 hospitals} &  & \multicolumn{2}{c}{Estimated for those lost}\tabularnewline
+\cline{2-3} \cline{3-3} \cline{5-6} \cline{6-6} 
+ & E+ & E- &  & E+ & E-\tabularnewline
+\hline 
+Deaths & 3 & 5 &  & \textcolor{red}{4.2} & \textcolor{red}{18.7}\tabularnewline
+Person-years & 60.8 & 110.2 &  & 85.9 & 411.7\tabularnewline
+Crude rate & \textcolor{blue}{4.9/100py} & \textcolor{blue}{4.5/100py} &  &  & \tabularnewline
+Crude RD & 0.4/100py & 0 &  &  & \tabularnewline
+Crude RR & 1.1 & 1.0 &  &  & \tabularnewline
+& & & & & \tabularnewline
+\end{tabular}
+
+## Bias-corrected estimates (with assumptions)
+
+\begin{tabular}{cccccc}
+\hline 
+ & \multicolumn{2}{c}{With follow-up} &  & \multicolumn{2}{c}{Lost to follow-up}\tabularnewline
+\cline{2-3} \cline{3-3} \cline{5-6} \cline{6-6} 
+ & E+ & E- &  & E+ & E-\tabularnewline
+\hline 
+Deaths & 40 & 65 &  & 4.2  & 18.7 \tabularnewline
+Persons & 104 & 286 &  & 13 & 46\tabularnewline
+Person-years & 687 & 2560 &  & 85.9 & 411.7 \tabularnewline
+Crude rate & 5.8/100py & 2.5/100py &  &  & \tabularnewline
+Crude RD & 3.3/100py & 0 &  &  & \tabularnewline
+Crude RR & 2.3 & 1.0 &  &  & \tabularnewline
+& & & & & \tabularnewline
+\end{tabular}
+
+:::{style="text-align: center;"}
+
+$IR_{E+}=(40 + 4.2)/(687py+85.9py) = 5.7/100py$ 
+
+$IR_{E-}=(65+18.7)(2560py+411.7py)=2.8/100py$
+
+$RD=2.9/100py\quad \text{and} \quad RR=2.0$ 
+
+:::
+
+## Bias-corrected estimates (bounds)
+- Worst case scenario still suggests some impact.
+
+\begin{tabular}{cccccc}
+\hline 
+ & \multicolumn{2}{c}{With follow-up} &  & \multicolumn{2}{c}{Lost to follow-up}\tabularnewline
+\cline{2-3} \cline{3-3} \cline{5-6} \cline{6-6} 
+ & E+ & E- &  & E+ & E-\tabularnewline
+\hline 
+Deaths & 40 & 65 &  & \textcolor{blue}{0}  & \textcolor{blue}{46} \tabularnewline
+Persons & 104 & 286 &  & 13 & 46\tabularnewline
+Person-years & 687 & 2560 &  & 85.9 & 411.7 \tabularnewline
+Crude rate & 5.8/100py & 2.5/100py &  &  & \tabularnewline
+Crude RD & 3.3/100py & 0 &  &  & \tabularnewline
+Crude RR & 2.3 & 1.0 &  &  & \tabularnewline
+& & & & & \tabularnewline
+\end{tabular}
+
+:::{style="text-align: center;"}
+
+$IR_{E+}=(40 + 0)/(687py+85.9py) = 5.2/100py$ 
+
+$IR_{E-}=(65+46)(2560py+411.7py)=3.7/100py$
+
+$RD=1.4/100py\quad \text{and} \quad RR=1.4$ 
+
+:::
+
+## IP weighting for selection bias
+[lash figure]
+
+## Break!  `r emo::ji("coffee")` {.h2center}
+
+```{r, echo=F}
+countdown(minutes = 10, 
+          left = 0, right = 0, bottom = "15%", top = "15%",
+          padding = "50px",
+          margin = "5%",
+          font_size = "7em",
+          color_text= '#f5bc6c')
+```
+
+## Overview {.h2center}
+
+### [Why Bias Analysis?]{.gray}
+
+<br>
+
+### [Deterministic Bias Analysis]{.gray}
+
+#### [Unmeasured confounding]{.gray}
+
+#### [Misclassification]{.gray}
+
+#### [Selection bias]{.gray}
+
+<br>
+
+### **Probabilistic Bias Analysis**
+
+<br>
+
+### [Record-level Implementation]{.gray}
+
+<br>
+
+### [Summary]{.gray}
+
+## Multidimensional bias analysis
+
+-   Often, bias parameters are only educated guesses.
+
+-   Multidimensional bias analysis uses a range of plausible values for
+    bias parameters.
+
+-   Especially useful if there are no known validation data for your
+    parameters of interest.
+
+. . . 
+
+What to vary?
+
+set.seed(123)
+probsens.conf
+
+library(episensr)
+confounders(matrix(c(45, 94, 257, 945),
+dimnames = list(c("D+", "D-"), c("D+", "D-")), nrow = 2, byrow = TRUE),
+type = "OR",
+bias_parms = c(5, .7, .5))
+
+
+pc <- probsens.conf(matrix(c(45, 94, 257, 945),
+dimnames = list(c("D+", "D-"), c("D+", "D-")), nrow = 2, byrow = TRUE),
+reps = 1000,
+prev.exp = list("triangular", c(.6, .8, .7)),
+prev.nexp = list("triangular", c(.3, .5, .4)),
+risk = list("log-normal", c(1.522, 0.216)),
+corr.p = 0.01)
+
+ggplot(pc)
+
+p1 <- data.frame(pc$sim.df$p1)
+p0 <- data.frame(pc$sim.df$p0)
+
+ggplot(p1, aes(x=pc.sim.df.p1)) + geom_histogram()
+
+-   Unmeasured confounding
+
+    -   Vary strength of Z-Exp and Z-Dis associations.
+
+-   Misclassification:
+
+    -   Range of Se/Sp values, including differential.
+
+-   Selection bias
+
+    -   Range of different selection proportions or selection bias
+        factor.
+
 ## References
+
