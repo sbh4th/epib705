@@ -21,6 +21,8 @@ library(kableExtra)
 library(episensr)
 library(countdown)
 library(emo)
+library(ggplot2)
+library(patchwork)
 ```
 
 ## Overview {.h2center}
@@ -1020,30 +1022,7 @@ countdown(minutes = 10,
 
 What to vary?
 
-set.seed(123)
-probsens.conf
 
-library(episensr)
-confounders(matrix(c(45, 94, 257, 945),
-dimnames = list(c("D+", "D-"), c("D+", "D-")), nrow = 2, byrow = TRUE),
-type = "OR",
-bias_parms = c(5, .7, .5))
-
-
-pc <- probsens.conf(matrix(c(45, 94, 257, 945),
-dimnames = list(c("D+", "D-"), c("D+", "D-")), nrow = 2, byrow = TRUE),
-reps = 1000,
-prev.exp = list("triangular", c(.6, .8, .7)),
-prev.nexp = list("triangular", c(.3, .5, .4)),
-risk = list("log-normal", c(1.522, 0.216)),
-corr.p = 0.01)
-
-ggplot(pc)
-
-p1 <- data.frame(pc$sim.df$p1)
-p0 <- data.frame(pc$sim.df$p0)
-
-ggplot(p1, aes(x=pc.sim.df.p1)) + geom_histogram()
 
 -   Unmeasured confounding
 
@@ -1057,6 +1036,88 @@ ggplot(p1, aes(x=pc.sim.df.p1)) + geom_histogram()
 
     -   Range of different selection proportions or selection bias
         factor.
+        
+## Example of multidimensional bias analysis
+
+## Probabilistic
+
+```{css, echo=FALSE}
+.longcode {
+height: 800px;
+width: 1500px;
+}
+```
+## Example: Unmeasured confounding of resins and cancer
+- Setup using the `episensr` package
+```{r, cache=T, echo=T}
+#| class-source: longcode
+#| classes: longcode
+# set the seed for reproducible results
+set.seed(39569)
+
+# define the observed 2x2 data
+pc <- probsens.conf(matrix(c(45, 94, 257, 945),
+  dimnames = list(c("D+", "D-"), c("D+", "D-")), nrow = 2, byrow = TRUE),
+
+# number of replications
+  reps = 5000, 
+
+# bias parameters and distributions
+
+# prevalence of U among exposed
+prev.exp = list("triangular", c(.6, .8, .7)),
+
+# prevalence of U among unexposed
+prev.nexp = list("triangular", c(.3, .5, .4)),
+
+# association of U with outcome
+risk = list("log-normal", c(1.522, 0.216)), 
+
+# correlation between exposure prevalences 
+corr.p = 0.01)
+```
+
+## Probability distributions for each parameter
+
+```{r, echo=F}
+#| fig.align: center
+p1 <- data.frame(pc$sim.df$p1)
+p0 <- data.frame(pc$sim.df$p0)
+rrcd <- data.frame(pc$sim.df$RR.cd)
+bcor <- data.frame(pc$sim.df$tot.OR)
+
+pba_p1 <- ggplot(p1, aes(x=pc.sim.df.p1)) + theme_classic() + 
+  geom_histogram(binwidth=0.005, color="#5e3c99", fill="#b2abd2") +
+  labs(x="P(Confounder in E+)", y="No. observations")
+
+pba_p0 <- ggplot(p0, aes(x=pc.sim.df.p0)) + theme_classic() + 
+  geom_histogram(binwidth=0.005, color="#5e3c99", fill="#b2abd2") +
+  labs(x="P(Confounder in E-)", y="No. observations")
+
+pba_rrcd <- ggplot(rrcd, aes(x=pc.sim.df.RR.cd)) + theme_classic() + 
+  geom_histogram(binwidth=0.2, color="#5e3c99", fill="#b2abd2") +
+  labs(x="Confounder-Disease RR", y="No. observations")
+
+pba_p1 + pba_p0 + pba_rrcd
+```
+
+## Generates a distribution of corrected estimates
+```{r, echo=F}
+#| fig.align: center
+ggplot(bcor, aes(x=pc.sim.df.tot.OR)) + theme_classic() + 
+  geom_histogram(binwidth=0.02, color="#5e3c99", fill="#b2abd2") +
+  labs(x="Bias-corrected OR", y="No. observations")
+```
+
+## Bias-corrected estimates
+```{r, echo=F}
+oor <- as.numeric(gsub("\\D+", ".", pc$obs.measures[2,]))
+cors <- as.numeric(gsub("\\D+", ".", pc$adj.measures[3,]))
+corsr <- as.numeric(gsub("\\D+", ".", pc$adj.measures[4,]))
+bcor_t <- data.frame(rbind(oor, cors, corsr))
+row.names(bcor_t) <- c("OR:Crude", "OR:Corrected-systematic error", "OR:Corrected-systematic and random error")
+kbl(bcor_t, col.names = c("Median", "2.5th pctile", "97.5th pctile"),digits = 2) %>% kable_styling()
+```
 
 ## References
 
