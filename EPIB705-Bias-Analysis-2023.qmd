@@ -1,5 +1,9 @@
 ---
 title: "Bias Analysis"
+subtitle: "EPIB 705"
+author: "Sam Harper"
+date: 2023-03-22
+date-format: iso
 format: 
   revealjs:
     theme: [default, custom.scss]
@@ -14,7 +18,7 @@ filters:
   - parse-latex
 ---
 
-```{r setup, echo=F}
+```{r setup, echo=F, include=FALSE}
 library(here)
 library(tidyverse)
 library(kableExtra)
@@ -51,7 +55,31 @@ library(patchwork)
 
 ### Summary
 
-## Unmeasured Confounding
+## Overview {.h2center}
+
+### Why Bias Analysis?
+
+<br>
+
+### [Deterministic Bias Analysis]{.gray}
+
+#### [Unmeasured confounding]{.gray}
+
+#### [Misclassification]{.gray}
+
+#### [Selection bias]{.gray}
+
+<br>
+
+### [Probabilistic Bias Analysis]{.gray}
+
+<br>
+
+### [Record-level Implementation]{.gray}
+
+<br>
+
+### [Summary]{.gray}
 
 ## Introduction
 
@@ -64,10 +92,54 @@ How do misclassification, selection bias, and unmeasured confounding create bias
 :::
 
 ## What are we concerned about?
-
-```{r, echo=F, out.width="80%"}
-knitr::include_graphics(here("images", "bias-DAG.pdf"))
+In theory.
+<br>
+    
+```{r, engine = 'tikz'}
+#| fig.align: center
+\begin{tikzpicture}[shorten > = 1pt, line width=1pt]
+\tikzstyle{every node} = [rectangle, fill=white, draw=none]
+\node (e) at  (0,0) [align=center] {E};
+\node (em) at  (0,3) [align=center, color=white] {E*};
+\node (u) at (2.5,-1.5) [align=center, color=white] {U};
+\node (c) at (2.5,1.5) [align=center] {C};
+\node (s) at  (2.5,3) [align=center, color=white] {S=1};
+\node (y) at (5,0) [align=center] {Y};
+\node (ym) at (7,0) [align=center,color=white] {Y*};
+\foreach \from/\to in {e/y, c/y, c/e}
+   \draw [->] (\from) -- (\to);
+% \draw [->] (y) to [bend right=35] (s);
+\end{tikzpicture}
 ```
+## What are we concerned about?
+In practice.
+<br>
+    
+```{r, engine = 'tikz'}
+#| fig.align: center
+\begin{tikzpicture}[shorten > = 1pt, line width=1pt]
+\tikzstyle{every node} = [rectangle, fill=white, draw=none]
+\node (e) at  (0,0) [align=center] {E};
+\node (em) at  (0,3) [align=center] {E*};
+\node (u) at (2.5,-1.5) [align=center] {U};
+\node (c) at (2.5,1.5) [align=center] {C};
+\node (s) at  (2.5,3) [align=center, draw=black] {S=1};
+\node (y) at (5,0) [align=center] {Y};
+\node (ym) at (7,0) [align=center] {Y*};
+\foreach \from/\to in {e/y, e/em, c/y, c/e, e/s, u/e, u/y, y/ym}
+   \draw [->] (\from) -- (\to);
+ \draw [->] (y) to [bend right=35] (s);
+\end{tikzpicture}
+```
+
+
+## Potential consequences
+
+- "Bias analysis requires educated guesses about the likely sizes of systematic errors"^[Rothman, Greenland, Lash, *Modern Epidemiology* 3rd ed, p,347.] 
+<br>
+- The difficulty is that it is challenging to do so quantitatively, thus investigators often rely on qualitative judgments about the likelihood that their estimates are biased.
+<br>
+- A basic problem is that the results of observational studies are likely to be sensitive to choices made by the analyst.
 
 ## Example
 
@@ -92,17 +164,6 @@ Intuitions are difficult to overcome.
 ```{r, echo=F}
 knitr::include_graphics(here("images", "illusion-2.png"))
 ```
-
-## Record level implementation
-
--   Step 1: Identify the Source of Bias
--   Step 2: Select the Bias Parameters
--   Step 3: Assign Probability Distributions to Each Bias Parameter
--   Step 4: Use Simple Bias Analysis Methods to Incorporate Uncertainty in the Bias Parameters and Random Error
-    -   Step 4a: Randomly Sample from the Bias Parameter Distributions
-    -   Step 4b: Use Simple Bias Analysis Methods and Incorporate Uncertainty and Conventional Random Error
-    -   Step 4c: Sample the Bias-Adjusted Effect Estimate
--   Step 5: Save the Bias-Adjusted Estimate and Repeat Steps 4a--c
 
 ## Overview {.h2center}
 
@@ -131,22 +192,7 @@ knitr::include_graphics(here("images", "illusion-2.png"))
 ### [Summary]{.gray}
 
 ## Unmeasured Confounding
-
-Example of Sensitivity Analysis for Unmeasured Confounding
-
--   Crude OR: $OR_{DX+}=(45\times945)/(94\times257)=1.76$
-
-| Disease Status | X=1 | X=0  | Total |
-|----------------|-----|------|-------|
-| Cases (D=1)    | 45  | 94   | 139   |
-| Controls (D=0) | 257 | 945  | 1202  |
-| Total          | 302 | 1039 | 1341  |
-
--   We think this is confounded by smoking $(Z)$, but we did not measure it.
-
--   How can we quantify the potential effect of failing to adjust for $Z$?
-
-## Unmeasured Confounding
+- Suppose we want to assess the effect of occupational exposure to resins ($X$) on lung cancer risk ($D$) using a case-control design.^[Longstanding example used in *Modern Epidemiology* from @Greenland:1994aa] 
 
 <br>
 
@@ -176,41 +222,9 @@ $OR_{DX+}=\frac{(45\times945)}{(94\times257)}=1.76$
 
 ## Example: Sensitivity Analysis for Unmeasured Confounding
 
-## Data Layout for Dichotomous Unmeasured Confounder
-
-::: columns
-::: {.column width="35%"}
-|       | X=1   | X=0   | Total |
-|-------|-------|-------|-------|
-| D=1   | A~11~ | A~01~ | M~11~ |
-| D=0   | B~11~ | B~01~ | M~01~ |
-| Total | N~11~ | N~01~ | N~+1~ |
-
-: **Z=1 Smokers**
-:::
-
-::: {.column width="40%"}
-| X=1           | X=0           | Total         |
-|---------------|---------------|---------------|
-| A~1+~ - A~11~ | A~0+~ - A~01~ | M~A+~ - M~11~ |
-| B~1+~ - B~11~ | B~0+~ - B~01~ | M~B+~ - M~01~ |
-| N~1+~ - N~11~ | N~0+~ - N~01~ | N~++~ - N~+1~ |
-
-: **Z=0 Non-smokers**
-:::
-
-::: {.column width="25%"}
-| X=1   | X=0   | Total |
-|-------|-------|-------|
-| A~1+~ | A~0+~ | M~A+~ |
-| B~1+~ | B~0+~ | M~B+~ |
-| N~1+~ | N~0+~ | N~++~ |
-
-: **Total**
-:::
-:::
-
 ## Where did this come from?
+
+- Early ideas formulated in the context of controversy surrounding the link between smoking and lung cancer^[@Bross:1954aa is credited with implementing the first quantitative bias analyis, but @Cornfield:1959aa also played an important role.]
 
 ::: columns
 ::: {.column width="65%"}
@@ -225,146 +239,131 @@ $OR_{DX+}=\frac{(45\times945)}{(94\times257)}=1.76$
 knitr::include_graphics(here("images", "cornfield.png"))
 ```
 
-Contribution of Cornfield et al. (1959, J Nat Canc Inst).
 :::
 :::
 
 ## Data Layout for Dichotomous Unmeasured Confounder
 
-::: columns
-::: {.column width="35%"}
-|       | X=1   | X=0   | Total |
-|-------|-------|-------|-------|
-| D=1   | A~11~ | A~01~ | M~11~ |
-| D=0   | B~11~ | B~01~ | M~01~ |
-| Total | N~11~ | N~01~ | N~+1~ |
+\begin{tabular}{cccccccccccc}
+\hline 
+ & \multicolumn{3}{c}{{\small{}Z=1 Smokers}} &  & \multicolumn{3}{c}{{\small{}Z=0 Non-smokers}} &  & \multicolumn{3}{c}{{\small{}Total}}\tabularnewline
+\cline{2-4} \cline{3-4} \cline{4-4} \cline{6-8} \cline{7-8} \cline{8-8} \cline{10-12} \cline{11-12} \cline{12-12} 
+ & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total}\tabularnewline
+\hline 
+{\small{}D=1} & {\small{}${\scriptstyle A_{11}}$} & {\small{}${\scriptstyle A_{01}}$} & {\small{}${\scriptstyle M_{11}}$} &  & {\small{}${\scriptstyle A_{1+}-A_{11}}$} & {\small{}${\scriptstyle A_{0+}-A_{01}}$} & {\small{}${\scriptstyle M_{A+}-M_{11}}$} &  & {\small{}${\scriptstyle A_{1+}}$} & {\small{}${\scriptstyle A_{0+}}$} & {\small{}${\scriptstyle M_{A+}}$}\tabularnewline
+{\small{}D=0} & {\small{}${\scriptstyle B_{11}}$} & {\small{}${\scriptstyle B_{01}}$} & {\small{}${\scriptstyle M_{01}}$} &  & {\small{}${\scriptstyle B_{1+}-B_{11}}$} & {\small{}${\scriptstyle B_{0+}-B_{01}}$} & {\small{}${\scriptstyle M_{B+}-M_{01}}$} &  & {\small{}${\scriptstyle B_{1+}}$} & {\small{}${\scriptstyle B_{0+}}$} & {\small{}${\scriptstyle M_{B+}}$}\tabularnewline
+\hline 
+{\small{}Total} & {\small{}${\scriptstyle N_{11}}$} & {\small{}${\scriptstyle N_{01}}$} & {\small{}${\scriptstyle N_{+1}}$} &  & {\small{}${\scriptstyle N_{1+}-N_{11}}$} & {\small{}${\scriptstyle N_{0+}-N_{01}}$} & {\small{}${\scriptstyle N_{++}-N_{+1}}$} &  & {\small{}${\scriptstyle N_{1+}}$} & {\small{}${\scriptstyle N_{0+}}$} & {\small{}${\scriptstyle N_{++}}$}\tabularnewline
+& & & & & & & & & & & \tabularnewline 
+\end{tabular}
 
-: **Z=1 Smokers**
-:::
+. . . 
 
-::: {.column width="40%"}
-| X=1           | X=0           | Total         |
-|---------------|---------------|---------------|
-| A~1+~ - A~11~ | A~0+~ - A~01~ | M~A+~ - M~11~ |
-| B~1+~ - B~11~ | B~0+~ - B~01~ | M~B+~ - M~01~ |
-| N~1+~ - N~11~ | N~0+~ - N~01~ | N~++~ - N~+1~ |
+- The crude odds ratio is $OR_{DX+}=A_{1+}B_{0+}/A_{0+}B_{1+}$, but to adjust for smoking we need smoking stratum-specific ORs.
+- We can write the exposure-disease OR **within strata** of $Z$ $(OR_{DXZ})$ as:
 
-: **Z=0 Non-smokers**
-:::
-
-::: {.column width="25%"}
-| X=1   | X=0   | Total |
-|-------|-------|-------|
-| A~1+~ | A~0+~ | M~A+~ |
-| B~1+~ | B~0+~ | M~B+~ |
-| N~1+~ | N~0+~ | N~++~ |
-
-: **Total**
-:::
-:::
-
--   To adjust for smoking we need stratum-specific ORs.
-
--   We can write the exposure-disease OR \textbf{within strata} of $Z$ $\left(OR_{DXZ}\right)$ as:
-
-:::columns
-
-::: {.column width="35%"}
-$OR_{DX_{Z=1}}=\dfrac{A_{11}B_{01}}{A_{01}B_{11}}$
-:::
-::: {.column width="65%"}
-$OR_{DX_{Z=0}}=\dfrac{\left(A_{1+}-A_{11}\right)\left(B_{0+}-B_{01}\right)}{\left(A_{0+}-A_{01}\right)\left(B_{1+}-B_{11}\right)}$
-:::
-
+:::{style="text-align: center;"}
+$OR_{DX1}=\dfrac{A_{11}B_{01}}{A_{01}B_{11}}\quad \text{and} \quad OR_{DX0}=\dfrac{\left(A_{1+}-A_{11}\right)\left(B_{0+}-B_{01}\right)}{\left(A_{0+}-A_{01}\right)\left(B_{1+}-B_{11}\right)}$
 :::
 
 ## Data Layout for Dichotomous Unmeasured Confounder
-
-::: columns
-::: {.column width="35%"}
-|       | X=1                | X=0                | Total |
-|-------|--------------------|--------------------|-------|
-| D=1   | <mark>A~11~</mark> | <mark>A~01~</mark> | M~11~ |
-| D=0   | <mark>B~11~</mark> | <mark>B~01~</mark> | M~01~ |
-| Total | N~11~              | N~01~              | N~+1~ |
-
-: **Z=1 Smokers**
-:::
-
-::: {.column width="40%"}
-| X=1           | X=0           | Total         |
-|---------------|---------------|---------------|
-| A~1+~ - A~11~ | A~0+~ - A~01~ | M~A+~ - M~11~ |
-| B~1+~ - B~11~ | B~0+~ - B~01~ | M~B+~ - M~01~ |
-| N~1+~ - N~11~ | N~0+~ - N~01~ | N~++~ - N~+1~ |
-
-: **Z=0 Non-smokers**
-:::
-
-::: {.column width="25%"}
-| X=1 | X=0  | Total |
-|-----|------|-------|
-| 45  | 94   | 139   |
-| 257 | 945  | 1202  |
-| 302 | 1039 | 1341  |
-
-: **Total**
-:::
-:::
 
 We already know the marginal totals, so only 4 quantities to estimate.
+
+\begin{tabular}{cccccccccccc}
+\hline 
+ & \multicolumn{3}{c}{{\small{}Z=1 Smokers}} &  & \multicolumn{3}{c}{{\small{}Z=0 Non-smokers}} &  & \multicolumn{3}{c}{{\small{}Total}}\tabularnewline
+\cline{2-4} \cline{3-4} \cline{4-4} \cline{6-8} \cline{7-8} \cline{8-8} \cline{10-12} \cline{11-12} \cline{12-12} 
+ & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total}\tabularnewline
+\hline 
+{\small{}D=1} & \textbf{\small{}$\mathbf{{\scriptstyle A_{11}}}$} & \textbf{\small{}$\mathbf{{\scriptstyle A_{01}}}$}  & {\small{}${\scriptstyle M_{11}}$} &  & {\small{}${\scriptstyle A_{1+}-A_{11}}$} & {\small{}${\scriptstyle A_{0+}-A_{01}}$} & {\small{}${\scriptstyle M_{A+}-M_{11}}$} &  & {\small{}${\scriptstyle A_{1+}}$} & {\small{}${\scriptstyle A_{0+}}$} & {\small{}${\scriptstyle M_{A+}}$}\tabularnewline
+{\small{}D=0} & \textbf{\small{}$\mathbf{{\scriptstyle B_{11}}}$} & \textbf{\small{}$\mathbf{{\scriptstyle B_{01}}}$} & {\small{}${\scriptstyle M_{01}}$} &  & {\small{}${\scriptstyle B_{1+}-B_{11}}$} & {\small{}${\scriptstyle B_{0+}-B_{01}}$} & {\small{}${\scriptstyle M_{B+}-M_{01}}$} &  & {\small{}${\scriptstyle B_{1+}}$} & {\small{}${\scriptstyle B_{0+}}$} & {\small{}${\scriptstyle M_{B+}}$}\tabularnewline
+\hline 
+{\small{}Total} & {\small{}${\scriptstyle N_{11}}$} & {\small{}${\scriptstyle N_{01}}$} & {\small{}${\scriptstyle N_{+1}}$} &  & {\small{}${\scriptstyle N_{1+}-N_{11}}$} & {\small{}${\scriptstyle N_{0+}-N_{01}}$} & {\small{}${\scriptstyle N_{++}-N_{+1}}$} &  & {\small{}${\scriptstyle N_{1+}}$} & {\small{}${\scriptstyle N_{0+}}$} & {\small{}${\scriptstyle N_{++}}$}\tabularnewline
+& & & & & & & & & & & \tabularnewline 
+\end{tabular}
 
 -   These values may be generated by specifying values for the prevalence of smoking in each exposure group and the association between smoking and disease.
 
 -   The (unknown) smoking prevalence in exposure strata are:
 
-    $P_{Z1}=N_{11}/N_{1+}$ and $P_{Z0}=N_{01}/N_{0+}$
+    $$P_{Z1}=N_{11}/N_{1+}\quad \text{and} \quad P_{Z0}=N_{01}/N_{0+}$$
 
-## Ex
-
-```{r tab, echo=F, include=F}
-z1 <- rep(1,9)
-x1 <- rep(seq(1:3),3)
-d <- rep(seq(1:3), each=3)
-c1 <- c("A~11~", "A01", "M11",
-        "B11", "B01", "M01",
-        "N11", "N01", "N+1")
-df <- data.frame(z1, x1, d, c1)
-df1 <- df %>% 
-  pivot_wider(names_from = x1, values_from = c(c1,z1)) %>%
-  select(d:c1_3)
-z0 <- rep(0,9)
-c0 <- c("A11", "A01", "M11",
-        "B11", "B01", "M01",
-        "N11", "N01", "N+1")
-
-df <- data.frame(z0, x1, d, c0)
-df0 <- df %>%
-  pivot_wider(names_from = x1, values_from = c(c0,z0)) %>%
-  select(d:c0_3)
-zt <- rep(2,9)
-ct <- c("A11", "A01", "M11",
-        "B11", "B01", "M01",
-        "N11", "N01", "N+1")
-
-df <- data.frame(zt, x1, d, ct)
-dft <- df %>%
-  pivot_wider(names_from = x1, values_from = c(ct,zt)) %>%
-  select(d:ct_3)
-
-tuc <- df1 %>%
-  inner_join(df0) %>%
-  inner_join(dft)
-
-kbl(tuc, col.names = c("Case", "X=1", "X=0", 
-  "Total", "X=1", "X=0", "Total", "X=1", "X=0", "Total")) %>% kable_styling() %>%
-    add_header_above(c(" " = 1, "Z=1 Smokers" = 3, 
-      "Z=0 Non-smokers" = 3, "Total" = 3))
+## What do we need? (1) Distribution of $Z$ by exposure
+```{r, engine = 'tikz'}
+#| fig.align: center
+\begin{tikzpicture}[shorten > = 1pt, line width=1pt]
+\tikzstyle{every node} = [rectangle, fill=white, draw=none]
+\node (z) at  (0,0) [align=center] {Z};
+\node (x) at (2.5,0) [align=center] {X};
+\node (d) at (5,0) [align=center] {D};
+ \draw[blue] [->] (z) -- (x);
+ \draw [->] (x) -- (d);
+ \draw [->] (z) to [bend left=25] (d);
+\end{tikzpicture}
 ```
+
+\begin{tabular}{cccccccccccc}
+\hline 
+ & \multicolumn{3}{c}{{\small{}Z=1 Smokers}} &  & \multicolumn{3}{c}{{\small{}Z=0 Non-smokers}} &  & \multicolumn{3}{c}{{\small{}Total}}\tabularnewline
+\cline{2-4} \cline{3-4} \cline{4-4} \cline{6-8} \cline{7-8} \cline{8-8} \cline{10-12} \cline{11-12} \cline{12-12} 
+ & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total}\tabularnewline
+\hline 
+{\small{}D=1} & \textbf{\small{}$\mathbf{{\scriptstyle A_{11}}}$} & \textbf{\small{}$\mathbf{{\scriptstyle A_{01}}}$} & {\small{}${\scriptstyle M_{11}}$} &  & {\small{}${\scriptstyle 45-A_{11}}$} & {\small{}${\scriptstyle 94-A_{01}}$} & {\small{}${\scriptstyle 139-M_{11}}$} &  & 45 & 94 & 139\tabularnewline
+{\small{}D=0} & \textbf{\small{}$\mathbf{{\scriptstyle B_{11}}}$} & \textbf{\small{}$\mathbf{{\scriptstyle B_{01}}}$} & {\small{}${\scriptstyle M_{01}}$} &  & {\small{}${\scriptstyle 257-B_{11}}$} & {\small{}${\scriptstyle 945-B_{01}}$} & {\small{}${\scriptstyle 1202-M_{01}}$} &  & 257 & 945 & 1202\tabularnewline
+\hline 
+{\small{}Total} & {\small{}${\scriptstyle N_{11}}$} & {\small{}${\scriptstyle N_{01}}$} & {\small{}${\scriptstyle N_{+1}}$} &  & {\small{}${\scriptstyle 302-N_{11}}$} & {\small{}${\scriptstyle 1039-N_{01}}$} & {\small{}${\scriptstyle 1341-N_{+1}}$} &  & 302 & 1039 & 1341\tabularnewline
+& & & & & & & & & & & \tabularnewline 
+\end{tabular}
+
+-   With plausible estimates of $P_{Z}$, perhaps from some externally
+    validated source, we can use this to estimate the
+    number of exposed controls, since $B_{11}=P_{Z1}B_{1+}$ and
+    $B_{01}=P_{Z0}B_{0+}$.
+
+-   However, $A_{11}$ and $A_{01}$ are still unknown, but note that they can be estimated if we specify a plausible value for the association between smoking $(Z)$ and disease $(D)$.
+
+<br>
+
+
+## What do we need? (2) Effect of $Z$ on $D$
+```{r, engine = 'tikz'}
+#| fig.align: center
+\begin{tikzpicture}[shorten > = 1pt, line width=1pt]
+\tikzstyle{every node} = [rectangle, fill=white, draw=none]
+\node (z) at  (0,0) [align=center] {Z};
+\node (x) at (2.5,0) [align=center] {X};
+\node (d) at (5,0) [align=center] {D};
+ \draw [->] (z) -- (x);
+ \draw [->] (x) -- (d);
+ \draw[blue] [->] (z) to [bend left=25] (d);
+\end{tikzpicture}
+```
+
+\begin{tabular}{cccccccccccc}
+\hline 
+ & \multicolumn{3}{c}{{\small{}Z=1 Smokers}} &  & \multicolumn{3}{c}{{\small{}Z=0 Non-smokers}} &  & \multicolumn{3}{c}{{\small{}Total}}\tabularnewline
+\cline{2-4} \cline{3-4} \cline{4-4} \cline{6-8} \cline{7-8} \cline{8-8} \cline{10-12} \cline{11-12} \cline{12-12} 
+ & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total}\tabularnewline
+\hline 
+{\small{}D=1} & \textcolor{blue}{\small{}${\scriptstyle A_{11}}$} & \textcolor{red}{\small{}${\scriptstyle A_{01}}$} & {\small{}${\scriptstyle M_{11}}$} &  & \textcolor{blue}{\small{}${\scriptstyle A_{1+}-A_{11}}$} & \textcolor{red}{\small{}${\scriptstyle A_{0+}-A_{01}}$} & {\small{}${\scriptstyle M_{A+}-M_{11}}$} &  & {\small{}${\scriptstyle A_{1+}}$} & {\small{}${\scriptstyle A_{0+}}$} & {\small{}${\scriptstyle M_{A+}}$}\tabularnewline
+{\small{}D=0} & \textcolor{blue}{\small{}${\scriptstyle B_{11}}$} & \textcolor{red}{\small{}${\scriptstyle B_{01}}$} & {\small{}${\scriptstyle M_{01}}$} &  & \textcolor{blue}{\small{}${\scriptstyle B_{1+}-B_{11}}$} & \textcolor{red}{\small{}${\scriptstyle B_{0+}-B_{01}}$} & {\small{}${\scriptstyle M_{B+}-M_{01}}$} &  & {\small{}${\scriptstyle B_{1+}}$} & {\small{}${\scriptstyle B_{0+}}$} & {\small{}${\scriptstyle M_{B+}}$}\tabularnewline
+\hline 
+{\small{}Total} & {\small{}${\scriptstyle N_{11}}$} & {\small{}${\scriptstyle N_{01}}$} & {\small{}${\scriptstyle N_{+1}}$} &  & {\small{}${\scriptstyle N_{1+}-N_{11}}$} & {\small{}${\scriptstyle N_{0+}-N_{01}}$} & {\small{}${\scriptstyle N_{++}-N_{+1}}$} &  & {\small{}${\scriptstyle N_{1+}}$} & {\small{}${\scriptstyle N_{0+}}$} & {\small{}${\scriptstyle N_{++}}$}\tabularnewline
+& & & & & & & & & & & \tabularnewline
+\end{tabular}
+
+- Based on the table above, the confounder-disease OR within strata of
+    $X$ $\left(OR_{DZX}\right)$ can be calculated as:
+
+$${\color{blue}OR_{DZ1}=\dfrac{A_{11}\left(B_{1+}-B_{11}\right)}{\left(A_{1+}-A_{11}\right)B_{11}}},\quad \text{and} \quad {\color{red}{\color{green}{\color{cyan}{\color{red}OR_{DZ0}=\dfrac{A_{01}\left(B_{0+}-B_{01}\right)}{\left(A_{0+}-A_{01}\right)B_{01}}}}}}$$
+
 
 ## Worked example
 
 -   Suppose we know from external studies that the prevalence of smoking is 70% among those occupationally exposed to resins and 50% among those unexposed in this population.
+
+. . . 
 
 ```{=tex}
 \begin{tabular}{cccccccccccc}
@@ -374,7 +373,7 @@ kbl(tuc, col.names = c("Case", "X=1", "X=0",
  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total}\tabularnewline
 \hline 
 {\small{}D=1} & \textbf{\small{}$\mathbf{{\scriptstyle A_{11}}}$} & \textbf{\small{}$\mathbf{{\scriptstyle A_{01}}}$} & {\small{}${\scriptstyle M_{11}}$} &  & {\small{}${\scriptstyle 45-A_{11}}$} & {\small{}${\scriptstyle 94-A_{01}}$} & {\small{}${\scriptstyle 139-M_{11}}$} &  & 45 & 94 & 139\tabularnewline
-{\small{}D=0} & \textbf{\textcolor{red}{\small{}$\mathbf{{\scriptstyle B_{11}}}$}} & \textbf{\textcolor{blue}{\small{}$\mathbf{{\scriptstyle B_{01}}}$}} & {\small{}${\scriptstyle M_{01}}$} &  & {\small{}${\scriptstyle 257-B_{11}}$} & {\small{}${\scriptstyle 945-B_{01}}$} & {\small{}${\scriptstyle 1202-M_{01}}$} &  & \textcolor{red}{257} & \textcolor{blue}{945} & 1202\tabularnewline
+{\small{}D=0} & \textcolor{red}{180} & \textcolor{blue}{473} & {\small{}${\scriptstyle M_{01}}$} &  & {\small{}${\scriptstyle 257-B_{11}}$} & {\small{}${\scriptstyle 945-B_{01}}$} & {\small{}${\scriptstyle 1202-M_{01}}$} &  & \textcolor{red}{257} & \textcolor{blue}{945} & 1202\tabularnewline
 \hline 
 {\small{}Total} & {\small{}${\scriptstyle N_{11}}$} & {\small{}${\scriptstyle N_{01}}$} & {\small{}${\scriptstyle N_{+1}}$} &  & {\small{}${\scriptstyle 302-N_{11}}$} & {\small{}${\scriptstyle 1039-N_{01}}$} & {\small{}${\scriptstyle 1341-N_{+1}}$} &  & 302 & 1039 & 1341\tabularnewline
 & & & & & & & & & & & \tabularnewline
@@ -382,13 +381,44 @@ kbl(tuc, col.names = c("Case", "X=1", "X=0",
 ```
 -   Our estimates of $B_{11}$ and $B_{01}$ are now:
 
-$B_{11}=P_{Z1}B_{1+}=(.7)(257)\approx180$
+:::{style="text-align: center;"}
 
-$B_{01}=P_{Z0}B_{0+}=(.5)(945)\approx473$
+$B_{11}=P_{Z1}B_{1+}=(.7)({\color{red}257})\approx{\color{red}180}$
 
-## Will this work?
+$B_{01}=P_{Z0}B_{0+}=(.5)({\color{blue}945})\approx{\color{blue}473}$ 
 
-```{=tex}
+:::
+
+##
+\begin{tabular}{cccccccccccc}
+\hline 
+ & \multicolumn{3}{c}{{\small{}Z=1 Smokers}} &  & \multicolumn{3}{c}{{\small{}Z=0 Non-smokers}} &  & \multicolumn{3}{c}{{\small{}Total}}\tabularnewline
+\cline{2-4} \cline{3-4} \cline{4-4} \cline{6-8} \cline{7-8} \cline{8-8} \cline{10-12} \cline{11-12} \cline{12-12} 
+ & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total}\tabularnewline
+\hline 
+{\small{}D=1} & \textcolor{red}{41} & \textcolor{blue}{77} & {\small{}${\scriptstyle M_{11}}$} &  & {\small{}${\scriptstyle 45-A_{11}}$} & {\small{}${\scriptstyle 94-A_{01}}$} & {\small{}${\scriptstyle 139-M_{11}}$} &  & 45 & 94 & 139\tabularnewline
+{\small{}D=0} & 180 & 473 & {\small{}${\scriptstyle M_{01}}$} &  & {\small{}${\scriptstyle 257-B_{11}}$} & {\small{}${\scriptstyle 945-B_{01}}$} & {\small{}${\scriptstyle 1202-M_{01}}$} &  & 257 & 945 & 1202\tabularnewline
+\hline 
+{\small{}Total} & {\small{}${\scriptstyle N_{11}}$} & {\small{}${\scriptstyle N_{01}}$} & {\small{}${\scriptstyle N_{+1}}$} &  & {\small{}${\scriptstyle 302-N_{11}}$} & {\small{}${\scriptstyle 1039-N_{01}}$} & {\small{}${\scriptstyle 1341-N_{+1}}$} &  & 302 & 1039 & 1341\tabularnewline
+& & & & & & & & & & & \tabularnewline
+\end{tabular}
+
+-   Plugging in the estimates of $B_{11}$ and $B_{01}$ along with a
+    plausible estimate of the confounder-disease association
+    $(OR_{DZ1}=OR_{DZ0}=5)$, assumed to be homogenous across strata of
+    resin exposure, now allow us to calculate $A_{11}$ and $A_{01}$:
+
+:::{style="text-align: center;"}
+
+$A_{11}=\frac{OR_{DZ1}A_{1+}B_{11}}{OR_{DZ1}B_{11}+B_{1+}-B_{11}}=\frac{5(45)(180)}{5(180)+257-180}\approx{\color{red}41}$
+
+$A_{01}=\frac{OR_{DZ0}A_{0+}B_{01}}{OR_{DZ0}B_{01}+B_{0+}-B_{01}}=\frac{5(94)(473)}{5(473)+945-473}\approx{\color{blue}77}$
+:::
+
+
+##
+We can now fill out the table and calculate an $OR$ standardized for smoking:
+
 \begin{tabular}{cccccccccccc}
 \hline 
  & \multicolumn{3}{c}{{\small{}Z=1 Smokers}} &  & \multicolumn{3}{c}{{\small{}Z=0 Non-smokers}} &  & \multicolumn{3}{c}{{\small{}Total}}\tabularnewline
@@ -396,14 +426,107 @@ $B_{01}=P_{Z0}B_{0+}=(.5)(945)\approx473$
  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total}\tabularnewline
 \hline 
 {\small{}D=1} & {\small{}41} & {\small{}78} & {\small{}120} &  & {\small{}4} & {\small{}16} & {\small{}19} &  & {\small{}45} & {\small{}94} & {\small{}139}\tabularnewline
-{\small{}D=0} & \textcolor{red}{\small{}180} & {\small{}473} & {\small{}652} &  & \textcolor{red}{\small{}77} & {\small{}473} & {\small{}550} &  & {\small{}257} & {\small{}945} & {\small{}1202}\tabularnewline
+{\small{}D=0} & {\small{}180} & {\small{}473} & {\small{}652} &  & {\small{}77} & {\small{}473} & {\small{}550} &  & {\small{}257} & {\small{}945} & {\small{}1202}\tabularnewline
 \hline 
 {\small{}Total{*}} & {\small{}221} & {\small{}551} & {\small{}772} &  & {\small{}81} & {\small{}488} & {\small{}569} &  & {\small{}302} & {\small{}1039} & {\small{}1341}\tabularnewline
+\multicolumn{12}{l}{{\scriptsize{}{*}Note: Row and column totals in Z strata may not sum because of rounding.}}\tabularnewline
+\end{tabular}
+
+- If we standardize to the exposed population, we get:
+
+$OR_{DXZ(E)}=\dfrac{\sum_{z}B_{1z}(A_{1z}/B_{1z})}{\sum_{z}B_{1z}(A_{0z}/B_{0z})}=\dfrac{180(41/180)+77(4/77)}{180(78/473)+77(16/473)}=1.39$
+
+
+## Simplifying formula
+- Bias relative to the crude estimate:
+    
+:::{style="text-align: center;"}
+$Bias(OR)=\dfrac{OR_{DX+}}{OR_{DXZ(E)}}=\dfrac{1.76}{1.39}=1.27$
+:::
+
+. . . 
+
+-   Arah et al.^[See @Arah:2008aa] also given an alternative estimator using only 1) prevalence of $Z$ in each exposure stratum and 2) association between $Z$ and $D$
+
+$Bias(OR)=\dfrac{OR_{DX+}}{OR_{DXZ(E)}}=\dfrac{OR_{DZ0}P_{11}+1-P_{11}}{OR_{DZ0}P_{10}+1-P_{10}}=\dfrac{5(.7)+1-.7}{5(.5)+1-.5}=1.27$
+
+where $P_{11}=P(Z=1|X=1)$, $P_{10}=P(Z=1|X=0)$, and $OR_{DZ0}$ is the
+Z-D association in the unexposed.
+
+
+## Extensions to other effect measures
+- The logic for adjusting the OR above applies equally to other effect measures ($RD$, $RR$), with minor alterations.
+
+- For both $RD$ and $RR$ you need to specify the difference in the prevalence of $Z$ by exposure
+
+- For $RR$ need to specify the association between $Z$ and $D$ on the $RR$ scale.
+
+. . . 
+
+- In our example above, we specified $OR=5$ for $Z\rightarrow D$ association, roughly $RR=4.32$.
+
+- The bias in the crude $RR$ is therefore:
+
+$Bias(RR)=\dfrac{RR_{DX+}}{RR_{DXZ(E)}}=\dfrac{RR_{DZ0}P_{11}+1-P_{11}}{RR_{DZ0}P_{10}+1-P_{10}}=\dfrac{4.3(.7)+1-.7}{4.3(.5)+1-.5}=1.25$
+
+
+## What about the risk difference?
+
+- Still need the prevalence of the unmeasured confounder by exposure, but now we need the risk difference $RD_{DZ}$ for the confounder-disease association.
+
+\begin{tabular}{cccccccccccc}
+\hline 
+ & \multicolumn{3}{c}{{\small{}Z=1 Smokers}} &  & \multicolumn{3}{c}{{\small{}Z=0 Non-smokers}} &  & \multicolumn{3}{c}{{\small{}Total}}\tabularnewline
+\cline{2-4} \cline{3-4} \cline{4-4} \cline{6-8} \cline{7-8} \cline{8-8} \cline{10-12} \cline{11-12} \cline{12-12} 
+ & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total}\tabularnewline
+\hline 
+{\small{}D=1} & \textbf{\small{}$\mathbf{{\scriptstyle A_{11}}}$} & \textbf{\small{}$\mathbf{{\scriptstyle A_{01}}}$} & {\small{}${\scriptstyle M_{11}}$} &  & {\small{}${\scriptstyle 45-A_{11}}$} & {\small{}${\scriptstyle 94-A_{01}}$} & {\small{}${\scriptstyle 139-M_{11}}$} &  & 45 & 94 & 139\tabularnewline
+{\small{}D=0} & \textbf{\small{}$\mathbf{{\scriptstyle B_{11}}}$} & \textbf{\small{}$\mathbf{{\scriptstyle B_{01}}}$} & {\small{}${\scriptstyle M_{01}}$} &  & {\small{}${\scriptstyle 257-B_{11}}$} & {\small{}${\scriptstyle 945-B_{01}}$} & {\small{}${\scriptstyle 1202-M_{01}}$} &  & 257 & 945 & 1202\tabularnewline
+\hline 
+{\small{}Total} & {\small{}${\scriptstyle N_{11}}$} & {\small{}${\scriptstyle N_{01}}$} & {\small{}${\scriptstyle N_{+1}}$} &  & {\small{}${\scriptstyle 302-N_{11}}$} & {\small{}${\scriptstyle 1039-N_{01}}$} & {\small{}${\scriptstyle 1341-N_{+1}}$} &  & 302 & 1039 & 1341\tabularnewline
+& & & & & & & & & & & \tabularnewline
+\end{tabular}
+
+. . . 
+
+-   The crude association^[These data are derived from a case-control study, so this is just for illustration.] is $RD_{DX+}=(45/302)-(94/1039)=0.06$
+
+-   Difference for $Z$ by exposure (70% $X=1$, 50% $X=0$)
+
+-   [Choose]{style="color: red"} $RD$ for $Z-D$ among the unexposed as
+    $RD_{DZ0}=0.10$.
+    
+    
+## 
+Revised table:
+\begin{tabular}{cccccccccccc}
+\hline 
+ & \multicolumn{3}{c}{{\small{}Z=1 Smokers}} &  & \multicolumn{3}{c}{{\small{}Z=0 Non-smokers}} &  & \multicolumn{3}{c}{{\small{}Total}}\tabularnewline
+\cline{2-4} \cline{3-4} \cline{4-4} \cline{6-8} \cline{7-8} \cline{8-8} \cline{10-12} \cline{11-12} \cline{12-12} 
+ & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total}\tabularnewline
+\hline 
+{\small{}D=1} & {\small{}38} & {\small{}73} & {\small{}111} &  & 7 & 21 & 28 &  & {\small{}45} & {\small{}94} & {\small{}139}\tabularnewline
+{\small{}D=0} & {\small{}174} & {\small{}447} & {\small{}620} &  & 83 & {\small{}499} & {\small{}582} &  & {\small{}257} & {\small{}945} & {\small{}1202}\tabularnewline
+\hline 
+{\small{}Total{*}} & {\small{}211} & {\small{}520} & {\small{}731} &  & {\small{}91} & {\small{}520} & 610 &  & {\small{}302} & {\small{}1039} & {\small{}1341}\tabularnewline
 \hline 
 \multicolumn{12}{l}{{\scriptsize{}{*}Note: Row and column totals in Z strata may not sum
 because of rounding.}}\tabularnewline
 \end{tabular}
-```
+
+. . . 
+
+- Standardize to exposed, we get:
+
+:::{style="text-align: center;"}
+$RD_{DXZ(E)}=\sum_{z}w_{z}RD_{DXZ}/\sum_{z}w_{z}=0.04$
+:::
+
+- Bias is $RD_{DX+}-RD_{DXZ(E)}=0.06-0.04=0.02$
+
+- Arah et al. show how to calculate simply as:
+$Bias=RD_{DX+}-RD_{DXZ(E)}=RD_{DZ0}\left(P_{Z1}-P_{Z0}\right)=0.10\left(0.7-0.5\right)=0.02$
+
 ## Overview {.h2center}
 
 ### [Why Bias Analysis?]{.gray}
@@ -940,8 +1063,7 @@ $RD=2.9/100py\quad \text{and} \quad RR=2.0$
 
 :::
 
-## Bias-corrected estimates (bounds)
-- Worst case scenario still suggests some impact.
+## Worst case scenario still suggests some impact.
 
 \begin{tabular}{cccccc}
 \hline 
@@ -1041,6 +1163,20 @@ What to vary?
 
 ## Probabilistic
 
+-   The major limitation of the previous methods for analyzing study
+    bias is that they treat the bias parameters (sensitivity,
+    specificity, confounder-disease association, prevalence of
+    unmeasured confounders, etc.) as known quantities that are perfectly
+    measured.
+
+-   Thus, the analyses above are referred to as deterministic, and they
+    only account for systematic error (i.e., they do not account for
+    measurement error in the estimates of the prevalence of the
+    unmeasured confounder or the confounder-disease association.
+
+-   An alternative would be to assign a probability distribution to bias
+    parameters.
+
 ```{css, echo=FALSE}
 .longcode {
 height: 800px;
@@ -1119,5 +1255,44 @@ row.names(bcor_t) <- c("OR:Crude", "OR:Corrected-systematic error", "OR:Correcte
 kbl(bcor_t, col.names = c("Median", "2.5th pctile", "97.5th pctile"),digits = 2) %>% kable_styling()
 ```
 
+- Using probabilistic analysis gives a similar adjusted OR () relative to our deterministic bias analysis (), but provides empirical confidence limits. 
+
+- Introduction of additional random error via the simulation analysis widens the confidence limits further.
+
+## Record level implementation
+
+- Benefit of adjustment for record-level covariates
+
+## Steps for record-level implementatio
+
+-   Step 1: Identify the Source of Bias
+-   Step 2: Select the Bias Parameters
+-   Step 3: Assign Probability Distributions to Each Bias Parameter
+-   Step 4: Use Simple Bias Analysis Methods to Incorporate Uncertainty in the Bias Parameters and Random Error
+    -   Step 4a: Randomly Sample from the Bias Parameter Distributions
+    -   Step 4b: Use Simple Bias Analysis Methods and Incorporate Uncertainty and Conventional Random Error
+    -   Step 4c: Sample the Bias-Adjusted Effect Estimate
+-   Step 5: Save the Bias-Adjusted Estimate and Repeat Steps 4a--c
+
+## Multiple bias analysis
+
+-   Extension of simple bias analysis in which we assign bias
+    parameters, either deterministically or probabilistically, but now
+    the we examine the impact of more than one bias at a time.
+
+-   Difficult to ascertain quantitatively how multiple biases may work
+    together.
+
+-   Order matters, and corrections should be made in the reverse of the
+    order in which they occurred as the data were generated.
+
+-   Generally (but not a rule):
+
+    1.  Misclassification
+
+    2.  Selection bias
+
+    3.  Unmeasured confounding
+    
 ## References
 

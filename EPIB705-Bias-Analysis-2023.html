@@ -7,8 +7,10 @@
 <link href="EPIB705-Bias-Analysis-2023_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="EPIB705-Bias-Analysis-2023_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="EPIB705-Bias-Analysis-2023_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.269">
+  <meta name="generator" content="quarto-1.2.280">
 
+  <meta name="author" content="Sam Harper">
+  <meta name="dcterms.date" content="2023-03-22">
   <title>Bias Analysis</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -401,10 +403,10 @@
     }
   </style>
   
-  <script src="EPIB705-Bias-Analysis-2023_files/libs/kePrint-0.0.1/kePrint.js"></script>
-  <link href="EPIB705-Bias-Analysis-2023_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
   <link href="EPIB705-Bias-Analysis-2023_files/libs/countdown-0.4.0/countdown.css" rel="stylesheet">
   <script src="EPIB705-Bias-Analysis-2023_files/libs/countdown-0.4.0/countdown.js"></script>
+  <script src="EPIB705-Bias-Analysis-2023_files/libs/kePrint-0.0.1/kePrint.js"></script>
+  <link href="EPIB705-Bias-Analysis-2023_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -412,16 +414,17 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Bias Analysis</h1>
+  <p class="subtitle">EPIB 705</p>
 
 <div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Sam Harper 
+</div>
+</div>
 </div>
 
-</section>
-<section class="slide level2">
-
-<div class="cell">
-
-</div>
+  <p class="date">2023-03-22</p>
 </section>
 <section id="overview" class="slide level2 h2center">
 <h2>Overview</h2>
@@ -438,8 +441,20 @@
 <p><br></p>
 <h3 id="summary">Summary</h3>
 </section>
-<section id="unmeasured-confounding-1" class="slide level2">
-<h2>Unmeasured Confounding</h2>
+<section id="overview-1" class="slide level2 h2center">
+<h2>Overview</h2>
+<h3 id="why-bias-analysis-1">Why Bias Analysis?</h3>
+<p><br></p>
+<h3 id="deterministic-bias-analysis-1"><span class="gray">Deterministic Bias Analysis</span></h3>
+<h4 id="unmeasured-confounding-1"><span class="gray">Unmeasured confounding</span></h4>
+<h4 id="misclassification-1"><span class="gray">Misclassification</span></h4>
+<h4 id="selection-bias-1"><span class="gray">Selection bias</span></h4>
+<p><br></p>
+<h3 id="probabilistic-bias-analysis-1"><span class="gray">Probabilistic Bias Analysis</span></h3>
+<p><br></p>
+<h3 id="record-level-implementation-1"><span class="gray">Record-level Implementation</span></h3>
+<p><br></p>
+<h3 id="summary-1"><span class="gray">Summary</span></h3>
 </section>
 <section id="introduction" class="slide level2">
 <h2>Introduction</h2>
@@ -455,18 +470,28 @@
 </section>
 <section id="what-are-we-concerned-about" class="slide level2">
 <h2>What are we concerned about?</h2>
-<div class="cell">
-<div class="cell-output-display">
-<p><embed data-src="images/bias-DAG.pdf" style="width:80.0%"></p>
-</div>
-</div>
-</section>
+<p>In theory. <br></p>
+
+<img data-src="EPIB705-Bias-Analysis-2023_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<section id="what-are-we-concerned-about-1" class="slide level2">
+<h2>What are we concerned about?</h2>
+<p>In practice. <br></p>
+
+<img data-src="EPIB705-Bias-Analysis-2023_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<section id="potential-consequences" class="slide level2">
+<h2>Potential consequences</h2>
+<ul>
+<li>“Bias analysis requires educated guesses about the likely sizes of systematic errors”<sup>1</sup> <br></li>
+<li>The difficulty is that it is challenging to do so quantitatively, thus investigators often rely on qualitative judgments about the likelihood that their estimates are biased. <br></li>
+<li>A basic problem is that the results of observational studies are likely to be sensitive to choices made by the analyst.</li>
+</ul>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>Rothman, Greenland, Lash, <em>Modern Epidemiology</em> 3rd ed, p,347.</p></li></ol></aside></section>
 <section id="example" class="slide level2">
 <h2>Example</h2>
 <blockquote>
 <p>Several potential limitations of the present investigation must be considered in drawing conclusions from the results. In particular, AMD was ascertained only in one eye, resulting in a possible underestimation of AMD cases; however, studies have shown that AMD development is typically symmetric. Further, AMD was identified using nonmydriatic fundus photography without dilating the pupils, which may have led to potential misclassification of cases. In estimating milk and fish intake, the food frequency questionnaire used in this study was not validated and the measurement error was unknown. The serum 25-hydroxyvitamin D values would reflect sun exposure and food intake over recent weeks, rather than years, which would have enhanced random measurement error. Therefore, <strong>associations reported are likely to be biased toward the null.</strong><sup>1</sup></p>
 </blockquote>
-<aside><ol class="aside-footnotes"><li id="fn1"><p>See <span class="citation" data-cites="Parekh:2007aa">Parekh et al. (<a href="#/references" role="doc-biblioref" onclick="">2007</a>)</span></p></li></ol></aside></section>
+<aside><ol class="aside-footnotes"><li id="fn2"><p>See <span class="citation" data-cites="Parekh:2007aa">Parekh et al. (<a href="#/references" role="doc-biblioref" onclick="">2007</a>)</span></p></li></ol></aside></section>
 <section id="section" class="slide level2">
 <h2></h2>
 <div class="center">
@@ -478,80 +503,27 @@
 <h2></h2>
 <p>Intuitions are difficult to overcome.</p>
 
-<img data-src="images/illusion-2.png" width="965" class="r-stretch"></section>
-<section id="record-level-implementation-1" class="slide level2">
-<h2>Record level implementation</h2>
-<ul>
-<li>Step 1: Identify the Source of Bias</li>
-<li>Step 2: Select the Bias Parameters</li>
-<li>Step 3: Assign Probability Distributions to Each Bias Parameter</li>
-<li>Step 4: Use Simple Bias Analysis Methods to Incorporate Uncertainty in the Bias Parameters and Random Error
-<ul>
-<li>Step 4a: Randomly Sample from the Bias Parameter Distributions</li>
-<li>Step 4b: Use Simple Bias Analysis Methods and Incorporate Uncertainty and Conventional Random Error</li>
-<li>Step 4c: Sample the Bias-Adjusted Effect Estimate</li>
-</ul></li>
-<li>Step 5: Save the Bias-Adjusted Estimate and Repeat Steps 4a–c</li>
-</ul>
-</section>
-<section id="overview-1" class="slide level2 h2center">
+<img data-src="images/illusion-2.png" class="r-stretch"></section>
+<section id="overview-2" class="slide level2 h2center">
 <h2>Overview</h2>
-<h3 id="why-bias-analysis-1"><span class="gray">Why Bias Analysis?</span></h3>
+<h3 id="why-bias-analysis-2"><span class="gray">Why Bias Analysis?</span></h3>
 <p><br></p>
-<h3 id="deterministic-bias-analysis-1"><strong>Deterministic Bias Analysis</strong></h3>
+<h3 id="deterministic-bias-analysis-2"><strong>Deterministic Bias Analysis</strong></h3>
 <h4 id="unmeasured-confounding-2"><strong>Unmeasured confounding</strong></h4>
 <h4 id="measurement-error"><span class="gray">Measurement error</span></h4>
-<h4 id="selection-bias-1"><span class="gray">Selection bias</span></h4>
+<h4 id="selection-bias-2"><span class="gray">Selection bias</span></h4>
 <p><br></p>
-<h3 id="probabilistic-bias-analysis-1"><span class="gray">Probabilistic Bias Analysis</span></h3>
+<h3 id="probabilistic-bias-analysis-2"><span class="gray">Probabilistic Bias Analysis</span></h3>
 <p><br></p>
 <h3 id="record-level-implementation-2"><span class="gray">Record-level Implementation</span></h3>
 <p><br></p>
-<h3 id="summary-1"><span class="gray">Summary</span></h3>
+<h3 id="summary-2"><span class="gray">Summary</span></h3>
 </section>
 <section id="unmeasured-confounding-3" class="slide level2">
 <h2>Unmeasured Confounding</h2>
-<p>Example of Sensitivity Analysis for Unmeasured Confounding</p>
 <ul>
-<li>Crude OR: <span class="math inline">\(OR_{DX+}=(45\times945)/(94\times257)=1.76\)</span></li>
+<li>Suppose we want to assess the effect of occupational exposure to resins (<span class="math inline">\(X\)</span>) on lung cancer risk (<span class="math inline">\(D\)</span>) using a case-control design.<sup>1</sup></li>
 </ul>
-<table>
-<thead>
-<tr class="header">
-<th>Disease Status</th>
-<th>X=1</th>
-<th>X=0</th>
-<th>Total</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Cases (D=1)</td>
-<td>45</td>
-<td>94</td>
-<td>139</td>
-</tr>
-<tr class="even">
-<td>Controls (D=0)</td>
-<td>257</td>
-<td>945</td>
-<td>1202</td>
-</tr>
-<tr class="odd">
-<td>Total</td>
-<td>302</td>
-<td>1039</td>
-<td>1341</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><p>We think this is confounded by smoking <span class="math inline">\((Z)\)</span>, but we did not measure it.</p></li>
-<li><p>How can we quantify the potential effect of failing to adjust for <span class="math inline">\(Z\)</span>?</p></li>
-</ul>
-</section>
-<section id="unmeasured-confounding-4" class="slide level2">
-<h2>Unmeasured Confounding</h2>
 <p><br></p>
 <div class="columns">
 <div class="column" style="width:52%;">
@@ -597,106 +569,15 @@
 <li><p>Likely confounded by smoking <span class="math inline">\((Z)\)</span>, but we did not measure it.</p></li>
 <li><p>How can we quantify failing to adjust for <span class="math inline">\(Z\)</span>?</p></li>
 </ul>
-</section>
+<aside><ol class="aside-footnotes"><li id="fn3"><p>Longstanding example used in <em>Modern Epidemiology</em> from <span class="citation" data-cites="Greenland:1994aa">Greenland et al. (<a href="#/references" role="doc-biblioref" onclick="">1994</a>)</span></p></li></ol></aside></section>
 <section id="example-sensitivity-analysis-for-unmeasured-confounding" class="slide level2">
 <h2>Example: Sensitivity Analysis for Unmeasured Confounding</h2>
 </section>
-<section id="data-layout-for-dichotomous-unmeasured-confounder" class="slide level2">
-<h2>Data Layout for Dichotomous Unmeasured Confounder</h2>
-<div class="columns">
-<div class="column" style="width:35%;">
-<table>
-<caption><strong>Z=1 Smokers</strong></caption>
-<thead>
-<tr class="header">
-<th></th>
-<th>X=1</th>
-<th>X=0</th>
-<th>Total</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>D=1</td>
-<td>A<sub>11</sub></td>
-<td>A<sub>01</sub></td>
-<td>M<sub>11</sub></td>
-</tr>
-<tr class="even">
-<td>D=0</td>
-<td>B<sub>11</sub></td>
-<td>B<sub>01</sub></td>
-<td>M<sub>01</sub></td>
-</tr>
-<tr class="odd">
-<td>Total</td>
-<td>N<sub>11</sub></td>
-<td>N<sub>01</sub></td>
-<td>N<sub>+1</sub></td>
-</tr>
-</tbody>
-</table>
-</div><div class="column" style="width:40%;">
-<table>
-<caption><strong>Z=0 Non-smokers</strong></caption>
-<thead>
-<tr class="header">
-<th>X=1</th>
-<th>X=0</th>
-<th>Total</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>A<sub>1+</sub> - A<sub>11</sub></td>
-<td>A<sub>0+</sub> - A<sub>01</sub></td>
-<td>M<sub>A+</sub> - M<sub>11</sub></td>
-</tr>
-<tr class="even">
-<td>B<sub>1+</sub> - B<sub>11</sub></td>
-<td>B<sub>0+</sub> - B<sub>01</sub></td>
-<td>M<sub>B+</sub> - M<sub>01</sub></td>
-</tr>
-<tr class="odd">
-<td>N<sub>1+</sub> - N<sub>11</sub></td>
-<td>N<sub>0+</sub> - N<sub>01</sub></td>
-<td>N<sub>++</sub> - N<sub>+1</sub></td>
-</tr>
-</tbody>
-</table>
-</div><div class="column" style="width:25%;">
-<table>
-<caption><strong>Total</strong></caption>
-<thead>
-<tr class="header">
-<th>X=1</th>
-<th>X=0</th>
-<th>Total</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>A<sub>1+</sub></td>
-<td>A<sub>0+</sub></td>
-<td>M<sub>A+</sub></td>
-</tr>
-<tr class="even">
-<td>B<sub>1+</sub></td>
-<td>B<sub>0+</sub></td>
-<td>M<sub>B+</sub></td>
-</tr>
-<tr class="odd">
-<td>N<sub>1+</sub></td>
-<td>N<sub>0+</sub></td>
-<td>N<sub>++</sub></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</section>
 <section id="where-did-this-come-from" class="slide level2">
 <h2>Where did this come from?</h2>
+<ul>
+<li>Early ideas formulated in the context of controversy surrounding the link between smoking and lung cancer<sup>1</sup></li>
+</ul>
 <div class="columns">
 <div class="column" style="width:65%;">
 <blockquote>
@@ -710,223 +591,389 @@
 <p><img data-src="images/cornfield.png" style="width:150.0%"></p>
 </div>
 </div>
-<p>Contribution of Cornfield et al.&nbsp;(1959, J Nat Canc Inst).</p>
+</div>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn4"><p><span class="citation" data-cites="Bross:1954aa">Bross (<a href="#/references" role="doc-biblioref" onclick="">1954</a>)</span> is credited with implementing the first quantitative bias analyis, but <span class="citation" data-cites="Cornfield:1959aa">Cornfield et al. (<a href="#/references" role="doc-biblioref" onclick="">1959</a>)</span> also played an important role.</p></li></ol></aside></section>
+<section id="data-layout-for-dichotomous-unmeasured-confounder" class="slide level2">
+<h2>Data Layout for Dichotomous Unmeasured Confounder</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th colspan="3" style="text-align: center;"><span>Z=1 Smokers</span></th>
+<th style="text-align: center;"></th>
+<th colspan="3" style="text-align: center;"><span>Z=0 Non-smokers</span></th>
+<th style="text-align: center;"></th>
+<th colspan="3" style="text-align: center;"><span>Total</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span>X=1</span></td>
+<td style="text-align: center;"><span>X=0</span></td>
+<td style="text-align: center;"><span>Total</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span>X=1</span></td>
+<td style="text-align: center;"><span>X=0</span></td>
+<td style="text-align: center;"><span>Total</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span>X=1</span></td>
+<td style="text-align: center;"><span>X=0</span></td>
+<td style="text-align: center;"><span>Total</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span>D=1</span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle A_{11}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle A_{01}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle M_{11}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle A_{1+}-A_{11}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle A_{0+}-A_{01}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle M_{A+}-M_{11}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle A_{1+}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle A_{0+}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle M_{A+}}\)</span></span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span>D=0</span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle B_{11}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle B_{01}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle M_{01}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle B_{1+}-B_{11}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle B_{0+}-B_{01}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle M_{B+}-M_{01}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle B_{1+}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle B_{0+}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle M_{B+}}\)</span></span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span>Total</span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{11}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{01}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{+1}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{1+}-N_{11}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{0+}-N_{01}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{++}-N_{+1}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{1+}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{0+}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{++}}\)</span></span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<ul>
+<li>The crude odds ratio is <span class="math inline">\(OR_{DX+}=A_{1+}B_{0+}/A_{0+}B_{1+}\)</span>, but to adjust for smoking we need smoking stratum-specific ORs.</li>
+<li>We can write the exposure-disease OR <strong>within strata</strong> of <span class="math inline">\(Z\)</span> <span class="math inline">\((OR_{DXZ})\)</span> as:</li>
+</ul>
+<div style="text-align: center;">
+<p><span class="math inline">\(OR_{DX1}=\dfrac{A_{11}B_{01}}{A_{01}B_{11}}\quad \text{and} \quad OR_{DX0}=\dfrac{\left(A_{1+}-A_{11}\right)\left(B_{0+}-B_{01}\right)}{\left(A_{0+}-A_{01}\right)\left(B_{1+}-B_{11}\right)}\)</span></p>
 </div>
 </div>
 </section>
 <section id="data-layout-for-dichotomous-unmeasured-confounder-1" class="slide level2">
 <h2>Data Layout for Dichotomous Unmeasured Confounder</h2>
-<div class="columns">
-<div class="column" style="width:35%;">
-<table>
-<caption><strong>Z=1 Smokers</strong></caption>
-<thead>
-<tr class="header">
-<th></th>
-<th>X=1</th>
-<th>X=0</th>
-<th>Total</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>D=1</td>
-<td>A<sub>11</sub></td>
-<td>A<sub>01</sub></td>
-<td>M<sub>11</sub></td>
-</tr>
-<tr class="even">
-<td>D=0</td>
-<td>B<sub>11</sub></td>
-<td>B<sub>01</sub></td>
-<td>M<sub>01</sub></td>
-</tr>
-<tr class="odd">
-<td>Total</td>
-<td>N<sub>11</sub></td>
-<td>N<sub>01</sub></td>
-<td>N<sub>+1</sub></td>
-</tr>
-</tbody>
-</table>
-</div><div class="column" style="width:40%;">
-<table>
-<caption><strong>Z=0 Non-smokers</strong></caption>
-<thead>
-<tr class="header">
-<th>X=1</th>
-<th>X=0</th>
-<th>Total</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>A<sub>1+</sub> - A<sub>11</sub></td>
-<td>A<sub>0+</sub> - A<sub>01</sub></td>
-<td>M<sub>A+</sub> - M<sub>11</sub></td>
-</tr>
-<tr class="even">
-<td>B<sub>1+</sub> - B<sub>11</sub></td>
-<td>B<sub>0+</sub> - B<sub>01</sub></td>
-<td>M<sub>B+</sub> - M<sub>01</sub></td>
-</tr>
-<tr class="odd">
-<td>N<sub>1+</sub> - N<sub>11</sub></td>
-<td>N<sub>0+</sub> - N<sub>01</sub></td>
-<td>N<sub>++</sub> - N<sub>+1</sub></td>
-</tr>
-</tbody>
-</table>
-</div><div class="column" style="width:25%;">
-<table>
-<caption><strong>Total</strong></caption>
-<thead>
-<tr class="header">
-<th>X=1</th>
-<th>X=0</th>
-<th>Total</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>A<sub>1+</sub></td>
-<td>A<sub>0+</sub></td>
-<td>M<sub>A+</sub></td>
-</tr>
-<tr class="even">
-<td>B<sub>1+</sub></td>
-<td>B<sub>0+</sub></td>
-<td>M<sub>B+</sub></td>
-</tr>
-<tr class="odd">
-<td>N<sub>1+</sub></td>
-<td>N<sub>0+</sub></td>
-<td>N<sub>++</sub></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<ul>
-<li><p>To adjust for smoking we need stratum-specific ORs.</p></li>
-<li><p>We can write the exposure-disease OR <strong>within strata</strong> of <span class="math inline">\(Z\)</span> <span class="math inline">\(\left(OR_{DXZ}\right)\)</span> as:</p></li>
-</ul>
-<div class="columns">
-<div class="column" style="width:35%;">
-<p><span class="math inline">\(OR_{DX_{Z=1}}=\dfrac{A_{11}B_{01}}{A_{01}B_{11}}\)</span></p>
-</div><div class="column" style="width:65%;">
-<p><span class="math inline">\(OR_{DX_{Z=0}}=\dfrac{\left(A_{1+}-A_{11}\right)\left(B_{0+}-B_{01}\right)}{\left(A_{0+}-A_{01}\right)\left(B_{1+}-B_{11}\right)}\)</span></p>
-</div>
-</div>
-</section>
-<section id="data-layout-for-dichotomous-unmeasured-confounder-2" class="slide level2">
-<h2>Data Layout for Dichotomous Unmeasured Confounder</h2>
-<div class="columns">
-<div class="column" style="width:35%;">
-<table>
-<caption><strong>Z=1 Smokers</strong></caption>
-<thead>
-<tr class="header">
-<th></th>
-<th>X=1</th>
-<th>X=0</th>
-<th>Total</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>D=1</td>
-<td><mark>A<sub>11</sub></mark></td>
-<td><mark>A<sub>01</sub></mark></td>
-<td>M<sub>11</sub></td>
-</tr>
-<tr class="even">
-<td>D=0</td>
-<td><mark>B<sub>11</sub></mark></td>
-<td><mark>B<sub>01</sub></mark></td>
-<td>M<sub>01</sub></td>
-</tr>
-<tr class="odd">
-<td>Total</td>
-<td>N<sub>11</sub></td>
-<td>N<sub>01</sub></td>
-<td>N<sub>+1</sub></td>
-</tr>
-</tbody>
-</table>
-</div><div class="column" style="width:40%;">
-<table>
-<caption><strong>Z=0 Non-smokers</strong></caption>
-<thead>
-<tr class="header">
-<th>X=1</th>
-<th>X=0</th>
-<th>Total</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>A<sub>1+</sub> - A<sub>11</sub></td>
-<td>A<sub>0+</sub> - A<sub>01</sub></td>
-<td>M<sub>A+</sub> - M<sub>11</sub></td>
-</tr>
-<tr class="even">
-<td>B<sub>1+</sub> - B<sub>11</sub></td>
-<td>B<sub>0+</sub> - B<sub>01</sub></td>
-<td>M<sub>B+</sub> - M<sub>01</sub></td>
-</tr>
-<tr class="odd">
-<td>N<sub>1+</sub> - N<sub>11</sub></td>
-<td>N<sub>0+</sub> - N<sub>01</sub></td>
-<td>N<sub>++</sub> - N<sub>+1</sub></td>
-</tr>
-</tbody>
-</table>
-</div><div class="column" style="width:25%;">
-<table>
-<caption><strong>Total</strong></caption>
-<thead>
-<tr class="header">
-<th>X=1</th>
-<th>X=0</th>
-<th>Total</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>45</td>
-<td>94</td>
-<td>139</td>
-</tr>
-<tr class="even">
-<td>257</td>
-<td>945</td>
-<td>1202</td>
-</tr>
-<tr class="odd">
-<td>302</td>
-<td>1039</td>
-<td>1341</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
 <p>We already know the marginal totals, so only 4 quantities to estimate.</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th colspan="3" style="text-align: center;"><span>Z=1 Smokers</span></th>
+<th style="text-align: center;"></th>
+<th colspan="3" style="text-align: center;"><span>Z=0 Non-smokers</span></th>
+<th style="text-align: center;"></th>
+<th colspan="3" style="text-align: center;"><span>Total</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span>X=1</span></td>
+<td style="text-align: center;"><span>X=0</span></td>
+<td style="text-align: center;"><span>Total</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span>X=1</span></td>
+<td style="text-align: center;"><span>X=0</span></td>
+<td style="text-align: center;"><span>Total</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span>X=1</span></td>
+<td style="text-align: center;"><span>X=0</span></td>
+<td style="text-align: center;"><span>Total</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span>D=1</span></td>
+<td style="text-align: center;"><strong><span class="math inline">\(\mathbf{{\scriptstyle A_{11}}}\)</span></strong></td>
+<td style="text-align: center;"><strong><span class="math inline">\(\mathbf{{\scriptstyle A_{01}}}\)</span></strong></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle M_{11}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle A_{1+}-A_{11}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle A_{0+}-A_{01}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle M_{A+}-M_{11}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle A_{1+}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle A_{0+}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle M_{A+}}\)</span></span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span>D=0</span></td>
+<td style="text-align: center;"><strong><span class="math inline">\(\mathbf{{\scriptstyle B_{11}}}\)</span></strong></td>
+<td style="text-align: center;"><strong><span class="math inline">\(\mathbf{{\scriptstyle B_{01}}}\)</span></strong></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle M_{01}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle B_{1+}-B_{11}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle B_{0+}-B_{01}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle M_{B+}-M_{01}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle B_{1+}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle B_{0+}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle M_{B+}}\)</span></span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span>Total</span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{11}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{01}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{+1}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{1+}-N_{11}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{0+}-N_{01}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{++}-N_{+1}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{1+}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{0+}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{++}}\)</span></span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li><p>These values may be generated by specifying values for the prevalence of smoking in each exposure group and the association between smoking and disease.</p></li>
 <li><p>The (unknown) smoking prevalence in exposure strata are:</p>
-<p><span class="math inline">\(P_{Z1}=N_{11}/N_{1+}\)</span> and <span class="math inline">\(P_{Z0}=N_{01}/N_{0+}\)</span></p></li>
+<p><span class="math display">\[P_{Z1}=N_{11}/N_{1+}\quad \text{and} \quad P_{Z0}=N_{01}/N_{0+}\]</span></p></li>
 </ul>
 </section>
-<section id="ex" class="slide level2">
-<h2>Ex</h2>
+<section id="what-do-we-need-1-distribution-of-z-by-exposure" class="slide level2">
+<h2>What do we need? (1) Distribution of <span class="math inline">\(Z\)</span> by exposure</h2>
+
+<img data-src="EPIB705-Bias-Analysis-2023_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch quarto-figure-center"><table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th colspan="3" style="text-align: center;"><span>Z=1 Smokers</span></th>
+<th style="text-align: center;"></th>
+<th colspan="3" style="text-align: center;"><span>Z=0 Non-smokers</span></th>
+<th style="text-align: center;"></th>
+<th colspan="3" style="text-align: center;"><span>Total</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span>X=1</span></td>
+<td style="text-align: center;"><span>X=0</span></td>
+<td style="text-align: center;"><span>Total</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span>X=1</span></td>
+<td style="text-align: center;"><span>X=0</span></td>
+<td style="text-align: center;"><span>Total</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span>X=1</span></td>
+<td style="text-align: center;"><span>X=0</span></td>
+<td style="text-align: center;"><span>Total</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span>D=1</span></td>
+<td style="text-align: center;"><strong><span class="math inline">\(\mathbf{{\scriptstyle A_{11}}}\)</span></strong></td>
+<td style="text-align: center;"><strong><span class="math inline">\(\mathbf{{\scriptstyle A_{01}}}\)</span></strong></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle M_{11}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle 45-A_{11}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle 94-A_{01}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle 139-M_{11}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">45</td>
+<td style="text-align: center;">94</td>
+<td style="text-align: center;">139</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span>D=0</span></td>
+<td style="text-align: center;"><strong><span class="math inline">\(\mathbf{{\scriptstyle B_{11}}}\)</span></strong></td>
+<td style="text-align: center;"><strong><span class="math inline">\(\mathbf{{\scriptstyle B_{01}}}\)</span></strong></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle M_{01}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle 257-B_{11}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle 945-B_{01}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle 1202-M_{01}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">257</td>
+<td style="text-align: center;">945</td>
+<td style="text-align: center;">1202</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span>Total</span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{11}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{01}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{+1}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle 302-N_{11}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle 1039-N_{01}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle 1341-N_{+1}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">302</td>
+<td style="text-align: center;">1039</td>
+<td style="text-align: center;">1341</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>With plausible estimates of <span class="math inline">\(P_{Z}\)</span>, perhaps from some externally validated source, we can use this to estimate the number of exposed controls, since <span class="math inline">\(B_{11}=P_{Z1}B_{1+}\)</span> and <span class="math inline">\(B_{01}=P_{Z0}B_{0+}\)</span>.</p></li>
+<li><p>However, <span class="math inline">\(A_{11}\)</span> and <span class="math inline">\(A_{01}\)</span> are still unknown, but note that they can be estimated if we specify a plausible value for the association between smoking <span class="math inline">\((Z)\)</span> and disease <span class="math inline">\((D)\)</span>.</p></li>
+</ul>
+<p><br></p>
+</section>
+<section id="what-do-we-need-2-effect-of-z-on-d" class="slide level2">
+<h2>What do we need? (2) Effect of <span class="math inline">\(Z\)</span> on <span class="math inline">\(D\)</span></h2>
+
+<img data-src="EPIB705-Bias-Analysis-2023_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch quarto-figure-center"><table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th colspan="3" style="text-align: center;"><span>Z=1 Smokers</span></th>
+<th style="text-align: center;"></th>
+<th colspan="3" style="text-align: center;"><span>Z=0 Non-smokers</span></th>
+<th style="text-align: center;"></th>
+<th colspan="3" style="text-align: center;"><span>Total</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span>X=1</span></td>
+<td style="text-align: center;"><span>X=0</span></td>
+<td style="text-align: center;"><span>Total</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span>X=1</span></td>
+<td style="text-align: center;"><span>X=0</span></td>
+<td style="text-align: center;"><span>Total</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span>X=1</span></td>
+<td style="text-align: center;"><span>X=0</span></td>
+<td style="text-align: center;"><span>Total</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span>D=1</span></td>
+<td style="text-align: center;"><span style="color: blue"><span class="math inline">\({\scriptstyle A_{11}}\)</span></span></td>
+<td style="text-align: center;"><span style="color: red"><span class="math inline">\({\scriptstyle A_{01}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle M_{11}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span style="color: blue"><span class="math inline">\({\scriptstyle A_{1+}-A_{11}}\)</span></span></td>
+<td style="text-align: center;"><span style="color: red"><span class="math inline">\({\scriptstyle A_{0+}-A_{01}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle M_{A+}-M_{11}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle A_{1+}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle A_{0+}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle M_{A+}}\)</span></span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span>D=0</span></td>
+<td style="text-align: center;"><span style="color: blue"><span class="math inline">\({\scriptstyle B_{11}}\)</span></span></td>
+<td style="text-align: center;"><span style="color: red"><span class="math inline">\({\scriptstyle B_{01}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle M_{01}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span style="color: blue"><span class="math inline">\({\scriptstyle B_{1+}-B_{11}}\)</span></span></td>
+<td style="text-align: center;"><span style="color: red"><span class="math inline">\({\scriptstyle B_{0+}-B_{01}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle M_{B+}-M_{01}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle B_{1+}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle B_{0+}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle M_{B+}}\)</span></span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span>Total</span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{11}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{01}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{+1}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{1+}-N_{11}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{0+}-N_{01}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{++}-N_{+1}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{1+}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{0+}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{++}}\)</span></span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Based on the table above, the confounder-disease OR within strata of <span class="math inline">\(X\)</span> <span class="math inline">\(\left(OR_{DZX}\right)\)</span> can be calculated as:</li>
+</ul>
+<p><span class="math display">\[{\color{blue}OR_{DZ1}=\dfrac{A_{11}\left(B_{1+}-B_{11}\right)}{\left(A_{1+}-A_{11}\right)B_{11}}},\quad \text{and} \quad {\color{red}{\color{green}{\color{cyan}{\color{red}OR_{DZ0}=\dfrac{A_{01}\left(B_{0+}-B_{01}\right)}{\left(A_{0+}-A_{01}\right)B_{01}}}}}}\]</span></p>
 </section>
 <section id="worked-example" class="slide level2">
 <h2>Worked example</h2>
 <ul>
 <li>Suppose we know from external studies that the prevalence of smoking is 70% among those occupationally exposed to resins and 50% among those unexposed in this population.</li>
 </ul>
+<div class="fragment">
 <table>
 <thead>
 <tr class="header">
@@ -969,8 +1016,8 @@
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><span>D=0</span></td>
-<td style="text-align: center;"><strong><span style="color: red"><span class="math inline">\(\mathbf{{\scriptstyle B_{11}}}\)</span></span></strong></td>
-<td style="text-align: center;"><strong><span style="color: blue"><span class="math inline">\(\mathbf{{\scriptstyle B_{01}}}\)</span></span></strong></td>
+<td style="text-align: center;"><span style="color: red">180</span></td>
+<td style="text-align: center;"><span style="color: blue">473</span></td>
 <td style="text-align: center;"><span><span class="math inline">\({\scriptstyle M_{01}}\)</span></span></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"><span><span class="math inline">\({\scriptstyle 257-B_{11}}\)</span></span></td>
@@ -1014,11 +1061,109 @@
 <ul>
 <li>Our estimates of <span class="math inline">\(B_{11}\)</span> and <span class="math inline">\(B_{01}\)</span> are now:</li>
 </ul>
-<p><span class="math inline">\(B_{11}=P_{Z1}B_{1+}=(.7)(257)\approx180\)</span></p>
-<p><span class="math inline">\(B_{01}=P_{Z0}B_{0+}=(.5)(945)\approx473\)</span></p>
+<div style="text-align: center;">
+<p><span class="math inline">\(B_{11}=P_{Z1}B_{1+}=(.7)({\color{red}257})\approx{\color{red}180}\)</span></p>
+<p><span class="math inline">\(B_{01}=P_{Z0}B_{0+}=(.5)({\color{blue}945})\approx{\color{blue}473}\)</span></p>
+</div>
+</div>
 </section>
-<section id="will-this-work" class="slide level2">
-<h2>Will this work?</h2>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th colspan="3" style="text-align: center;"><span>Z=1 Smokers</span></th>
+<th style="text-align: center;"></th>
+<th colspan="3" style="text-align: center;"><span>Z=0 Non-smokers</span></th>
+<th style="text-align: center;"></th>
+<th colspan="3" style="text-align: center;"><span>Total</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span>X=1</span></td>
+<td style="text-align: center;"><span>X=0</span></td>
+<td style="text-align: center;"><span>Total</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span>X=1</span></td>
+<td style="text-align: center;"><span>X=0</span></td>
+<td style="text-align: center;"><span>Total</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span>X=1</span></td>
+<td style="text-align: center;"><span>X=0</span></td>
+<td style="text-align: center;"><span>Total</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span>D=1</span></td>
+<td style="text-align: center;"><span style="color: red">41</span></td>
+<td style="text-align: center;"><span style="color: blue">77</span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle M_{11}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle 45-A_{11}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle 94-A_{01}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle 139-M_{11}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">45</td>
+<td style="text-align: center;">94</td>
+<td style="text-align: center;">139</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span>D=0</span></td>
+<td style="text-align: center;">180</td>
+<td style="text-align: center;">473</td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle M_{01}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle 257-B_{11}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle 945-B_{01}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle 1202-M_{01}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">257</td>
+<td style="text-align: center;">945</td>
+<td style="text-align: center;">1202</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span>Total</span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{11}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{01}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{+1}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle 302-N_{11}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle 1039-N_{01}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle 1341-N_{+1}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">302</td>
+<td style="text-align: center;">1039</td>
+<td style="text-align: center;">1341</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Plugging in the estimates of <span class="math inline">\(B_{11}\)</span> and <span class="math inline">\(B_{01}\)</span> along with a plausible estimate of the confounder-disease association <span class="math inline">\((OR_{DZ1}=OR_{DZ0}=5)\)</span>, assumed to be homogenous across strata of resin exposure, now allow us to calculate <span class="math inline">\(A_{11}\)</span> and <span class="math inline">\(A_{01}\)</span>:</li>
+</ul>
+<div style="text-align: center;">
+<p><span class="math inline">\(A_{11}=\frac{OR_{DZ1}A_{1+}B_{11}}{OR_{DZ1}B_{11}+B_{1+}-B_{11}}=\frac{5(45)(180)}{5(180)+257-180}\approx{\color{red}41}\)</span></p>
+<p><span class="math inline">\(A_{01}=\frac{OR_{DZ0}A_{0+}B_{01}}{OR_{DZ0}B_{01}+B_{0+}-B_{01}}=\frac{5(94)(473)}{5(473)+945-473}\approx{\color{blue}77}\)</span></p>
+</div>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+<p>We can now fill out the table and calculate an <span class="math inline">\(OR\)</span> standardized for smoking:</p>
 <table>
 <thead>
 <tr class="header">
@@ -1061,11 +1206,11 @@
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><span>D=0</span></td>
-<td style="text-align: center;"><span style="color: red">180</span></td>
+<td style="text-align: center;"><span>180</span></td>
 <td style="text-align: center;"><span>473</span></td>
 <td style="text-align: center;"><span>652</span></td>
 <td style="text-align: center;"></td>
-<td style="text-align: center;"><span style="color: red">77</span></td>
+<td style="text-align: center;"><span>77</span></td>
 <td style="text-align: center;"><span>473</span></td>
 <td style="text-align: center;"><span>550</span></td>
 <td style="text-align: center;"></td>
@@ -1092,21 +1237,242 @@
 </tr>
 </tbody>
 </table>
+<ul>
+<li>If we standardize to the exposed population, we get:</li>
+</ul>
+<p><span class="math inline">\(OR_{DXZ(E)}=\dfrac{\sum_{z}B_{1z}(A_{1z}/B_{1z})}{\sum_{z}B_{1z}(A_{0z}/B_{0z})}=\dfrac{180(41/180)+77(4/77)}{180(78/473)+77(16/473)}=1.39\)</span></p>
 </section>
-<section id="overview-2" class="slide level2 h2center">
+<section id="simplifying-formula" class="slide level2">
+<h2>Simplifying formula</h2>
+<ul>
+<li>Bias relative to the crude estimate:</li>
+</ul>
+<div style="text-align: center;">
+<p><span class="math inline">\(Bias(OR)=\dfrac{OR_{DX+}}{OR_{DXZ(E)}}=\dfrac{1.76}{1.39}=1.27\)</span></p>
+</div>
+<div class="fragment">
+<ul>
+<li>Arah et al.<sup>1</sup> also given an alternative estimator using only 1) prevalence of <span class="math inline">\(Z\)</span> in each exposure stratum and 2) association between <span class="math inline">\(Z\)</span> and <span class="math inline">\(D\)</span></li>
+</ul>
+<p><span class="math inline">\(Bias(OR)=\dfrac{OR_{DX+}}{OR_{DXZ(E)}}=\dfrac{OR_{DZ0}P_{11}+1-P_{11}}{OR_{DZ0}P_{10}+1-P_{10}}=\dfrac{5(.7)+1-.7}{5(.5)+1-.5}=1.27\)</span></p>
+<p>where <span class="math inline">\(P_{11}=P(Z=1|X=1)\)</span>, <span class="math inline">\(P_{10}=P(Z=1|X=0)\)</span>, and <span class="math inline">\(OR_{DZ0}\)</span> is the Z-D association in the unexposed.</p>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn5"><p>See <span class="citation" data-cites="Arah:2008aa">Arah et al. (<a href="#/references" role="doc-biblioref" onclick="">2008</a>)</span></p></li></ol></aside></section>
+<section id="extensions-to-other-effect-measures" class="slide level2">
+<h2>Extensions to other effect measures</h2>
+<ul>
+<li><p>The logic for adjusting the OR above applies equally to other effect measures (<span class="math inline">\(RD\)</span>, <span class="math inline">\(RR\)</span>), with minor alterations.</p></li>
+<li><p>For both <span class="math inline">\(RD\)</span> and <span class="math inline">\(RR\)</span> you need to specify the difference in the prevalence of <span class="math inline">\(Z\)</span> by exposure</p></li>
+<li><p>For <span class="math inline">\(RR\)</span> need to specify the association between <span class="math inline">\(Z\)</span> and <span class="math inline">\(D\)</span> on the <span class="math inline">\(RR\)</span> scale.</p></li>
+</ul>
+<div class="fragment">
+<ul>
+<li><p>In our example above, we specified <span class="math inline">\(OR=5\)</span> for <span class="math inline">\(Z\rightarrow D\)</span> association, roughly <span class="math inline">\(RR=4.32\)</span>.</p></li>
+<li><p>The bias in the crude <span class="math inline">\(RR\)</span> is therefore:</p></li>
+</ul>
+<p><span class="math inline">\(Bias(RR)=\dfrac{RR_{DX+}}{RR_{DXZ(E)}}=\dfrac{RR_{DZ0}P_{11}+1-P_{11}}{RR_{DZ0}P_{10}+1-P_{10}}=\dfrac{4.3(.7)+1-.7}{4.3(.5)+1-.5}=1.25\)</span></p>
+</div>
+</section>
+<section id="what-about-the-risk-difference" class="slide level2">
+<h2>What about the risk difference?</h2>
+<ul>
+<li>Still need the prevalence of the unmeasured confounder by exposure, but now we need the risk difference <span class="math inline">\(RD_{DZ}\)</span> for the confounder-disease association.</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th colspan="3" style="text-align: center;"><span>Z=1 Smokers</span></th>
+<th style="text-align: center;"></th>
+<th colspan="3" style="text-align: center;"><span>Z=0 Non-smokers</span></th>
+<th style="text-align: center;"></th>
+<th colspan="3" style="text-align: center;"><span>Total</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span>X=1</span></td>
+<td style="text-align: center;"><span>X=0</span></td>
+<td style="text-align: center;"><span>Total</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span>X=1</span></td>
+<td style="text-align: center;"><span>X=0</span></td>
+<td style="text-align: center;"><span>Total</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span>X=1</span></td>
+<td style="text-align: center;"><span>X=0</span></td>
+<td style="text-align: center;"><span>Total</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span>D=1</span></td>
+<td style="text-align: center;"><strong><span class="math inline">\(\mathbf{{\scriptstyle A_{11}}}\)</span></strong></td>
+<td style="text-align: center;"><strong><span class="math inline">\(\mathbf{{\scriptstyle A_{01}}}\)</span></strong></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle M_{11}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle 45-A_{11}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle 94-A_{01}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle 139-M_{11}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">45</td>
+<td style="text-align: center;">94</td>
+<td style="text-align: center;">139</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span>D=0</span></td>
+<td style="text-align: center;"><strong><span class="math inline">\(\mathbf{{\scriptstyle B_{11}}}\)</span></strong></td>
+<td style="text-align: center;"><strong><span class="math inline">\(\mathbf{{\scriptstyle B_{01}}}\)</span></strong></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle M_{01}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle 257-B_{11}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle 945-B_{01}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle 1202-M_{01}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">257</td>
+<td style="text-align: center;">945</td>
+<td style="text-align: center;">1202</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span>Total</span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{11}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{01}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle N_{+1}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle 302-N_{11}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle 1039-N_{01}}\)</span></span></td>
+<td style="text-align: center;"><span><span class="math inline">\({\scriptstyle 1341-N_{+1}}\)</span></span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">302</td>
+<td style="text-align: center;">1039</td>
+<td style="text-align: center;">1341</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<ul>
+<li><p>The crude association<sup>1</sup> is <span class="math inline">\(RD_{DX+}=(45/302)-(94/1039)=0.06\)</span></p></li>
+<li><p>Difference for <span class="math inline">\(Z\)</span> by exposure (70% <span class="math inline">\(X=1\)</span>, 50% <span class="math inline">\(X=0\)</span>)</p></li>
+<li><p><span style="color: red">Choose</span> <span class="math inline">\(RD\)</span> for <span class="math inline">\(Z-D\)</span> among the unexposed as <span class="math inline">\(RD_{DZ0}=0.10\)</span>.</p></li>
+</ul>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn6"><p>These data are derived from a case-control study, so this is just for illustration.</p></li></ol></aside></section>
+<section id="section-4" class="slide level2">
+<h2></h2>
+Revised table:
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th colspan="3" style="text-align: center;"><span>Z=1 Smokers</span></th>
+<th style="text-align: center;"></th>
+<th colspan="3" style="text-align: center;"><span>Z=0 Non-smokers</span></th>
+<th style="text-align: center;"></th>
+<th colspan="3" style="text-align: center;"><span>Total</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span>X=1</span></td>
+<td style="text-align: center;"><span>X=0</span></td>
+<td style="text-align: center;"><span>Total</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span>X=1</span></td>
+<td style="text-align: center;"><span>X=0</span></td>
+<td style="text-align: center;"><span>Total</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span>X=1</span></td>
+<td style="text-align: center;"><span>X=0</span></td>
+<td style="text-align: center;"><span>Total</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span>D=1</span></td>
+<td style="text-align: center;"><span>38</span></td>
+<td style="text-align: center;"><span>73</span></td>
+<td style="text-align: center;"><span>111</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">21</td>
+<td style="text-align: center;">28</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span>45</span></td>
+<td style="text-align: center;"><span>94</span></td>
+<td style="text-align: center;"><span>139</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span>D=0</span></td>
+<td style="text-align: center;"><span>174</span></td>
+<td style="text-align: center;"><span>447</span></td>
+<td style="text-align: center;"><span>620</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">83</td>
+<td style="text-align: center;"><span>499</span></td>
+<td style="text-align: center;"><span>582</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span>257</span></td>
+<td style="text-align: center;"><span>945</span></td>
+<td style="text-align: center;"><span>1202</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span>Total<span>*</span></span></td>
+<td style="text-align: center;"><span>211</span></td>
+<td style="text-align: center;"><span>520</span></td>
+<td style="text-align: center;"><span>731</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span>91</span></td>
+<td style="text-align: center;"><span>520</span></td>
+<td style="text-align: center;">610</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span>302</span></td>
+<td style="text-align: center;"><span>1039</span></td>
+<td style="text-align: center;"><span>1341</span></td>
+</tr>
+<tr class="odd">
+<td colspan="12" style="text-align: left;"><span><span>*</span>Note: Row and column totals in Z strata may not sum because of rounding.</span></td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<ul>
+<li>Standardize to exposed, we get:</li>
+</ul>
+<div style="text-align: center;">
+<p><span class="math inline">\(RD_{DXZ(E)}=\sum_{z}w_{z}RD_{DXZ}/\sum_{z}w_{z}=0.04\)</span></p>
+</div>
+<ul>
+<li><p>Bias is <span class="math inline">\(RD_{DX+}-RD_{DXZ(E)}=0.06-0.04=0.02\)</span></p></li>
+<li><p>Arah et al.&nbsp;show how to calculate simply as: <span class="math inline">\(Bias=RD_{DX+}-RD_{DXZ(E)}=RD_{DZ0}\left(P_{Z1}-P_{Z0}\right)=0.10\left(0.7-0.5\right)=0.02\)</span></p></li>
+</ul>
+</div>
+</section>
+<section id="overview-3" class="slide level2 h2center">
 <h2>Overview</h2>
-<h3 id="why-bias-analysis-2"><span class="gray">Why Bias Analysis?</span></h3>
+<h3 id="why-bias-analysis-3"><span class="gray">Why Bias Analysis?</span></h3>
 <p><br></p>
-<h3 id="deterministic-bias-analysis-2"><strong>Deterministic Bias Analysis</strong></h3>
-<h4 id="unmeasured-confounding-5"><span class="gray">Unmeasured confounding</span></h4>
-<h4 id="misclassification-1"><strong>Misclassification</strong></h4>
-<h4 id="selection-bias-2"><span class="gray">Selection bias</span></h4>
+<h3 id="deterministic-bias-analysis-3"><strong>Deterministic Bias Analysis</strong></h3>
+<h4 id="unmeasured-confounding-4"><span class="gray">Unmeasured confounding</span></h4>
+<h4 id="misclassification-2"><strong>Misclassification</strong></h4>
+<h4 id="selection-bias-3"><span class="gray">Selection bias</span></h4>
 <p><br></p>
-<h3 id="probabilistic-bias-analysis-2"><span class="gray">Probabilistic Bias Analysis</span></h3>
+<h3 id="probabilistic-bias-analysis-3"><span class="gray">Probabilistic Bias Analysis</span></h3>
 <p><br></p>
 <h3 id="record-level-implementation-3"><span class="gray">Record-level Implementation</span></h3>
 <p><br></p>
-<h3 id="summary-2"><span class="gray">Summary</span></h3>
+<h3 id="summary-3"><span class="gray">Summary</span></h3>
 </section>
 <section id="bias-analysis-for-misclassification" class="slide level2">
 <h2>Bias analysis for misclassification</h2>
@@ -1212,7 +1578,7 @@
 <p><span class="red">Note that observed data <em>implicitly</em> assumes 100% Se and Sp</span></p>
 </div>
 </section>
-<section id="section-2" class="slide level2">
+<section id="section-5" class="slide level2">
 <h2></h2>
 <ul>
 <li>Suppose we have 85% Se and 95% Sp, which is <span class="red">non-differential</span> with respect to disease:</li>
@@ -1529,7 +1895,7 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 </div>
 </div>
 </div>
-<aside><ol class="aside-footnotes"><li id="fn2"><p>See package by <span class="citation" data-cites="Haine:2021aa">Haine (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span></p></li></ol></aside></section>
+<aside><ol class="aside-footnotes"><li id="fn7"><p>See package by <span class="citation" data-cites="Haine:2021aa">Haine (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span></p></li></ol></aside></section>
 <section id="misclassification-of-confounders" class="slide level2">
 <h2>Misclassification of confounders</h2>
 <ul>
@@ -1547,12 +1913,12 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="images/fox-misclass-conf.png" width="600"></p>
+<p><img data-src="images/fox-misclass-conf.png"></p>
 </figure>
 </div>
 </div>
 </div>
-<aside><ol class="aside-footnotes"><li id="fn3"><p>See examples in Ch.6 of <span class="citation" data-cites="Fox:2022aa">Fox et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>.</p></li></ol></aside></section>
+<aside><ol class="aside-footnotes"><li id="fn8"><p>See examples in Ch.6 of <span class="citation" data-cites="Fox:2022aa">Fox et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>.</p></li></ol></aside></section>
 <section id="example-effect-of-coffee-consumption-on-bladder-cancer" class="slide level2">
 <h2>Example: Effect of coffee consumption on bladder cancer<sup>1</sup></h2>
 <p>We might draw a model like this, indicating that true smoking status is unmeasured but may still confound the association between coffee and bladder cancer:</p>
@@ -1560,19 +1926,19 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="EPIB705-Bias-Analysis-2023_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
+<p><img data-src="EPIB705-Bias-Analysis-2023_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
-<aside><ol class="aside-footnotes"><li id="fn4"><p>In line note.</p></li></ol></aside></section>
-<section id="section-3" class="slide level2">
+<aside><ol class="aside-footnotes"><li id="fn9"><p>In line note.</p></li></ol></aside></section>
+<section id="section-6" class="slide level2">
 <h2></h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="images/coffee-cancer-crude.png" width="828"></p>
+<p><img data-src="images/coffee-cancer-crude.png"></p>
 </figure>
 </div>
 </div>
@@ -1582,24 +1948,24 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="images/coffee-cancer-adj.png" width="828"></p>
+<p><img data-src="images/coffee-cancer-adj.png"></p>
 </figure>
 </div>
 </div>
 </div>
 <p><span class="math display">\[OR_{MHadj}=1.3\quad 95\%\text{CI}=[0.95,1.7]\]</span> ## Overview {.h2center}</p>
-<h3 id="why-bias-analysis-3"><span class="gray">Why Bias Analysis?</span></h3>
+<h3 id="why-bias-analysis-4"><span class="gray">Why Bias Analysis?</span></h3>
 <p><br></p>
-<h3 id="deterministic-bias-analysis-3"><strong>Deterministic Bias Analysis</strong></h3>
-<h4 id="unmeasured-confounding-6"><span class="gray">Unmeasured confounding</span></h4>
-<h4 id="misclassification-2"><span class="gray">Misclassification</span></h4>
-<h4 id="selection-bias-3"><strong>Selection bias</strong></h4>
+<h3 id="deterministic-bias-analysis-4"><strong>Deterministic Bias Analysis</strong></h3>
+<h4 id="unmeasured-confounding-5"><span class="gray">Unmeasured confounding</span></h4>
+<h4 id="misclassification-3"><span class="gray">Misclassification</span></h4>
+<h4 id="selection-bias-4"><strong>Selection bias</strong></h4>
 <p><br></p>
-<h3 id="probabilistic-bias-analysis-3"><span class="gray">Probabilistic Bias Analysis</span></h3>
+<h3 id="probabilistic-bias-analysis-4"><span class="gray">Probabilistic Bias Analysis</span></h3>
 <p><br></p>
 <h3 id="record-level-implementation-4"><span class="gray">Record-level Implementation</span></h3>
 <p><br></p>
-<h3 id="summary-3"><span class="gray">Summary</span></h3>
+<h3 id="summary-4"><span class="gray">Summary</span></h3>
 </section>
 <section id="bias-analysis-for-selection-bias" class="slide level2">
 <h2>Bias analysis for selection bias</h2>
@@ -1633,8 +1999,8 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 </div>
 </div>
 </div>
-<aside><ol class="aside-footnotes"><li id="fn5"><p>Example from <span class="citation" data-cites="Stang:2009aa">Stang et al. (<a href="#/references" role="doc-biblioref" onclick="">2009</a>)</span> described in <span class="citation" data-cites="Fox:2022aa">Fox et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span></p></li></ol></aside></section>
-<section id="section-4" class="slide level2">
+<aside><ol class="aside-footnotes"><li id="fn10"><p>Example from <span class="citation" data-cites="Stang:2009aa">Stang et al. (<a href="#/references" role="doc-biblioref" onclick="">2009</a>)</span> described in <span class="citation" data-cites="Fox:2022aa">Fox et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span></p></li></ol></aside></section>
+<section id="section-7" class="slide level2">
 <h2></h2>
 <table>
 <thead>
@@ -1724,8 +2090,8 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 <li><p>Overall loss-to-follow of 13%, initial baseline treatment status of those lost is known.</p></li>
 </ul>
 
-<img data-src="EPIB705-Bias-Analysis-2023_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch quarto-figure-center"></section>
-<section id="section-5" class="slide level2">
+<img data-src="EPIB705-Bias-Analysis-2023_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<section id="section-8" class="slide level2">
 <h2></h2>
 <p>How to estimate the rates among those lost?</p>
 <table>
@@ -1809,7 +2175,7 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 <li>First, let’s assume that they would have accrued similar person years as those with follow-up:</li>
 </ul>
 </section>
-<section id="section-6" class="slide level2">
+<section id="section-9" class="slide level2">
 <h2></h2>
 <table>
 <thead>
@@ -1896,7 +2262,7 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 <li>What if we assume similar to those with follow-up?</li>
 </ul>
 </section>
-<section id="section-7" class="slide level2">
+<section id="section-10" class="slide level2">
 <h2></h2>
 <ul>
 <li>Missing individuals were diagnosed at 2 specific hospitals, so use <span class="blue">observed rates</span> among those non-missing in hospitals where those LTF were diagnosed</li>
@@ -2058,11 +2424,8 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 <p><span class="math inline">\(RD=2.9/100py\quad \text{and} \quad RR=2.0\)</span></p>
 </div>
 </section>
-<section id="bias-corrected-estimates-bounds" class="slide level2">
-<h2>Bias-corrected estimates (bounds)</h2>
-<ul>
-<li>Worst case scenario still suggests some impact.</li>
-</ul>
+<section id="worst-case-scenario-still-suggests-some-impact." class="slide level2">
+<h2>Worst case scenario still suggests some impact.</h2>
 <table>
 <thead>
 <tr class="header">
@@ -2153,27 +2516,27 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 <h2>Break! ☕</h2>
 <div class="cell">
 <div class="cell-output-display">
-<div class="countdown" id="timer_b16a45a1" data-update-every="1" tabindex="0" style="top:15%;right:0;bottom:15%;left:0;margin:5%;padding:50px;font-size:7em;">
+<div class="countdown" id="timer_27a1a2ac" data-update-every="1" tabindex="0" style="top:15%;right:0;bottom:15%;left:0;margin:5%;padding:50px;font-size:7em;">
 <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
 <code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 </div>
 </div>
 </section>
-<section id="overview-3" class="slide level2 h2center">
+<section id="overview-4" class="slide level2 h2center">
 <h2>Overview</h2>
-<h3 id="why-bias-analysis-4"><span class="gray">Why Bias Analysis?</span></h3>
+<h3 id="why-bias-analysis-5"><span class="gray">Why Bias Analysis?</span></h3>
 <p><br></p>
-<h3 id="deterministic-bias-analysis-4"><span class="gray">Deterministic Bias Analysis</span></h3>
-<h4 id="unmeasured-confounding-7"><span class="gray">Unmeasured confounding</span></h4>
-<h4 id="misclassification-3"><span class="gray">Misclassification</span></h4>
-<h4 id="selection-bias-4"><span class="gray">Selection bias</span></h4>
+<h3 id="deterministic-bias-analysis-5"><span class="gray">Deterministic Bias Analysis</span></h3>
+<h4 id="unmeasured-confounding-6"><span class="gray">Unmeasured confounding</span></h4>
+<h4 id="misclassification-4"><span class="gray">Misclassification</span></h4>
+<h4 id="selection-bias-5"><span class="gray">Selection bias</span></h4>
 <p><br></p>
-<h3 id="probabilistic-bias-analysis-4"><strong>Probabilistic Bias Analysis</strong></h3>
+<h3 id="probabilistic-bias-analysis-5"><strong>Probabilistic Bias Analysis</strong></h3>
 <p><br></p>
 <h3 id="record-level-implementation-5"><span class="gray">Record-level Implementation</span></h3>
 <p><br></p>
-<h3 id="summary-4"><span class="gray">Summary</span></h3>
+<h3 id="summary-5"><span class="gray">Summary</span></h3>
 </section>
 <section id="multidimensional-bias-analysis" class="slide level2">
 <h2>Multidimensional bias analysis</h2>
@@ -2205,6 +2568,11 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 </section>
 <section id="probabilistic" class="slide level2">
 <h2>Probabilistic</h2>
+<ul>
+<li><p>The major limitation of the previous methods for analyzing study bias is that they treat the bias parameters (sensitivity, specificity, confounder-disease association, prevalence of unmeasured confounders, etc.) as known quantities that are perfectly measured.</p></li>
+<li><p>Thus, the analyses above are referred to as deterministic, and they only account for systematic error (i.e., they do not account for measurement error in the estimates of the prevalence of the unmeasured confounder or the confounder-disease association.</p></li>
+<li><p>An alternative would be to assign a probability distribution to bias parameters.</p></li>
+</ul>
 <div class="cell">
 <style type="text/css">
 .longcode {
@@ -2219,7 +2587,7 @@ width: 1500px;
 <ul>
 <li>Setup using the <code>episensr</code> package</li>
 </ul>
-<div class="cell longcode" data-hash="EPIB705-Bias-Analysis-2023_cache/revealjs/unnamed-chunk-15_2c4a45b39545e7c6bdad0cb693668f24">
+<div class="cell longcode" data-hash="EPIB705-Bias-Analysis-2023_cache/revealjs/unnamed-chunk-18_2cbe81703d277472b654b399b6a1e2d2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r longcode number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># set the seed for reproducible results</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="fu">set.seed</span>(<span class="dv">39569</span>)</span>
 <span id="cb3-3"><a href="#cb3-3"></a></span>
@@ -2248,11 +2616,11 @@ width: 1500px;
 <section id="probability-distributions-for-each-parameter" class="slide level2">
 <h2>Probability distributions for each parameter</h2>
 
-<img data-src="EPIB705-Bias-Analysis-2023_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="EPIB705-Bias-Analysis-2023_files/figure-revealjs/unnamed-chunk-19-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="generates-a-distribution-of-corrected-estimates" class="slide level2">
 <h2>Generates a distribution of corrected estimates</h2>
 
-<img data-src="EPIB705-Bias-Analysis-2023_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="EPIB705-Bias-Analysis-2023_files/figure-revealjs/unnamed-chunk-20-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="bias-corrected-estimates" class="slide level2">
 <h2>Bias-corrected estimates</h2>
 <div class="cell">
@@ -2291,6 +2659,45 @@ width: 1500px;
 
 </div>
 </div>
+<ul>
+<li><p>Using probabilistic analysis gives a similar adjusted OR () relative to our deterministic bias analysis (), but provides empirical confidence limits.</p></li>
+<li><p>Introduction of additional random error via the simulation analysis widens the confidence limits further.</p></li>
+</ul>
+</section>
+<section id="record-level-implementation-6" class="slide level2">
+<h2>Record level implementation</h2>
+<ul>
+<li>Benefit of adjustment for record-level covariates</li>
+</ul>
+</section>
+<section id="steps-for-record-level-implementatio" class="slide level2">
+<h2>Steps for record-level implementatio</h2>
+<ul>
+<li>Step 1: Identify the Source of Bias</li>
+<li>Step 2: Select the Bias Parameters</li>
+<li>Step 3: Assign Probability Distributions to Each Bias Parameter</li>
+<li>Step 4: Use Simple Bias Analysis Methods to Incorporate Uncertainty in the Bias Parameters and Random Error
+<ul>
+<li>Step 4a: Randomly Sample from the Bias Parameter Distributions</li>
+<li>Step 4b: Use Simple Bias Analysis Methods and Incorporate Uncertainty and Conventional Random Error</li>
+<li>Step 4c: Sample the Bias-Adjusted Effect Estimate</li>
+</ul></li>
+<li>Step 5: Save the Bias-Adjusted Estimate and Repeat Steps 4a–c</li>
+</ul>
+</section>
+<section id="multiple-bias-analysis" class="slide level2">
+<h2>Multiple bias analysis</h2>
+<ul>
+<li><p>Extension of simple bias analysis in which we assign bias parameters, either deterministically or probabilistically, but now the we examine the impact of more than one bias at a time.</p></li>
+<li><p>Difficult to ascertain quantitatively how multiple biases may work together.</p></li>
+<li><p>Order matters, and corrections should be made in the reverse of the order in which they occurred as the data were generated.</p></li>
+<li><p>Generally (but not a rule):</p>
+<ol type="1">
+<li><p>Misclassification</p></li>
+<li><p>Selection bias</p></li>
+<li><p>Unmeasured confounding</p></li>
+</ol></li>
+</ul>
 </section>
 <section id="references" class="slide level2 smaller scrollable">
 <h2>References</h2>
@@ -2298,8 +2705,20 @@ width: 1500px;
 
 </div>
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-Arah:2008aa" class="csl-entry" role="doc-biblioentry">
+Arah OA, Chiba Y, Greenland S. <a href="https://doi.org/10.1016/j.annepidem.2008.04.003">Bias formulas for external adjustment and sensitivity analysis of unmeasured confounders</a>. Ann Epidemiol. 2008 Aug;18(8):637–46.
+</div>
+<div id="ref-Bross:1954aa" class="csl-entry" role="doc-biblioentry">
+Bross I. Misclassification in 2 x 2 tables. Biometrics. 1954;10(4):478–86.
+</div>
+<div id="ref-Cornfield:1959aa" class="csl-entry" role="doc-biblioentry">
+Cornfield J, Haenszel W, Hammond EC, Lilienfeld AM, Shimkin MB, Wynder EL. <a href="https://www.ncbi.nlm.nih.gov/pubmed/13621204">Smoking and lung cancer: Recent evidence and a discussion of some questions</a>. J Natl Cancer Inst. 1959 Jan;22(1):173–203.
+</div>
 <div id="ref-Fox:2022aa" class="csl-entry" role="doc-biblioentry">
 Fox MP, MacLehose RF, Lash TL. Applying quantitative bias analysis to epidemiologic data. Springer; 2022.
+</div>
+<div id="ref-Greenland:1994aa" class="csl-entry" role="doc-biblioentry">
+Greenland S, Salvan A, Wegman DH, Hallock MF, Smith TJ. A case-control study of cancer mortality at a transformer-assembly facility. International archives of occupational and environmental health. 1994;66:49–54.
 </div>
 <div id="ref-Haine:2021aa" class="csl-entry" role="doc-biblioentry">
 Haine D. The episensr package: Basic sensitivity analysis of epidemiological results [Internet]. 2021. Available from: <a href="https://dhaine.github.io/episensr/">https://dhaine.github.io/episensr/</a>
