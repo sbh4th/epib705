@@ -481,8 +481,14 @@ Sam Harper
 <section id="potential-consequences" class="slide level2">
 <h2>Potential consequences</h2>
 <ul>
-<li>“Bias analysis requires educated guesses about the likely sizes of systematic errors”<sup>1</sup> <br></li>
-<li>The difficulty is that it is challenging to do so quantitatively, thus investigators often rely on qualitative judgments about the likelihood that their estimates are biased. <br></li>
+<li>“Bias analysis requires educated guesses about the likely sizes of systematic errors”<sup>1</sup></li>
+</ul>
+<p><br></p>
+<ul>
+<li>The difficulty is that it is challenging to do so quantitatively, thus investigators often rely on qualitative judgments about the likelihood that their estimates are biased.</li>
+</ul>
+<p><br></p>
+<ul>
 <li>A basic problem is that the results of observational studies are likely to be sensitive to choices made by the analyst.</li>
 </ul>
 <aside><ol class="aside-footnotes"><li id="fn1"><p>Rothman, Greenland, Lash, <em>Modern Epidemiology</em> 3rd ed, p,347.</p></li></ol></aside></section>
@@ -518,6 +524,25 @@ Sam Harper
 <h3 id="record-level-implementation-2"><span class="gray">Record-level Implementation</span></h3>
 <p><br></p>
 <h3 id="summary-2"><span class="gray">Summary</span></h3>
+</section>
+<section id="rationale-for-bias-analysis-for-unmeasured-confounding" class="slide level2">
+<h2>Rationale for bias analysis for unmeasured confounding</h2>
+<ul>
+<li>When should you conduct a bias analysis for unmeasured confounding?</li>
+</ul>
+<ol type="1">
+<li><p>An important (and well known) confounder was not measured (e.g., too expensive to collect; reliance on secondary data)</p></li>
+<li><p>Quantifying the impact of an unknown confounder (e.g., early study of an association; unmeasured confounding seems likely)</p></li>
+</ol>
+<div class="fragment">
+<ul>
+<li><p>Goals:</p>
+<ul>
+<li><p>We want to provide an estimate of the association corrected for the unmeasured confounder (<span class="math inline">\(Z\)</span>).</p></li>
+<li><p>Answers the question of what the association would have been <strong>had we controlled for</strong> <span class="math inline">\(Z\)</span>.</p></li>
+</ul></li>
+</ul>
+</div>
 </section>
 <section id="unmeasured-confounding-3" class="slide level2">
 <h2>Unmeasured Confounding</h2>
@@ -968,6 +993,16 @@ Sam Harper
 </ul>
 <p><span class="math display">\[{\color{blue}OR_{DZ1}=\dfrac{A_{11}\left(B_{1+}-B_{11}\right)}{\left(A_{1+}-A_{11}\right)B_{11}}},\quad \text{and} \quad {\color{red}{\color{green}{\color{cyan}{\color{red}OR_{DZ0}=\dfrac{A_{01}\left(B_{0+}-B_{01}\right)}{\left(A_{0+}-A_{01}\right)B_{01}}}}}}\]</span></p>
 </section>
+<section id="estimating-exposed-and-unexposed-cases" class="slide level2">
+<h2>Estimating exposed and unexposed cases</h2>
+<p>Recall our stratum-specific <span class="math inline">\(ORs\)</span>:</p>
+<p><span class="math display">\[OR_{DZ1}=\dfrac{A_{11}\left(B_{1+}-B_{11}\right)}{\left(A_{1+}-A_{11}\right)B_{11}}\quad \text{and} \quad OR_{DX0}=\dfrac{A_{01}\left(B_{0+}-B_{01}\right)}{\left(A_{0+}-A_{01}\right)B_{01}}\]</span></p>
+<ul>
+<li>If we can substitute reasonable values for these <span class="math inline">\(z\)</span>-specific <span class="math inline">\(OR\)</span>s, we can solve the above equations, we can solve these equations to get the value of <span class="math inline">\(A_{11}\)</span>and <span class="math inline">\(A_{01}\)</span>:<sup>1</sup></li>
+</ul>
+<p><span class="math display">\[A_{11}=OR_{DZ1}A_{1+}B_{11}/(OR_{DZ1}B_{11}+B_{1+}-B_{11})\]</span></p>
+<p><span class="math display">\[A_{01}=OR_{DZ0}A_{0+}B_{01}/(OR_{DZ0}B_{01}+B_{0+}-B_{01})\]</span></p>
+<aside><ol class="aside-footnotes"><li id="fn5"><p>See <span class="citation" data-cites="Rothman:2008aa">Rothman et al. (<a href="#/references" role="doc-biblioref" onclick="">2008</a>)</span>, p.350, eq. 19-1 and 19-2</p></li></ol></aside></section>
 <section id="worked-example" class="slide level2">
 <h2>Worked example</h2>
 <ul>
@@ -1154,13 +1189,13 @@ Sam Harper
 </tbody>
 </table>
 <ul>
-<li>Plugging in the estimates of <span class="math inline">\(B_{11}\)</span> and <span class="math inline">\(B_{01}\)</span> along with a plausible estimate of the confounder-disease association <span class="math inline">\((OR_{DZ1}=OR_{DZ0}=5)\)</span>, assumed to be homogenous across strata of resin exposure, now allow us to calculate <span class="math inline">\(A_{11}\)</span> and <span class="math inline">\(A_{01}\)</span>:</li>
+<li>Plugging in the estimates of <span class="math inline">\(B_{11}\)</span> and <span class="math inline">\(B_{01}\)</span> along with a plausible estimate of the confounder-disease association <span class="math inline">\((OR_{DZ1}=OR_{DZ0}=5)\)</span>, assumed<sup>1</sup> to be homogeneous across strata of resin exposure, now allow us to calculate <span class="math inline">\(A_{11}\)</span> and <span class="math inline">\(A_{01}\)</span>:</li>
 </ul>
 <div style="text-align: center;">
 <p><span class="math inline">\(A_{11}=\frac{OR_{DZ1}A_{1+}B_{11}}{OR_{DZ1}B_{11}+B_{1+}-B_{11}}=\frac{5(45)(180)}{5(180)+257-180}\approx{\color{red}41}\)</span></p>
 <p><span class="math inline">\(A_{01}=\frac{OR_{DZ0}A_{0+}B_{01}}{OR_{DZ0}B_{01}+B_{0+}-B_{01}}=\frac{5(94)(473)}{5(473)+945-473}\approx{\color{blue}77}\)</span></p>
 </div>
-</section>
+<aside><ol class="aside-footnotes"><li id="fn6"><p>Not necessary to assume homogeneity if there is evidence to the contrary.</p></li></ol></aside></section>
 <section id="section-3" class="slide level2">
 <h2></h2>
 <p>We can now fill out the table and calculate an <span class="math inline">\(OR\)</span> standardized for smoking:</p>
@@ -1252,12 +1287,12 @@ Sam Harper
 </div>
 <div class="fragment">
 <ul>
-<li>Arah et al.<sup>1</sup> also given an alternative estimator using only 1) prevalence of <span class="math inline">\(Z\)</span> in each exposure stratum and 2) association between <span class="math inline">\(Z\)</span> and <span class="math inline">\(D\)</span></li>
+<li>Arah et al.<sup>1</sup> also give an alternative estimator using only 1) prevalence of <span class="math inline">\(Z\)</span> in each exposure stratum and 2) association between <span class="math inline">\(Z\)</span> and <span class="math inline">\(D\)</span></li>
 </ul>
 <p><span class="math inline">\(Bias(OR)=\dfrac{OR_{DX+}}{OR_{DXZ(E)}}=\dfrac{OR_{DZ0}P_{11}+1-P_{11}}{OR_{DZ0}P_{10}+1-P_{10}}=\dfrac{5(.7)+1-.7}{5(.5)+1-.5}=1.27\)</span></p>
 <p>where <span class="math inline">\(P_{11}=P(Z=1|X=1)\)</span>, <span class="math inline">\(P_{10}=P(Z=1|X=0)\)</span>, and <span class="math inline">\(OR_{DZ0}\)</span> is the Z-D association in the unexposed.</p>
 </div>
-<aside><ol class="aside-footnotes"><li id="fn5"><p>See <span class="citation" data-cites="Arah:2008aa">Arah et al. (<a href="#/references" role="doc-biblioref" onclick="">2008</a>)</span></p></li></ol></aside></section>
+<aside><ol class="aside-footnotes"><li id="fn7"><p>See <span class="citation" data-cites="Arah:2008aa">Arah et al. (<a href="#/references" role="doc-biblioref" onclick="">2008</a>)</span></p></li></ol></aside></section>
 <section id="extensions-to-other-effect-measures" class="slide level2">
 <h2>Extensions to other effect measures</h2>
 <ul>
@@ -1274,7 +1309,7 @@ Sam Harper
 </div>
 </section>
 <section id="what-about-the-risk-difference" class="slide level2">
-<h2>What about the risk difference?</h2>
+<h2>What about the risk difference?<sup>1</sup></h2>
 <ul>
 <li>Still need the prevalence of the unmeasured confounder by exposure, but now we need the risk difference <span class="math inline">\(RD_{DZ}\)</span> for the confounder-disease association.</li>
 </ul>
@@ -1364,12 +1399,12 @@ Sam Harper
 </table>
 <div class="fragment">
 <ul>
-<li><p>The crude association<sup>1</sup> is <span class="math inline">\(RD_{DX+}=(45/302)-(94/1039)=0.06\)</span></p></li>
+<li><p>The crude association is <span class="math inline">\(RD_{DX+}=(45/302)-(94/1039)=0.06\)</span></p></li>
 <li><p>Difference for <span class="math inline">\(Z\)</span> by exposure (70% <span class="math inline">\(X=1\)</span>, 50% <span class="math inline">\(X=0\)</span>)</p></li>
-<li><p><span style="color: red">Choose</span> <span class="math inline">\(RD\)</span> for <span class="math inline">\(Z-D\)</span> among the unexposed as <span class="math inline">\(RD_{DZ0}=0.10\)</span>.</p></li>
+<li><p><span style="color: red">Choose</span> <span class="math inline">\(RD\)</span> for <span class="math inline">\(Z\rightarrow D\)</span> among the unexposed as <span class="math inline">\(RD_{DZ0}=0.10\)</span>.</p></li>
 </ul>
 </div>
-<aside><ol class="aside-footnotes"><li id="fn6"><p>These data are derived from a case-control study, so this is just for illustration.</p></li></ol></aside></section>
+<aside><ol class="aside-footnotes"><li id="fn8"><p>These data are derived from a case-control study, so this is just for illustration.</p></li></ol></aside></section>
 <section id="section-4" class="slide level2">
 <h2></h2>
 Revised table:
@@ -1459,6 +1494,131 @@ Revised table:
 </ul>
 </div>
 </section>
+<section id="general-formulas-based-on-counterfactual-notation" class="slide level2">
+<h2>General formulas based on counterfactual notation</h2>
+<ul>
+<li><p>What to do for more complex, regression-based models?<sup>1</sup></p></li>
+<li><p>VanderWeele and Arah (2011) provided some general formulas.</p></li>
+<li><p>The average causal effect among those exposed, which <strong>would</strong> be adjusted for both measured <span class="math inline">\(X\)</span>s <strong>and</strong> unmeasured <span class="math inline">\(U\)</span> is:</p>
+<p><span class="math display">\[E\left(Y_{a1}|a_{1}\right)-E\left(Y_{a0}|a_{1}\right)\]</span></p></li>
+</ul>
+<p><span class="math display">\[=\sum_{x}\sum_{u}\left\{ E(Y|a_{1},x,u)-E(Y|a_{0},x,u)\right\} P(u|x,a_{1})P(x|a_{1})\]</span></p>
+<aside><ol class="aside-footnotes"><li id="fn9"><p>Far more likely what you’ll be using in practice. See <span class="citation" data-cites="Vanderweele:2011aa">Vanderweele and Arah (<a href="#/references" role="doc-biblioref" onclick="">2011</a>)</span>.</p></li></ol></aside></section>
+<section id="general-formulas-for-unmeasured-confounding" class="slide level2">
+<h2>General formulas for unmeasured confounding</h2>
+<ul>
+<li>But, without adjustment for <span class="math inline">\(U\)</span> we get an <span class="math inline">\(X\)</span>-adjusted effect of:</li>
+</ul>
+<p><span class="math display">\[\sum_{x}\left\{ E(Y|a_{1},x)-E(Y|a_{0},x)\right\} P(x|a_{1})\]</span></p>
+<ul>
+<li>So, the difference between these two estimates, <span class="math inline">\(d_{a1}\)</span>, is</li>
+</ul>
+<p><span class="math display">\[d_{a1}=\sum_{x}\left\{ E(Y|a_{1},x)-E(Y|a_{0},x)\right\} P(x|a_{1})-\left\{ E\left(Y_{a1}|a_{1}\right)-E\left(Y_{a0}|a_{1}\right)\right\}\]</span></p>
+</section>
+<section id="general-formulas-for-unmeasured-confounding-1" class="slide level2">
+<h2>General formulas for unmeasured confounding</h2>
+<ul>
+<li>The bias is (still) a function of the prevalence of the unknown confounder and its effect on the outcome (reference level=<span class="math inline">\(u'\)</span>):</li>
+</ul>
+<p><span class="math display">\[d_{a1}=\sum_{x}\sum_{u}\left\{ E(Y|a_{0},x,u)-E(Y|a_{0},x,u')\right\} \left\{ P(u|a_{1},x)-P\left(u|a_{0},x\right)\right\} P\left(x|a_{1}\right)\]</span></p>
+<div class="fragment">
+<p>We thus need to specify:</p>
+<ul>
+<li>The <span class="math inline">\(U-Y\)</span> relationship among the unexposed:</li>
+</ul>
+<p><span class="math inline">\(E(Y|a_{0},x,u)-E(Y|a_{0},x,u')\)</span></p>
+<ul>
+<li>Distribution of <span class="math inline">\(U\)</span> among exposed and unexposed within strata of X:</li>
+</ul>
+<p><span class="math inline">\(\left\{ P(u|a_{1},x)-P(u|a_{0},x)\right\} P(x|a_{1})\)</span></p>
+</div>
+</section>
+<section id="complications-for-the-general-formula" class="slide level2">
+<h2>Complications for the general formula</h2>
+<ul>
+<li><p>These formulas require a lot of knowledge.</p>
+<ul>
+<li><p>Association between <span class="math inline">\(U\)</span> and <span class="math inline">\(Y\)</span> <span style="color: red">at each level of measured confounders</span> <span class="math inline">\(X\)</span>.</p></li>
+<li><p>Association between <span class="math inline">\(U\)</span> and <span class="math inline">\(A\)</span> <span style="color: red">at each level of measured confounders</span> <span class="math inline">\(X\)</span>.</p></li>
+</ul></li>
+</ul>
+<div class="fragment">
+<ul>
+<li><p>How many measured confounders do you have? 2? 10?</p></li>
+<li><p>Even for 2 age groups and gender, for example, you would need to specify the <span class="math inline">\(U-Y\)</span> and <span class="math inline">\(U-A\)</span> relations for:</p>
+<ul>
+<li><p>younger women, older women</p></li>
+<li><p>younger men, older men</p></li>
+</ul></li>
+<li><p>Is this information available? Can you make educated guesses?</p></li>
+</ul>
+</div>
+</section>
+<section id="general-formulas-for-unmeasured-confounding-2" class="slide level2">
+<h2>General formulas for unmeasured confounding</h2>
+<p>Simplifying assumptions could be useful. Assuming no heterogeneity across <span class="math inline">\(X\)</span>, we could posit:</p>
+<ul>
+<li>constant prevalence difference between exposed and unexposed:</li>
+</ul>
+<p><span class="math display">\[\delta=P(U=1|a_{1},x)-P(U=1|a_{0},x)\]</span></p>
+<ul>
+<li>constant RD for exposure to U across strata of exposure and <span class="math inline">\(X\)</span>:</li>
+</ul>
+<p><span class="math display">\[\gamma=E(Y|a,x,U=1)-E(Y|a,x,U=0)\]</span></p>
+<p>Then the extent of bias is the product of these two terms:</p>
+<p><span class="math display">\[d_{a1}=\gamma\delta\]</span></p>
+</section>
+<section id="external-adjustment-for-unmeasured-confounding" class="slide level2">
+<h2>External adjustment for unmeasured confounding</h2>
+<p>Assumptions:<sup>1</sup></p>
+<ul>
+<li><p>Differences in the distribution of <span class="math inline">\(U\)</span> by exposure similar across all strata of measured <span class="math inline">\(X\)</span>s.</p></li>
+<li><p>Effect of <span class="math inline">\(U\)</span> on <span class="math inline">\(Y\)</span> similar across all strata of measured <span class="math inline">\(X\)</span>s.</p></li>
+</ul>
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span>Example Post-Hoc Bias Analysis</span></td>
+<td colspan="2" style="text-align: center;"><span>Rosenbaum &amp; Rubin (1983)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;"><span>Enough to nullify</span></td>
+<td style="text-align: center;"><span>More plausible</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span>Adjusted estimate (0.67 – 0.36)</span></td>
+<td style="text-align: center;"><span>0.31 (0.17, 0.45)</span></td>
+<td style="text-align: center;"><span>0.31 (0.17, 0.45)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span><span class="math inline">\(\delta=P(U|a_{1})-P(U|a_{0})\)</span> all strata</span></td>
+<td style="text-align: center;"><span>0.6</span></td>
+<td style="text-align: center;"><span>0.3</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span><span class="math inline">\(\gamma=E(Y|U=1)-E(Y|U=0)\)</span> all strata</span></td>
+<td style="text-align: center;"><span>0.517</span></td>
+<td style="text-align: center;"><span>0.5217</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span>Bias<span class="math inline">\((\gamma\delta)\)</span></span></td>
+<td style="text-align: center;"><span>0.310</span></td>
+<td style="text-align: center;"><span>0.155</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span>Bias-corrected effect</span></td>
+<td style="text-align: center;"><span>0.0 (-0.14, 0.14)</span></td>
+<td style="text-align: center;"><span>0.16 (0.01, 0.30)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<aside><ol class="aside-footnotes"><li id="fn10"><p>See <span class="citation" data-cites="Rosenbaum:1983aa">Rosenbaum and Rubin (<a href="#/references" role="doc-biblioref" onclick="">1983</a>)</span> for more details.</p></li></ol></aside></section>
 <section id="overview-3" class="slide level2 h2center">
 <h2>Overview</h2>
 <h3 id="why-bias-analysis-3"><span class="gray">Why Bias Analysis?</span></h3>
@@ -1895,7 +2055,7 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 </div>
 </div>
 </div>
-<aside><ol class="aside-footnotes"><li id="fn7"><p>See package by <span class="citation" data-cites="Haine:2021aa">Haine (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span></p></li></ol></aside></section>
+<aside><ol class="aside-footnotes"><li id="fn11"><p>See package by <span class="citation" data-cites="Haine:2021aa">Haine (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span></p></li></ol></aside></section>
 <section id="misclassification-of-confounders" class="slide level2">
 <h2>Misclassification of confounders</h2>
 <ul>
@@ -1918,7 +2078,7 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 </div>
 </div>
 </div>
-<aside><ol class="aside-footnotes"><li id="fn8"><p>See examples in Ch.6 of <span class="citation" data-cites="Fox:2022aa">Fox et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>.</p></li></ol></aside></section>
+<aside><ol class="aside-footnotes"><li id="fn12"><p>See examples in Ch.6 of <span class="citation" data-cites="Fox:2022aa">Fox et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>.</p></li></ol></aside></section>
 <section id="example-effect-of-coffee-consumption-on-bladder-cancer" class="slide level2">
 <h2>Example: Effect of coffee consumption on bladder cancer<sup>1</sup></h2>
 <p>We might draw a model like this, indicating that true smoking status is unmeasured but may still confound the association between coffee and bladder cancer:</p>
@@ -1931,7 +2091,7 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 </div>
 </div>
 </div>
-<aside><ol class="aside-footnotes"><li id="fn9"><p>In line note.</p></li></ol></aside></section>
+<aside><ol class="aside-footnotes"><li id="fn13"><p>In line note.</p></li></ol></aside></section>
 <section id="section-6" class="slide level2">
 <h2></h2>
 <div class="cell" data-layout-align="center">
@@ -1999,7 +2159,7 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 </div>
 </div>
 </div>
-<aside><ol class="aside-footnotes"><li id="fn10"><p>Example from <span class="citation" data-cites="Stang:2009aa">Stang et al. (<a href="#/references" role="doc-biblioref" onclick="">2009</a>)</span> described in <span class="citation" data-cites="Fox:2022aa">Fox et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span></p></li></ol></aside></section>
+<aside><ol class="aside-footnotes"><li id="fn14"><p>Example from <span class="citation" data-cites="Stang:2009aa">Stang et al. (<a href="#/references" role="doc-biblioref" onclick="">2009</a>)</span> described in <span class="citation" data-cites="Fox:2022aa">Fox et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span></p></li></ol></aside></section>
 <section id="section-7" class="slide level2">
 <h2></h2>
 <table>
@@ -2516,7 +2676,7 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 <h2>Break! ☕</h2>
 <div class="cell">
 <div class="cell-output-display">
-<div class="countdown" id="timer_27a1a2ac" data-update-every="1" tabindex="0" style="top:15%;right:0;bottom:15%;left:0;margin:5%;padding:50px;font-size:7em;">
+<div class="countdown" id="timer_3881d412" data-update-every="1" tabindex="0" style="top:15%;right:0;bottom:15%;left:0;margin:5%;padding:50px;font-size:7em;">
 <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
 <code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
@@ -2726,8 +2886,17 @@ Haine D. The episensr package: Basic sensitivity analysis of epidemiological res
 <div id="ref-Parekh:2007aa" class="csl-entry" role="doc-biblioentry">
 Parekh N, Chappell RJ, Millen AE, Albert DM, Mares JA. <a href="https://doi.org/10.1001/archopht.125.5.661">Association between vitamin d and age-related macular degeneration in the third national health and nutrition examination survey, 1988 through 1994</a>. Arch Ophthalmol. 2007 May;125(5):661–9.
 </div>
+<div id="ref-Rosenbaum:1983aa" class="csl-entry" role="doc-biblioentry">
+Rosenbaum PR, Rubin DB. Assessing sensitivity to an unobserved binary covariate in an observational study with binary outcome. Journal of the Royal Statistical Society: Series B (Methodological). 1983;45(2):212–8.
+</div>
+<div id="ref-Rothman:2008aa" class="csl-entry" role="doc-biblioentry">
+Rothman KJ, Greenland S, Lash TL, et al. Modern epidemiology. Vol. 3. Wolters Kluwer Health/Lippincott Williams &amp; Wilkins Philadelphia; 2008.
+</div>
 <div id="ref-Stang:2009aa" class="csl-entry" role="doc-biblioentry">
 Stang A, Schmidt-Pokrzywniak A, Lash TL, Lommatzsch PK, Taubert G, Bornfeld N, et al. <a href="https://doi.org/10.1093/jnci/djn441">Mobile phone use and risk of uveal melanoma: Results of the risk factors for uveal melanoma case-control study</a>. J Natl Cancer Inst. 2009 Jan;101(2):120–3.
+</div>
+<div id="ref-Vanderweele:2011aa" class="csl-entry" role="doc-biblioentry">
+Vanderweele TJ, Arah OA. <a href="https://doi.org/10.1097/EDE.0b013e3181f74493">Bias formulas for sensitivity analysis of unmeasured confounding for general outcomes, treatments, and confounders</a>. Epidemiology. 2011 Jan;22(1):42–52.
 </div>
 </div>
 </section>
