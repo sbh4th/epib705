@@ -45,7 +45,7 @@ library(patchwork)
 
 <br>
 
-### Probabilistic Bias Analysis
+### Multidimensional Bias Analysis
 
 <br>
 
@@ -71,7 +71,7 @@ library(patchwork)
 
 <br>
 
-### [Probabilistic Bias Analysis]{.gray}
+### [Multidimensional Bias Analysis]{.gray}
 
 <br>
 
@@ -86,15 +86,15 @@ library(patchwork)
 How do misclassification, selection bias, and unmeasured confounding create bias in parameter estimation?
 
 ::: incremental
-> By assuming that all errors are random and that any modeling assumptions (such as homogeneity) are correct, all uncertainty about the effect of errors on estimates is subsumed within conventional standard deviations for the estimates (standard errors), such as those given in earlier chapters (which assume no measurement error), and any discrepancy between an observed association and the target effect may be attributed to chance alone - (RGL, p.346)
+> By assuming that all errors are random and that any modeling assumptions (such as homogeneity) are correct, all uncertainty about the effect of errors on estimates is subsumed within conventional standard deviations for the estimates (standard errors), such as those given in earlier chapters (which assume no measurement error), and any discrepancy between an observed association and the target effect may be attributed to chance alone^[See @Rothman:2008aa, p.362.]
 
--   Bias analysis is an attempt to "safeguard against failure to attribute effects to exposure rather than systematic error"
+- Bias analysis is an attempt to quantify the potential for bias, and reduce the likelihood of mistakenly attributing effects to exposure rather than systematic error.
 :::
 
 ## What are we concerned about?
-In theory.
-<br>
-    
+
+In theory. <br>
+
 ```{r, engine = 'tikz'}
 #| fig.align: center
 \begin{tikzpicture}[shorten > = 1pt, line width=1pt]
@@ -111,10 +111,11 @@ In theory.
 % \draw [->] (y) to [bend right=35] (s);
 \end{tikzpicture}
 ```
+
 ## What are we concerned about?
-In practice.
-<br>
-    
+
+In practice. <br>
+
 ```{r, engine = 'tikz'}
 #| fig.align: center
 \begin{tikzpicture}[shorten > = 1pt, line width=1pt]
@@ -123,50 +124,63 @@ In practice.
 \node (em) at  (0,3) [align=center] {E*};
 \node (u) at (2.5,-1.5) [align=center] {U};
 \node (c) at (2.5,1.5) [align=center] {C};
+\node (cs) at (4,1.5) [align=center] {C*};
 \node (s) at  (2.5,3) [align=center, draw=black] {S=1};
 \node (y) at (5,0) [align=center] {Y};
 \node (ym) at (7,0) [align=center] {Y*};
-\foreach \from/\to in {e/y, e/em, c/y, c/e, e/s, u/e, u/y, y/ym}
+\foreach \from/\to in {e/y, e/em, c/y, c/cs, c/e, e/s, u/e, u/y, y/ym}
    \draw [->] (\from) -- (\to);
  \draw [->] (y) to [bend right=35] (s);
 \end{tikzpicture}
 ```
 
-
 ## Potential consequences
 
-- "Bias analysis requires educated guesses about the likely sizes of systematic errors"^[Rothman, Greenland, Lash, *Modern Epidemiology* 3rd ed, p,347.] 
+::: columns
+::: {.column width="15%"}
+:::
+
+::: {.column width="85%"}
+-   "Bias analysis requires educated guesses about the likely sizes of systematic errors"[^1]
 
 <br>
 
-- The difficulty is that it is challenging to do so quantitatively, thus investigators often rely on qualitative judgments about the likelihood that their estimates are biased.
+-   The difficulty is that it is challenging to do so quantitatively, thus investigators often rely on qualitative judgments about the likelihood that their estimates are biased.
 
 <br>
 
-- A basic problem is that the results of observational studies are likely to be sensitive to choices made by the analyst.
+-   A basic problem is that the results of observational studies are likely to be sensitive to choices made by the analyst.
+:::
+:::
 
-## Example
+[^1]: Rothman, Greenland, Lash, *Modern Epidemiology* 3rd ed, p,347.
 
-> Several potential limitations of the present investigation must be considered in drawing conclusions from the results. In particular, AMD was ascertained only in one eye, resulting in a possible underestimation of AMD cases; however, studies have shown that AMD development is typically symmetric. Further, AMD was identified using nonmydriatic fundus photography without dilating the pupils, which may have led to potential misclassification of cases. In estimating milk and fish intake, the food frequency questionnaire used in this study was not validated and the measurement error was unknown. The serum 25-hydroxyvitamin D values would reflect sun exposure and food intake over recent weeks, rather than years, which would have enhanced random measurement error. Therefore, **associations reported are likely to be biased toward the null.**[^1]
+## Example of typical qualitative analysis
 
-[^1]: See @Parekh:2007aa
+Study[^2] assessing the association of vitamin D on age-related macular degeneration (AMD):
+
+> Several potential limitations of the present investigation must be considered in drawing conclusions from the results. In particular, AMD was ascertained only in one eye, resulting in a possible underestimation of AMD cases; however, studies have shown that AMD development is typically symmetric. Further, AMD was identified using nonmydriatic fundus photography without dilating the pupils, which may have led to potential misclassification of cases. In estimating milk and fish intake, the food frequency questionnaire used in this study was not validated and the measurement error was unknown. The serum 25-hydroxyvitamin D values would reflect sun exposure and food intake over recent weeks, rather than years, which would have enhanced random measurement error. Therefore, **associations reported are likely to be biased toward the null.**
+
+[^2]: @Parekh:2007aa
 
 ## 
 
 ::: center
-Which line is longer?
+Which red line is longer?^[https://michaelbach.de/ot/sze-muelue/]
 :::
 
-```{r, echo=F, out.width="80%"}
-knitr::include_graphics(here("images", "illusion-1.jpg"))
+```{r, echo=F, out.width="70%"}
+#| fig-align: center
+knitr::include_graphics(here("images", "ml-room-1.png"))
 ```
 
 ## 
 
-Intuitions are difficult to overcome.
+Intuitions are difficult to overcome.^[https://michaelbach.de/ot/sze-muelue/]
 
-```{r, echo=F}
-knitr::include_graphics(here("images", "illusion-2.png"))
+```{r, echo=F,out.width="70%"}
+#| fig-align: center
+knitr::include_graphics(here("images", "ml-room-2.png"))
 ```
 
 ## Overview {.h2center}
@@ -185,7 +199,7 @@ knitr::include_graphics(here("images", "illusion-2.png"))
 
 <br>
 
-### [Probabilistic Bias Analysis]{.gray}
+### [Multidimensional Bias Analysis]{.gray}
 
 <br>
 
@@ -197,23 +211,49 @@ knitr::include_graphics(here("images", "illusion-2.png"))
 
 ## Rationale for bias analysis for unmeasured confounding
 
-- When should you conduct a bias analysis for unmeasured confounding?
+<br>
 
-1. An important (and well known) confounder was not measured (e.g., too expensive to collect; reliance on secondary data)
+### When should you conduct a bias analysis for unmeasured confounding?
 
-2. Quantifying the impact of an unknown confounder (e.g., early study of an association; unmeasured confounding seems likely)
+1.  An important (and well known) confounder was not measured (e.g., too expensive to collect; reliance on secondary data)
+
+2.  Quantifying the impact of an unknown confounder (e.g., early study of an association; unmeasured confounding seems likely)
 
 . . .
 
-- Goals:
+-   Goals:
 
-  - We want to provide an estimate of the association corrected for the
-unmeasured confounder ($Z$).
-  
-  - Answers the question of what the association would have been **had we controlled for** $Z$.
+    -   We want to provide an estimate of the association corrected for the unmeasured confounder ($Z$).
+
+    -   Answers the question of what the association would have been **had we controlled for** $Z$.
+
+## Where did this come from?
+
+-   Early ideas formulated in the context of controversy surrounding the link between smoking and lung cancer[^4]
+
+[^4]: @Bross:1954aa is credited with implementing the first quantitative bias analyis, but @Cornfield:1959aa also played an important role.
+
+::: columns
+::: {.column width="65%"}
+> If a causal agent, *A*, with no causal effect upon the risk of a disease, nevertheless, because of a positive correlation with some other causal agent, *B*, shows an apparent risk, *r*, for those exposed to *A*, relative to those not so exposed, then the prevalence of *B*, among those exposed to *A*, relative to the prevalence among those not so exposed, must be greater than *r*.
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="30%"}
+```{r, echo=F, out.width="150%"}
+#| fig-cap: "Jerome Cornfield, 1974"
+knitr::include_graphics(here("images", "cornfield.png"))
+```
+:::
+:::
 
 ## Unmeasured Confounding
-- Suppose we want to assess the effect of occupational exposure to resins ($X$) on lung cancer risk ($D$) using a case-control design.^[Longstanding example used in *Modern Epidemiology* from @Greenland:1994aa] 
+
+-   Suppose we want to assess the effect of occupational exposure to resins ($X$) on lung cancer risk ($D$) using a case-control design.[^3]
+
+[^3]: Longstanding example used in *Modern Epidemiology* from @Greenland:1994aa
 
 <br>
 
@@ -241,30 +281,9 @@ $OR_{DX+}=\frac{(45\times945)}{(94\times257)}=1.76$
 
 -   How can we quantify failing to adjust for $Z$?
 
-## Example: Sensitivity Analysis for Unmeasured Confounding
-
-## Where did this come from?
-
-- Early ideas formulated in the context of controversy surrounding the link between smoking and lung cancer^[@Bross:1954aa is credited with implementing the first quantitative bias analyis, but @Cornfield:1959aa also played an important role.]
-
-::: columns
-::: {.column width="65%"}
-> If a causal agent, *A*, with no causal effect upon the risk of a disease, nevertheless, because of a positive correlation with some other causal agent, *B*, shows an apparent risk, *r*, for those exposed to *A*, relative to those not so exposed, then the prevalence of *B*, among those exposed to *A*, relative to the prevalence among those not so exposed, must be greater than *r*.
-:::
-
-::: {.column width="5%"}
-:::
-
-::: {.column width="30%"}
-```{r, echo=F, out.width="150%"}
-knitr::include_graphics(here("images", "cornfield.png"))
-```
-
-:::
-:::
-
 ## Data Layout for Dichotomous Unmeasured Confounder
 
+```{=tex}
 \begin{tabular}{cccccccccccc}
 \hline 
  & \multicolumn{3}{c}{{\small{}Z=1 Smokers}} &  & \multicolumn{3}{c}{{\small{}Z=0 Non-smokers}} &  & \multicolumn{3}{c}{{\small{}Total}}\tabularnewline
@@ -277,13 +296,13 @@ knitr::include_graphics(here("images", "cornfield.png"))
 {\small{}Total} & {\small{}${\scriptstyle N_{11}}$} & {\small{}${\scriptstyle N_{01}}$} & {\small{}${\scriptstyle N_{+1}}$} &  & {\small{}${\scriptstyle N_{1+}-N_{11}}$} & {\small{}${\scriptstyle N_{0+}-N_{01}}$} & {\small{}${\scriptstyle N_{++}-N_{+1}}$} &  & {\small{}${\scriptstyle N_{1+}}$} & {\small{}${\scriptstyle N_{0+}}$} & {\small{}${\scriptstyle N_{++}}$}\tabularnewline
 & & & & & & & & & & & \tabularnewline 
 \end{tabular}
+```
+. . .
 
-. . . 
+-   The crude odds ratio is $OR_{DX+}=A_{1+}B_{0+}/A_{0+}B_{1+}$, but to adjust for smoking we need smoking stratum-specific ORs.
+-   We can write the exposure-disease OR **within strata** of $Z$ $(OR_{DXZ})$ as:
 
-- The crude odds ratio is $OR_{DX+}=A_{1+}B_{0+}/A_{0+}B_{1+}$, but to adjust for smoking we need smoking stratum-specific ORs.
-- We can write the exposure-disease OR **within strata** of $Z$ $(OR_{DXZ})$ as:
-
-:::{style="text-align: center;"}
+::: {style="text-align: center;"}
 $OR_{DX1}=\dfrac{A_{11}B_{01}}{A_{01}B_{11}}\quad \text{and} \quad OR_{DX0}=\dfrac{\left(A_{1+}-A_{11}\right)\left(B_{0+}-B_{01}\right)}{\left(A_{0+}-A_{01}\right)\left(B_{1+}-B_{11}\right)}$
 :::
 
@@ -291,19 +310,20 @@ $OR_{DX1}=\dfrac{A_{11}B_{01}}{A_{01}B_{11}}\quad \text{and} \quad OR_{DX0}=\dfr
 
 We already know the marginal totals, so only 4 quantities to estimate.
 
+```{=tex}
 \begin{tabular}{cccccccccccc}
 \hline 
  & \multicolumn{3}{c}{{\small{}Z=1 Smokers}} &  & \multicolumn{3}{c}{{\small{}Z=0 Non-smokers}} &  & \multicolumn{3}{c}{{\small{}Total}}\tabularnewline
 \cline{2-4} \cline{3-4} \cline{4-4} \cline{6-8} \cline{7-8} \cline{8-8} \cline{10-12} \cline{11-12} \cline{12-12} 
  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total}\tabularnewline
 \hline 
-{\small{}D=1} & \textbf{\small{}$\mathbf{{\scriptstyle A_{11}}}$} & \textbf{\small{}$\mathbf{{\scriptstyle A_{01}}}$}  & {\small{}${\scriptstyle M_{11}}$} &  & {\small{}${\scriptstyle A_{1+}-A_{11}}$} & {\small{}${\scriptstyle A_{0+}-A_{01}}$} & {\small{}${\scriptstyle M_{A+}-M_{11}}$} &  & {\small{}${\scriptstyle A_{1+}}$} & {\small{}${\scriptstyle A_{0+}}$} & {\small{}${\scriptstyle M_{A+}}$}\tabularnewline
-{\small{}D=0} & \textbf{\small{}$\mathbf{{\scriptstyle B_{11}}}$} & \textbf{\small{}$\mathbf{{\scriptstyle B_{01}}}$} & {\small{}${\scriptstyle M_{01}}$} &  & {\small{}${\scriptstyle B_{1+}-B_{11}}$} & {\small{}${\scriptstyle B_{0+}-B_{01}}$} & {\small{}${\scriptstyle M_{B+}-M_{01}}$} &  & {\small{}${\scriptstyle B_{1+}}$} & {\small{}${\scriptstyle B_{0+}}$} & {\small{}${\scriptstyle M_{B+}}$}\tabularnewline
+{\small{}D=1} & \textbf{\small{}$\mathbf{{\scriptstyle A_{11}}}$} & \textbf{\small{}$\mathbf{{\scriptstyle A_{01}}}$} & {\small{}${\scriptstyle M_{11}}$} &  & {\small{}${\scriptstyle 45-A_{11}}$} & {\small{}${\scriptstyle 94-A_{01}}$} & {\small{}${\scriptstyle 139-M_{11}}$} &  & 45 & 94 & 139\tabularnewline
+{\small{}D=0} & \textbf{\small{}$\mathbf{{\scriptstyle B_{11}}}$} & \textbf{\small{}$\mathbf{{\scriptstyle B_{01}}}$} & {\small{}${\scriptstyle M_{01}}$} &  & {\small{}${\scriptstyle 257-B_{11}}$} & {\small{}${\scriptstyle 945-B_{01}}$} & {\small{}${\scriptstyle 1202-M_{01}}$} &  & 257 & 945 & 1202\tabularnewline
 \hline 
-{\small{}Total} & {\small{}${\scriptstyle N_{11}}$} & {\small{}${\scriptstyle N_{01}}$} & {\small{}${\scriptstyle N_{+1}}$} &  & {\small{}${\scriptstyle N_{1+}-N_{11}}$} & {\small{}${\scriptstyle N_{0+}-N_{01}}$} & {\small{}${\scriptstyle N_{++}-N_{+1}}$} &  & {\small{}${\scriptstyle N_{1+}}$} & {\small{}${\scriptstyle N_{0+}}$} & {\small{}${\scriptstyle N_{++}}$}\tabularnewline
+{\small{}Total} & {\small{}${\scriptstyle N_{11}}$} & {\small{}${\scriptstyle N_{01}}$} & {\small{}${\scriptstyle N_{+1}}$} &  & {\small{}${\scriptstyle 302-N_{11}}$} & {\small{}${\scriptstyle 1039-N_{01}}$} & {\small{}${\scriptstyle 1341-N_{+1}}$} &  & 302 & 1039 & 1341\tabularnewline
 & & & & & & & & & & & \tabularnewline 
 \end{tabular}
-
+```
 -   These values may be generated by specifying values for the prevalence of smoking in each exposure group and the association between smoking and disease.
 
 -   The (unknown) smoking prevalence in exposure strata are:
@@ -311,6 +331,7 @@ We already know the marginal totals, so only 4 quantities to estimate.
     $$P_{Z1}=N_{11}/N_{1+}\quad \text{and} \quad P_{Z0}=N_{01}/N_{0+}$$
 
 ## What do we need? (1) Distribution of $Z$ by exposure
+
 ```{r, engine = 'tikz'}
 #| fig.align: center
 \begin{tikzpicture}[shorten > = 1pt, line width=1pt]
@@ -324,6 +345,7 @@ We already know the marginal totals, so only 4 quantities to estimate.
 \end{tikzpicture}
 ```
 
+```{=tex}
 \begin{tabular}{cccccccccccc}
 \hline 
  & \multicolumn{3}{c}{{\small{}Z=1 Smokers}} &  & \multicolumn{3}{c}{{\small{}Z=0 Non-smokers}} &  & \multicolumn{3}{c}{{\small{}Total}}\tabularnewline
@@ -336,18 +358,15 @@ We already know the marginal totals, so only 4 quantities to estimate.
 {\small{}Total} & {\small{}${\scriptstyle N_{11}}$} & {\small{}${\scriptstyle N_{01}}$} & {\small{}${\scriptstyle N_{+1}}$} &  & {\small{}${\scriptstyle 302-N_{11}}$} & {\small{}${\scriptstyle 1039-N_{01}}$} & {\small{}${\scriptstyle 1341-N_{+1}}$} &  & 302 & 1039 & 1341\tabularnewline
 & & & & & & & & & & & \tabularnewline 
 \end{tabular}
-
--   With plausible estimates of $P_{Z}$, perhaps from some externally
-    validated source, we can use this to estimate the
-    number of exposed controls, since $B_{11}=P_{Z1}B_{1+}$ and
-    $B_{01}=P_{Z0}B_{0+}$.
+```
+-   With plausibly valid estimates of $P_{Z}$, we can use this to estimate the number of controls, since $B_{11}=P_{Z1}B_{1+}$ and $B_{01}=P_{Z0}B_{0+}$.
 
 -   However, $A_{11}$ and $A_{01}$ are still unknown, but note that they can be estimated if we specify a plausible value for the association between smoking $(Z)$ and disease $(D)$.
 
 <br>
 
-
 ## What do we need? (2) Effect of $Z$ on $D$
+
 ```{r, engine = 'tikz'}
 #| fig.align: center
 \begin{tikzpicture}[shorten > = 1pt, line width=1pt]
@@ -361,6 +380,7 @@ We already know the marginal totals, so only 4 quantities to estimate.
 \end{tikzpicture}
 ```
 
+```{=tex}
 \begin{tabular}{cccccccccccc}
 \hline 
  & \multicolumn{3}{c}{{\small{}Z=1 Smokers}} &  & \multicolumn{3}{c}{{\small{}Z=0 Non-smokers}} &  & \multicolumn{3}{c}{{\small{}Total}}\tabularnewline
@@ -373,21 +393,20 @@ We already know the marginal totals, so only 4 quantities to estimate.
 {\small{}Total} & {\small{}${\scriptstyle N_{11}}$} & {\small{}${\scriptstyle N_{01}}$} & {\small{}${\scriptstyle N_{+1}}$} &  & {\small{}${\scriptstyle N_{1+}-N_{11}}$} & {\small{}${\scriptstyle N_{0+}-N_{01}}$} & {\small{}${\scriptstyle N_{++}-N_{+1}}$} &  & {\small{}${\scriptstyle N_{1+}}$} & {\small{}${\scriptstyle N_{0+}}$} & {\small{}${\scriptstyle N_{++}}$}\tabularnewline
 & & & & & & & & & & & \tabularnewline
 \end{tabular}
-
-- Based on the table above, the confounder-disease OR within strata of
-    $X$ $\left(OR_{DZX}\right)$ can be calculated as:
+```
+-   Based on the table above, the confounder-disease OR within strata of $X$ $\left(OR_{DZX}\right)$ can be calculated as:
 
 $${\color{blue}OR_{DZ1}=\dfrac{A_{11}\left(B_{1+}-B_{11}\right)}{\left(A_{1+}-A_{11}\right)B_{11}}},\quad \text{and} \quad {\color{red}{\color{green}{\color{cyan}{\color{red}OR_{DZ0}=\dfrac{A_{01}\left(B_{0+}-B_{01}\right)}{\left(A_{0+}-A_{01}\right)B_{01}}}}}}$$
 
+## Estimating $Z$ among cases
 
-## Estimating exposed and unexposed cases
 Recall our stratum-specific $ORs$:
 
 $$OR_{DZ1}=\dfrac{A_{11}\left(B_{1+}-B_{11}\right)}{\left(A_{1+}-A_{11}\right)B_{11}}\quad \text{and} \quad OR_{DX0}=\dfrac{A_{01}\left(B_{0+}-B_{01}\right)}{\left(A_{0+}-A_{01}\right)B_{01}}$$
 
--   If we can substitute reasonable values for these $z$-specific $OR$s,
-    we can solve the above equations, we can solve these equations to
-    get the value of $A_{11}$and $A_{01}$:^[See @Rothman:2008aa, p.350, eq. 19-1 and 19-2]
+-   If we can substitute reasonable values for these $z$-specific $OR$s, we can solve[^5] the above equations to get the value of $A_{11}$and $A_{01}$:
+
+[^5]: See @Rothman:2008aa, p.350, eq. 19-1 and 19-2
 
 $$A_{11}=OR_{DZ1}A_{1+}B_{11}/(OR_{DZ1}B_{11}+B_{1+}-B_{11})$$
 
@@ -397,7 +416,7 @@ $$A_{01}=OR_{DZ0}A_{0+}B_{01}/(OR_{DZ0}B_{01}+B_{0+}-B_{01})$$
 
 -   Suppose we know from external studies that the prevalence of smoking is 70% among those occupationally exposed to resins and 50% among those unexposed in this population.
 
-. . . 
+. . .
 
 ```{=tex}
 \begin{tabular}{cccccccccccc}
@@ -415,15 +434,15 @@ $$A_{01}=OR_{DZ0}A_{0+}B_{01}/(OR_{DZ0}B_{01}+B_{0+}-B_{01})$$
 ```
 -   Our estimates of $B_{11}$ and $B_{01}$ are now:
 
-:::{style="text-align: center;"}
-
+::: {style="text-align: center;"}
 $B_{11}=P_{Z1}B_{1+}=(.7)({\color{red}257})\approx{\color{red}180}$
 
-$B_{01}=P_{Z0}B_{0+}=(.5)({\color{blue}945})\approx{\color{blue}473}$ 
-
+$B_{01}=P_{Z0}B_{0+}=(.5)({\color{blue}945})\approx{\color{blue}473}$
 :::
 
-##
+## 
+
+```{=tex}
 \begin{tabular}{cccccccccccc}
 \hline 
  & \multicolumn{3}{c}{{\small{}Z=1 Smokers}} &  & \multicolumn{3}{c}{{\small{}Z=0 Non-smokers}} &  & \multicolumn{3}{c}{{\small{}Total}}\tabularnewline
@@ -436,23 +455,22 @@ $B_{01}=P_{Z0}B_{0+}=(.5)({\color{blue}945})\approx{\color{blue}473}$
 {\small{}Total} & {\small{}${\scriptstyle N_{11}}$} & {\small{}${\scriptstyle N_{01}}$} & {\small{}${\scriptstyle N_{+1}}$} &  & {\small{}${\scriptstyle 302-N_{11}}$} & {\small{}${\scriptstyle 1039-N_{01}}$} & {\small{}${\scriptstyle 1341-N_{+1}}$} &  & 302 & 1039 & 1341\tabularnewline
 & & & & & & & & & & & \tabularnewline
 \end{tabular}
+```
+-   Plugging in the estimates of $B_{11}$ and $B_{01}$ along with a plausible estimate of the confounder-disease association $(OR_{DZ1}=OR_{DZ0}=5)$, assumed[^6] to be homogeneous across strata of resin exposure, now allow us to calculate $A_{11}$ and $A_{01}$:
 
--   Plugging in the estimates of $B_{11}$ and $B_{01}$ along with a
-    plausible estimate of the confounder-disease association
-    $(OR_{DZ1}=OR_{DZ0}=5)$, assumed^[Not necessary to assume homogeneity if there is evidence to the contrary.] to be homogeneous across strata of
-    resin exposure, now allow us to calculate $A_{11}$ and $A_{01}$:
+[^6]: Not necessary to assume homogeneity if there is evidence to the contrary.
 
-:::{style="text-align: center;"}
-
+::: {style="text-align: center;"}
 $A_{11}=\frac{OR_{DZ1}A_{1+}B_{11}}{OR_{DZ1}B_{11}+B_{1+}-B_{11}}=\frac{5(45)(180)}{5(180)+257-180}\approx{\color{red}41}$
 
 $A_{01}=\frac{OR_{DZ0}A_{0+}B_{01}}{OR_{DZ0}B_{01}+B_{0+}-B_{01}}=\frac{5(94)(473)}{5(473)+945-473}\approx{\color{blue}77}$
 :::
 
+## 
 
-##
 We can now fill out the table and calculate an $OR$ standardized for smoking:
 
+```{=tex}
 \begin{tabular}{cccccccccccc}
 \hline 
  & \multicolumn{3}{c}{{\small{}Z=1 Smokers}} &  & \multicolumn{3}{c}{{\small{}Z=0 Non-smokers}} &  & \multicolumn{3}{c}{{\small{}Total}}\tabularnewline
@@ -465,49 +483,50 @@ We can now fill out the table and calculate an $OR$ standardized for smoking:
 {\small{}Total{*}} & {\small{}221} & {\small{}551} & {\small{}772} &  & {\small{}81} & {\small{}488} & {\small{}569} &  & {\small{}302} & {\small{}1039} & {\small{}1341}\tabularnewline
 \multicolumn{12}{l}{{\scriptsize{}{*}Note: Row and column totals in Z strata may not sum because of rounding.}}\tabularnewline
 \end{tabular}
-
-- If we standardize to the exposed population, we get:
+```
+-   If we standardize to the exposed population, we get:
 
 $OR_{DXZ(E)}=\dfrac{\sum_{z}B_{1z}(A_{1z}/B_{1z})}{\sum_{z}B_{1z}(A_{0z}/B_{0z})}=\dfrac{180(41/180)+77(4/77)}{180(78/473)+77(16/473)}=1.39$
 
-
 ## Simplifying formula
-- Bias relative to the crude estimate:
-    
-:::{style="text-align: center;"}
+
+-   Bias relative to the crude estimate:
+
+::: {style="text-align: center;"}
 $Bias(OR)=\dfrac{OR_{DX+}}{OR_{DXZ(E)}}=\dfrac{1.76}{1.39}=1.27$
 :::
 
-. . . 
+. . .
 
--   Arah et al.^[See @Arah:2008aa] also give an alternative estimator using only 1) prevalence of $Z$ in each exposure stratum and 2) association between $Z$ and $D$
+-   Arah et al.[^7] also give an alternative estimator using only 1) prevalence of $Z$ in each exposure stratum and 2) association between $Z$ and $D$
+
+[^7]: See @Arah:2008aa
 
 $Bias(OR)=\dfrac{OR_{DX+}}{OR_{DXZ(E)}}=\dfrac{OR_{DZ0}P_{11}+1-P_{11}}{OR_{DZ0}P_{10}+1-P_{10}}=\dfrac{5(.7)+1-.7}{5(.5)+1-.5}=1.27$
 
-where $P_{11}=P(Z=1|X=1)$, $P_{10}=P(Z=1|X=0)$, and $OR_{DZ0}$ is the
-Z-D association in the unexposed.
-
+where $P_{11}=P(Z=1|X=1)$, $P_{10}=P(Z=1|X=0)$, and $OR_{DZ0}$ is the $Z\rightarrow D$ association in the unexposed.
 
 ## Extensions to other effect measures
-- The logic for adjusting the OR above applies equally to other effect measures ($RD$, $RR$), with minor alterations.
 
-- For both $RD$ and $RR$ you need to specify the difference in the prevalence of $Z$ by exposure
+-   The logic for adjusting the OR above applies equally to other effect measures ($RD$, $RR$), with minor alterations.
 
-- For $RR$ need to specify the association between $Z$ and $D$ on the $RR$ scale.
+-   For both $RD$ and $RR$ you need to specify the difference in the prevalence of $Z$ by exposure
 
-. . . 
+-   For $RR$ need to specify the association between $Z$ and $D$ on the $RR$ scale.
 
-- In our example above, we specified $OR=5$ for $Z\rightarrow D$ association, roughly $RR=4.32$.
+. . .
 
-- The bias in the crude $RR$ is therefore:
+-   In our example above, we specified $OR=5$ for $Z\rightarrow D$ association, roughly $RR=4.32$.
+
+-   The bias in the crude $RR$ is therefore:
 
 $Bias(RR)=\dfrac{RR_{DX+}}{RR_{DXZ(E)}}=\dfrac{RR_{DZ0}P_{11}+1-P_{11}}{RR_{DZ0}P_{10}+1-P_{10}}=\dfrac{4.3(.7)+1-.7}{4.3(.5)+1-.5}=1.25$
 
-
 ## What about the risk difference?^[These data are derived from a case-control study, so this is just for illustration.]
 
-- Still need the prevalence of the unmeasured confounder by exposure, but now we need the risk difference $RD_{DZ}$ for the confounder-disease association.
+-   Still need the prevalence of the unmeasured confounder by exposure, but now we need the risk difference $RD_{DZ}$ for the confounder-disease association.
 
+```{=tex}
 \begin{tabular}{cccccccccccc}
 \hline 
  & \multicolumn{3}{c}{{\small{}Z=1 Smokers}} &  & \multicolumn{3}{c}{{\small{}Z=0 Non-smokers}} &  & \multicolumn{3}{c}{{\small{}Total}}\tabularnewline
@@ -520,19 +539,20 @@ $Bias(RR)=\dfrac{RR_{DX+}}{RR_{DXZ(E)}}=\dfrac{RR_{DZ0}P_{11}+1-P_{11}}{RR_{DZ0}
 {\small{}Total} & {\small{}${\scriptstyle N_{11}}$} & {\small{}${\scriptstyle N_{01}}$} & {\small{}${\scriptstyle N_{+1}}$} &  & {\small{}${\scriptstyle 302-N_{11}}$} & {\small{}${\scriptstyle 1039-N_{01}}$} & {\small{}${\scriptstyle 1341-N_{+1}}$} &  & 302 & 1039 & 1341\tabularnewline
 & & & & & & & & & & & \tabularnewline
 \end{tabular}
-
-. . . 
+```
+. . .
 
 -   The crude association is $RD_{DX+}=(45/302)-(94/1039)=0.06$
 
 -   Difference for $Z$ by exposure (70% $X=1$, 50% $X=0$)
 
--   [Choose]{style="color: red"} $RD$ for $Z\rightarrow D$ among the unexposed as
-    $RD_{DZ0}=0.10$.
-    
-    
+-   [Choose]{style="color: red"} $RD$ for $Z\rightarrow D$ among the unexposed as $RD_{DZ0}=0.10$.
+
 ## 
-Revised table:
+
+Revised table for RD:
+
+```{=tex}
 \begin{tabular}{cccccccccccc}
 \hline 
  & \multicolumn{3}{c}{{\small{}Z=1 Smokers}} &  & \multicolumn{3}{c}{{\small{}Z=0 Non-smokers}} &  & \multicolumn{3}{c}{{\small{}Total}}\tabularnewline
@@ -547,30 +567,30 @@ Revised table:
 \multicolumn{12}{l}{{\scriptsize{}{*}Note: Row and column totals in Z strata may not sum
 because of rounding.}}\tabularnewline
 \end{tabular}
+```
+. . .
 
-. . . 
+-   Standardize to exposed, we get:
 
-- Standardize to exposed, we get:
-
-:::{style="text-align: center;"}
+::: {style="text-align: center;"}
 $RD_{DXZ(E)}=\sum_{z}w_{z}RD_{DXZ}/\sum_{z}w_{z}=0.04$
 :::
 
-- Bias is $RD_{DX+}-RD_{DXZ(E)}=0.06-0.04=0.02$
+-   Bias is $RD_{DX+}-RD_{DXZ(E)}=0.06-0.04=0.02$
 
-- Arah et al. show how to calculate simply as:
-$Bias=RD_{DX+}-RD_{DXZ(E)}=RD_{DZ0}\left(P_{Z1}-P_{Z0}\right)=0.10\left(0.7-0.5\right)=0.02$
+-   Arah et al. show how to calculate simply as: $Bias=RD_{DX+}-RD_{DXZ(E)}=RD_{DZ0}\left(P_{Z1}-P_{Z0}\right)=0.10\left(0.7-0.5\right)=0.02$
 
 ## General formulas based on counterfactual notation
 
-- What to do for more complex, regression-based models?^[Far more likely what you'll be using in practice. See @Vanderweele:2011aa.]
+-   What to do for more complex, regression-based models?[^9]
 
 -   VanderWeele and Arah (2011) provided some general formulas.
 
--   The average causal effect among those exposed, which **would** be
-    adjusted for both measured $X$s **and** unmeasured $U$ is:
-    
+-   The average causal effect among those exposed, which **would** be adjusted for both measured $X$s **and** unmeasured $U$ is:
+
     $$E\left(Y_{a1}|a_{1}\right)-E\left(Y_{a0}|a_{1}\right)$$
+
+[^9]: Far more likely what you'll be using in practice. See @Vanderweele:2011aa. More on this later.
 
 $$=\sum_{x}\sum_{u}\left\{ E(Y|a_{1},x,u)-E(Y|a_{0},x,u)\right\} P(u|x,a_{1})P(x|a_{1})$$
 
@@ -586,21 +606,19 @@ $$d_{a1}=\sum_{x}\left\{ E(Y|a_{1},x)-E(Y|a_{0},x)\right\} P(x|a_{1})-\left\{ E\
 
 ## General formulas for unmeasured confounding
 
--   The bias is (still) a function of the prevalence of the unknown
-    confounder and its effect on the outcome (reference level=$u'$):
-
+-   The bias is (still) a function of the prevalence of the unknown confounder and its effect on the outcome (reference level=$u'$):
 
 $$d_{a1}=\sum_{x}\sum_{u}\left\{ E(Y|a_{0},x,u)-E(Y|a_{0},x,u')\right\} \left\{ P(u|a_{1},x)-P\left(u|a_{0},x\right)\right\} P\left(x|a_{1}\right)$$
 
-. . . 
+. . .
 
 We thus need to specify:
 
--   The $U-Y$ relationship among the unexposed:
+-   The $U\rightarrow Y$ relationship among the unexposed:
 
 $E(Y|a_{0},x,u)-E(Y|a_{0},x,u')$
 
--   Distribution of $U$ among exposed and unexposed within strata of X:
+-   Distribution of $U$ among exposed and unexposed *within strata of X*:
 
 $\left\{ P(u|a_{1},x)-P(u|a_{0},x)\right\} P(x|a_{1})$
 
@@ -608,18 +626,15 @@ $\left\{ P(u|a_{1},x)-P(u|a_{0},x)\right\} P(x|a_{1})$
 
 -   These formulas require a lot of knowledge.
 
-    -   Association between $U$ and $Y$ [at each level of measured
-        confounders]{style="color: red"} $X$.
+    -   Association between $U$ and $Y$ [at each level of measured confounders]{style="color: red"} $X$.
 
-    -   Association between $U$ and $A$ [at each level of measured
-        confounders]{style="color: red"} $X$.
+    -   Association between $U$ and $A$ [at each level of measured confounders]{style="color: red"} $X$.
 
 . . .
 
 -   How many measured confounders do you have? 2? 10?
 
--   Even for 2 age groups and gender, for example, you would need to
-    specify the $U-Y$ and $U-A$ relations for:
+-   Even for 2 age groups and gender, for example, you would need to specify the $U\rightarrow Y$ and $U\rightarrow A$ relations for:
 
     -   younger women, older women
 
@@ -629,8 +644,7 @@ $\left\{ P(u|a_{1},x)-P(u|a_{0},x)\right\} P(x|a_{1})$
 
 ## General formulas for unmeasured confounding
 
-Simplifying assumptions could be useful. Assuming no heterogeneity
-across $X$, we could posit:
+Simplifying assumptions could be useful. Assuming no heterogeneity across $X$, we could posit:
 
 -   constant prevalence difference between exposed and unexposed:
 
@@ -646,13 +660,15 @@ $$d_{a1}=\gamma\delta$$
 
 ## External adjustment for unmeasured confounding
 
-Assumptions:^[See @Rosenbaum:1983aa for more details.]
+Assumptions:[^10]
 
--   Differences in the distribution of $U$ by exposure similar across
-    all strata of measured $X$s.
+[^10]: See @Rosenbaum:1983aa for more details. Similar in some ways to the 'e-value' concept from @VanderWeele:2017aa.
+
+-   Differences in the distribution of $U$ by exposure similar across all strata of measured $X$s.
 
 -   Effect of $U$ on $Y$ similar across all strata of measured $X$s.
 
+```{=tex}
 \begin{tabular}{lcc}
 \hline 
 {\small{}Example Post-Hoc Bias Analysis} & \multicolumn{2}{c}{{\small{}Rosenbaum \& Rubin (1983)}}\tabularnewline
@@ -665,7 +681,17 @@ Assumptions:^[See @Rosenbaum:1983aa for more details.]
 {\small{}Bias-corrected effect} & {\small{}0.0 (-0.14, 0.14)} & {\small{}0.16 (0.01, 0.30)}\tabularnewline
 & & \tabularnewline
 \end{tabular}
+```
+## Break! `r emo::ji("coffee")` {.h2center}
 
+```{r, echo=F}
+countdown(minutes = 7, 
+          left = 0, right = 0, bottom = "15%", top = "15%",
+          padding = "50px",
+          margin = "5%",
+          font_size = "7em",
+          color_text= '#f5bc6c')
+```
 ## Overview {.h2center}
 
 ### [Why Bias Analysis?]{.gray}
@@ -682,7 +708,7 @@ Assumptions:^[See @Rosenbaum:1983aa for more details.]
 
 <br>
 
-### [Probabilistic Bias Analysis]{.gray}
+### [Multidimensional Bias Analysis]{.gray}
 
 <br>
 
@@ -692,16 +718,47 @@ Assumptions:^[See @Rosenbaum:1983aa for more details.]
 
 ### [Summary]{.gray}
 
-## Bias analysis for misclassification
+## 
+```{r}
+#| fig-align: center
+knitr::include_graphics(here("images", "taubes-1995.png"))
+```
 
-<br>
+## 
 
-> "In epidemiology, victories are few and at this point a whole field may be on the verge of propagating pathological science, which means they cannot get good enough resolution to identify the effects they're studying. Epidemiologists may be seeing and reporting that there are canals on Mars because they're looking at Mars through Galileo's telescope. And that's the nature of the field and all the statistical wizardry in the world isn't going to change that" -Gary Taubes, quoted in Koepsell and Weiss (2004)
+Epidemiology Monitor:^[Interview in @Epimonitor:1996aa of Gary Taubes, who published "Epidemiology Faces its Limits" in *Science* 1995.]
+
+> That was one of the criticisms of your article. Epidemiologists said it is unbalanced and that you were only talking about our warts. What about our victories?
+
+Gary Taubes:
+
+> Well, what I am saying is the warts are huge. The victories are few, and at this point, a whole field may be on the verge of propagating pathological science, which means they cannot get good enough resolution to identify the effects they’re studying. Epidemiologists may be seeing and reporting that there are canals on Mars because they’re looking at Mars through Galileo’s telescope. And that’s the nature of the field and [all the statistical wizardry in the world isn’t going to change that because the experimental subjects are messy and the artifacts and biases found are so huge and the signals are small.]{.blue} Epidemiologists have to be willing to confront that. That’s the problem.
+
+##
+```{r}
+#| fig-align: center
+knitr::include_graphics(here("images", "lash-sciadv-2022.png"))
+```
+^[See @McCullough:2022aa. I'll leave to to you as to whether you find this a convincing rebuttal.] 
+
+## 
+You may recall^[https://www.buzzfeednews.com/article/stephaniemlee/coronavirus-antibody-test-santa-clara-los-angeles-stanford]
+
+```{r, echo=F, out.width="50%"}
+#| fig-align: center
+knitr::include_graphics(here("images", "buzzfeed-2020-title.png"))
+```
+
+```{r, echo=F, out.width="50%"}
+#| fig-align: center
+knitr::include_graphics(here("images", "buzzfeed-2020-quote.png"))
+```
 
 ## Basic quantities you already know
 
 Exposure or disease classification table:
 
+```{=tex}
 \begin{tabular}{ccc}
 \hline 
  & \multicolumn{2}{c}{True Status of Exposure or Disease}\tabularnewline
@@ -712,16 +769,17 @@ Positive & a & b\tabularnewline
 Negative & c & d\tabularnewline
 & & \tabularnewline
 \end{tabular}
-
+```
 <br>
 
-- Sensitivity (Se) = a / (a + c)
+-   Sensitivity (Se) = a / (a + c)
 
-- Specificity (Sp) = d / (b + d)
+-   Specificity (Sp) = d / (b + d)
 
-- Positive Predictive Value (PPV) = a / (a + b)
+-   Positive Predictive Value (PPV) = a / (a + b)
 
-- Negative Predictive Value (NPV) = d / (c + d)
+-   Negative Predictive Value (NPV) = d / (c + d)
+
 
 ## Relation between "true" and expected observed data
 
@@ -741,17 +799,19 @@ The number of individuals expected to be observed in a given study is a function
 ```
 Who is in the observed "$a$" cell? It is a mixture of:
 
-- Truly exposed individuals correctly classified: $A(Se_{D_{1}})$
+-   Truly exposed individuals correctly classified: $A(Se_{D_{1}})$
 
-- Truly unexposed individuals misclassified as exposed: $B(1-Sp_{D_{1}})$
+-   Truly unexposed individuals misclassified as exposed: $B(1-Sp_{D_{1}})$
 
-:::{style="text-align: center;"}
+::: {style="text-align: center;"}
 [Note that observed data *implicitly* assumes 100% Se and Sp]{.red}
 :::
 
 ## 
-- Suppose we have 85% Se and 95% Sp, which is [non-differential]{.red} with respect to disease:
 
+-   Suppose we have 85% Se and 95% Sp, which is [non-differential]{.red} with respect to disease:
+
+```{=tex}
 \begin{tabular}{cccccc}
 \hline 
  & \multicolumn{2}{c}{True} &  & \multicolumn{2}{c}{Expected observed cells}\tabularnewline
@@ -764,19 +824,20 @@ Who is in the observed "$a$" cell? It is a mixture of:
  & $1000$ & $1000$ &  & $900$ & $1100$\tabularnewline
 & & & & & \tabularnewline
 \end{tabular}
+```
+. . .
 
 The observed $a$ cell has 175 individuals, of which:
 
-- 170 ($200\times0.85$) are truly exposed and correctly classified:
-    $A(Se_{D_{1}})$
+-   170 ($200\times0.85$) are truly exposed and correctly classified: $A(Se_{D_{1}})$
 
-- 5 $(100\times0.05)$ are truly unexposed but misclassified:
-    $B(1-Sp_{D_{0}})$
+-   5 $(100\times0.05)$ are truly unexposed but misclassified: $B(1-Sp_{D_{0}})$
 
-:::columns
+::: columns
 ::: {.column width="35%"}
 $RR_{true}=\dfrac{200/1000}{100/900}=2.0$
 :::
+
 ::: {.column width="65%"}
 $RR_{obs}=\dfrac{175/900}{125/1100}=1.7$
 :::
@@ -784,24 +845,21 @@ $RR_{obs}=\dfrac{175/900}{125/1100}=1.7$
 
 ## Going from observed to "true" data
 
-- We often have "observed" data and want to know what the corrected effect would be.
+-   We often have "observed" data and want to know what the corrected effect would be.
 
-- Re-arrange the equations above to go from "observed" to "true" cells:
+-   Re-arrange the equations above to go from "observed" to "true" cells:
 
-- Recall that the observed $a$ cell is: $a=A(Se_{D_{1}})+B(1-Sp_{D_{1}})$, and we know that the "true" B cell must be $B=D_{1Tot}-A$
+-   Recall that the observed $a$ cell is: $a=A(Se_{D_{1}})+B(1-Sp_{D_{1}})$, and we know that the "true" B cell must be $B=D_{1Tot}-A$
 
-- Now we can substitute and write $a=A(Se_{D_{1}})+(D_{1Tot}-A)(1-Sp_{D_{1}})$ and solve for $A$:
+-   Now we can substitute: $a=A(Se_{D_{1}})+(D_{1Tot}-A)(1-Sp_{D_{1}})$ and solve for $A$
 
 <br>
 
- $\begin{aligned}
-a & = A(Se_{D1})+D_{1Tot}-A-D_{1Tot}(Sp_{D1})+A(Sp_{D1})\\
-a-D_{1Tot}+D_{1Tot}(Sp_{D1}) & = A(Se_{D1})-A+A(Sp_{D1})\\
-a-D_{1Tot}(1-Sp_{D1}) & = A(Se_{D1}-1+Sp_{D1})\\
-\frac{a-D_{1Tot}(1-Sp_{D1})}{(Se_{D1}-1+Sp_{D1})} & = A\end{aligned}$
+$\begin{aligned} a & = A(Se_{D1})+D_{1Tot}-A-D_{1Tot}(Sp_{D1})+A(Sp_{D1})\\ a-D_{1Tot}+D_{1Tot}(Sp_{D1}) & = A(Se_{D1})-A+A(Sp_{D1})\\ a-D_{1Tot}(1-Sp_{D1}) & = A(Se_{D1}-1+Sp_{D1})\\ \frac{a-D_{1Tot}(1-Sp_{D1})}{(Se_{D1}-1+Sp_{D1})} & = A\end{aligned}$
 
 ## Going from observed to "true" data
 
+```{=tex}
 \begin{tabular}{ccccccc}
 \hline 
  & \multicolumn{3}{c}{Observed} &  & \multicolumn{2}{c}{Corrected}\tabularnewline
@@ -812,29 +870,46 @@ a-D_{1Tot}(1-Sp_{D1}) & = A(Se_{D1}-1+Sp_{D1})\\
 {\small{}$D_{0}$} & {\small{}$c$} & {\small{}$d$} & {\small{}$D_{0Tot}$} &  & $\dfrac{c-D_{0Tot}(1-Sp_{D_{0}})}{Se_{D_{0}}-(1-Sp_{D_{0}})}$ & {\small{}$D_{0T}-C$}\tabularnewline
 & & & & & & \tabularnewline
 \end{tabular}
-
+```
 In our earlier example Se=85% and Sp=95%, we observed $a=175$, so to get the "true" estimate we have:
 
 $$A=\frac{a-D_{1Tot}(1-Sp_{D1})}{(Se_{D1}-1+Sp_{D1})}=\frac{175-300(0.05)}{(0.85-1+0.95)}=200$$
 
 ## What can be done about misclassification?
 
-- Validation study
-  - Measurement using a "gold standard" on a random sub-sample.
-  - Need to make assumptions about who "complies" with additional measurements and participation.
-  - Might still be infeasible to conduct a validation study for other reasons (e.g., data already collected).
-  - However, for many kinds of exposures (e.g., Personality tests, social class, etc.) there are no "gold standard" tests.
+-   Validation study
+    -   Measurement using a "gold standard" on a random sub-sample.
+    -   Need to make assumptions about who "complies" with additional measurements and participation.
+    -   Might still be infeasible to conduct a validation study for other reasons (e.g., data already collected).
+    -   However, for many kinds of exposures (e.g., Personality tests, social class, etc.) there are no "gold standard" tests.
 
+. . .
 
 - One option in these cases is to try and quantify the potential role that misclassification may have played in your study.
-- Example of coronary heart disease and personality types (Western Collaborative Group Study):
-- If misclassification is ignored entirely, you are assuming 100%
-        Sensitivity and 100% Specificity.
-        
+
+- If misclassification is ignored entirely, you are assuming 100% Sensitivity and 100% Specificity.
+
+## Implications of validation for bias parameters
+
+Choices for internal validation study:  
+
+1. Sample by misclassified exposure and obtain "gold standard":
+   - Directly estimates PPV/NPV, but not Se/SP.
+   - Need to consider outcome and confounders. 
+ 
+2. Sample by "true" exposure:
+   - Directly estimates Se/Sp but not PPV/NPV.  
+   - Often not feasible.
+   
+3. Sample randomly:
+   - Can estimate Se/Sp/PPV/NPV.
+   - Need adequate samples for rare exposures or outcomes, potentially stratified by covariates.
+
 ## Example: non-differential misclassification of exposure
 
-Example of coronary heart disease ($D$) and personality types ($E$):
+Example of coronary heart disease ($D$) and "Type A" personality ($E$):
 
+```{=tex}
 \begin{tabular}{ccccccc}
 \hline 
  & \multicolumn{2}{c}{True} &  & \multicolumn{2}{c}{Observed cells} & \tabularnewline
@@ -845,19 +920,18 @@ Example of coronary heart disease ($D$) and personality types ($E$):
 {\small{}$D_{0}$} & {\small{}$C$} & {\small{}$D$} &  & 1277 & 1620 & 2897\tabularnewline
 & & & & \tabularnewline
 \end{tabular}
-
+```
 $$RR_{obs}=(150/1427)/(107/1727)=1.7$$
 
-- Suppose we have good reasons for assuming 80% Se and 90% Sp.
+-   Suppose we have good reasons for assuming 80% Se and 90% Sp.
 
-- What is the true association?
+-   What is the true association?
 
 ## Calculating "true" values from observed
 
 In our example Se=80% and Sp=90%, we observed $a=150$, so to get the "true" estimate for $A$ we have:
 
-$$A=\frac{a-D_{1Tot}(1-Sp_{D1})}{(Se_{D1}-1+Sp_{D1})}=\frac{150-257(0.10)}{(0.80-1+0.90)}=177.6$$
-<br>
+$$A=\frac{a-D_{1Tot}(1-Sp_{D1})}{(Se_{D1}-1+Sp_{D1})}=\frac{150-257(0.10)}{(0.80-1+0.90)}=177.6$$ <br>
 
 Similar calculations for "true" $C$:
 
@@ -865,8 +939,7 @@ $$C=\frac{c-D_{0Tot}(1-Sp_{D0})}{(Se_{D0}-1+Sp_{D0})}=\frac{1277-2897(0.10)}{(0.
 
 ## Example: non-differential misclassification of exposure
 
-- True $B$ and $D$ are then calculated by subtraction from marginal
-    totals:
+- True $B$ and $D$ are then calculated by subtraction from marginal totals:
 
 $B=D_{1Tot}-a=257-177.5=79.4$
 
@@ -874,6 +947,7 @@ $D=D_{0Tot}-b=2897-1410.4=1486.6$
 
 - Now fill in the "true" table:
 
+```{=tex}
 \begin{tabular}{ccccccc}
 \hline 
  & \multicolumn{2}{c}{True} &  & \multicolumn{2}{c}{Observed cells} & \tabularnewline
@@ -884,14 +958,16 @@ $D=D_{0Tot}-b=2897-1410.4=1486.6$
 {\small{}$D_{0}$} & 1410.4 & 1486.6 &  & 1277 & 1620 & 2897\tabularnewline
 & & & & & & \tabularnewline
 \end{tabular}
+```
 <br>
 
 $$RR_{true}=(177.6/1588)/(79.4/1566)=2.2$$
 
-## Simple implementation via `episensr`^[See package by @Haine:2021aa]
+## Simple implementation via `episensr`[^11]
 
-:::: {.columns}
+[^11]: See package by @Haine:2021aa
 
+::: columns
 ::: {.column width="35%"}
 ```{r, echo=T, results='hide'}
 library(episensr)
@@ -911,7 +987,6 @@ misclassification(
 :::
 
 ::: {.column width="65%"}
-
 ```{r, echo=F}
 misclassification(matrix(c(150, 107, 1277, 1620),
   dimnames = list(c("D+", "D-"),
@@ -921,30 +996,39 @@ misclassification(matrix(c(150, 107, 1277, 1620),
   bias_parms = c(0.80, 0.80, 0.90, 0.90))
 ```
 :::
+:::
 
-::::
+## Simpler implementation using PPV/NPVs^[See Ch.6 in @Fox:2022aa]
+```{r, out.width="85%"}
+#| fig-align: center
+knitr::include_graphics(here("images", "fox-ppv.png"))
+```
 
 ## Misclassification of confounders
 
-- Even if exposure and disease have 100% Se and 100% Sp, misclassification of confounders can lead to biased estimates.
+-   Even if exposure and disease have 100% Se and 100% Sp, misclassification of confounders can lead to biased estimates.
 
-- If the confounding is strong and the exposure-disease relation is weak or null, confounder misclassification can produce misleading results, even if independent and non-differential.
+-   If the confounding is strong and the exposure-disease relation is weak or null, confounder misclassification can produce misleading results, even if independent and non-differential.
 
-- Need bias parameters for misclassified confounder data (validation, literature, etc.)
+-   Need bias parameters for misclassified confounder data (validation, literature, etc.)
 
 ## Stratified analysis implementation
 
-- Estimates for Se and Sp are applied to measurement of confounder rather than exposure.^[See examples in Ch.6 of @Fox:2022aa.]
+-   Estimates for Se and Sp are applied to measurement of confounder rather than exposure.[^12]
+
+[^12]: See examples in Ch.6 of @Fox:2022aa.
 
 ```{r}
 #| fig-align: center
 knitr::include_graphics(here("images", "fox-misclass-conf.png"))
 ```
 
-## Example: Effect of coffee consumption on bladder cancer^[In line note.] 
+## Example: Effect of coffee consumption on bladder cancer[^13]
+
+[^13]: @Slattery:1988aa
 
 We might draw a model like this, indicating that true smoking status is unmeasured but may still confound the association between coffee and bladder cancer:
-    
+
 ```{r, engine = 'tikz'}
 #| fig.align: center
 \begin{tikzpicture}[shorten > = 1pt, line width=1pt]
@@ -960,16 +1044,25 @@ We might draw a model like this, indicating that true smoking status is unmeasur
 ```
 
 ## 
-```{r}
+Excel resources at https://sites.google.com/site/biasanalysis/
+
+::: {style="text-align: center;"}
+```{r, out.width="70%"}
 #| fig-align: center
 knitr::include_graphics(here("images", "coffee-cancer-crude.png"))
 ```
-$$OR_{crude}=1.8\quad \textrm{and} \quad OR_{MHadj}=1.5\quad 95\%\text{CI}=[1.1,2.0]$$
-```{r}
+
+$OR_{crude}=1.8\quad \textrm{and} \quad OR_{MHadj}=1.5\quad 95\%\text{CI}=[1.1,2.0]$
+
+
+```{r, out.width="70%"}
 #| fig-align: center
 knitr::include_graphics(here("images", "coffee-cancer-adj.png"))
 ```
-$$OR_{MHadj}=1.3\quad 95\%\text{CI}=[0.95,1.7]$$
+
+$OR_{MHadj}=1.3\quad 95\%\text{CI}=[0.95,1.7]$ 
+:::
+
 ## Overview {.h2center}
 
 ### [Why Bias Analysis?]{.gray}
@@ -986,7 +1079,7 @@ $$OR_{MHadj}=1.3\quad 95\%\text{CI}=[0.95,1.7]$$
 
 <br>
 
-### [Probabilistic Bias Analysis]{.gray}
+### [Multidimensional Bias Analysis]{.gray}
 
 <br>
 
@@ -998,37 +1091,57 @@ $$OR_{MHadj}=1.3\quad 95\%\text{CI}=[0.95,1.7]$$
 
 ## Bias analysis for selection bias
 
-## Differential baseline participation
+- Results from conditioning on a common effect of exposure and disease.
+  - Differential baseline participation
+  - Differential losses to follow-up
 
-:::: {.columns}
-
+::: columns
 ::: {.column width="40%"}
 
-What do you need?
-
-- Selection probabilities  
-- Ideally, by exposure *and* disease status.  
-
-Where can you get it?
-
-- Validation (internal or external).
-- Internal probably better.
-- Educated guesses (largely based on experience or prior data).
-
+Or when the cells of the 2 x 2 table in your study are sampled with different probabilities from the 2 x 2 table in the target population:
 :::
 
 ::: {.column width="60%"}
-Example: mobile phone use and uveal melanoma^[Example from @Stang:2009aa described in @Fox:2022aa]
+```{r}
+#| fig-align: center
+#| out-width: 80%
+knitr::include_graphics(here("images", "selection-bias.png"))
+```
+:::
+
+:::
+## Differential baseline participation
+
+::: columns
+::: {.column width="40%"}
+What do you need?
+
+-   Selection probabilities\
+-   Ideally, by exposure *and* disease status.
+
+Where can you get it?
+
+-   Validation (internal or external).
+-   Internal probably better.
+-   Educated guesses (largely based on experience or prior data).
+:::
+
+::: {.column width="60%"}
+Example: mobile phone use and uveal melanoma[^14]
+
 ```{r}
 #| fig-align: center
 #| out-width: 80%
 knitr::include_graphics(here("images", "stang.png"))
 ```
 :::
+:::
 
-::::
+[^14]: Example from @Stang:2009aa described in @Fox:2022aa
 
-##
+## 
+
+```{=tex}
 \begin{tabular}{cccccccc}
 \hline 
  & \multicolumn{2}{c}{Participants} &  & \multicolumn{2}{c}{Non-participants+Q} &  & Refusals\tabularnewline
@@ -1039,22 +1152,22 @@ Cases & 136 & 107 &  & 3 & 7 &  & 17\tabularnewline
 Controls & 297 & 165 &  & 72 & 212 &  & 379\tabularnewline
 \hline 
 \end{tabular}
+```
+-   OR among participants: (136/297)/(107/165) = 0.71
 
-- OR among participants: (136/297)/(107/165) = 0.71
+-   OR among non-participants w/Q: (3/72)/(7/212) = 1.25
 
-- OR among non-participants w/Q: (3/72)/(7/212) = 1.25
+-   Who's missing? 3 exposed cases we know from the questionnaire, but what about the other non-participants? Assume the exposure distribution similar to the other non-participants (3/10)\*17. Same for controls.
 
-- Who's missing? 3 exposed cases we know from the questionnaire, but what about the other non-participants? Assume the exposure distribution similar to the other non-participants (3/10)\*17. Same for controls.
+-   Now we can get an adjusted OR:
 
-- Now we can get an adjusted OR:
-
-$OR_{adj}=\dfrac{136+3+(3/10)*17}{297+72+(72/284)*379}/\dfrac{107+7+(7/10)*17}{165+212+(212/284)*379}=1.62$
+$OR_{adj}=\dfrac{136+3+(3/10)*17}{297+72+(72/284)*379}/\dfrac{107+7+(7/10)*17}{165+212+(212/284)*379}=1.63$
 
 ## Using selection probabilities
 
-- More generally, if we know or can estimate, or have reasonable guesses about the selection probabilities, we can create an adjusted OR using the selection probabilities:
+-   More generally, if we know or can estimate, or have reasonable guesses about the selection probabilities, we can create an adjusted OR using the selection probabilities:
 
-    -   E+ Cases = 136/(136+3+(3/10)\*17) = 0.96
+    -   E+ Cases = 136/(136+3+(3/10)\*17) = 0.94
 
     -   E- Cases = 107/(107+7+(7/10)\*17) = 0.85
 
@@ -1068,27 +1181,27 @@ $$OR_{adj}=0.71\times\dfrac{0.85\times0.64}{0.94\times0.25}=1.63$$
 
 ## Using inverse-probability of selection weighting
 
-- More generally, if we know or can estimate, or have reasonable guesses about the selection probabilities, we can create an adjusted OR using the selection probabilities:
+-   Could also just reweight each group by the inverse of its probability of selection:
 
-    -   E+ Cases = 136/(136+3+(3/10)\*17) = 0.96
+    -   Weighted E+ Cases = 136 * (1 / 0.94)
 
-    -   E- Cases = 107/(107+7+(7/10)\*17) = 0.85
+    -   Weighted E- Cases = 107 * (1 / 0.85)
 
-    -   E+ Controls = 297/(297+72+(72/284)\*379) = 0.64
+    -   Weighted E+ Controls = 297 * (1 / 0.64)
 
-    -   E- Controls = 165/(165+212+(212/294)\*379) = 0.25
+    -   Weighted E- Controls = 165 * (1 / 0.25)
 
-$$OR_{adj}=\hat{OR}\times\dfrac{S_{caseE-}\times S_{controlE+}}{S_{caseE+}\times S_{controlE-}}$$
+$$OR_{adj}=\dfrac{136*(1/S_{caseE+}) / 297*(1/S_{controlE+})}{107*(1/S_{caseE-})/165*(1/S_{controlE-})}$$
 
-$$OR_{adj}=0.71\times\dfrac{0.85\times0.64}{0.94\times0.25}=1.63$$
+$$OR_{adj}=\dfrac{136*(1/0.94) / 297*(1/0.64)}{107*(1/0.85)/165*(1/0.25)}=1.63$$
 
 ## Differential loss-to-follow up
 
-- How to account for potential bias among those lost?
+-   How to account for potential bias among those lost?
 
-- Example of impact of treatment guidelines on breast cancer mortality.
+-   Example of impact of treatment guidelines on breast cancer mortality.
 
-- Overall loss-to-follow of 13%, initial baseline treatment status of those lost is known.
+-   Overall loss-to-follow of 13%, initial baseline treatment status of those lost is known.
 
 ```{r, engine = 'tikz'}
 #| fig.align: center
@@ -1105,8 +1218,10 @@ $$OR_{adj}=0.71\times\dfrac{0.85\times0.64}{0.94\times0.25}=1.63$$
 ```
 
 ## 
+
 How to estimate the rates among those lost?
 
+```{=tex}
 \begin{tabular}{cccccc}
 \hline 
  & \multicolumn{2}{c}{With follow-up} &  & \multicolumn{2}{c}{Lost to follow-up}\tabularnewline
@@ -1121,13 +1236,14 @@ Crude RD & 3.3/100py & 0 &  &  & \tabularnewline
 Crude RR & 2.3 & 1.0 &  &  & \tabularnewline
 & & & & & \tabularnewline
 \end{tabular}
-
+```
 <br>
 
-- First, let's assume that they would have accrued similar person
-    years as those with follow-up:
+-   First, let's assume that they would have accrued similar person years as those with follow-up:
 
-##
+## 
+
+```{=tex}
 \begin{tabular}{cccccc}
 \hline 
  & \multicolumn{2}{c}{With follow-up} &  & \multicolumn{2}{c}{Lost to follow-up}\tabularnewline
@@ -1142,25 +1258,27 @@ Crude RD & 3.3/100py & 0 &  &  & \tabularnewline
 Crude RR & 2.3 & 1.0 &  &  & \tabularnewline
 & & & & & \tabularnewline
 \end{tabular}
-
-:::{style="text-align: center;"}
-$PY_{E+}=\color{red}{(687/104)\times{13}=85.9py}$ 
+```
+::: {style="text-align: center;"}
+$PY_{E+}=\color{red}{(687/104)\times{13}=85.9py}$
 
 $PY_{E-}=\color{blue}{(2560/286)\times{46}=411.7py}$
 :::
 
-- What should we assume about their mortality risks?
-- What if we assume similar to those with follow-up?
+-   What should we assume about their mortality risks?
+-   What if we assume similar to those with follow-up?
 
 ## 
-- Missing individuals were diagnosed at 2 specific hospitals, so use [observed rates]{.blue} among those non-missing in hospitals where those LTF were diagnosed
 
-:::{style="text-align: center;"}
-$Deaths_{E+}=\color{blue}{.049}\color{black}{\times{85.9}=}\color{red}{4.2}$ 
+-   Missing individuals were diagnosed at 2 specific hospitals, so use [observed rates]{.blue} among those non-missing in hospitals where those LTF were diagnosed
 
-$Deaths_{E-}=\color{blue}{.045}\color{black}{\times{411.7}=}\color{red}{18.7}$ 
+::: {style="text-align: center;"}
+$Deaths_{E+}=\color{blue}{.049}\color{black}{\times{85.9}=}\color{red}{4.2}$
+
+$Deaths_{E-}=\color{blue}{.045}\color{black}{\times{411.7}=}\color{red}{18.7}$
 :::
 
+```{=tex}
 \begin{tabular}{cccccc}
 \hline 
  & \multicolumn{2}{c}{At 2 hospitals} &  & \multicolumn{2}{c}{Estimated for those lost}\tabularnewline
@@ -1174,9 +1292,10 @@ Crude RD & 0.4/100py & 0 &  &  & \tabularnewline
 Crude RR & 1.1 & 1.0 &  &  & \tabularnewline
 & & & & & \tabularnewline
 \end{tabular}
-
+```
 ## Bias-corrected estimates (with assumptions)
 
+```{=tex}
 \begin{tabular}{cccccc}
 \hline 
  & \multicolumn{2}{c}{With follow-up} &  & \multicolumn{2}{c}{Lost to follow-up}\tabularnewline
@@ -1191,19 +1310,18 @@ Crude RD & 3.3/100py & 0 &  &  & \tabularnewline
 Crude RR & 2.3 & 1.0 &  &  & \tabularnewline
 & & & & & \tabularnewline
 \end{tabular}
-
-:::{style="text-align: center;"}
-
-$IR_{E+}=(40 + 4.2)/(687py+85.9py) = 5.7/100py$ 
+```
+::: {style="text-align: center;"}
+$IR_{E+}=(40 + 4.2)/(687py+85.9py) = 5.7/100py$
 
 $IR_{E-}=(65+18.7)(2560py+411.7py)=2.8/100py$
 
-$RD=2.9/100py\quad \text{and} \quad RR=2.0$ 
-
+$RD=2.9/100py\quad \text{and} \quad RR=2.0$
 :::
 
 ## Worst case scenario still suggests some impact.
 
+```{=tex}
 \begin{tabular}{cccccc}
 \hline 
  & \multicolumn{2}{c}{With follow-up} &  & \multicolumn{2}{c}{Lost to follow-up}\tabularnewline
@@ -1218,24 +1336,26 @@ Crude RD & 3.3/100py & 0 &  &  & \tabularnewline
 Crude RR & 2.3 & 1.0 &  &  & \tabularnewline
 & & & & & \tabularnewline
 \end{tabular}
-
-:::{style="text-align: center;"}
-
-$IR_{E+}=(40 + 0)/(687py+85.9py) = 5.2/100py$ 
+```
+::: {style="text-align: center;"}
+$IR_{E+}=(40 + 0)/(687py+85.9py) = 5.2/100py$
 
 $IR_{E-}=(65+46)(2560py+411.7py)=3.7/100py$
 
-$RD=1.4/100py\quad \text{and} \quad RR=1.4$ 
-
+$RD=1.4/100py\quad \text{and} \quad RR=1.4$
 :::
 
 ## IP weighting for selection bias
-[lash figure]
 
-## Break!  `r emo::ji("coffee")` {.h2center}
+```{r}
+#| fig-align: center
+knitr::include_graphics(here("images", "fox-ipaw.png"))
+```
+
+## Break! `r emo::ji("coffee")` {.h2center}
 
 ```{r, echo=F}
-countdown(minutes = 10, 
+countdown(minutes = 7, 
           left = 0, right = 0, bottom = "15%", top = "15%",
           padding = "50px",
           margin = "5%",
@@ -1259,7 +1379,7 @@ countdown(minutes = 10,
 
 <br>
 
-### **Probabilistic Bias Analysis**
+### **Multidimensional Bias Analysis**
 
 <br>
 
@@ -1271,19 +1391,15 @@ countdown(minutes = 10,
 
 ## Multidimensional bias analysis
 
--   Often, bias parameters are only educated guesses.
+- Often, bias parameters are only educated guesses.
 
--   Multidimensional bias analysis uses a range of plausible values for
-    bias parameters.
+- Multidimensional bias analysis uses a range of plausible values for bias parameters.
 
--   Especially useful if there are no known validation data for your
-    parameters of interest.
+- Especially useful if there are no known validation data for your parameters of interest.
 
-. . . 
+. . .
 
 What to vary?
-
-
 
 -   Unmeasured confounding
 
@@ -1295,26 +1411,42 @@ What to vary?
 
 -   Selection bias
 
-    -   Range of different selection proportions or selection bias
-        factor.
-        
-## Example of multidimensional bias analysis
+    -   Range of different selection proportions or selection bias factor.
 
-## Probabilistic
+## 
+:::: {.columns}
 
--   The major limitation of the previous methods for analyzing study
-    bias is that they treat the bias parameters (sensitivity,
-    specificity, confounder-disease association, prevalence of
-    unmeasured confounders, etc.) as known quantities that are perfectly
-    measured.
+::: {.column width="20%"}
+### Example
+Peri-operative consultation and 30d mortality
+Confounder-adjusted RR=1.16 (1.07,1.26).^[@Wijeysundera:2010aa]
+:::
 
--   Thus, the analyses above are referred to as deterministic, and they
-    only account for systematic error (i.e., they do not account for
-    measurement error in the estimates of the prevalence of the
-    unmeasured confounder or the confounder-disease association.
+::: {.column width="80%"}
+```{r}
+#| fig-align: center
+knitr::include_graphics(here("images", "mba-confounding.png"))
+```
+>An unmeasured confounder could render the association between consultation and 30-day mortality [statistically nonsignificant]{.red} but only if it at least doubled the odds of mortality and was present in 20% of patients who underwent consultation as compared with 10% of those who did not.
+:::
 
--   An alternative would be to assign a probability distribution to bias
-    parameters.
+:::
+
+## Probabilistic Bias Analysis
+
+-   The major limitation of the previous methods for analyzing study bias is that they treat the bias parameters (sensitivity, specificity, confounder-disease association, prevalence of unmeasured confounders, etc.) as known quantities that are perfectly measured.
+
+-   Thus, the analyses above are referred to as deterministic, and they only account for systematic error (i.e., they do not account for measurement error in the estimates of the prevalence of the unmeasured confounder or the confounder-disease association.
+
+-   An alternative would be to assign a probability distribution to bias parameters.
+
+## Example distributions for sensitivity
+Five distributions all centered near 0.57 and spread around 0.42 and 0.71.
+```{r}
+#| fig-align: center
+knitr::include_graphics(here("images", "fox-distributions.png"))
+```
+
 
 ```{css, echo=FALSE}
 .longcode {
@@ -1322,8 +1454,11 @@ height: 800px;
 width: 1500px;
 }
 ```
+
 ## Example: Unmeasured confounding of resins and cancer
-- Setup using the `episensr` package
+
+-   Setup using the `episensr` package
+
 ```{r, cache=T, echo=T}
 #| class-source: longcode
 #| classes: longcode
@@ -1343,7 +1478,7 @@ pc <- probsens.conf(matrix(c(45, 94, 257, 945),
 prev.exp = list("triangular", c(.6, .8, .7)),
 
 # prevalence of U among unexposed
-prev.nexp = list("triangular", c(.3, .5, .4)),
+prev.nexp = list("triangular", c(.4, .6, .5)),
 
 # association of U with outcome
 risk = list("log-normal", c(1.522, 0.216)), 
@@ -1377,6 +1512,7 @@ pba_p1 + pba_p0 + pba_rrcd
 ```
 
 ## Generates a distribution of corrected estimates
+
 ```{r, echo=F}
 #| fig.align: center
 ggplot(bcor, aes(x=pc.sim.df.tot.OR)) + theme_classic() + 
@@ -1385,6 +1521,7 @@ ggplot(bcor, aes(x=pc.sim.df.tot.OR)) + theme_classic() +
 ```
 
 ## Bias-corrected estimates
+
 ```{r, echo=F}
 oor <- as.numeric(gsub("\\D+", ".", pc$obs.measures[2,]))
 cors <- as.numeric(gsub("\\D+", ".", pc$adj.measures[3,]))
@@ -1394,15 +1531,97 @@ row.names(bcor_t) <- c("OR:Crude", "OR:Corrected-systematic error", "OR:Correcte
 kbl(bcor_t, col.names = c("Median", "2.5th pctile", "97.5th pctile"),digits = 2) %>% kable_styling()
 ```
 
-- Using probabilistic analysis gives a similar adjusted OR () relative to our deterministic bias analysis (), but provides empirical confidence limits. 
+-   Using probabilistic analysis gives a similar adjusted OR (1.44) relative to our deterministic bias analysis (1.39), but provides empirical confidence limits.
 
-- Introduction of additional random error via the simulation analysis widens the confidence limits further.
+-   Introduction of additional random error via the simulation by choosing a standard normal deviate ($z_{i}$) for each iteration ($i$), multiply by $SE$
+
+::: {style="text-align: center;"}
+$estimate^{total}_{i}=estimate^{adj}_{i}-z_{i}\times SE^{adj}_{i}$
+
+$OR^{total}_{i}=e^{ln(OR^{adj}_{i})-z_{i}\times SE^{adj}_{i}}$
+:::
+
+## Multiple bias analysis
+
+- Extension of simple bias analysis in which we assign bias parameters, either deterministically or probabilistically, but now we examine the impact of more than one bias at a time.
+
+- Difficult to ascertain quantitatively how multiple biases may work together.
+
+- Order matters, and corrections should be made in the reverse of the order in which they occurred as the data were generated.
+
+- Generally (but not a rule):
+
+    1.  Misclassification
+
+    2.  Selection bias
+
+    3.  Unmeasured confounding
+    
+## Multiple bias analysis example^[@Johnson:2018aa]
+
+```{r}
+#| fig-align: center
+knitr::include_graphics(here("images", "johnson-mba-t3.png"))
+```
+
+## Overview {.h2center}
+
+### [Why Bias Analysis?]{.gray}
+
+<br>
+
+### [Deterministic Bias Analysis]{.gray}
+
+#### [Unmeasured confounding]{.gray}
+
+#### [Misclassification]{.gray}
+
+#### [Selection bias]{.gray}
+
+<br>
+
+### [Probabilistic Bias Analysis]{.gray}
+
+<br>
+
+### **Record-level Implementation**
+
+<br>
+
+### [Summary]{.gray}
 
 ## Record level implementation
 
-- Benefit of adjustment for record-level covariates
+- Applications to summaries have limitations (stratified analyses)
+- Often need QBA on estimates adjusted for multiple covariates 
 
-## Steps for record-level implementatio
+<br>
+
+:::: {.columns}
+
+::: {.column width="50%"}
+#### Benefits
+- More complex models (regression)
+- More 'realistic'
+:::
+
+::: {.column width="50%"}
+#### Drawbacks
+- More complex programming
+- Added computing time
+- 100K simulations on 10K obs = 100m records
+:::
+
+:::: 
+
+## Basic workflow for record-level analysis^[See @Fox:2022aa Chapter 9.]
+- Basic idea is to take *one* realization of bias parameters, apply it to record-level data, then save estimates and repeat.
+```{r, echo=F, out.width="80%"}
+#| fig-align: center
+knitr::include_graphics(here("images", "rqba-flow.png"))
+```
+
+## Steps for record-level implementation
 
 -   Step 1: Identify the Source of Bias
 -   Step 2: Select the Bias Parameters
@@ -1413,25 +1632,119 @@ kbl(bcor_t, col.names = c("Median", "2.5th pctile", "97.5th pctile"),digits = 2)
     -   Step 4c: Sample the Bias-Adjusted Effect Estimate
 -   Step 5: Save the Bias-Adjusted Estimate and Repeat Steps 4a--c
 
-## Multiple bias analysis
+## Example for Unmeasured Confounding
 
--   Extension of simple bias analysis in which we assign bias
-    parameters, either deterministically or probabilistically, but now
-    the we examine the impact of more than one bias at a time.
+-   Step 3: Assign Probability Distributions to Each Bias Parameter
 
--   Difficult to ascertain quantitatively how multiple biases may work
-    together.
+- Choose triangular distributions for $P_1$, $P_0$, and $RR_{cd}$, which leads to the following realizations for a single set of parameters:
 
--   Order matters, and corrections should be made in the reverse of the
-    order in which they occurred as the data were generated.
+$$RR_{cd}= 0.567$$
+$$P_1=75.1\%$$
 
--   Generally (but not a rule):
+$$P_0=7.2\%$$
 
-    1.  Misclassification
+##
+Collapse record-level data to contingency table, i.e.,
 
-    2.  Selection bias
+:::: {.columns}
 
-    3.  Unmeasured confounding
+::: {.column width="70%"}
+### From
+```{r}
+#| fig-align: center
+knitr::include_graphics(here("images", "rqba-obs.png"))
+```
+:::
+
+::: {.column width="30%"}
+### To:
+```{r}
+#| fig-align: center
+knitr::include_graphics(here("images", "rqba-collapsed.png"))
+```
+:::
+
+::::
+
+##
+Perform simple QBA:^[Note that the values in the table are in the first observation row.]
+```{r, out.width="65%"}
+#| fig-align: center
+knitr::include_graphics(here("images", "rqba-simple.png"))
+```
+
+##
+Generate predicted probabilities for the unmeasured confounder:
+```{r, out.width="60%"}
+#| fig-align: center
+knitr::include_graphics(here("images", "rqba-table-probs.png"))
+```
+
+```{r, out.width="80%"}
+#| fig-align: center
+knitr::include_graphics(here("images", "rqba-sample-probs.png"))
+```
+
+##
+- Merge back into the *record-level* data
+- Generate the confounder via a Bernoulli trial based on the predicted probability for each cell. Something like `c=rbinom(n,1,p)`.
+- If the trial returns a 1, set $c=1$, if not, then $c=0$, i.e., does not hav the confounder.
+```{r, out.width="80%"}
+#| fig-align: center
+knitr::include_graphics(here("images", "rqba-predict-c.png"))
+```
+
+##
+- Estimate the parameter for each iteration, save, and summarize:
+```{r, out.width="50%"}
+#| fig-align: center
+knitr::include_graphics(here("images", "rqba-rr-sims.png"))
+```
+
+```{r, out.width="60%"}
+#| fig-align: center
+knitr::include_graphics(here("images", "rqba-table-results.png"))
+```
     
-## References
+## Summary
+- Bias analysis is a method for trying to quantify *systematic* sources of bias not captured in sampling error.
 
+- Generally, don't rely on intuitions, especially the idea that "non-differential" bias will lead to bias toward the null. 
+
+- Consider implementing validation studies to help ground your choice of bias parameters.
+
+- Be humble and honest about uncertainty.
+
+- Likely that simple, plausible, deterministic QBA is better than nothing.
+
+## 
+:::: {.columns}
+
+::: {.column width="30%"}
+### Is it worth it?
+Results of systematic review of QBAs.^[@Petersen:2021aa] Graph shows original and revised estimates for:
+
+(a) misclassification
+(b) unmeasured confounding
+(c) selection bias
+(d) multiple biases
+:::
+
+::: {.column width="70%"}
+```{r, echo=F, out.width="60%"}
+#| fig-align: center
+knitr::include_graphics(here("images", "petersen-graph.png"))
+```
+:::
+
+::::
+
+## Best practices
+Try to get through all of this:
+
+```{r, echo=F, out.width="60%"}
+#| fig-align: center
+knitr::include_graphics(here("images", "fox-book-2021.png"))
+```
+
+## References
