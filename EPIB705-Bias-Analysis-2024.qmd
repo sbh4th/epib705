@@ -1529,7 +1529,7 @@ row.names(bcor_t) <- c("OR:Crude", "OR:Corrected-systematic error", "OR:Correcte
 kbl(bcor_t, col.names = c("Median", "2.5th pctile", "97.5th pctile"),digits = 2) %>% kable_styling()
 ```
 
--   Using probabilistic analysis gives a similar adjusted OR (1.44) relative to our deterministic bias analysis (1.39), but provides empirical confidence limits.
+-   Using probabilistic analysis gives a similar adjusted OR (1.38) relative to our deterministic bias analysis (1.39), but provides empirical confidence limits.
 
 -   Introduction of additional random error via the simulation by choosing a standard normal deviate ($z_{i}$) for each iteration ($i$), multiply by $SE$
 
@@ -1748,7 +1748,7 @@ Results of systematic review of QBAs.[^26] Graph shows original and revised esti
 :::
 
 ::: {.column width="70%"}
-```{r, echo=F, out.width="75%"}
+```{r, echo=F, out.width="65%"}
 #| fig-align: center
 knitr::include_graphics(here("images", "petersen-graph.png"))
 ```
