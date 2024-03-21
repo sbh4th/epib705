@@ -8,7 +8,7 @@
 <link href="EPIB705-Bias-Analysis-2024_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="EPIB705-Bias-Analysis-2024_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="EPIB705-Bias-Analysis-2024_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.4.398">
 
   <meta name="author" content="Sam Harper">
   <meta name="dcterms.date" content="2024-03-21">
@@ -32,7 +32,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -241,7 +241,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -404,7 +405,6 @@
       margin-right: 0; 
     }
   </style>
-  
   <link href="EPIB705-Bias-Analysis-2024_files/libs/countdown-0.4.0/countdown.css" rel="stylesheet">
   <script src="EPIB705-Bias-Analysis-2024_files/libs/countdown-0.4.0/countdown.js"></script>
   <script src="EPIB705-Bias-Analysis-2024_files/libs/kePrint-0.0.1/kePrint.js"></script>
@@ -474,12 +474,12 @@ Sam Harper
 <h2>What are we concerned about?</h2>
 <p>In theory. <br></p>
 
-<img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-1-1.png" class="quarto-figure-center r-stretch" width="960"></section>
 <section id="what-are-we-concerned-about-1" class="slide level2">
 <h2>What are we concerned about?</h2>
 <p>In practice. <br></p>
 
-<img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-2-1.png" class="quarto-figure-center r-stretch" width="960"></section>
 <section id="potential-consequences" class="slide level2">
 <h2>Potential consequences</h2>
 <div class="columns">
@@ -514,11 +514,7 @@ Sam Harper
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/ml-room-1.png" style="width:70.0%"></p>
-</figure>
-</div>
+<p><img data-src="images/ml-room-1.png" class="quarto-figure-center" style="width:70.0%"></p>
 </div>
 </div>
 <aside><ol class="aside-footnotes"><li id="fn4"><p>https://michaelbach.de/ot/sze-muelue/</p></li></ol></aside></section>
@@ -527,11 +523,7 @@ Sam Harper
 <p>Intuitions are difficult to overcome.<sup>1</sup></p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/ml-room-2.png" style="width:70.0%"></p>
-</figure>
-</div>
+<p><img data-src="images/ml-room-2.png" class="quarto-figure-center" style="width:70.0%"></p>
 </div>
 </div>
 <aside><ol class="aside-footnotes"><li id="fn5"><p>https://michaelbach.de/ot/sze-muelue/</p></li></ol></aside></section>
@@ -832,7 +824,7 @@ Sam Harper
 <section id="what-do-we-need-1-distribution-of-z-by-exposure" class="slide level2">
 <h2>What do we need? (1) Distribution of <span class="math inline">\(Z\)</span> by exposure</h2>
 
-<img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch quarto-figure-center"><table>
+<img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure-center r-stretch" width="960"><table>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"></td>
@@ -923,7 +915,7 @@ Sam Harper
 <section id="what-do-we-need-2-effect-of-z-on-d" class="slide level2">
 <h2>What do we need? (2) Effect of <span class="math inline">\(Z\)</span> on <span class="math inline">\(D\)</span></h2>
 
-<img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch quarto-figure-center"><table>
+<img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure-center r-stretch" width="960"><table>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"></td>
@@ -1630,7 +1622,11 @@ Sam Harper
 <h2>Break! ☕</h2>
 <div class="cell">
 <div class="cell-output-display">
+<<<<<<< HEAD
 <div class="countdown" id="timer_3e7f9378" data-update-every="1" tabindex="0" style="top:15%;right:0;bottom:15%;left:0;margin:5%;padding:50px;font-size:7em;">
+=======
+<div class="countdown" id="timer_8e3982d5" data-update-every="1" tabindex="0" style="top:15%;right:0;bottom:15%;left:0;margin:5%;padding:50px;font-size:7em;">
+>>>>>>> a4873200fea6e4bafe826a464cb51bac30d49fb9
 <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
 <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
@@ -1655,7 +1651,7 @@ Sam Harper
 <section id="section-5" class="slide level2">
 <h2></h2>
 
-<img data-src="images/taubes-1995.png" width="880" class="r-stretch quarto-figure-center"></section>
+<img data-src="images/taubes-1995.png" class="quarto-figure-center r-stretch" width="880"></section>
 <section id="section-6" class="slide level2">
 <h2></h2>
 <p>Epidemiology Monitor:<sup>1</sup></p>
@@ -1671,11 +1667,7 @@ Sam Harper
 <h2>Update<sup>1</sup></h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/lash-sciadv-2022.png" style="width:85.0%"></p>
-</figure>
-</div>
+<p><img data-src="images/lash-sciadv-2022.png" class="quarto-figure-center" style="width:85.0%"></p>
 </div>
 </div>
 <aside><ol class="aside-footnotes"><li id="fn15"><p>See <span class="citation" data-cites="McCullough:2022aa">McCullough et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>. I’ll leave to to you as to whether you find this a convincing rebuttal.</p></li></ol></aside></section>
@@ -1684,20 +1676,12 @@ Sam Harper
 <p>You may recall<sup>1</sup></p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/buzzfeed-2020-title.png" style="width:50.0%"></p>
-</figure>
-</div>
+<p><img data-src="images/buzzfeed-2020-title.png" class="quarto-figure-center" style="width:50.0%"></p>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/buzzfeed-2020-quote.png" style="width:50.0%"></p>
-</figure>
-</div>
+<p><img data-src="images/buzzfeed-2020-quote.png" class="quarto-figure-center" style="width:50.0%"></p>
 </div>
 </div>
 <aside><ol class="aside-footnotes"><li id="fn16"><p>https://www.buzzfeednews.com/article/stephaniemlee/coronavirus-antibody-test-santa-clara-los-angeles-stanford</p></li></ol></aside></section>
@@ -2135,11 +2119,7 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 <h2>Simpler implementation using PPV/NPVs<sup>1</sup></h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/fox-ppv.png" style="width:85.0%"></p>
-</figure>
-</div>
+<p><img data-src="images/fox-ppv.png" class="quarto-figure-center" style="width:85.0%"></p>
 </div>
 </div>
 <aside><ol class="aside-footnotes"><li id="fn18"><p>See Ch.6 in <span class="citation" data-cites="Fox:2022aa">Fox et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span></p></li></ol></aside></section>
@@ -2158,11 +2138,7 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/fox-misclass-conf.png" style="width:80.0%"></p>
-</figure>
-</div>
+<p><img data-src="images/fox-misclass-conf.png" class="quarto-figure-center" style="width:80.0%"></p>
 </div>
 </div>
 <aside><ol class="aside-footnotes"><li id="fn19"><p>See examples in Ch.6 of <span class="citation" data-cites="Fox:2022aa">Fox et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>.</p></li></ol></aside></section>
@@ -2171,11 +2147,7 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 <p>We might draw a model like this, indicating that true smoking status is unmeasured but may still confound the association between coffee and bladder cancer:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-17-1.png" width="960"></p>
-</figure>
-</div>
+<p><img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-17-1.png" class="quarto-figure-center" width="960"></p>
 </div>
 </div>
 <aside><ol class="aside-footnotes"><li id="fn20"><p><span class="citation" data-cites="Slattery:1988aa">Slattery et al. (<a href="#/references" role="doc-biblioref" onclick="">1988</a>)</span></p></li></ol></aside></section>
@@ -2185,21 +2157,13 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 <div style="text-align: center;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/coffee-cancer-crude.png" style="width:70.0%"></p>
-</figure>
-</div>
+<p><img data-src="images/coffee-cancer-crude.png" class="quarto-figure-center" style="width:70.0%"></p>
 </div>
 </div>
 <p><span class="math inline">\(OR_{crude}=1.8\quad \textrm{and} \quad OR_{MHadj}=1.5\quad 95\%\text{CI}=[1.1,2.0]\)</span></p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/coffee-cancer-adj.png" style="width:70.0%"></p>
-</figure>
-</div>
+<p><img data-src="images/coffee-cancer-adj.png" class="quarto-figure-center" style="width:70.0%"></p>
 </div>
 </div>
 <p><span class="math inline">\(OR_{MHadj}=1.3\quad 95\%\text{CI}=[0.95,1.7]\)</span></p>
@@ -2235,11 +2199,7 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 </div><div class="column" style="width:60%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/selection-bias.png" style="width:80.0%"></p>
-</figure>
-</div>
+<p><img data-src="images/selection-bias.png" class="quarto-figure-center" style="width:80.0%"></p>
 </div>
 </div>
 </div>
@@ -2265,11 +2225,7 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 <p>Example: mobile phone use and uveal melanoma<sup>1</sup></p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/stang.png" style="width:80.0%"></p>
-</figure>
-</div>
+<p><img data-src="images/stang.png" class="quarto-figure-center" style="width:80.0%"></p>
 </div>
 </div>
 </div>
@@ -2363,7 +2319,7 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 <li><p>Overall loss-to-follow of 13%, initial baseline treatment status of those lost is known.</p></li>
 </ul>
 
-<img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-22-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-22-1.png" class="quarto-figure-center r-stretch" width="960"></section>
 <section id="section-11" class="slide level2">
 <h2></h2>
 <p>How to estimate the rates among those lost?</p>
@@ -2774,12 +2730,16 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 <section id="ip-weighting-for-selection-bias" class="slide level2">
 <h2>IP weighting for selection bias</h2>
 
-<img data-src="images/fox-ipaw.png" width="898" class="r-stretch quarto-figure-center"></section>
+<img data-src="images/fox-ipaw.png" class="quarto-figure-center r-stretch" width="898"></section>
 <section id="break-1" class="slide level2 h2center">
 <h2>Break! ☕</h2>
 <div class="cell">
 <div class="cell-output-display">
+<<<<<<< HEAD
 <div class="countdown" id="timer_32612096" data-update-every="1" tabindex="0" style="top:15%;right:0;bottom:15%;left:0;margin:5%;padding:50px;font-size:7em;">
+=======
+<div class="countdown" id="timer_a71b1f34" data-update-every="1" tabindex="0" style="top:15%;right:0;bottom:15%;left:0;margin:5%;padding:50px;font-size:7em;">
+>>>>>>> a4873200fea6e4bafe826a464cb51bac30d49fb9
 <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
 <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
@@ -2835,11 +2795,7 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 </div><div class="column" style="width:80%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/mba-confounding.png" style="width:100.0%"></p>
-</figure>
-</div>
+<p><img data-src="images/mba-confounding.png" class="quarto-figure-center" style="width:100.0%"></p>
 </div>
 </div>
 <blockquote>
@@ -2860,7 +2816,7 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 <h2>Example distributions for sensitivity</h2>
 <p>Five distributions all centered near 0.57 and spread around 0.42 and 0.71.</p>
 
-<img data-src="images/fox-distributions.png" width="591" class="r-stretch quarto-figure-center"><div class="cell">
+<img data-src="images/fox-distributions.png" class="quarto-figure-center r-stretch" width="591"><div class="cell">
 <style type="text/css">
 .longcode {
 height: 800px;
@@ -2874,7 +2830,7 @@ width: 1500px;
 <ul>
 <li>Setup using the <code>episensr</code> package</li>
 </ul>
-<div class="cell longcode" data-hash="EPIB705-Bias-Analysis-2024_cache/revealjs/unnamed-chunk-28_45eff098e04c8d892ac762d2e3f1daae">
+<div class="cell longcode" data-hash="EPIB705-Bias-Analysis-2024_cache/revealjs/unnamed-chunk-28_3ca051a177fd0067b2eaced2f79c0606">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r longcode number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># set the seed for reproducible results</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="fu">set.seed</span>(<span class="dv">39569</span>)</span>
 <span id="cb3-3"><a href="#cb3-3"></a></span>
@@ -2903,11 +2859,11 @@ width: 1500px;
 <section id="probability-distributions-for-each-parameter" class="slide level2">
 <h2>Probability distributions for each parameter</h2>
 
-<img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-29-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-29-1.png" class="quarto-figure-center r-stretch" width="960"></section>
 <section id="generates-a-distribution-of-corrected-estimates" class="slide level2">
 <h2>Generates a distribution of corrected estimates</h2>
 
-<img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-30-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-30-1.png" class="quarto-figure-center r-stretch" width="960"></section>
 <section id="bias-corrected-estimates" class="slide level2">
 <h2>Bias-corrected estimates</h2>
 <div class="cell">
@@ -2976,11 +2932,7 @@ width: 1500px;
 <h2>Multiple bias analysis example<sup>1</sup></h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/johnson-mba-t3.png" style="width:100.0%"></p>
-</figure>
-</div>
+<p><img data-src="images/johnson-mba-t3.png" class="quarto-figure-center" style="width:100.0%"></p>
 </div>
 </div>
 <aside><ol class="aside-footnotes"><li id="fn23"><p><span class="citation" data-cites="Johnson:2018aa">Johnson et al. (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span></p></li></ol></aside></section>
@@ -3030,11 +2982,7 @@ width: 1500px;
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/rqba-flow.png" style="width:80.0%"></p>
-</figure>
-</div>
+<p><img data-src="images/rqba-flow.png" class="quarto-figure-center" style="width:80.0%"></p>
 </div>
 </div>
 <aside><ol class="aside-footnotes"><li id="fn24"><p>See <span class="citation" data-cites="Fox:2022aa">Fox et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> Chapter 9.</p></li></ol></aside></section>
@@ -3070,22 +3018,14 @@ width: 1500px;
 <h3 id="from">From</h3>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/rqba-obs.png" style="width:100.0%"></p>
-</figure>
-</div>
+<p><img data-src="images/rqba-obs.png" class="quarto-figure-center" style="width:100.0%"></p>
 </div>
 </div>
 </div><div class="column" style="width:30%;">
 <h3 id="to">To:</h3>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/rqba-collapsed.png" style="width:100.0%"></p>
-</figure>
-</div>
+<p><img data-src="images/rqba-collapsed.png" class="quarto-figure-center" style="width:100.0%"></p>
 </div>
 </div>
 </div>
@@ -3096,11 +3036,7 @@ width: 1500px;
 <p>Perform simple QBA:<sup>1</sup></p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/rqba-simple.png" style="width:65.0%"></p>
-</figure>
-</div>
+<p><img data-src="images/rqba-simple.png" class="quarto-figure-center" style="width:65.0%"></p>
 </div>
 </div>
 <aside><ol class="aside-footnotes"><li id="fn25"><p>Note that the values in the table are in the first observation row.</p></li></ol></aside></section>
@@ -3109,20 +3045,12 @@ width: 1500px;
 <p>Generate predicted probabilities for the unmeasured confounder:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/rqba-table-probs.png" style="width:60.0%"></p>
-</figure>
-</div>
+<p><img data-src="images/rqba-table-probs.png" class="quarto-figure-center" style="width:60.0%"></p>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/rqba-sample-probs.png" style="width:80.0%"></p>
-</figure>
-</div>
+<p><img data-src="images/rqba-sample-probs.png" class="quarto-figure-center" style="width:80.0%"></p>
 </div>
 </div>
 </section>
@@ -3134,7 +3062,7 @@ width: 1500px;
 <li>If the trial returns a 1, set <span class="math inline">\(c=1\)</span>, if not, then <span class="math inline">\(c=0\)</span>, i.e., does not have the confounder.</li>
 </ul>
 
-<img data-src="images/rqba-predict-c.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
+<img data-src="images/rqba-predict-c.png" class="quarto-figure-center r-stretch" style="width:80.0%"></section>
 <section id="section-19" class="slide level2">
 <h2></h2>
 <ul>
@@ -3142,20 +3070,12 @@ width: 1500px;
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/rqba-rr-sims.png" style="width:50.0%"></p>
-</figure>
-</div>
+<p><img data-src="images/rqba-rr-sims.png" class="quarto-figure-center" style="width:50.0%"></p>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/rqba-table-results.png" style="width:60.0%"></p>
-</figure>
-</div>
+<p><img data-src="images/rqba-table-results.png" class="quarto-figure-center" style="width:60.0%"></p>
 </div>
 </div>
 </section>
@@ -3184,11 +3104,15 @@ width: 1500px;
 </div><div class="column" style="width:70%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
+<<<<<<< HEAD
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/petersen-graph.png" style="width:65.0%"></p>
 </figure>
 </div>
+=======
+<p><img data-src="images/petersen-graph.png" class="quarto-figure-center" style="width:75.0%"></p>
+>>>>>>> a4873200fea6e4bafe826a464cb51bac30d49fb9
 </div>
 </div>
 </div>
@@ -3198,7 +3122,7 @@ width: 1500px;
 <h2>Best practices</h2>
 <p>Try to get through all of this:</p>
 
-<img data-src="images/fox-book-2021.png" style="width:60.0%" class="r-stretch quarto-figure-center"></section>
+<img data-src="images/fox-book-2021.png" class="quarto-figure-center r-stretch" style="width:60.0%"></section>
 <section id="references" class="slide level2 smaller scrollable">
 <h2>References</h2>
 <div class="footer footer-default">
@@ -3288,7 +3212,6 @@ Wijeysundera DN, Austin PC, Beattie WS, Hux JE, Laupacis A. <a href="https://doi
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -3587,10 +3510,9 @@ Wijeysundera DN, Austin PC, Beattie WS, Hux JE, Laupacis A. <a href="https://doi
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn) {
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -3600,8 +3522,17 @@ Wijeysundera DN, Austin PC, Beattie WS, Hux JE, Laupacis A. <a href="https://doi
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
