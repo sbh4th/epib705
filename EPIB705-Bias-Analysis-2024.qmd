@@ -11,7 +11,7 @@ format:
     height: 900
     slide-number: true
     html-math-method: mathjax
-editor: visual
+editor: source
 bibliography: bias-analysis.bib
 csl: vancouver-author-date.csl
 filters:
@@ -289,11 +289,10 @@ $OR_{DX+}=\frac{(45\times945)}{(94\times257)}=1.76$
 
 ## Data Layout for Dichotomous Unmeasured Confounder
 
-```{=tex}
+```{=latex}
 \begin{tabular}{cccccccccccc}
 \hline 
  & \multicolumn{3}{c}{{\small{}Z=1 Smokers}} &  & \multicolumn{3}{c}{{\small{}Z=0 Non-smokers}} &  & \multicolumn{3}{c}{{\small{}Total}}\tabularnewline
-\cline{2-4} \cline{3-4} \cline{4-4} \cline{6-8} \cline{7-8} \cline{8-8} \cline{10-12} \cline{11-12} \cline{12-12} 
  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total}\tabularnewline
 \hline 
 {\small{}D=1} & {\small{}${\scriptstyle A_{11}}$} & {\small{}${\scriptstyle A_{01}}$} & {\small{}${\scriptstyle M_{11}}$} &  & {\small{}${\scriptstyle A_{1+}-A_{11}}$} & {\small{}${\scriptstyle A_{0+}-A_{01}}$} & {\small{}${\scriptstyle M_{A+}-M_{11}}$} &  & {\small{}${\scriptstyle A_{1+}}$} & {\small{}${\scriptstyle A_{0+}}$} & {\small{}${\scriptstyle M_{A+}}$}\tabularnewline
@@ -320,7 +319,6 @@ We already know the marginal totals, so only 4 quantities to estimate.
 \begin{tabular}{cccccccccccc}
 \hline 
  & \multicolumn{3}{c}{{\small{}Z=1 Smokers}} &  & \multicolumn{3}{c}{{\small{}Z=0 Non-smokers}} &  & \multicolumn{3}{c}{{\small{}Total}}\tabularnewline
-\cline{2-4} \cline{3-4} \cline{4-4} \cline{6-8} \cline{7-8} \cline{8-8} \cline{10-12} \cline{11-12} \cline{12-12} 
  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total}\tabularnewline
 \hline 
 {\small{}D=1} & \textbf{\small{}$\mathbf{{\scriptstyle A_{11}}}$} & \textbf{\small{}$\mathbf{{\scriptstyle A_{01}}}$} & {\small{}${\scriptstyle M_{11}}$} &  & {\small{}${\scriptstyle 45-A_{11}}$} & {\small{}${\scriptstyle 94-A_{01}}$} & {\small{}${\scriptstyle 139-M_{11}}$} &  & 45 & 94 & 139\tabularnewline
@@ -355,7 +353,6 @@ We already know the marginal totals, so only 4 quantities to estimate.
 \begin{tabular}{cccccccccccc}
 \hline 
  & \multicolumn{3}{c}{{\small{}Z=1 Smokers}} &  & \multicolumn{3}{c}{{\small{}Z=0 Non-smokers}} &  & \multicolumn{3}{c}{{\small{}Total}}\tabularnewline
-\cline{2-4} \cline{3-4} \cline{4-4} \cline{6-8} \cline{7-8} \cline{8-8} \cline{10-12} \cline{11-12} \cline{12-12} 
  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total}\tabularnewline
 \hline 
 {\small{}D=1} & \textbf{\small{}$\mathbf{{\scriptstyle A_{11}}}$} & \textbf{\small{}$\mathbf{{\scriptstyle A_{01}}}$} & {\small{}${\scriptstyle M_{11}}$} &  & {\small{}${\scriptstyle 45-A_{11}}$} & {\small{}${\scriptstyle 94-A_{01}}$} & {\small{}${\scriptstyle 139-M_{11}}$} &  & 45 & 94 & 139\tabularnewline
@@ -390,7 +387,6 @@ We already know the marginal totals, so only 4 quantities to estimate.
 \begin{tabular}{cccccccccccc}
 \hline 
  & \multicolumn{3}{c}{{\small{}Z=1 Smokers}} &  & \multicolumn{3}{c}{{\small{}Z=0 Non-smokers}} &  & \multicolumn{3}{c}{{\small{}Total}}\tabularnewline
-\cline{2-4} \cline{3-4} \cline{4-4} \cline{6-8} \cline{7-8} \cline{8-8} \cline{10-12} \cline{11-12} \cline{12-12} 
  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total}\tabularnewline
 \hline 
 {\small{}D=1} & \textcolor{blue}{\small{}${\scriptstyle A_{11}}$} & \textcolor{red}{\small{}${\scriptstyle A_{01}}$} & {\small{}${\scriptstyle M_{11}}$} &  & \textcolor{blue}{\small{}${\scriptstyle A_{1+}-A_{11}}$} & \textcolor{red}{\small{}${\scriptstyle A_{0+}-A_{01}}$} & {\small{}${\scriptstyle M_{A+}-M_{11}}$} &  & {\small{}${\scriptstyle A_{1+}}$} & {\small{}${\scriptstyle A_{0+}}$} & {\small{}${\scriptstyle M_{A+}}$}\tabularnewline
@@ -428,7 +424,6 @@ $$A_{01}=OR_{DZ0}A_{0+}B_{01}/(OR_{DZ0}B_{01}+B_{0+}-B_{01})$$
 \begin{tabular}{cccccccccccc}
 \hline 
  & \multicolumn{3}{c}{{\small{}Z=1 Smokers}} &  & \multicolumn{3}{c}{{\small{}Z=0 Non-smokers}} &  & \multicolumn{3}{c}{{\small{}Total}}\tabularnewline
-\cline{2-4} \cline{3-4} \cline{4-4} \cline{6-8} \cline{7-8} \cline{8-8} \cline{10-12} \cline{11-12} \cline{12-12} 
  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total}\tabularnewline
 \hline 
 {\small{}D=1} & \textbf{\small{}$\mathbf{{\scriptstyle A_{11}}}$} & \textbf{\small{}$\mathbf{{\scriptstyle A_{01}}}$} & {\small{}${\scriptstyle M_{11}}$} &  & {\small{}${\scriptstyle 45-A_{11}}$} & {\small{}${\scriptstyle 94-A_{01}}$} & {\small{}${\scriptstyle 139-M_{11}}$} &  & 45 & 94 & 139\tabularnewline
@@ -452,7 +447,6 @@ $B_{01}=P_{Z0}B_{0+}=(.5)({\color{blue}945})\approx{\color{blue}473}$
 \begin{tabular}{cccccccccccc}
 \hline 
  & \multicolumn{3}{c}{{\small{}Z=1 Smokers}} &  & \multicolumn{3}{c}{{\small{}Z=0 Non-smokers}} &  & \multicolumn{3}{c}{{\small{}Total}}\tabularnewline
-\cline{2-4} \cline{3-4} \cline{4-4} \cline{6-8} \cline{7-8} \cline{8-8} \cline{10-12} \cline{11-12} \cline{12-12} 
  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total}\tabularnewline
 \hline 
 {\small{}D=1} & \textcolor{red}{41} & \textcolor{blue}{77} & {\small{}${\scriptstyle M_{11}}$} &  & {\small{}${\scriptstyle 45-A_{11}}$} & {\small{}${\scriptstyle 94-A_{01}}$} & {\small{}${\scriptstyle 139-M_{11}}$} &  & 45 & 94 & 139\tabularnewline
@@ -480,7 +474,6 @@ We can now fill out the table and calculate an $OR$ standardized for smoking:
 \begin{tabular}{cccccccccccc}
 \hline 
  & \multicolumn{3}{c}{{\small{}Z=1 Smokers}} &  & \multicolumn{3}{c}{{\small{}Z=0 Non-smokers}} &  & \multicolumn{3}{c}{{\small{}Total}}\tabularnewline
-\cline{2-4} \cline{3-4} \cline{4-4} \cline{6-8} \cline{7-8} \cline{8-8} \cline{10-12} \cline{11-12} \cline{12-12} 
  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total}\tabularnewline
 \hline 
 {\small{}D=1} & {\small{}41} & {\small{}78} & {\small{}120} &  & {\small{}4} & {\small{}16} & {\small{}19} &  & {\small{}45} & {\small{}94} & {\small{}139}\tabularnewline
@@ -538,7 +531,6 @@ $Bias(RR)=\dfrac{RR_{DX+}}{RR_{DXZ(E)}}=\dfrac{RR_{DZ0}P_{11}+1-P_{11}}{RR_{DZ0}
 \begin{tabular}{cccccccccccc}
 \hline 
  & \multicolumn{3}{c}{{\small{}Z=1 Smokers}} &  & \multicolumn{3}{c}{{\small{}Z=0 Non-smokers}} &  & \multicolumn{3}{c}{{\small{}Total}}\tabularnewline
-\cline{2-4} \cline{3-4} \cline{4-4} \cline{6-8} \cline{7-8} \cline{8-8} \cline{10-12} \cline{11-12} \cline{12-12} 
  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total}\tabularnewline
 \hline 
 {\small{}D=1} & \textbf{\small{}$\mathbf{{\scriptstyle A_{11}}}$} & \textbf{\small{}$\mathbf{{\scriptstyle A_{01}}}$} & {\small{}${\scriptstyle M_{11}}$} &  & {\small{}${\scriptstyle 45-A_{11}}$} & {\small{}${\scriptstyle 94-A_{01}}$} & {\small{}${\scriptstyle 139-M_{11}}$} &  & 45 & 94 & 139\tabularnewline
@@ -564,7 +556,6 @@ Revised table for RD:
 \begin{tabular}{cccccccccccc}
 \hline 
  & \multicolumn{3}{c}{{\small{}Z=1 Smokers}} &  & \multicolumn{3}{c}{{\small{}Z=0 Non-smokers}} &  & \multicolumn{3}{c}{{\small{}Total}}\tabularnewline
-\cline{2-4} \cline{3-4} \cline{4-4} \cline{6-8} \cline{7-8} \cline{8-8} \cline{10-12} \cline{11-12} \cline{12-12} 
  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total} &  & {\small{}X=1} & {\small{}X=0} & {\small{}Total}\tabularnewline
 \hline 
 {\small{}D=1} & {\small{}38} & {\small{}73} & {\small{}111} &  & 7 & 21 & 28 &  & {\small{}45} & {\small{}94} & {\small{}139}\tabularnewline
@@ -779,7 +770,6 @@ Exposure or disease classification table:
 \begin{tabular}{ccc}
 \hline 
  & \multicolumn{2}{c}{True Status of Exposure or Disease}\tabularnewline
-\cline{2-3} \cline{3-3} 
 Measured Exposure (Dx) Status & Positive & Negative\tabularnewline
 \hline 
 Positive & a & b\tabularnewline
@@ -805,7 +795,6 @@ The number of individuals expected to be observed in a given study is a function
 \begin{tabular}{cccccc}
 \hline 
  & \multicolumn{2}{c}{True} &  & \multicolumn{2}{c}{Expected observed cells}\tabularnewline
-\cline{1-3} \cline{2-3} \cline{3-3} \cline{5-6} \cline{6-6} 
  & {\small{}$E_{1}$} & {\small{}$E_{0}$} &  & {\small{}$E_{1}$} & {\small{}$E_{0}$}\tabularnewline
 \hline 
 {\small{}$D_{1}$} & {\small{}$A$} & {\small{}$B$} &  & {\small{}$a=A(Se_{D_{1}})+B(1-Sp_{D_{1}})$} & {\small{}$b=A(1-Se_{D_{1}})+B(Sp_{D_{1}})$}\tabularnewline
@@ -831,7 +820,6 @@ Who is in the observed "$a$" cell? It is a mixture of:
 \begin{tabular}{cccccc}
 \hline 
  & \multicolumn{2}{c}{True} &  & \multicolumn{2}{c}{Expected observed cells}\tabularnewline
-\cline{1-3} \cline{2-3} \cline{3-3} \cline{5-6} \cline{6-6} 
  & {\small{}$E_{1}$} & {\small{}$E_{0}$} &  & {\small{}$E_{1}$} & {\small{}$E_{0}$}\tabularnewline
 \hline 
 {\small{}$D_{1}$} & $200$ & {\small{}$100$} &  & {\small{}$200(.85)+100(.05)=175$} & {\small{}$200(.15)+100(.95)=125$}\tabularnewline
@@ -879,7 +867,6 @@ $\begin{aligned} a & = A(Se_{D1})+D_{1Tot}-A-D_{1Tot}(Sp_{D1})+A(Sp_{D1})\\ a-D_
 \begin{tabular}{ccccccc}
 \hline 
  & \multicolumn{3}{c}{Observed} &  & \multicolumn{2}{c}{Corrected}\tabularnewline
-\cline{1-4} \cline{2-4} \cline{3-4} \cline{4-4} \cline{6-7} \cline{7-7} 
  & {\small{}$E_{1}$} & {\small{}$E_{0}$} & Total &  & {\small{}$E_{1}$} & {\small{}$E_{0}$}\tabularnewline
 \hline 
 {\small{}$D_{1}$} & {\small{}$a$} & {\small{}$b$} & {\small{}$D_{1Tot}$} &  & $\dfrac{a-D_{1Tot}(1-Sp_{D_{1}})}{Se_{D_{1}}-(1-Sp_{D_{1}})}$ & {\small{}$D_{1Tot}-A$}\tabularnewline
@@ -927,7 +914,6 @@ Example of coronary heart disease ($D$) and "Type A" personality ($E$):
 \begin{tabular}{ccccccc}
 \hline 
  & \multicolumn{2}{c}{True} &  & \multicolumn{2}{c}{Observed cells} & \tabularnewline
-\cline{1-3} \cline{2-3} \cline{3-3} \cline{5-7} \cline{6-7} \cline{7-7} 
  & {\small{}$E_{1}$} & {\small{}$E_{0}$} &  & {\small{}$E_{1}$} & {\small{}$E_{0}$} & Total\tabularnewline
 \hline 
 {\small{}$D_{1}$} & {\small{}$A$} & {\small{}$B$} &  & 150 & 107 & 257\tabularnewline
@@ -965,7 +951,6 @@ $D=D_{0Tot}-b=2897-1410.4=1486.6$
 \begin{tabular}{ccccccc}
 \hline 
  & \multicolumn{2}{c}{True} &  & \multicolumn{2}{c}{Observed cells} & \tabularnewline
-\cline{1-3} \cline{2-3} \cline{3-3} \cline{5-7} \cline{6-7} \cline{7-7} 
  & {\small{}$E_{1}$} & {\small{}$E_{0}$} &  & {\small{}$E_{1}$} & {\small{}$E_{0}$} & Total\tabularnewline
 \hline 
 {\small{}$D_{1}$} & 177.6 & 79.4 &  & 150 & 107 & 257\tabularnewline
@@ -1161,7 +1146,6 @@ knitr::include_graphics(here("images", "stang.png"))
 \begin{tabular}{cccccccc}
 \hline 
  & \multicolumn{2}{c}{Participants} &  & \multicolumn{2}{c}{Non-participants+Q} &  & Refusals\tabularnewline
-\cline{2-3} \cline{3-3} \cline{5-6} \cline{6-6} \cline{8-8} 
  & E+ & E- &  & E+ & E- &  & ?\tabularnewline
 \hline 
 Cases & 136 & 107 &  & 3 & 7 &  & 17\tabularnewline
@@ -1241,7 +1225,6 @@ How to estimate the rates among those lost?
 \begin{tabular}{cccccc}
 \hline 
  & \multicolumn{2}{c}{With follow-up} &  & \multicolumn{2}{c}{Lost to follow-up}\tabularnewline
-\cline{2-3} \cline{3-3} \cline{5-6} \cline{6-6} 
  & E+ & E- &  & E+ & E-\tabularnewline
 \hline 
 Deaths & 40 & 65 &  &  & \tabularnewline
@@ -1263,7 +1246,6 @@ Crude RR & 2.3 & 1.0 &  &  & \tabularnewline
 \begin{tabular}{cccccc}
 \hline 
  & \multicolumn{2}{c}{With follow-up} &  & \multicolumn{2}{c}{Lost to follow-up}\tabularnewline
-\cline{2-3} \cline{3-3} \cline{5-6} \cline{6-6} 
  & E+ & E- &  & E+ & E-\tabularnewline
 \hline 
 Deaths & 40 & 65 &  &  & \tabularnewline
@@ -1298,7 +1280,6 @@ $Deaths_{E-}=\color{blue}{.045}\color{black}{\times{411.7}=}\color{red}{18.7}$
 \begin{tabular}{cccccc}
 \hline 
  & \multicolumn{2}{c}{At 2 hospitals} &  & \multicolumn{2}{c}{Estimated for those lost}\tabularnewline
-\cline{2-3} \cline{3-3} \cline{5-6} \cline{6-6} 
  & E+ & E- &  & E+ & E-\tabularnewline
 \hline 
 Deaths & 3 & 5 &  & \textcolor{red}{4.2} & \textcolor{red}{18.7}\tabularnewline
@@ -1315,7 +1296,6 @@ Crude RR & 1.1 & 1.0 &  &  & \tabularnewline
 \begin{tabular}{cccccc}
 \hline 
  & \multicolumn{2}{c}{With follow-up} &  & \multicolumn{2}{c}{Lost to follow-up}\tabularnewline
-\cline{2-3} \cline{3-3} \cline{5-6} \cline{6-6} 
  & E+ & E- &  & E+ & E-\tabularnewline
 \hline 
 Deaths & 40 & 65 &  & 4.2  & 18.7 \tabularnewline
@@ -1341,7 +1321,6 @@ $RD=2.9/100py\quad \text{and} \quad RR=2.0$
 \begin{tabular}{cccccc}
 \hline 
  & \multicolumn{2}{c}{With follow-up} &  & \multicolumn{2}{c}{Lost to follow-up}\tabularnewline
-\cline{2-3} \cline{3-3} \cline{5-6} \cline{6-6} 
  & E+ & E- &  & E+ & E-\tabularnewline
 \hline 
 Deaths & 40 & 65 &  & \textcolor{blue}{0}  & \textcolor{blue}{46} \tabularnewline
