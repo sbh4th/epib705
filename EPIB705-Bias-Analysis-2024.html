@@ -6,9 +6,8 @@
 <script src="EPIB705-Bias-Analysis-2024_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="EPIB705-Bias-Analysis-2024_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="EPIB705-Bias-Analysis-2024_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="EPIB705-Bias-Analysis-2024_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="EPIB705-Bias-Analysis-2024_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.398">
+<link href="EPIB705-Bias-Analysis-2024_files/libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.26">
 
   <meta name="author" content="Sam Harper">
   <meta name="dcterms.date" content="2024-03-21">
@@ -31,8 +30,9 @@
       vertical-align: middle;
     }
     /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -71,7 +71,7 @@
     code span.at { color: #657422; } /* Attribute */
     code span.bn { color: #ad0000; } /* BaseN */
     code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
     code span.ch { color: #20794d; } /* Char */
     code span.cn { color: #8f5902; } /* Constant */
     code span.co { color: #5e5e5e; } /* Comment */
@@ -85,7 +85,7 @@
     code span.fu { color: #4758ab; } /* Function */
     code span.im { color: #00769e; } /* Import */
     code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; } /* Keyword */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
     code span.op { color: #5e5e5e; } /* Operator */
     code span.ot { color: #003b4f; } /* Other */
     code span.pp { color: #ad0000; } /* Preprocessor */
@@ -115,209 +115,11 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="EPIB705-Bias-Analysis-2024_files/libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="EPIB705-Bias-Analysis-2024_files/libs/revealjs/dist/theme/quarto-1c76ab9349026c94e1cd5e26bf1f0ef9.css">
   <link href="EPIB705-Bias-Analysis-2024_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="EPIB705-Bias-Analysis-2024_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="EPIB705-Bias-Analysis-2024_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
   <link href="EPIB705-Bias-Analysis-2024_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
-  <style type="text/css">
-
-  .callout {
-    margin-top: 1em;
-    margin-bottom: 1em;  
-    border-radius: .25rem;
-  }
-
-  .callout.callout-style-simple { 
-    padding: 0em 0.5em;
-    border-left: solid #acacac .3rem;
-    border-right: solid 1px silver;
-    border-top: solid 1px silver;
-    border-bottom: solid 1px silver;
-    display: flex;
-  }
-
-  .callout.callout-style-default {
-    border-left: solid #acacac .3rem;
-    border-right: solid 1px silver;
-    border-top: solid 1px silver;
-    border-bottom: solid 1px silver;
-  }
-
-  .callout .callout-body-container {
-    flex-grow: 1;
-  }
-
-  .callout.callout-style-simple .callout-body {
-    font-size: 1rem;
-    font-weight: 400;
-  }
-
-  .callout.callout-style-default .callout-body {
-    font-size: 0.9rem;
-    font-weight: 400;
-  }
-
-  .callout.callout-titled.callout-style-simple .callout-body {
-    margin-top: 0.2em;
-  }
-
-  .callout:not(.callout-titled) .callout-body {
-      display: flex;
-  }
-
-  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
-    padding-left: 1.6em;
-  }
-
-  .callout.callout-titled .callout-header {
-    padding-top: 0.2em;
-    margin-bottom: -0.2em;
-  }
-
-  .callout.callout-titled .callout-title  p {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-  }
-    
-  .callout.callout-titled.callout-style-simple .callout-content  p {
-    margin-top: 0;
-  }
-
-  .callout.callout-titled.callout-style-default .callout-content  p {
-    margin-top: 0.7em;
-  }
-
-  .callout.callout-style-simple div.callout-title {
-    border-bottom: none;
-    font-size: .9rem;
-    font-weight: 600;
-    opacity: 75%;
-  }
-
-  .callout.callout-style-default  div.callout-title {
-    border-bottom: none;
-    font-weight: 600;
-    opacity: 85%;
-    font-size: 0.9rem;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-  }
-
-  .callout.callout-style-default div.callout-content {
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-  }
-
-  .callout.callout-style-simple .callout-icon::before {
-    height: 1rem;
-    width: 1rem;
-    display: inline-block;
-    content: "";
-    background-repeat: no-repeat;
-    background-size: 1rem 1rem;
-  }
-
-  .callout.callout-style-default .callout-icon::before {
-    height: 0.9rem;
-    width: 0.9rem;
-    display: inline-block;
-    content: "";
-    background-repeat: no-repeat;
-    background-size: 0.9rem 0.9rem;
-  }
-
-  .callout-title {
-    display: flex
-  }
-    
-  .callout-icon::before {
-    margin-top: 1rem;
-    padding-right: .5rem;
-  }
-
-  .callout.no-icon::before {
-    display: none !important;
-  }
-
-  .callout.callout-titled .callout-body > .callout-content > :last-child {
-    padding-bottom: 0.5rem;
-    margin-bottom: 0;
-  }
-
-  .callout.callout-titled .callout-icon::before {
-    margin-top: .5rem;
-    padding-right: .5rem;
-  }
-
-  .callout:not(.callout-titled) .callout-icon::before {
-    margin-top: 1rem;
-    padding-right: .5rem;
-  }
-
-  /* Callout Types */
-
-  div.callout-note {
-    border-left-color: #4582ec !important;
-  }
-
-  div.callout-note .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
-  }
-
-  div.callout-note.callout-style-default .callout-title {
-    background-color: #dae6fb
-  }
-
-  div.callout-important {
-    border-left-color: #d9534f !important;
-  }
-
-  div.callout-important .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
-  }
-
-  div.callout-important.callout-style-default .callout-title {
-    background-color: #f7dddc
-  }
-
-  div.callout-warning {
-    border-left-color: #f0ad4e !important;
-  }
-
-  div.callout-warning .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
-  }
-
-  div.callout-warning.callout-style-default .callout-title {
-    background-color: #fcefdc
-  }
-
-  div.callout-tip {
-    border-left-color: #02b875 !important;
-  }
-
-  div.callout-tip .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
-  }
-
-  div.callout-tip.callout-style-default .callout-title {
-    background-color: #ccf1e3
-  }
-
-  div.callout-caution {
-    border-left-color: #fd7e14 !important;
-  }
-
-  div.callout-caution .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
-  }
-
-  div.callout-caution.callout-style-default .callout-title {
-    background-color: #ffe5d0
-  }
-
-  </style>
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -461,25 +263,23 @@ Sam Harper
 <section id="introduction" class="slide level2">
 <h2>Introduction</h2>
 <p>How do misclassification, selection bias, and unmeasured confounding create bias in parameter estimation?</p>
-<div>
 <blockquote>
 <p>By assuming that all errors are random and that any modeling assumptions (such as homogeneity) are correct, all uncertainty about the effect of errors on estimates is subsumed within conventional standard deviations for the estimates (standard errors), such as those given in earlier chapters (which assume no measurement error), and any discrepancy between an observed association and the target effect may be attributed to chance alone<sup>1</sup></p>
 </blockquote>
 <ul>
 <li class="fragment">Bias analysis is an attempt to quantify the potential for bias, and reduce the likelihood of mistakenly attributing effects to exposure rather than systematic error.</li>
 </ul>
-</div>
 <aside><ol class="aside-footnotes"><li id="fn1"><p>See <span class="citation" data-cites="Rothman:2008aa">Rothman et al. (<a href="#/references" role="doc-biblioref" onclick="">2008</a>)</span>, p.362.</p></li></ol></aside></section>
 <section id="what-are-we-concerned-about" class="slide level2">
 <h2>What are we concerned about?</h2>
 <p>In theory. <br></p>
 
-<img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-1-1.png" class="quarto-figure-center r-stretch" width="960"></section>
+<img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-1-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="what-are-we-concerned-about-1" class="slide level2">
 <h2>What are we concerned about?</h2>
 <p>In practice. <br></p>
 
-<img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-2-1.png" class="quarto-figure-center r-stretch" width="960"></section>
+<img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-2-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="potential-consequences" class="slide level2">
 <h2>Potential consequences</h2>
 <div class="columns">
@@ -497,8 +297,7 @@ Sam Harper
 <ul>
 <li>A basic problem is that the results of observational studies are likely to be sensitive to choices made by the analyst.</li>
 </ul>
-</div>
-</div>
+</div></div>
 <aside><ol class="aside-footnotes"><li id="fn2"><p>Rothman, Greenland, Lash, <em>Modern Epidemiology</em> 3rd ed, p,347.</p></li></ol></aside></section>
 <section id="example-of-typical-qualitative-analysis" class="slide level2">
 <h2>Example of typical qualitative analysis</h2>
@@ -514,7 +313,11 @@ Sam Harper
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="images/ml-room-1.png" class="quarto-figure-center" style="width:70.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/ml-room-1.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <aside><ol class="aside-footnotes"><li id="fn4"><p>https://michaelbach.de/ot/sze-muelue/</p></li></ol></aside></section>
@@ -523,7 +326,11 @@ Sam Harper
 <p>Intuitions are difficult to overcome.<sup>1</sup></p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="images/ml-room-2.png" class="quarto-figure-center" style="width:70.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/ml-room-2.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <aside><ol class="aside-footnotes"><li id="fn5"><p>https://michaelbach.de/ot/sze-muelue/</p></li></ol></aside></section>
@@ -582,8 +389,7 @@ Sam Harper
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 <aside><ol class="aside-footnotes"><li id="fn6"><p><span class="citation" data-cites="Bross:1954aa">Bross (<a href="#/references" role="doc-biblioref" onclick="">1954</a>)</span> is credited with implementing the first quantitative bias analyis, but <span class="citation" data-cites="Cornfield:1959aa">Cornfield et al. (<a href="#/references" role="doc-biblioref" onclick="">1959</a>)</span> also played an important role.</p></li></ol></aside></section>
 <section id="unmeasured-confounding-3" class="slide level2">
 <h2>Unmeasured Confounding</h2>
@@ -593,7 +399,7 @@ Sam Harper
 <p><br></p>
 <div class="columns">
 <div class="column" style="width:52%;">
-<table>
+<table class="caption-top">
 <thead>
 <tr class="header">
 <th>Disease Status</th>
@@ -628,8 +434,7 @@ Sam Harper
 </div><div class="column" style="width:46%;">
 <p>Crude OR:<br>
 <span class="math inline">\(OR_{DX+}=\frac{(45\times945)}{(94\times257)}=1.76\)</span></p>
-</div>
-</div>
+</div></div>
 <p><br></p>
 <ul>
 <li><p>Likely confounded by smoking <span class="math inline">\((Z)\)</span>, but we did not measure it.</p></li>
@@ -638,7 +443,7 @@ Sam Harper
 <aside><ol class="aside-footnotes"><li id="fn7"><p>Longstanding example used in <em>Modern Epidemiology</em> from <span class="citation" data-cites="Greenland:1994aa">Greenland et al. (<a href="#/references" role="doc-biblioref" onclick="">1994</a>)</span></p></li></ol></aside></section>
 <section id="data-layout-for-dichotomous-unmeasured-confounder" class="slide level2">
 <h2>Data Layout for Dichotomous Unmeasured Confounder</h2>
-<table>
+<table class="caption-top">
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"></td>
@@ -733,7 +538,7 @@ Sam Harper
 <section id="data-layout-for-dichotomous-unmeasured-confounder-1" class="slide level2">
 <h2>Data Layout for Dichotomous Unmeasured Confounder</h2>
 <p>We already know the marginal totals, so only 4 quantities to estimate.</p>
-<table>
+<table class="caption-top">
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"></td>
@@ -824,7 +629,7 @@ Sam Harper
 <section id="what-do-we-need-1-distribution-of-z-by-exposure" class="slide level2">
 <h2>What do we need? (1) Distribution of <span class="math inline">\(Z\)</span> by exposure</h2>
 
-<img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure-center r-stretch" width="960"><table>
+<img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><table class="caption-top">
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"></td>
@@ -915,7 +720,7 @@ Sam Harper
 <section id="what-do-we-need-2-effect-of-z-on-d" class="slide level2">
 <h2>What do we need? (2) Effect of <span class="math inline">\(Z\)</span> on <span class="math inline">\(D\)</span></h2>
 
-<img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure-center r-stretch" width="960"><table>
+<img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><table class="caption-top">
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"></td>
@@ -1015,10 +820,14 @@ Sam Harper
 <section id="worked-example" class="slide level2">
 <h2>Worked example</h2>
 <ul>
-<li>Suppose we know from external studies that the prevalence of smoking is 70% among those occupationally exposed to resins and 50% among those unexposed in this population.</li>
+<li>Suppose external studies show a 70% prevalence of smoking among those exposed to resins and 50% among those unexposed. We can estimate <span class="math inline">\(B_{11}\)</span> and <span class="math inline">\(B_{01}\)</span> as:</li>
 </ul>
+<div style="text-align: center;">
+<p><span class="math inline">\(B_{11}=P_{Z1}B_{1+}=(.7)({\color{red}257})\approx{\color{red}180}\)</span></p>
+<p><span class="math inline">\(B_{01}=P_{Z0}B_{0+}=(.5)({\color{blue}945})\approx{\color{blue}473}\)</span></p>
+</div>
 <div class="fragment">
-<table>
+<table class="caption-top">
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"></td>
@@ -1100,18 +909,11 @@ Sam Harper
 </tr>
 </tbody>
 </table>
-<ul>
-<li>Our estimates of <span class="math inline">\(B_{11}\)</span> and <span class="math inline">\(B_{01}\)</span> are now:</li>
-</ul>
-<div style="text-align: center;">
-<p><span class="math inline">\(B_{11}=P_{Z1}B_{1+}=(.7)({\color{red}257})\approx{\color{red}180}\)</span></p>
-<p><span class="math inline">\(B_{01}=P_{Z0}B_{0+}=(.5)({\color{blue}945})\approx{\color{blue}473}\)</span></p>
-</div>
 </div>
 </section>
 <section id="section-2" class="slide level2">
 <h2></h2>
-<table>
+<table class="caption-top">
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"></td>
@@ -1204,7 +1006,7 @@ Sam Harper
 <section id="section-3" class="slide level2">
 <h2></h2>
 <p>We can now fill out the table and calculate an <span class="math inline">\(OR\)</span> standardized for smoking:</p>
-<table>
+<table class="caption-top">
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"></td>
@@ -1316,7 +1118,7 @@ Sam Harper
 <ul>
 <li>Still need the prevalence of the unmeasured confounder by exposure, but now we need the risk difference <span class="math inline">\(RD_{DZ}\)</span> for the confounder-disease association.</li>
 </ul>
-<table>
+<table class="caption-top">
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"></td>
@@ -1409,7 +1211,7 @@ Sam Harper
 <section id="section-4" class="slide level2">
 <h2></h2>
 <p>Revised table for RD:</p>
-<table>
+<table class="caption-top">
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"></td>
@@ -1574,7 +1376,7 @@ Sam Harper
 <li><p>Differences in the distribution of <span class="math inline">\(U\)</span> by exposure similar across all strata of measured <span class="math inline">\(X\)</span>s.</p></li>
 <li><p>Effect of <span class="math inline">\(U\)</span> on <span class="math inline">\(Y\)</span> similar across all strata of measured <span class="math inline">\(X\)</span>s.</p></li>
 </ul>
-<table>
+<table class="caption-top">
 <tbody>
 <tr class="odd">
 <td style="text-align: left;"><span>Example Post-Hoc Bias Analysis</span></td>
@@ -1622,11 +1424,7 @@ Sam Harper
 <h2>Break! ☕</h2>
 <div class="cell">
 <div class="cell-output-display">
-<<<<<<< HEAD
-<div class="countdown" id="timer_3e7f9378" data-update-every="1" tabindex="0" style="top:15%;right:0;bottom:15%;left:0;margin:5%;padding:50px;font-size:7em;">
-=======
-<div class="countdown" id="timer_8e3982d5" data-update-every="1" tabindex="0" style="top:15%;right:0;bottom:15%;left:0;margin:5%;padding:50px;font-size:7em;">
->>>>>>> a4873200fea6e4bafe826a464cb51bac30d49fb9
+<div class="countdown" id="timer_7bf11de9" data-update-every="1" tabindex="0" style="top:15%;right:0;bottom:15%;left:0;margin:5%;padding:50px;font-size:7em;">
 <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
 <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
@@ -1651,7 +1449,7 @@ Sam Harper
 <section id="section-5" class="slide level2">
 <h2></h2>
 
-<img data-src="images/taubes-1995.png" class="quarto-figure-center r-stretch" width="880"></section>
+<img data-src="images/taubes-1995.png" class="quarto-figure quarto-figure-center r-stretch" width="880"></section>
 <section id="section-6" class="slide level2">
 <h2></h2>
 <p>Epidemiology Monitor:<sup>1</sup></p>
@@ -1667,7 +1465,11 @@ Sam Harper
 <h2>Update<sup>1</sup></h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="images/lash-sciadv-2022.png" class="quarto-figure-center" style="width:85.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/lash-sciadv-2022.png" class="quarto-figure quarto-figure-center" style="width:85.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <aside><ol class="aside-footnotes"><li id="fn15"><p>See <span class="citation" data-cites="McCullough:2022aa">McCullough et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>. I’ll leave to to you as to whether you find this a convincing rebuttal.</p></li></ol></aside></section>
@@ -1676,19 +1478,27 @@ Sam Harper
 <p>You may recall<sup>1</sup></p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="images/buzzfeed-2020-title.png" class="quarto-figure-center" style="width:50.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/buzzfeed-2020-title.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="images/buzzfeed-2020-quote.png" class="quarto-figure-center" style="width:50.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/buzzfeed-2020-quote.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <aside><ol class="aside-footnotes"><li id="fn16"><p>https://www.buzzfeednews.com/article/stephaniemlee/coronavirus-antibody-test-santa-clara-los-angeles-stanford</p></li></ol></aside></section>
 <section id="basic-quantities-you-already-know" class="slide level2">
 <h2>Basic quantities you already know</h2>
 <p>Exposure or disease classification table:</p>
-<table>
+<table class="caption-top">
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"></td>
@@ -1727,7 +1537,7 @@ Sam Harper
 <section id="relation-between-true-and-expected-observed-data" class="slide level2">
 <h2>Relation between “true” and expected observed data</h2>
 <p>The number of individuals expected to be observed in a given study is a function of the “true” exposure status and the bias parameters (i.e., sensitivity and specificity):</p>
-<table>
+<table class="caption-top">
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"></td>
@@ -1783,7 +1593,7 @@ Sam Harper
 <ul>
 <li>Suppose we have 85% Se and 95% Sp, which is <span class="red">non-differential</span> with respect to disease:</li>
 </ul>
-<table>
+<table class="caption-top">
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"></td>
@@ -1844,8 +1654,7 @@ Sam Harper
 <p><span class="math inline">\(RR_{true}=\dfrac{200/1000}{100/900}=2.0\)</span></p>
 </div><div class="column" style="width:65%;">
 <p><span class="math inline">\(RR_{obs}=\dfrac{175/900}{125/1100}=1.7\)</span></p>
-</div>
-</div>
+</div></div>
 </div>
 </section>
 <section id="going-from-observed-to-true-data" class="slide level2">
@@ -1861,7 +1670,7 @@ Sam Harper
 </section>
 <section id="going-from-observed-to-true-data-1" class="slide level2">
 <h2>Going from observed to “true” data</h2>
-<table>
+<table class="caption-top">
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"></td>
@@ -1953,7 +1762,7 @@ Sam Harper
 <section id="example-non-differential-misclassification-of-exposure" class="slide level2">
 <h2>Example: non-differential misclassification of exposure</h2>
 <p>Example of coronary heart disease (<span class="math inline">\(D\)</span>) and “Type A” personality (<span class="math inline">\(E\)</span>):</p>
-<table>
+<table class="caption-top">
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"></td>
@@ -2023,7 +1832,7 @@ Sam Harper
 <ul>
 <li>Now fill in the “true” table:</li>
 </ul>
-<table>
+<table class="caption-top">
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"></td>
@@ -2078,48 +1887,47 @@ Sam Harper
 <div class="columns">
 <div class="column" style="width:35%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(episensr)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># observed data</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">misclassification</span>(</span>
-<span id="cb1-4"><a href="#cb1-4"></a>  <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">150</span>, <span class="dv">107</span>, </span>
-<span id="cb1-5"><a href="#cb1-5"></a>           <span class="dv">1277</span>, <span class="dv">1620</span>),</span>
-<span id="cb1-6"><a href="#cb1-6"></a>  <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"D+"</span>, <span class="st">"D-"</span>),</span>
-<span id="cb1-7"><a href="#cb1-7"></a>  <span class="fu">c</span>(<span class="st">"E+"</span>, <span class="st">"E- "</span>)),</span>
-<span id="cb1-8"><a href="#cb1-8"></a>  <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb1-9"><a href="#cb1-9"></a>  <span class="at">type =</span> <span class="st">"exposure"</span>,</span>
-<span id="cb1-10"><a href="#cb1-10"></a></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="co"># bias parameters</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a>  <span class="at">bias_parms =</span> <span class="fu">c</span>(<span class="fl">0.80</span>, <span class="fl">0.80</span>, </span>
-<span id="cb1-13"><a href="#cb1-13"></a>                 <span class="fl">0.90</span>, <span class="fl">0.90</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">library</span>(episensr)</span>
+<span id="cb1-2"><a href=""></a><span class="co"># observed data</span></span>
+<span id="cb1-3"><a href=""></a><span class="fu">misclassification</span>(</span>
+<span id="cb1-4"><a href=""></a>  <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">150</span>, <span class="dv">107</span>, </span>
+<span id="cb1-5"><a href=""></a>           <span class="dv">1277</span>, <span class="dv">1620</span>),</span>
+<span id="cb1-6"><a href=""></a>  <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"D+"</span>, <span class="st">"D-"</span>),</span>
+<span id="cb1-7"><a href=""></a>  <span class="fu">c</span>(<span class="st">"E+"</span>, <span class="st">"E- "</span>)),</span>
+<span id="cb1-8"><a href=""></a>  <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb1-9"><a href=""></a>  <span class="at">type =</span> <span class="st">"exposure"</span>,</span>
+<span id="cb1-10"><a href=""></a></span>
+<span id="cb1-11"><a href=""></a><span class="co"># bias parameters</span></span>
+<span id="cb1-12"><a href=""></a>  <span class="at">bias_parms =</span> <span class="fu">c</span>(<span class="fl">0.80</span>, <span class="fl">0.80</span>, </span>
+<span id="cb1-13"><a href=""></a>                 <span class="fl">0.90</span>, <span class="fl">0.90</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div><div class="column" style="width:65%;">
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>--Observed data-- 
-         Outcome: D+ 
-       Comparing: E+ vs. E-  
-
-     E+  E- 
+<pre><code>     E+  E- 
 D+  150  107
 D- 1277 1620
-
                                      2.5%    97.5%
 Observed Relative Risk: 1.696586 1.337392 2.152252
-   Observed Odds Ratio: 1.778409 1.373122 2.303319
----
-                                                             2.5%    97.5%
+   Observed Odds Ratio: 1.778409 1.373122 2.303319</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                                             2.5%    97.5%
 Misclassification Bias Corrected Relative Risk: 2.204640                  
    Misclassification Bias Corrected Odds Ratio: 2.356302 1.554052 3.572700</code></pre>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 <aside><ol class="aside-footnotes"><li id="fn17"><p>See package by <span class="citation" data-cites="Haine:2021aa">Haine (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span></p></li></ol></aside></section>
 <section id="simpler-implementation-using-ppvnpvs18" class="slide level2">
 <h2>Simpler implementation using PPV/NPVs<sup>1</sup></h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="images/fox-ppv.png" class="quarto-figure-center" style="width:85.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/fox-ppv.png" class="quarto-figure quarto-figure-center" style="width:85.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <aside><ol class="aside-footnotes"><li id="fn18"><p>See Ch.6 in <span class="citation" data-cites="Fox:2022aa">Fox et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span></p></li></ol></aside></section>
@@ -2138,7 +1946,11 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="images/fox-misclass-conf.png" class="quarto-figure-center" style="width:80.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/fox-misclass-conf.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <aside><ol class="aside-footnotes"><li id="fn19"><p>See examples in Ch.6 of <span class="citation" data-cites="Fox:2022aa">Fox et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>.</p></li></ol></aside></section>
@@ -2147,7 +1959,11 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 <p>We might draw a model like this, indicating that true smoking status is unmeasured but may still confound the association between coffee and bladder cancer:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-17-1.png" class="quarto-figure-center" width="960"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-17-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 <aside><ol class="aside-footnotes"><li id="fn20"><p><span class="citation" data-cites="Slattery:1988aa">Slattery et al. (<a href="#/references" role="doc-biblioref" onclick="">1988</a>)</span></p></li></ol></aside></section>
@@ -2157,13 +1973,21 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 <div style="text-align: center;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="images/coffee-cancer-crude.png" class="quarto-figure-center" style="width:70.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/coffee-cancer-crude.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p><span class="math inline">\(OR_{crude}=1.8\quad \textrm{and} \quad OR_{MHadj}=1.5\quad 95\%\text{CI}=[1.1,2.0]\)</span></p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="images/coffee-cancer-adj.png" class="quarto-figure-center" style="width:70.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/coffee-cancer-adj.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p><span class="math inline">\(OR_{MHadj}=1.3\quad 95\%\text{CI}=[0.95,1.7]\)</span></p>
@@ -2199,11 +2023,14 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 </div><div class="column" style="width:60%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="images/selection-bias.png" class="quarto-figure-center" style="width:80.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/selection-bias.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+</figure>
 </div>
 </div>
 </div>
-</div>
+</div></div>
 </section>
 <section id="differential-baseline-participation" class="slide level2">
 <h2>Differential baseline participation</h2>
@@ -2225,15 +2052,18 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 <p>Example: mobile phone use and uveal melanoma<sup>1</sup></p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="images/stang.png" class="quarto-figure-center" style="width:80.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/stang.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+</figure>
 </div>
 </div>
 </div>
-</div>
+</div></div>
 <aside><ol class="aside-footnotes"><li id="fn21"><p>Example from <span class="citation" data-cites="Stang:2009aa">Stang et al. (<a href="#/references" role="doc-biblioref" onclick="">2009</a>)</span> described in <span class="citation" data-cites="Fox:2022aa">Fox et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span></p></li></ol></aside></section>
 <section id="section-10" class="slide level2">
 <h2></h2>
-<table>
+<table class="caption-top">
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"></td>
@@ -2319,11 +2149,11 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 <li><p>Overall loss-to-follow of 13%, initial baseline treatment status of those lost is known.</p></li>
 </ul>
 
-<img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-22-1.png" class="quarto-figure-center r-stretch" width="960"></section>
+<img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-22-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="section-11" class="slide level2">
 <h2></h2>
 <p>How to estimate the rates among those lost?</p>
-<table>
+<table class="caption-top">
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"></td>
@@ -2404,7 +2234,7 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 </section>
 <section id="section-12" class="slide level2">
 <h2></h2>
-<table>
+<table class="caption-top">
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"></td>
@@ -2496,7 +2326,7 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 <p><span class="math inline">\(Deaths_{E+}=\color{blue}{.049}\color{black}{\times{85.9}=}\color{red}{4.2}\)</span></p>
 <p><span class="math inline">\(Deaths_{E-}=\color{blue}{.045}\color{black}{\times{411.7}=}\color{red}{18.7}\)</span></p>
 </div>
-<table>
+<table class="caption-top">
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"></td>
@@ -2565,7 +2395,7 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 </section>
 <section id="bias-corrected-estimates-with-assumptions" class="slide level2">
 <h2>Bias-corrected estimates (with assumptions)</h2>
-<table>
+<table class="caption-top">
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"></td>
@@ -2647,7 +2477,7 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 </section>
 <section id="worst-case-scenario-still-suggests-some-impact." class="slide level2">
 <h2>Worst case scenario still suggests some impact.</h2>
-<table>
+<table class="caption-top">
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"></td>
@@ -2730,16 +2560,12 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 <section id="ip-weighting-for-selection-bias" class="slide level2">
 <h2>IP weighting for selection bias</h2>
 
-<img data-src="images/fox-ipaw.png" class="quarto-figure-center r-stretch" width="898"></section>
+<img data-src="images/fox-ipaw.png" class="quarto-figure quarto-figure-center r-stretch" width="898"></section>
 <section id="break-1" class="slide level2 h2center">
 <h2>Break! ☕</h2>
 <div class="cell">
 <div class="cell-output-display">
-<<<<<<< HEAD
-<div class="countdown" id="timer_32612096" data-update-every="1" tabindex="0" style="top:15%;right:0;bottom:15%;left:0;margin:5%;padding:50px;font-size:7em;">
-=======
-<div class="countdown" id="timer_a71b1f34" data-update-every="1" tabindex="0" style="top:15%;right:0;bottom:15%;left:0;margin:5%;padding:50px;font-size:7em;">
->>>>>>> a4873200fea6e4bafe826a464cb51bac30d49fb9
+<div class="countdown" id="timer_d4c23fc3" data-update-every="1" tabindex="0" style="top:15%;right:0;bottom:15%;left:0;margin:5%;padding:50px;font-size:7em;">
 <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
 <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
@@ -2795,14 +2621,17 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 </div><div class="column" style="width:80%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="images/mba-confounding.png" class="quarto-figure-center" style="width:100.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/mba-confounding.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <blockquote>
 <p>An unmeasured confounder could render the association between consultation and 30-day mortality <span class="red">statistically nonsignificant</span> but only if it at least doubled the odds of mortality and was present in 20% of patients who underwent consultation as compared with 10% of those who did not.</p>
 </blockquote>
-</div>
-</div>
+</div></div>
 <aside><ol class="aside-footnotes"><li id="fn22"><p><span class="citation" data-cites="Wijeysundera:2010aa">Wijeysundera et al. (<a href="#/references" role="doc-biblioref" onclick="">2010</a>)</span></p></li></ol></aside></section>
 <section id="probabilistic-bias-analysis" class="slide level2">
 <h2>Probabilistic Bias Analysis</h2>
@@ -2816,7 +2645,7 @@ Misclassification Bias Corrected Relative Risk: 2.204640
 <h2>Example distributions for sensitivity</h2>
 <p>Five distributions all centered near 0.57 and spread around 0.42 and 0.71.</p>
 
-<img data-src="images/fox-distributions.png" class="quarto-figure-center r-stretch" width="591"><div class="cell">
+<img data-src="images/fox-distributions.png" class="quarto-figure quarto-figure-center r-stretch" width="591"><div class="cell">
 <style type="text/css">
 .longcode {
 height: 800px;
@@ -2830,45 +2659,45 @@ width: 1500px;
 <ul>
 <li>Setup using the <code>episensr</code> package</li>
 </ul>
-<div class="cell longcode" data-hash="EPIB705-Bias-Analysis-2024_cache/revealjs/unnamed-chunk-28_3ca051a177fd0067b2eaced2f79c0606">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r longcode number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># set the seed for reproducible results</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">set.seed</span>(<span class="dv">39569</span>)</span>
-<span id="cb3-3"><a href="#cb3-3"></a></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="co"># define the observed 2x2 data</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a>pc <span class="ot">&lt;-</span> <span class="fu">probsens.conf</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">45</span>, <span class="dv">94</span>, <span class="dv">257</span>, <span class="dv">945</span>),</span>
-<span id="cb3-6"><a href="#cb3-6"></a>  <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"D+"</span>, <span class="st">"D-"</span>), <span class="fu">c</span>(<span class="st">"D+"</span>, <span class="st">"D-"</span>)), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb3-7"><a href="#cb3-7"></a></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="co"># number of replications</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a>  <span class="at">reps =</span> <span class="dv">5000</span>, </span>
-<span id="cb3-10"><a href="#cb3-10"></a></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="co"># bias parameters and distributions</span></span>
-<span id="cb3-12"><a href="#cb3-12"></a></span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="co"># prevalence of U among exposed</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a><span class="at">prev.exp =</span> <span class="fu">list</span>(<span class="st">"triangular"</span>, <span class="fu">c</span>(.<span class="dv">6</span>, .<span class="dv">8</span>, .<span class="dv">7</span>)),</span>
-<span id="cb3-15"><a href="#cb3-15"></a></span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="co"># prevalence of U among unexposed</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a><span class="at">prev.nexp =</span> <span class="fu">list</span>(<span class="st">"triangular"</span>, <span class="fu">c</span>(.<span class="dv">4</span>, .<span class="dv">6</span>, .<span class="dv">5</span>)),</span>
-<span id="cb3-18"><a href="#cb3-18"></a></span>
-<span id="cb3-19"><a href="#cb3-19"></a><span class="co"># association of U with outcome</span></span>
-<span id="cb3-20"><a href="#cb3-20"></a><span class="at">risk =</span> <span class="fu">list</span>(<span class="st">"log-normal"</span>, <span class="fu">c</span>(<span class="fl">1.522</span>, <span class="fl">0.216</span>)), </span>
-<span id="cb3-21"><a href="#cb3-21"></a></span>
-<span id="cb3-22"><a href="#cb3-22"></a><span class="co"># correlation between exposure prevalences </span></span>
-<span id="cb3-23"><a href="#cb3-23"></a><span class="at">corr.p =</span> <span class="fl">0.01</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell longcode">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r longcode number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="co"># set the seed for reproducible results</span></span>
+<span id="cb4-2"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">39569</span>)</span>
+<span id="cb4-3"><a href=""></a></span>
+<span id="cb4-4"><a href=""></a><span class="co"># define the observed 2x2 data</span></span>
+<span id="cb4-5"><a href=""></a>pc <span class="ot">&lt;-</span> <span class="fu">probsens_conf</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">45</span>, <span class="dv">94</span>, <span class="dv">257</span>, <span class="dv">945</span>),</span>
+<span id="cb4-6"><a href=""></a>  <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"D+"</span>, <span class="st">"D-"</span>), <span class="fu">c</span>(<span class="st">"D+"</span>, <span class="st">"D-"</span>)), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb4-7"><a href=""></a></span>
+<span id="cb4-8"><a href=""></a><span class="co"># number of replications</span></span>
+<span id="cb4-9"><a href=""></a>  <span class="at">reps =</span> <span class="dv">5000</span>, </span>
+<span id="cb4-10"><a href=""></a></span>
+<span id="cb4-11"><a href=""></a><span class="co"># bias parameters and distributions</span></span>
+<span id="cb4-12"><a href=""></a></span>
+<span id="cb4-13"><a href=""></a><span class="co"># prevalence of U among exposed</span></span>
+<span id="cb4-14"><a href=""></a><span class="at">prev_exp =</span> <span class="fu">list</span>(<span class="st">"triangular"</span>, <span class="fu">c</span>(.<span class="dv">6</span>, .<span class="dv">8</span>, .<span class="dv">7</span>)),</span>
+<span id="cb4-15"><a href=""></a></span>
+<span id="cb4-16"><a href=""></a><span class="co"># prevalence of U among unexposed</span></span>
+<span id="cb4-17"><a href=""></a><span class="at">prev_nexp =</span> <span class="fu">list</span>(<span class="st">"triangular"</span>, <span class="fu">c</span>(.<span class="dv">4</span>, .<span class="dv">6</span>, .<span class="dv">5</span>)),</span>
+<span id="cb4-18"><a href=""></a></span>
+<span id="cb4-19"><a href=""></a><span class="co"># association of U with outcome</span></span>
+<span id="cb4-20"><a href=""></a><span class="at">risk =</span> <span class="fu">list</span>(<span class="st">"log-normal"</span>, <span class="fu">c</span>(<span class="fl">1.522</span>, <span class="fl">0.216</span>)), </span>
+<span id="cb4-21"><a href=""></a></span>
+<span id="cb4-22"><a href=""></a><span class="co"># correlation between exposure prevalences </span></span>
+<span id="cb4-23"><a href=""></a><span class="at">corr_p =</span> <span class="fl">0.01</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="probability-distributions-for-each-parameter" class="slide level2">
 <h2>Probability distributions for each parameter</h2>
 
-<img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-29-1.png" class="quarto-figure-center r-stretch" width="960"></section>
+<img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-29-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="generates-a-distribution-of-corrected-estimates" class="slide level2">
 <h2>Generates a distribution of corrected estimates</h2>
 
-<img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-30-1.png" class="quarto-figure-center r-stretch" width="960"></section>
+<img data-src="EPIB705-Bias-Analysis-2024_files/figure-revealjs/unnamed-chunk-30-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="bias-corrected-estimates" class="slide level2">
 <h2>Bias-corrected estimates</h2>
 <div class="cell">
 <div class="cell-output-display">
-<table class="table" data-quarto-postprocess="true" style="margin-left: auto; margin-right: auto;">
+<table class="table caption-top" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th"></th>
@@ -2886,24 +2715,22 @@ width: 1500px;
 </tr>
 <tr class="even">
 <td style="text-align: left;">OR:Corrected-systematic error</td>
-<td style="text-align: right;">1.38</td>
+<td style="text-align: right;">1.39</td>
 <td style="text-align: right;">1.17</td>
-<td style="text-align: right;">1.61</td>
+<td style="text-align: right;">1.63</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">OR:Corrected-systematic and random error</td>
-<td style="text-align: right;">1.38</td>
-<td style="text-align: right;">0.90</td>
-<td style="text-align: right;">2.10</td>
+<td style="text-align: right;">1.39</td>
+<td style="text-align: right;">0.96</td>
+<td style="text-align: right;">1.99</td>
 </tr>
 </tbody>
 </table>
-
-
 </div>
 </div>
 <ul>
-<li><p>Using probabilistic analysis gives a similar adjusted OR (1.44) relative to our deterministic bias analysis (1.39), but provides empirical confidence limits.</p></li>
+<li><p>Using probabilistic analysis gives a similar adjusted OR (1.38) relative to our deterministic bias analysis (1.39), but provides empirical confidence limits.</p></li>
 <li><p>Introduction of additional random error via the simulation by choosing a standard normal deviate (<span class="math inline">\(z_{i}\)</span>) for each iteration (<span class="math inline">\(i\)</span>), multiply by <span class="math inline">\(SE\)</span></p></li>
 </ul>
 <div style="text-align: center;">
@@ -2932,7 +2759,11 @@ width: 1500px;
 <h2>Multiple bias analysis example<sup>1</sup></h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="images/johnson-mba-t3.png" class="quarto-figure-center" style="width:100.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/johnson-mba-t3.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <aside><ol class="aside-footnotes"><li id="fn23"><p><span class="citation" data-cites="Johnson:2018aa">Johnson et al. (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span></p></li></ol></aside></section>
@@ -2972,8 +2803,7 @@ width: 1500px;
 <li>Added computing time</li>
 <li>100K simulations on 10K obs = 100m records</li>
 </ul>
-</div>
-</div>
+</div></div>
 </section>
 <section id="basic-workflow-for-record-level-analysis24" class="slide level2">
 <h2>Basic workflow for record-level analysis<sup>1</sup></h2>
@@ -2982,7 +2812,11 @@ width: 1500px;
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="images/rqba-flow.png" class="quarto-figure-center" style="width:80.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/rqba-flow.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <aside><ol class="aside-footnotes"><li id="fn24"><p>See <span class="citation" data-cites="Fox:2022aa">Fox et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> Chapter 9.</p></li></ol></aside></section>
@@ -3018,25 +2852,36 @@ width: 1500px;
 <h3 id="from">From</h3>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="images/rqba-obs.png" class="quarto-figure-center" style="width:100.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/rqba-obs.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 </div><div class="column" style="width:30%;">
 <h3 id="to">To:</h3>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="images/rqba-collapsed.png" class="quarto-figure-center" style="width:100.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/rqba-collapsed.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
 </div>
 </div>
 </div>
-</div>
+</div></div>
 </section>
 <section id="section-16" class="slide level2">
 <h2></h2>
 <p>Perform simple QBA:<sup>1</sup></p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="images/rqba-simple.png" class="quarto-figure-center" style="width:65.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/rqba-simple.png" class="quarto-figure quarto-figure-center" style="width:65.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <aside><ol class="aside-footnotes"><li id="fn25"><p>Note that the values in the table are in the first observation row.</p></li></ol></aside></section>
@@ -3045,12 +2890,20 @@ width: 1500px;
 <p>Generate predicted probabilities for the unmeasured confounder:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="images/rqba-table-probs.png" class="quarto-figure-center" style="width:60.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/rqba-table-probs.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="images/rqba-sample-probs.png" class="quarto-figure-center" style="width:80.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/rqba-sample-probs.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -3062,7 +2915,7 @@ width: 1500px;
 <li>If the trial returns a 1, set <span class="math inline">\(c=1\)</span>, if not, then <span class="math inline">\(c=0\)</span>, i.e., does not have the confounder.</li>
 </ul>
 
-<img data-src="images/rqba-predict-c.png" class="quarto-figure-center r-stretch" style="width:80.0%"></section>
+<img data-src="images/rqba-predict-c.png" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%"></section>
 <section id="section-19" class="slide level2">
 <h2></h2>
 <ul>
@@ -3070,12 +2923,20 @@ width: 1500px;
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="images/rqba-rr-sims.png" class="quarto-figure-center" style="width:50.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/rqba-rr-sims.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img data-src="images/rqba-table-results.png" class="quarto-figure-center" style="width:60.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/rqba-table-results.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -3104,30 +2965,23 @@ width: 1500px;
 </div><div class="column" style="width:70%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<<<<<<< HEAD
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="images/petersen-graph.png" style="width:65.0%"></p>
+<p><img data-src="images/petersen-graph.png" class="quarto-figure quarto-figure-center" style="width:65.0%"></p>
 </figure>
 </div>
-=======
-<p><img data-src="images/petersen-graph.png" class="quarto-figure-center" style="width:75.0%"></p>
->>>>>>> a4873200fea6e4bafe826a464cb51bac30d49fb9
 </div>
 </div>
-</div>
-</div>
+</div></div>
 <aside><ol class="aside-footnotes"><li id="fn26"><p><span class="citation" data-cites="Petersen:2021aa">Petersen et al. (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span></p></li></ol></aside></section>
 <section id="best-practices" class="slide level2">
 <h2>Best practices</h2>
 <p>Try to get through all of this:</p>
 
-<img data-src="images/fox-book-2021.png" class="quarto-figure-center r-stretch" style="width:60.0%"></section>
+<img data-src="images/fox-book-2021.png" class="quarto-figure quarto-figure-center r-stretch" style="width:60.0%"></section>
 <section id="references" class="slide level2 smaller scrollable">
 <h2>References</h2>
-<div class="footer footer-default">
 
-</div>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-Arah:2008aa" class="csl-entry" role="listitem">
 Arah OA, Chiba Y, Greenland S. <a href="https://doi.org/10.1016/j.annepidem.2008.04.003">Bias formulas for external adjustment and sensitivity analysis of unmeasured confounders</a>. Ann Epidemiol. 2008 Aug;18(8):637–46.
@@ -3187,7 +3041,11 @@ Wijeysundera DN, Austin PC, Beattie WS, Hux JE, Laupacis A. <a href="https://doi
 </section>
 
     </div>
-  </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
   <script src="EPIB705-Bias-Analysis-2024_files/libs/revealjs/dist/reveal.js"></script>
@@ -3216,7 +3074,8 @@ Wijeysundera DN, Austin PC, Beattie WS, Hux JE, Laupacis A. <a href="https://doi
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -3435,40 +3294,55 @@ Wijeysundera DN, Austin PC, Beattie WS, Hux JE, Laupacis A. <a href="https://doi
     </script>
 
     <script id="quarto-html-after-body" type="application/javascript">
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-      const toggleBodyColorMode = (bsSheetEl) => {
-        const mode = bsSheetEl.getAttribute("data-mode");
-        const bodyEl = window.document.querySelector("body");
-        if (mode === "dark") {
-          bodyEl.classList.add("quarto-dark");
-          bodyEl.classList.remove("quarto-light");
-        } else {
-          bodyEl.classList.add("quarto-light");
-          bodyEl.classList.remove("quarto-dark");
-        }
-      }
-      const toggleBodyColorPrimary = () => {
-        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-        if (bsSheetEl) {
-          toggleBodyColorMode(bsSheetEl);
-        }
-      }
-      toggleBodyColorPrimary();  
-      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-      tabsets.forEach(function(tabset) {
-        const tabby = new Tabby('#' + tabset.id);
-      });
-      const isCodeAnnotation = (el) => {
-        for (const clz of el.classList) {
-          if (clz.startsWith('code-annotation-')) {                     
-            return true;
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
           }
+          return false;
         }
-        return false;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
           for (const childEl of codeEl.children) {
             if (isCodeAnnotation(childEl)) {
               childEl.remove();
@@ -3476,118 +3350,117 @@ Wijeysundera DN, Austin PC, Beattie WS, Hux JE, Laupacis A. <a href="https://doi
           }
           return codeEl.innerText;
         }
-      });
-      clipboard.on('success', function(e) {
-        // button target
-        const button = e.trigger;
-        // don't keep focus
-        button.blur();
-        // flash "checked"
-        button.classList.add('code-copy-button-checked');
-        var currentTitle = button.getAttribute("title");
-        button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
-        setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
-          }
-          button.setAttribute("title", currentTitle);
-          button.classList.remove('code-copy-button-checked');
-        }, 1000);
-        // clear code selection
-        e.clearSelection();
-      });
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-        const config = {
-          allowHTML: true,
-          maxWidth: 500,
-          delay: 100,
-          arrow: false,
-          appendTo: function(el) {
-              return el.closest('section.slide') || el.parentElement;
-          },
-          interactive: true,
-          interactiveBorder: 10,
-          theme: 'light-border',
-          placement: 'bottom-start',
-        };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
-          config['offset'] = [0,0];
-          config['maxWidth'] = 700;
-        window.tippy(el, config); 
-      }
-      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-      for (var i=0; i<noterefs.length; i++) {
-        const ref = noterefs[i];
-        tippyHover(ref, function() {
-          // use id or data attribute instead here
-          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-          try { href = new URL(href).hash; } catch {}
-          const id = href.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          return note.innerHTML;
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
         });
-      }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
-          }
-        } else {
-          return undefined;
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
         }
-      };
-      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-      for (var i=0; i<bibliorefs.length; i++) {
-        const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
               }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
           });
         }
-      }
-    });
-    </script>
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
     
 
 </body></html>
