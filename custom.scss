@@ -17,6 +17,45 @@ $theme-gray: #cccccc;
   color: $theme-gray;
 }
 
+/* tables */
+
+/* The RevealJS theme sets `border-bottom: 1px solid` (no color) on table
+   cells, so borders inherit currentColor and turn red/blue when cell text
+   is colored. Scoping under .reveal beats the theme's specificity. */
+.reveal .table td, .reveal .table th {
+  border-color: black;
+}
+
+/* Remove borders between data rows — only keep structural borders. */
+.reveal .table tbody td {
+  border-bottom: none;
+}
+
+/* Restore a border after the last data row. */
+.reveal .table tbody tr:last-child td {
+  border-bottom: 1px solid black;
+}
+
+/* Group header row: first remove all borders (the RevealJS theme adds
+   border-bottom to all th), then restore only under the spanning headers.
+   Positions 2, 4, 6 are the group labels; 1 (row label) and 3, 5 (spacers)
+   get none. Adjust nth-child values if the number of groups changes. */
+.reveal .table thead tr:first-child th {
+  border-bottom: none;
+}
+.reveal .table thead tr:first-child th:nth-child(2),
+.reveal .table thead tr:first-child th:nth-child(4),
+.reveal .table thead tr:first-child th:nth-child(6) {
+  border-bottom: 1px solid black;
+}
+
+/* Column-name row (booktabs "header rule"): solid black line separating
+   column headers from data. Tinytable's inline CSS sets a faint gray here;
+   this higher-specificity rule overrides it. */
+.reveal .table thead tr:last-child th {
+  border-bottom: 1px solid black;
+}
+
 /* alignment */
 
 .h2center h2 {

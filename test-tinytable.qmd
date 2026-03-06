@@ -1,0 +1,101 @@
+---
+title: "tinytable rendering test"
+subtitle: "EPIB 705"
+author: "Sam Harper"
+date: 2026-03-04
+date-format: iso
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    width: 1600
+    height: 900
+    slide-number: true
+    html-math-method: mathjax
+editor: source
+---
+
+```{r setup, echo=FALSE, include=FALSE}
+library(here)
+library(tinytable)
+```
+
+## Test 1: Colored math via `\color{}` inside strings {.smaller}
+
+All cells are math; color applied *inside* the `\(...\)` string.
+
+```{r echo=FALSE}
+d1 <- data.frame(
+  " "     = c("\\(D=1\\)", "\\(D=0\\)", "Total"),
+  "X=1"   = c("\\({\\color{blue}{A_{11}}}\\)",        "\\({\\color{blue}{B_{11}}}\\)",        "\\(N_{11}\\)"),
+  "X=0"   = c("\\({\\color{red}{A_{01}}}\\)",          "\\({\\color{red}{B_{01}}}\\)",         "\\(N_{01}\\)"),
+  "Total" = c("\\(M_{11}\\)",                          "\\(M_{01}\\)",                         "\\(N_{+1}\\)"),
+  "  "    = c("", "", ""),
+  "X=1"   = c("\\({\\color{blue}{A_{1+}-A_{11}}}\\)", "\\({\\color{blue}{B_{1+}-B_{11}}}\\)", "\\(N_{1+}-N_{11}\\)"),
+  "X=0"   = c("\\({\\color{red}{A_{0+}-A_{01}}}\\)",  "\\({\\color{red}{B_{0+}-B_{01}}}\\)",  "\\(N_{0+}-N_{01}\\)"),
+  "Total" = c("\\(M_{A+}-M_{11}\\)",                  "\\(M_{B+}-M_{01}\\)",                  "\\(N_{++}-N_{+1}\\)"),
+  "   "   = c("", "", ""),
+  "X=1"   = c("\\(A_{1+}\\)", "\\(B_{1+}\\)", "\\(N_{1+}\\)"),
+  "X=0"   = c("\\(A_{0+}\\)", "\\(B_{0+}\\)", "\\(N_{0+}\\)"),
+  "Total" = c("\\(M_{A+}\\)", "\\(M_{B+}\\)", "\\(N_{++}\\)"),
+  check.names = FALSE
+)
+
+tt(d1, escape = FALSE) |>
+  group_tt(j = list("Z=1 Smokers" = 2:4, "Z=0 Non-smokers" = 6:8, "Total" = 10:12))
+```
+
+## Test 2: Colored numbers via `style_tt()` {.smaller}
+
+Colored cells are plain numbers; other cells contain math symbols.
+
+```{r echo=FALSE}
+d2 <- data.frame(
+  " "     = c("\\(D=1\\)", "\\(D=0\\)", "Total"),
+  "X=1"   = c("41",              "180",             "\\(N_{11}\\)"),
+  "X=0"   = c("77",              "473",             "\\(N_{01}\\)"),
+  "Total" = c("\\(M_{11}\\)",    "\\(M_{01}\\)",    "\\(N_{+1}\\)"),
+  "  "    = c("", "", ""),
+  "X=1"   = c("\\(45-A_{11}\\)", "\\(257-B_{11}\\)","\\(302-N_{11}\\)"),
+  "X=0"   = c("\\(94-A_{01}\\)", "\\(945-B_{01}\\)","\\(1039-N_{01}\\)"),
+  "Total" = c("\\(139-M_{11}\\)","\\(1202-M_{01}\\)","\\(1341-N_{+1}\\)"),
+  "   "   = c("", "", ""),
+  "X=1"   = c("45",  "257",  "302"),
+  "X=0"   = c("94",  "945",  "1039"),
+  "Total" = c("139", "1202", "1341"),
+  check.names = FALSE
+)
+
+tt(d2, escape = FALSE,
+   notes = "* Row and column totals in Z strata may not sum due to rounding.") |>
+  group_tt(j = list("Z=1 Smokers" = 2:4, "Z=0 Non-smokers" = 6:8, "Total" = 10:12)) |>
+  style_tt(i = 1, j = 2, color = "red") |>
+  style_tt(i = 1, j = 3, color = "blue") |>
+  style_tt(i = 2, j = 2, color = "red") |>
+  style_tt(i = 2, j = 3, color = "blue")
+```
+
+## Test 3: Fully filled table (no math, plain numbers) {.smaller}
+
+Baseline check — no math, just numbers.
+
+```{r echo=FALSE}
+d3 <- data.frame(
+  " "     = c("\\(D=1\\)", "\\(D=0\\)", "Total*"),
+  "X=1"   = c("41",  "180", "221"),
+  "X=0"   = c("78",  "473", "551"),
+  "Total" = c("120", "652", "772"),
+  "  "    = c("", "", ""),
+  "X=1"   = c("4",   "77",  "81"),
+  "X=0"   = c("16",  "473", "488"),
+  "Total" = c("19",  "550", "569"),
+  "   "   = c("", "", ""),
+  "X=1"   = c("45",  "257", "302"),
+  "X=0"   = c("94",  "945", "1039"),
+  "Total" = c("139", "1202","1341"),
+  check.names = FALSE
+)
+
+tt(d3, escape = FALSE,
+   notes = "* Row and column totals in Z strata may not sum due to rounding.") |>
+  group_tt(j = list("Z=1 Smokers" = 2:4, "Z=0 Non-smokers" = 6:8, "Total" = 10:12))
+```
