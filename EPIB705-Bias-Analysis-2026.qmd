@@ -343,7 +343,7 @@ tt(d_layout2, escape = FALSE) |>
 
 $$P_{Z1}=N_{11}/N_{1+}\quad \text{and} \quad P_{Z0}=N_{01}/N_{0+}$$
 
-## What do we need? (1) Distribution of $Z$ by exposure {.smaller}
+## What do we need? (1) Distribution of $Z$ by exposure
 
 ```{r, engine='tikz'}
 #| fig-align: center
@@ -368,10 +368,11 @@ tt(d_layout2, escape = FALSE) |>
 
 - However, $A_{11}$ and $A_{01}$ are still unknown, but note that they can be estimated if we specify a plausible value for the association between smoking $(Z)$ and disease $(D)$.
 
-## What do we need? (2) Effect of $Z$ on $D$ {.smaller}
+## What do we need? (2) Effect of $Z$ on $D$
 
 ```{r, engine='tikz'}
 #| fig-align: center
+#| out-width: 50%
 \begin{tikzpicture}[shorten > = 1pt, line width=1pt]
 \tikzstyle{every node} = [rectangle, fill=white, draw=none]
 \node (z) at  (0,0) [align=center] {Z};
@@ -400,7 +401,9 @@ d_layout_col <- data.frame(
   check.names = FALSE
 )
 tt(d_layout_col, escape = FALSE) |>
-  group_tt(j = list("Z=1 Smokers" = 2:4, "Z=0 Non-smokers" = 6:8, "Total" = 10:12))
+  group_tt(j = list("Z=1 Smokers" = 2:4, 
+    "Z=0 Non-smokers" = 6:8, "Total" = 10:12)) |>
+  style_tt(j = 1:12, fontsize = 0.9)
 ```
 
 - Based on the table above, the confounder-disease OR within strata of $X$ $\left(OR_{DZX}\right)$ can be calculated as:
@@ -421,7 +424,7 @@ $$A_{11}=OR_{DZ1}A_{1+}B_{11}/(OR_{DZ1}B_{11}+B_{1+}-B_{11})$$
 
 $$A_{01}=OR_{DZ0}A_{0+}B_{01}/(OR_{DZ0}B_{01}+B_{0+}-B_{01})$$
 
-## Worked example {.smaller}
+## Worked example
 
 - Suppose external studies show a 70% prevalence of smoking among those exposed to resins and 50% among those unexposed. We can estimate $B_{11}$ and $B_{01}$ as:
 
@@ -455,10 +458,11 @@ tt(d_worked, escape = FALSE) |>
   style_tt(i = 2, j = 2,  color = "red")  |>
   style_tt(i = 2, j = 3,  color = "blue") |>
   style_tt(i = 2, j = 10, color = "red")  |>
-  style_tt(i = 2, j = 11, color = "blue")
+  style_tt(i = 2, j = 11, color = "blue") |>
+  style_tt(j = 1:12, fontsize = 0.9)
 ```
 
-## {.smaller}
+##
 
 ```{r echo=FALSE}
 d_filled1 <- data.frame(
@@ -479,7 +483,8 @@ d_filled1 <- data.frame(
 tt(d_filled1, escape = FALSE) |>
   group_tt(j = list("Z=1 Smokers" = 2:4, "Z=0 Non-smokers" = 6:8, "Total" = 10:12)) |>
   style_tt(i = 1, j = 2, color = "red")  |>
-  style_tt(i = 1, j = 3, color = "blue")
+  style_tt(i = 1, j = 3, color = "blue") |>
+  style_tt(j = 1:12, fontsize=0.9)
 ```
 
 - Plugging in the estimates of $B_{11}$ and $B_{01}$ along with a plausible estimate of the confounder-disease association $(OR_{DZ1}=OR_{DZ0}=5)$, assumed[^9] to be homogeneous across strata of resin exposure, now allow us to calculate $A_{11}$ and $A_{01}$:
@@ -492,7 +497,7 @@ $A_{11}=\frac{OR_{DZ1}A_{1+}B_{11}}{OR_{DZ1}B_{11}+B_{1+}-B_{11}}=\frac{5(45)(18
 $A_{01}=\frac{OR_{DZ0}A_{0+}B_{01}}{OR_{DZ0}B_{01}+B_{0+}-B_{01}}=\frac{5(94)(473)}{5(473)+945-473}\approx{\color{blue}77}$
 :::
 
-## {.smaller}
+##
 
 We can now fill out the table and calculate an $OR$ standardized for smoking:
 
@@ -555,7 +560,7 @@ where $P_{11}=P(Z=1|X=1)$, $P_{10}=P(Z=1|X=0)$, and $OR_{DZ0}$ is the $Z\rightar
 
 $Bias(RR)=\dfrac{RR_{DX+}}{RR_{DXZ(E)}}=\dfrac{RR_{DZ0}P_{11}+1-P_{11}}{RR_{DZ0}P_{10}+1-P_{10}}=\dfrac{4.3(.7)+1-.7}{4.3(.5)+1-.5}=1.25$
 
-## What about the risk difference?[^11] {.smaller}
+## What about the risk difference?[^11]
 
 [^11]: These data are derived from a case-control study, so this is just for illustration.
 
@@ -564,7 +569,8 @@ $Bias(RR)=\dfrac{RR_{DX+}}{RR_{DXZ(E)}}=\dfrac{RR_{DZ0}P_{11}+1-P_{11}}{RR_{DZ0}
 ```{r echo=FALSE}
 tt(d_layout2, escape = FALSE) |>
   group_tt(j = list("Z=1 Smokers" = 2:4, "Z=0 Non-smokers" = 6:8, "Total" = 10:12)) |>
-  style_tt(i = 1:2, j = 2:3, bold = TRUE)
+  style_tt(i = 1:2, j = 2:3, bold = TRUE) |>
+  style_tt(j = 1:12, fontsize=0.9)
 ```
 
 . . .
