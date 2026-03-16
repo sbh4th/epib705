@@ -550,184 +550,7 @@ $Bias(OR)=\dfrac{OR_{DX+}}{OR_{DXZ(E)}}=\dfrac{OR_{DZ0}P_{11}+1-P_{11}}{OR_{DZ0}
 
 where $P_{11}=P(Z=1|X=1)$, $P_{10}=P(Z=1|X=0)$, and $OR_{DZ0}$ is the $Z\rightarrow D$ association in the unexposed.
 
-## Extensions to other effect measures
-
-- The logic for adjusting the OR above applies equally to other effect measures ($RD$, $RR$), with minor alterations.
-
-- For both $RD$ and $RR$ you need to specify the difference in the prevalence of $Z$ by exposure
-
-- For $RR$ need to specify the association between $Z$ and $D$ on the $RR$ scale.
-
-. . .
-
-- In our example above, we specified $OR=5$ for $Z\rightarrow D$ association, roughly $RR=4.32$.
-
-- The bias in the crude $RR$ is therefore:
-
-$Bias(RR)=\dfrac{RR_{DX+}}{RR_{DXZ(E)}}=\dfrac{RR_{DZ0}P_{11}+1-P_{11}}{RR_{DZ0}P_{10}+1-P_{10}}=\dfrac{4.3(.7)+1-.7}{4.3(.5)+1-.5}=1.25$
-
-## What about the risk difference?[^11]
-
-[^11]: These data are derived from a case-control study, so this is just for illustration.
-
-- Still need the prevalence of the unmeasured confounder by exposure, but now we need the risk difference $RD_{DZ}$ for the confounder-disease association.
-
-```{r echo=FALSE}
-tt(d_layout2, escape = FALSE) |>
-  group_tt(j = list("Z=1 Smokers" = 2:4, "Z=0 Non-smokers" = 6:8, "Total" = 10:12)) |>
-  style_tt(i = 1:2, j = 2:3, bold = TRUE) |>
-  style_tt(j = 1:12, fontsize=0.9)
-```
-
-. . .
-
-- The crude association is $RD_{DX+}=(45/302)-(94/1039)=0.06$
-
-- Difference for $Z$ by exposure (70% $X=1$, 50% $X=0$)
-
-- [Choose]{style="color: red"} $RD$ for $Z\rightarrow D$ among the unexposed as $RD_{DZ0}=0.10$.
-
-##
-
-Revised table for RD:
-
-```{r echo=FALSE}
-d_rd_full <- data.frame(
-  " "     = c("\\(D=1\\)", "\\(D=0\\)", "Total*"),
-  "X=1"   = c("38",  "174", "211"),
-  "X=0"   = c("73",  "447", "520"),
-  "Total" = c("111", "620", "731"),
-  "  "    = c("", "", ""),
-  "X=1"   = c("7",   "83",  "91"),
-  "X=0"   = c("21",  "499", "520"),
-  "Total" = c("28",  "582", "610"),
-  "   "   = c("", "", ""),
-  "X=1"   = c("45",  "257", "302"),
-  "X=0"   = c("94",  "945", "1039"),
-  "Total" = c("139", "1202","1341"),
-  check.names = FALSE
-)
-tt(d_rd_full, escape = FALSE,
-   notes = "* Row and column totals in Z strata may not sum due to rounding.") |>
-  group_tt(j = list("Z=1 Smokers" = 2:4, 
-    "Z=0 Non-smokers" = 6:8, "Total" = 10:12)) |>
-  style_tt(j = 1:12, fontsize=0.9)
-```
-
-. . .
-
-- Standardize to exposed, we get:
-
-::: {style="text-align: center;"}
-$RD_{DXZ(E)}=\sum_{z}w_{z}RD_{DXZ}/\sum_{z}w_{z}=0.04$
-:::
-
-- Bias is $RD_{DX+}-RD_{DXZ(E)}=0.06-0.04=0.02$
-
-- Arah et al. show how to calculate simply as: $Bias=RD_{DX+}-RD_{DXZ(E)}=RD_{DZ0}\left(P_{Z1}-P_{Z0}\right)=0.10\left(0.7-0.5\right)=0.02$
-
-## General formulas based on counterfactual notation
-
-- What to do for more complex, regression-based models?[^12]
-
-- VanderWeele and Arah (2011) provided some general formulas.
-
-- The average causal effect among those exposed, which **would** be adjusted for both measured $X$s **and** unmeasured $U$ is:
-
-$$E\left(Y_{a1}|a_{1}\right)-E\left(Y_{a0}|a_{1}\right)$$
-
-[^12]: Far more likely what you'll be using in practice. See @Vanderweele:2011aa. More on this later.
-
-$$=\sum_{x}\sum_{u}\left\{ E(Y|a_{1},x,u)-E(Y|a_{0},x,u)\right\} P(u|x,a_{1})P(x|a_{1})$$
-
-## General formulas for unmeasured confounding
-
-- But, without adjustment for $U$ we get an $X$-adjusted effect of:
-
-$$\sum_{x}\left\{ E(Y|a_{1},x)-E(Y|a_{0},x)\right\} P(x|a_{1})$$
-
-- So, the difference between these two estimates, $d_{a1}$, is
-
-$$d_{a1}=\sum_{x}\left\{ E(Y|a_{1},x)-E(Y|a_{0},x)\right\} P(x|a_{1})-\left\{ E\left(Y_{a1}|a_{1}\right)-E\left(Y_{a0}|a_{1}\right)\right\}$$
-
-## General formulas for unmeasured confounding
-
-- The bias is (still) a function of the prevalence of the unknown confounder and its effect on the outcome (reference level=$u'$):
-
-$$d_{a1}=\sum_{x}\sum_{u}\left\{ E(Y|a_{0},x,u)-E(Y|a_{0},x,u')\right\} \left\{ P(u|a_{1},x)-P\left(u|a_{0},x\right)\right\} P\left(x|a_{1}\right)$$
-
-. . .
-
-We thus need to specify:
-
-- The $U\rightarrow Y$ relationship among the unexposed:
-
-$E(Y|a_{0},x,u)-E(Y|a_{0},x,u')$
-
-- Distribution of $U$ among exposed and unexposed *within strata of X*:
-
-$\left\{ P(u|a_{1},x)-P(u|a_{0},x)\right\} P(x|a_{1})$
-
-## Complications for the general formula
-
-- These formulas require a lot of knowledge.
-
-    - Association between $U$ and $Y$ [at each level of measured confounders]{style="color: red"} $X$.
-
-    - Association between $U$ and $A$ [at each level of measured confounders]{style="color: red"} $X$.
-
-. . .
-
-- How many measured confounders do you have? 2? 10?
-
-- Even for 2 age groups and gender, for example, you would need to specify the $U\rightarrow Y$ and $U\rightarrow A$ relations for:
-
-    - younger women, older women
-
-    - younger men, older men
-
-- Is this information available? Can you make educated guesses?
-
-## General formulas for unmeasured confounding
-
-Simplifying assumptions could be useful. Assuming no heterogeneity across $X$, we could posit:
-
-- constant prevalence difference between exposed and unexposed:
-
-$$\delta=P(U=1|a_{1},x)-P(U=1|a_{0},x)$$
-
-- constant RD for exposure to U across strata of exposure and $X$:
-
-$$\gamma=E(Y|a,x,U=1)-E(Y|a,x,U=0)$$
-
-Then the extent of bias is the product of these two terms:
-
-$$d_{a1}=\gamma\delta$$
-
-## External adjustment for unmeasured confounding
-
-Assumptions:[^13]
-
-[^13]: See @Rosenbaum:1983aa for more details. Similar in some ways to the 'e-value' concept from @VanderWeele:2017aa.
-
-- Differences in the distribution of $U$ by exposure similar across all strata of measured $X$s.
-
-- Effect of $U$ on $Y$ similar across all strata of measured $X$s.
-
-```{r echo=FALSE}
-d_rr <- data.frame(
-  " " = c("Adjusted estimate (0.67--0.36)",
-          "\\(\\delta=P(U|a_1)-P(U|a_0)\\) all strata",
-          "\\(\\gamma=E(Y|U=1)-E(Y|U=0)\\) all strata",
-          "Bias\\((\\gamma\\delta)\\)",
-          "Bias-corrected effect"),
-  "Enough to nullify" = c("0.31 (0.17, 0.45)", "0.6",   "0.517",  "0.310", "0.0 (−0.14, 0.14)"),
-  "More plausible"    = c("0.31 (0.17, 0.45)", "0.3",   "0.5217", "0.155", "0.16 (0.01, 0.30)"),
-  check.names = FALSE
-)
-tt(d_rr, escape = FALSE) |>
-  group_tt(j = list("Rosenbaum & Rubin (1983)" = 2:3))
-```
+[→ See appendix for extensions to RR, RD, and general formulas](#app-extensions)
 
 ## Break! `r emo::ji("coffee")` {.h2center}
 
@@ -1834,3 +1657,187 @@ knitr::include_graphics(here("images", "fox-book-2021.png"))
 ```
 
 ## References
+
+::: {#refs}
+:::
+
+# Appendix {visibility="uncounted"}
+
+## Unmeasured confounding for other effect measures {#app-extensions visibility="uncounted"}
+
+[← Back to main deck](#simplifying-formula)
+
+- The logic for adjusting the OR above applies equally to other effect measures ($RD$, $RR$), with minor alterations.
+
+- For both $RD$ and $RR$ you need to specify the difference in the prevalence of $Z$ by exposure
+
+- For $RR$ need to specify the association between $Z$ and $D$ on the $RR$ scale.
+
+- In our example above, we specified $OR=5$ for $Z\rightarrow D$ association, roughly $RR=4.32$.
+
+- The bias in the crude $RR$ is therefore:
+
+$Bias(RR)=\dfrac{RR_{DX+}}{RR_{DXZ(E)}}=\dfrac{RR_{DZ0}P_{11}+1-P_{11}}{RR_{DZ0}P_{10}+1-P_{10}}=\dfrac{4.3(.7)+1-.7}{4.3(.5)+1-.5}=1.25$
+
+## What about the risk difference?[^11] {visibility="uncounted"}
+
+[^11]: These data are derived from a case-control study, so this is just for illustration.
+
+- Still need the prevalence of the unmeasured confounder by exposure, but now we need the risk difference $RD_{DZ}$ for the confounder-disease association.
+
+```{r echo=FALSE}
+tt(d_layout2, escape = FALSE) |>
+  group_tt(j = list("Z=1 Smokers" = 2:4, "Z=0 Non-smokers" = 6:8, "Total" = 10:12)) |>
+  style_tt(i = 1:2, j = 2:3, bold = TRUE) |>
+  style_tt(j = 1:12, fontsize=0.9)
+```
+
+. . .
+
+- The crude association is $RD_{DX+}=(45/302)-(94/1039)=0.06$
+
+- Difference for $Z$ by exposure (70% $X=1$, 50% $X=0$)
+
+- [Choose]{style="color: red"} $RD$ for $Z\rightarrow D$ among the unexposed as $RD_{DZ0}=0.10$.
+
+## {visibility="uncounted"}
+
+Revised table for RD:
+
+```{r echo=FALSE}
+d_rd_full <- data.frame(
+  " "     = c("\\(D=1\\)", "\\(D=0\\)", "Total*"),
+  "X=1"   = c("38",  "174", "211"),
+  "X=0"   = c("73",  "447", "520"),
+  "Total" = c("111", "620", "731"),
+  "  "    = c("", "", ""),
+  "X=1"   = c("7",   "83",  "91"),
+  "X=0"   = c("21",  "499", "520"),
+  "Total" = c("28",  "582", "610"),
+  "   "   = c("", "", ""),
+  "X=1"   = c("45",  "257", "302"),
+  "X=0"   = c("94",  "945", "1039"),
+  "Total" = c("139", "1202","1341"),
+  check.names = FALSE
+)
+tt(d_rd_full, escape = FALSE,
+   notes = "* Row and column totals in Z strata may not sum due to rounding.") |>
+  group_tt(j = list("Z=1 Smokers" = 2:4,
+    "Z=0 Non-smokers" = 6:8, "Total" = 10:12)) |>
+  style_tt(j = 1:12, fontsize=0.9)
+```
+
+. . .
+
+- Standardize to exposed, we get:
+
+::: {style="text-align: center;"}
+$RD_{DXZ(E)}=\sum_{z}w_{z}RD_{DXZ}/\sum_{z}w_{z}=0.04$
+:::
+
+- Bias is $RD_{DX+}-RD_{DXZ(E)}=0.06-0.04=0.02$
+
+- Arah et al. show how to calculate simply as: $Bias=RD_{DX+}-RD_{DXZ(E)}=RD_{DZ0}\left(P_{Z1}-P_{Z0}\right)=0.10\left(0.7-0.5\right)=0.02$
+
+## General formulas based on counterfactual notation {visibility="uncounted"}
+
+- What to do for more complex, regression-based models?[^12]
+
+- VanderWeele and Arah (2011) provided some general formulas.
+
+- The average causal effect among those exposed, which **would** be adjusted for both measured $X$s **and** unmeasured $U$ is:
+
+$$E\left(Y_{a1}|a_{1}\right)-E\left(Y_{a0}|a_{1}\right)$$
+
+[^12]: Far more likely what you'll be using in practice. See @Vanderweele:2011aa. More on this later.
+
+$$=\sum_{x}\sum_{u}\left\{ E(Y|a_{1},x,u)-E(Y|a_{0},x,u)\right\} P(u|x,a_{1})P(x|a_{1})$$
+
+## General formulas for unmeasured confounding {visibility="uncounted"}
+
+- But, without adjustment for $U$ we get an $X$-adjusted effect of:
+
+$$\sum_{x}\left\{ E(Y|a_{1},x)-E(Y|a_{0},x)\right\} P(x|a_{1})$$
+
+- So, the difference between these two estimates, $d_{a1}$, is
+
+$$d_{a1}=\sum_{x}\left\{ E(Y|a_{1},x)-E(Y|a_{0},x)\right\} P(x|a_{1})-\left\{ E\left(Y_{a1}|a_{1}\right)-E\left(Y_{a0}|a_{1}\right)\right\}$$
+
+## General formulas for unmeasured confounding {visibility="uncounted"}
+
+- The bias is (still) a function of the prevalence of the unknown confounder and its effect on the outcome (reference level=$u'$):
+
+$$d_{a1}=\sum_{x}\sum_{u}\left\{ E(Y|a_{0},x,u)-E(Y|a_{0},x,u')\right\} \left\{ P(u|a_{1},x)-P\left(u|a_{0},x\right)\right\} P\left(x|a_{1}\right)$$
+
+. . .
+
+We thus need to specify:
+
+- The $U\rightarrow Y$ relationship among the unexposed:
+
+$E(Y|a_{0},x,u)-E(Y|a_{0},x,u')$
+
+- Distribution of $U$ among exposed and unexposed *within strata of X*:
+
+$\left\{ P(u|a_{1},x)-P(u|a_{0},x)\right\} P(x|a_{1})$
+
+## Complications for the general formula {visibility="uncounted"}
+
+- These formulas require a lot of knowledge.
+
+    - Association between $U$ and $Y$ [at each level of measured confounders]{style="color: red"} $X$.
+
+    - Association between $U$ and $A$ [at each level of measured confounders]{style="color: red"} $X$.
+
+. . .
+
+- How many measured confounders do you have? 2? 10?
+
+- Even for 2 age groups and gender, for example, you would need to specify the $U\rightarrow Y$ and $U\rightarrow A$ relations for:
+
+    - younger women, older women
+
+    - younger men, older men
+
+- Is this information available? Can you make educated guesses?
+
+## General formulas for unmeasured confounding {visibility="uncounted"}
+
+Simplifying assumptions could be useful. Assuming no heterogeneity across $X$, we could posit:
+
+- constant prevalence difference between exposed and unexposed:
+
+$$\delta=P(U=1|a_{1},x)-P(U=1|a_{0},x)$$
+
+- constant RD for exposure to U across strata of exposure and $X$:
+
+$$\gamma=E(Y|a,x,U=1)-E(Y|a,x,U=0)$$
+
+Then the extent of bias is the product of these two terms:
+
+$$d_{a1}=\gamma\delta$$
+
+## External adjustment for unmeasured confounding {visibility="uncounted"}
+
+Assumptions:[^13]
+
+[^13]: See @Rosenbaum:1983aa for more details. Similar in some ways to the 'e-value' concept from @VanderWeele:2017aa.
+
+- Differences in the distribution of $U$ by exposure similar across all strata of measured $X$s.
+
+- Effect of $U$ on $Y$ similar across all strata of measured $X$s.
+
+```{r echo=FALSE}
+d_rr <- data.frame(
+  " " = c("Adjusted estimate (0.67--0.36)",
+          "\\(\\delta=P(U|a_1)-P(U|a_0)\\) all strata",
+          "\\(\\gamma=E(Y|U=1)-E(Y|U=0)\\) all strata",
+          "Bias\\((\\gamma\\delta)\\)",
+          "Bias-corrected effect"),
+  "Enough to nullify" = c("0.31 (0.17, 0.45)", "0.6",   "0.517",  "0.310", "0.0 (−0.14, 0.14)"),
+  "More plausible"    = c("0.31 (0.17, 0.45)", "0.3",   "0.5217", "0.155", "0.16 (0.01, 0.30)"),
+  check.names = FALSE
+)
+tt(d_rr, escape = FALSE) |>
+  group_tt(j = list("Rosenbaum & Rubin (1983)" = 2:3))
+```
