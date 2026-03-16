@@ -43,4 +43,39 @@
 \end{tabular}
 ```
 
-- This is a huge pain and I hope there is some way to make this easier because it is really a pain to write all of that code to make a table and to update it. 
+- This is a huge pain and I hope there is some way to make this easier because it is really a pain to write all of that code to make a table and to update it.
+
+---
+
+## Table Sizing and Font Control
+
+- When a `tinytable` (`tt()`) table is too wide or tall to fit comfortably on a slide, **do not** add `{.smaller}` to the slide heading. That class shrinks *all* text on the slide — headings, bullet points, and equations — making the presentation harder to read.
+- Instead, shrink only the table font by passing `fontsize` to `style_tt()`. A value of `0.9` (i.e., 90% of the default font size) is usually sufficient for large tables:
+
+```r
+tt(my_data, escape = FALSE) |>
+  group_tt(j = list("Group A" = 2:4, "Group B" = 6:8)) |>
+  style_tt(j = 1:8, fontsize = 0.9)
+```
+
+- Apply `fontsize` to all columns (`j = 1:ncol`) so the header row is also scaled consistently.
+- `fontsize` values below `0.7` are generally too small to read comfortably in a presentation; prefer restructuring the table or splitting it across slides instead.
+- The `{.smaller}` slide class should be avoided entirely in this deck.
+
+---
+
+## TikZ / DAG Figure Sizing
+
+- The YAML header sets `auto-stretch: false` under `format: revealjs:`. This disables Quarto's default behaviour of automatically applying the `r-stretch` CSS class to figures, which would otherwise make a DAG expand or shrink to fill whatever vertical space remains on a slide (causing the same diagram to appear at wildly different sizes depending on how much other content is present).
+- Control TikZ figure size using `fig-height` (a number in inches) directly in the chunk options. Do **not** use `fig-width: <percentage>` — that is invalid YAML and will cause a render error. Use `out-width: <percentage>` if you need to constrain display width, but prefer `fig-height` for TikZ.
+- For the simple three-node horizontal DAGs in this deck (e.g. Z → X → D), `fig-height: 1.5` produces a compact, consistently-sized figure that leaves room for tables and bullets below it. Adjust up or down to taste, but keep the value the same across all equivalent DAG slides so they look uniform.
+
+```r
+# Correct — fig-height is a number (inches), consistent across DAG slides
+```{r, engine='tikz'}
+#| fig-align: center
+#| fig-height: 1.5
+\begin{tikzpicture}...
+\end{tikzpicture}
+` ` `
+```
