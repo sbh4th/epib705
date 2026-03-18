@@ -1,8 +1,8 @@
 ---
-title: "Bias Analysis"
+title: "Bias Analysis: <br> Basic Concepts and Methods"
 subtitle: "EPIB 705"
 author: "Sam Harper"
-date: 2026-03-04
+date: 2026-03-18
 date-format: iso
 format:
   revealjs:
@@ -86,12 +86,12 @@ library(patchwork)
 How do misclassification, selection bias, and unmeasured confounding create bias in parameter estimation?
 
 ::: incremental
-> By assuming that all errors are random and that any modeling assumptions (such as homogeneity) are correct, all uncertainty about the effect of errors on estimates is subsumed within conventional standard deviations for the estimates (standard errors), such as those given in earlier chapters (which assume no measurement error), and any discrepancy between an observed association and the target effect may be attributed to chance alone[^1]
+> By assuming that all errors are random and that any modeling assumptions (such as homogeneity) are correct, all uncertainty about the effect of errors on estimates is subsumed within conventional standard deviations for the estimates (standard errors), such as those given in earlier chapters (which assume no measurement error), and any discrepancy between an observed association and the target effect may be attributed to chance alone[^rothman-p362]
 
 - Bias analysis is an attempt to quantify the potential for bias, and reduce the likelihood of mistakenly attributing effects to exposure rather than systematic error.
 :::
 
-[^1]: See @Rothman:2008aa, p.362.
+[^rothman-p362]: See @Rothman:2008aa, p.362.
 
 ## What are we concerned about?
 
@@ -141,7 +141,7 @@ In practice. <br>
 ::: {.column width="15%"}
 :::
 ::: {.column width="85%"}
-- "Bias analysis requires educated guesses about the likely sizes of systematic errors"[^2]
+- "Bias analysis requires educated guesses about the likely sizes of systematic errors"[^ME-p347]
 
 <br>
 
@@ -153,23 +153,23 @@ In practice. <br>
 :::
 :::::
 
-[^2]: Rothman, Greenland, Lash, *Modern Epidemiology* 3rd ed, p,347.
+[^ME-p347]: Rothman, Greenland, Lash, *Modern Epidemiology* 3rd ed, p,347.
 
 ## Example of typical qualitative analysis
 
-Study[^3] assessing the association of vitamin D on age-related macular degeneration (AMD):
+Study[^parekh-vitd] assessing the association of vitamin D on age-related macular degeneration (AMD):
 
-[^3]: @Parekh:2007aa
+[^parekh-vitd]: @Parekh:2007aa
 
 > Several potential limitations of the present investigation must be considered in drawing conclusions from the results. In particular, AMD was ascertained only in one eye, resulting in a possible underestimation of AMD cases; however, studies have shown that AMD development is typically symmetric. Further, AMD was identified using nonmydriatic fundus photography without dilating the pupils, which may have led to potential misclassification of cases. In estimating milk and fish intake, the food frequency questionnaire used in this study was not validated and the measurement error was unknown. The serum 25-hydroxyvitamin D values would reflect sun exposure and food intake over recent weeks, rather than years, which would have enhanced random measurement error. Therefore, **associations reported are likely to be biased toward the null.**
 
 ##
 
 ::: center
-Which red line is longer?[^4]
+Which red line is longer?[^muller-lyer-1]
 :::
 
-[^4]: https://michaelbach.de/ot/sze-muelue/
+[^muller-lyer-1]: https://michaelbach.de/ot/sze-muelue/
 
 ```{r, echo=FALSE, out.width="70%"}
 #| fig-align: center
@@ -178,9 +178,9 @@ knitr::include_graphics(here("images", "ml-room-1.png"))
 
 ##
 
-Intuitions are difficult to overcome.[^5]
+Intuitions are difficult to overcome.[^muller-lyer-2]
 
-[^5]: https://michaelbach.de/ot/sze-muelue/
+[^muller-lyer-2]: https://michaelbach.de/ot/sze-muelue/
 
 ```{r, echo=FALSE, out.width="70%"}
 #| fig-align: center
@@ -225,17 +225,17 @@ knitr::include_graphics(here("images", "ml-room-2.png"))
 
 . . .
 
-- Goals:
+Goals:
 
-    - We want to provide an estimate of the association corrected for the unmeasured confounder ($Z$).
+- We want to provide an estimate of the association corrected for the unmeasured confounder ($Z$).
 
-    - Answers the question of what the association would have been **had we controlled for** $Z$.
+- Answers the question of what the association would have been **had we controlled for** $Z$.
 
 ## Where did this come from?
 
-- Early ideas formulated in the context of controversy surrounding the link between smoking and lung cancer[^6]
+- Early ideas formulated in the context of controversy surrounding the link between smoking and lung cancer[^bross-cornfield]
 
-[^6]: @Bross:1954aa is credited with implementing the first quantitative bias analyis, but @Cornfield:1959aa also played an important role.
+[^bross-cornfield]: @Bross:1954aa is credited with implementing the first quantitative bias analyis, but @Cornfield:1959aa also played an important role.
 
 :::::: columns
 ::: {.column width="65%"}
@@ -253,9 +253,9 @@ knitr::include_graphics(here("images", "cornfield.png"))
 
 ## Unmeasured Confounding
 
-- Suppose we want to assess the effect of occupational exposure to resins ($X$) on lung cancer risk ($D$) using a case-control design.[^7]
+- Suppose we want to assess the effect of occupational exposure to resins ($X$) on lung cancer risk ($D$) using a case-control design.[^greenland-resins]
 
-[^7]: Longstanding example used in *Modern Epidemiology* from @Greenland:1994aa
+[^greenland-resins]: Longstanding example used in *Modern Epidemiology* from @Greenland:1994aa
 
 <br>
 
@@ -422,9 +422,9 @@ Recall our stratum-specific $ORs$:
 
 $$OR_{DZ1}=\dfrac{A_{11}\left(B_{1+}-B_{11}\right)}{\left(A_{1+}-A_{11}\right)B_{11}}\quad \text{and} \quad OR_{DZ0}=\dfrac{A_{01}\left(B_{0+}-B_{01}\right)}{\left(A_{0+}-A_{01}\right)B_{01}}$$
 
-- If we can substitute reasonable values for these $z$-specific $OR$s, we can solve[^8] the above equations to get the value of $A_{11}$ and $A_{01}$:
+- If we can substitute reasonable values for these $z$-specific $OR$s, we can solve[^rothman-p350] the above equations to get the value of $A_{11}$ and $A_{01}$:
 
-[^8]: See @Rothman:2008aa, p.350, eq. 19-1 and 19-2
+[^rothman-p350]: See @Rothman:2008aa, p.350, eq. 19-1 and 19-2
 
 $$A_{11}=OR_{DZ1}A_{1+}B_{11}/(OR_{DZ1}B_{11}+B_{1+}-B_{11})$$
 
@@ -432,7 +432,9 @@ $$A_{01}=OR_{DZ0}A_{0+}B_{01}/(OR_{DZ0}B_{01}+B_{0+}-B_{01})$$
 
 ## Worked example
 
-- Suppose external studies show a 70% prevalence of smoking among those exposed to resins and 50% among those unexposed. We can estimate $B_{11}$ and $B_{01}$ as:
+- Suppose external studies show a 70% prevalence of smoking among those exposed to resins and 50% among those unexposed.[^just] We can estimate $B_{11}$ and $B_{01}$ as:
+
+[^just]: This choice needs justification and should be defended on substantive grounds. See @Lash:2014aa.
 
 ::: {style="text-align: center;"}
 $B_{11}=P_{Z1}B_{1+}=(.7)({\color{red}257})\approx{\color{red}180}$
@@ -493,9 +495,9 @@ tt(d_filled1, escape = FALSE) |>
   style_tt(j = 1:12, fontsize=0.9)
 ```
 
-- Plugging in the estimates of $B_{11}$ and $B_{01}$ along with a plausible estimate of the confounder-disease association $(OR_{DZ1}=OR_{DZ0}=5)$, assumed[^9] to be homogeneous across strata of resin exposure, now allow us to calculate $A_{11}$ and $A_{01}$:
+- Plugging in the estimates of $B_{11}$ and $B_{01}$ along with a plausible estimate of the confounder-disease association $(OR_{DZ1}=OR_{DZ0}=5)$, assumed[^homogeneity] to be homogeneous across strata of resin exposure, now allow us to calculate $A_{11}$ and $A_{01}$:
 
-[^9]: Not necessary to assume homogeneity if there is evidence to the contrary.
+[^homogeneity]: Not necessary to assume homogeneity if there is evidence to the contrary.
 
 ::: {style="text-align: center;"}
 $A_{11}=\frac{OR_{DZ1}A_{1+}B_{11}}{OR_{DZ1}B_{11}+B_{1+}-B_{11}}=\frac{5(45)(180)}{5(180)+257-180}\approx{\color{red}41}$
@@ -542,9 +544,9 @@ $Bias(OR)=\dfrac{OR_{DX+}}{OR_{DXZ(E)}}=\dfrac{1.76}{1.39}=1.27$
 
 . . .
 
-- Arah et al.[^10] also give an alternative estimator using only 1) prevalence of $Z$ in each exposure stratum and 2) association between $Z$ and $D$
+- Arah et al.[^arah-2008] also give an alternative estimator using only 1) prevalence of $Z$ in each exposure stratum and 2) association between $Z$ and $D$
 
-[^10]: See @Arah:2008aa
+[^arah-2008]: See @Arah:2008aa
 
 $Bias(OR)=\dfrac{OR_{DX+}}{OR_{DXZ(E)}}=\dfrac{OR_{DZ0}P_{11}+1-P_{11}}{OR_{DZ0}P_{10}+1-P_{10}}=\dfrac{5(.7)+1-.7}{5(.5)+1-.5}=1.27$
 
@@ -552,16 +554,74 @@ where $P_{11}=P(Z=1|X=1)$, $P_{10}=P(Z=1|X=0)$, and $OR_{DZ0}$ is the $Z\rightar
 
 [→ See appendix for extensions to RR, RD, and general formulas](#app-extensions)
 
-## Break! `r emo::ji("coffee")` {.h2center}
+## Simple implementation via `episensr`[^episensr-conf]
 
-```{r, echo=FALSE}
-countdown(minutes = 5,
-          left = 0, right = 0, bottom = "15%", top = "15%",
-          padding = "50px",
-          margin = "5%",
-          font_size = "7em",
-          color_text = '#f5bc6c')
+[^episensr-conf]: See package by @Haine:2021aa
+
+::::: columns
+::: {.column width="35%"}
+```{r, echo=TRUE, results='hide'}
+library(episensr)
+# observed data
+confounders(
+  matrix(c(45, 94, 257, 945),
+  dimnames = list(
+    c("D+", "D-"),
+    c("E+", "E- ")),
+  nrow = 2, byrow = TRUE),
+  type = "OR",
+
+# bias parameters (ORdz, Pz1, Pz0)
+  bias_parms = c(5, 0.7, 0.5))
 ```
+:::
+::: {.column width="65%"}
+```{r, echo=FALSE}
+confounders(
+  matrix(c(45, 94, 257, 945),
+  dimnames = list(
+    c("D+", "D-"),
+    c("E+", "E- ")),
+  nrow = 2, byrow = TRUE),
+  type = "OR",
+  bias_parms = c(5, 0.7, 0.5))
+```
+:::
+:::::
+
+## All the parameters matter (not an E-value)
+
+- What if we change the $OR_{DZ}$ from 5 to 1.5? 
+
+<br>
+
+::::: columns
+::: {.column width="35%"}
+
+```{r, echo=TRUE, results='hide'}
+library(episensr)
+# observed data
+confounders(matrix(c(45, 94, 257, 945),
+  dimnames = list(c("D+", "D-"),
+  c("E+", "E- ")),
+  nrow = 2, byrow = TRUE),
+  type = "OR",
+
+# bias parameters (ORdz, Pz1, Pz0)
+  bias_parms = c(1.5, 0.7, 0.5))
+```
+:::
+::: {.column width="65%"}
+```{r, echo=FALSE}
+confounders(matrix(c(45, 94, 257, 945),
+  dimnames = list(c("D+", "D-"),
+  c("E+", "E- ")),
+  nrow = 2, byrow = TRUE),
+  type = "OR",
+  bias_parms = c(1.5, 0.7, 0.5))
+```
+:::
+:::::
 
 ## Overview {.h2center}
 
@@ -598,9 +658,9 @@ knitr::include_graphics(here("images", "taubes-1995.png"))
 
 ##
 
-Epidemiology Monitor:[^14]
+Epidemiology Monitor:[^epimonitor-taubes]
 
-[^14]: Interview in @Epimonitor:1996aa of Gary Taubes, who published "Epidemiology Faces its Limits" in *Science* 1995.
+[^epimonitor-taubes]: Interview in @Epimonitor:1996aa of Gary Taubes, who published "Epidemiology Faces its Limits" in *Science* 1995.
 
 > That was one of the criticisms of your article. Epidemiologists said it is unbalanced and that you were only talking about our warts. What about our victories?
 
@@ -610,9 +670,9 @@ Gary Taubes:
 
 ##
 
-You may recall[^16]
+You may recall[^buzzfeed-covid]
 
-[^16]: https://www.buzzfeednews.com/article/stephaniemlee/coronavirus-antibody-test-santa-clara-los-angeles-stanford
+[^buzzfeed-covid]: https://www.buzzfeednews.com/article/stephaniemlee/coronavirus-antibody-test-santa-clara-los-angeles-stanford
 
 ```{r, echo=FALSE, out.width="50%"}
 #| fig-align: center
@@ -775,6 +835,39 @@ Choices for internal validation study:
 3. Sample randomly:
     - Can estimate Se/Sp/PPV/NPV.
     - Need adequate samples for rare exposures or outcomes, potentially stratified by covariates.
+    
+## Implications of validation for bias parameters
+
+Choices for internal validation study:
+
+::::: columns
+::: {.column width="60%"}
+1. Sample by misclassified exposure and obtain "gold standard":
+    - Directly estimates PPV/NPV, but not Se/SP.
+    - Need to consider outcome and confounders.
+2. Sample by "true" exposure:
+    - Directly estimates Se/Sp but not PPV/NPV.\
+    - Often not feasible.
+3. Sample randomly:
+    - Can estimate Se/Sp/PPV/NPV.
+    - Need adequate samples for rare exposures or outcomes.
+:::
+
+::: {.column width="40%"}
+```{r echo=FALSE}
+d_class <- data.frame(
+  "Measured Status" = c("Positive", "Negative"),
+  "Positive"        = c("a", "c"),
+  "Negative"        = c("b", "d"),
+  check.names = FALSE
+)
+tt(d_class) |>
+  group_tt(j = list("True Status" = 2:3)) |>
+  style_tt(j = 1:3, fontsize = 0.75)
+```
+:::
+
+:::::
 
 ## Example: non-differential misclassification of exposure
 
@@ -840,9 +933,9 @@ tt(d_typeA_fill, escape = FALSE) |>
 
 $$RR_{true}=(177.6/1588)/(79.4/1566)=2.2$$
 
-## Simple implementation via `episensr`[^17]
+## Simple implementation via `episensr`[^episensr-misc]
 
-[^17]: See package by @Haine:2021aa
+[^episensr-misc]: See package by @Haine:2021aa
 
 ::::: columns
 ::: {.column width="35%"}
@@ -874,9 +967,9 @@ misclassification(matrix(c(150, 107, 1277, 1620),
 :::
 :::::
 
-## Simpler implementation using PPV/NPVs[^18]
+## Simpler implementation using PPV/NPVs[^fox-ch6-ppvnpv]
 
-[^18]: See Ch.6 in @Fox:2022aa
+[^fox-ch6-ppvnpv]: See Ch.6 in @Fox:2022aa
 
 ```{r, out.width="85%"}
 #| fig-align: center
@@ -893,18 +986,18 @@ knitr::include_graphics(here("images", "fox-ppv.png"))
 
 ## Stratified analysis implementation
 
-- Estimates for Se and Sp are applied to measurement of confounder rather than exposure.[^19]
+- Estimates for Se and Sp are applied to measurement of confounder rather than exposure.[^fox-ch6-conf]
 
-[^19]: See examples in Ch.6 of @Fox:2022aa.
+[^fox-ch6-conf]: See examples in Ch.6 of @Fox:2022aa.
 
 ```{r, out.width="80%"}
 #| fig-align: center
 knitr::include_graphics(here("images", "fox-misclass-conf.png"))
 ```
 
-## Example: Effect of coffee consumption on bladder cancer[^20]
+## Example: Effect of coffee consumption on bladder cancer[^slattery-coffee]
 
-[^20]: @Slattery:1988aa
+[^slattery-coffee]: @Slattery:1988aa
 
 We might draw a model like this, indicating that true smoking status is unmeasured but may still confound the association between coffee and bladder cancer:
 
@@ -1003,7 +1096,7 @@ Where can you get it?
 - Educated guesses (largely based on experience or prior data).
 :::
 ::: {.column width="60%"}
-Example: mobile phone use and uveal melanoma[^21]
+Example: mobile phone use and uveal melanoma[^stang-mobile]
 
 ```{r}
 #| fig-align: center
@@ -1013,7 +1106,7 @@ knitr::include_graphics(here("images", "stang.png"))
 :::
 :::::
 
-[^21]: Example from @Stang:2009aa described in @Fox:2022aa
+[^stang-mobile]: Example from @Stang:2009aa described in @Fox:2022aa
 
 ##
 
@@ -1237,7 +1330,7 @@ knitr::include_graphics(here("images", "fox-ipaw.png"))
 ## Break! `r emo::ji("coffee")` {.h2center}
 
 ```{r, echo=FALSE}
-countdown(minutes = 5,
+countdown(minutes = 10,
           left = 0, right = 0, bottom = "15%", top = "15%",
           padding = "50px",
           margin = "5%",
@@ -1301,7 +1394,7 @@ What to vary?
 ::: {.column width="20%"}
 ### Example
 
-Peri-operative consultation and 30d mortality Confounder-adjusted RR=1.16 (1.07,1.26).[^22]
+Peri-operative consultation and 30d mortality Confounder-adjusted RR=1.16 (1.07,1.26).[^wijeysundera]
 :::
 ::: {.column width="80%"}
 ```{r, out.width="100%"}
@@ -1313,11 +1406,11 @@ knitr::include_graphics(here("images", "mba-confounding.png"))
 :::
 :::::
 
-[^22]: @Wijeysundera:2010aa
+[^wijeysundera]: @Wijeysundera:2010aa
 
 ## Probabilistic Bias Analysis
 
-- The major limitation of the previous methods for analyzing study bias is that they treat the bias parameters (sensitivity, specificity, confounder-disease association, prevalence of unmeasured confounders, etc.) as known quantities that are perfectly measured.
+- The major limitation of the previous methods for analyzing study bias is that they treat the bias parameters (sensitivity, specificity, confounder-disease association, prevalence of unmeasured confounders, etc.) as [known quantities]{.blue} that are perfectly measured.
 
 - Thus, the analyses above are referred to as deterministic, and they only account for systematic error (i.e., they do not account for measurement error in the estimates of the prevalence of the unmeasured confounder or the confounder-disease association.
 
@@ -1449,9 +1542,9 @@ $OR^{total}_{i}=e^{ln(OR^{adj}_{i})-z_{i}\times SE^{adj}_{i}}$
 
     3. Unmeasured confounding
 
-## Multiple bias analysis example[^23]
+## Multiple bias analysis example[^johnson-multibias]
 
-[^23]: @Johnson:2018aa
+[^johnson-multibias]: @Johnson:2018aa
 
 ```{r, out.width="100%"}
 #| fig-align: center
@@ -1507,9 +1600,9 @@ knitr::include_graphics(here("images", "johnson-mba-t3.png"))
 :::
 :::::
 
-## Basic workflow for record-level analysis[^24]
+## Basic workflow for record-level analysis[^fox-ch9]
 
-[^24]: See @Fox:2022aa Chapter 9.
+[^fox-ch9]: See @Fox:2022aa Chapter 9.
 
 - Basic idea is to take *one* realization of bias parameters, apply it to record-level data, then save estimates and repeat.
 
@@ -1564,9 +1657,9 @@ knitr::include_graphics(here("images", "rqba-collapsed.png"))
 
 ##
 
-Perform simple QBA:[^25]
+Perform simple QBA:[^first-obs-row]
 
-[^25]: Note that the values in the table are in the first observation row.
+[^first-obs-row]: Note that the values in the table are in the first observation row.
 
 ```{r, out.width="65%"}
 #| fig-align: center
@@ -1612,6 +1705,33 @@ knitr::include_graphics(here("images", "rqba-rr-sims.png"))
 knitr::include_graphics(here("images", "rqba-table-results.png"))
 ```
 
+## The core tension in record-level QBA
+
+- Fox et al. still collapse to a **marginal 2×2 table** at the bias-correction step — the formulas for misclassification, confounding, and selection bias were derived for cell counts
+
+- But if your final model adjusts for $W$ and $Z$, you care about the *conditional* $X$–$Y$ association, not the marginal one — **these are different quantities**
+
+. . .
+
+- Matters most when bias is *differential* across levels of $W$ or $Z$ (e.g. $P(U=1 \mid X)$ varies by $W$)
+
+- **Fix:** stratify the correction *within* strata of $W$ and $Z$ — Fox et al. call this "collapsing with reweighting"
+
+## A cleaner approach: direct record-level simulation
+
+Skip the contingency table entirely. For unmeasured confounding, simulate $U$ directly:
+
+1. Specify $P(U=1 \mid X)$ and $OR_{UY}$ as bias parameters
+2. Compute $P(U=1 \mid X_i, Y_i)$ per record via Bayes' theorem
+3. Sample $U_i \sim \text{Bernoulli}\bigl(P(U=1 \mid X_i, Y_i)\bigr)$
+4. Fit $Y \sim X + W + Z + U$ — the coefficient on $X$ is now bias-adjusted
+
+. . .
+
+- This is just **multiple imputation of an unobserved variable** — no PPV/NPV formulas, no merging
+- Naturally handles multivariable models and differential bias (condition on $W$ in step 2)
+- The Fox et al. contingency-table route is one way to derive the per-record posterior — not the only way
+
 ## Summary
 
 - Bias analysis is a method for trying to quantify *systematic* sources of bias not captured in sampling error.
@@ -1630,7 +1750,7 @@ knitr::include_graphics(here("images", "rqba-table-results.png"))
 ::: {.column width="30%"}
 ### Is it worth it?
 
-Results of systematic review of QBAs.[^26] Graph shows original and revised estimates for:
+Results of systematic review of QBAs.[^petersen-review] Graph shows original and revised estimates for:
 
 (a) misclassification
 (b) unmeasured confounding
@@ -1645,7 +1765,7 @@ knitr::include_graphics(here("images", "petersen-graph.png"))
 :::
 :::::
 
-[^26]: @Petersen:2021aa
+[^petersen-review]: @Petersen:2021aa
 
 ## Best practices
 
@@ -1679,9 +1799,9 @@ knitr::include_graphics(here("images", "fox-book-2021.png"))
 
 $Bias(RR)=\dfrac{RR_{DX+}}{RR_{DXZ(E)}}=\dfrac{RR_{DZ0}P_{11}+1-P_{11}}{RR_{DZ0}P_{10}+1-P_{10}}=\dfrac{4.3(.7)+1-.7}{4.3(.5)+1-.5}=1.25$
 
-## What about the risk difference?[^11] {visibility="uncounted"}
+## What about the risk difference?[^cc-illustration] {visibility="uncounted"}
 
-[^11]: These data are derived from a case-control study, so this is just for illustration.
+[^cc-illustration]: These data are derived from a case-control study, so this is just for illustration.
 
 - Still need the prevalence of the unmeasured confounder by exposure, but now we need the risk difference $RD_{DZ}$ for the confounder-disease association.
 
@@ -1741,7 +1861,7 @@ $RD_{DXZ(E)}=\sum_{z}w_{z}RD_{DXZ}/\sum_{z}w_{z}=0.04$
 
 ## General formulas based on counterfactual notation {visibility="uncounted"}
 
-- What to do for more complex, regression-based models?[^12]
+- What to do for more complex, regression-based models?[^vanderweele-regression]
 
 - VanderWeele and Arah (2011) provided some general formulas.
 
@@ -1749,7 +1869,7 @@ $RD_{DXZ(E)}=\sum_{z}w_{z}RD_{DXZ}/\sum_{z}w_{z}=0.04$
 
 $$E\left(Y_{a1}|a_{1}\right)-E\left(Y_{a0}|a_{1}\right)$$
 
-[^12]: Far more likely what you'll be using in practice. See @Vanderweele:2011aa. More on this later.
+[^vanderweele-regression]: Far more likely what you'll be using in practice. See @Vanderweele:2011aa. More on this later.
 
 $$=\sum_{x}\sum_{u}\left\{ E(Y|a_{1},x,u)-E(Y|a_{0},x,u)\right\} P(u|x,a_{1})P(x|a_{1})$$
 
@@ -1819,9 +1939,9 @@ $$d_{a1}=\gamma\delta$$
 
 ## External adjustment for unmeasured confounding {visibility="uncounted"}
 
-Assumptions:[^13]
+Assumptions:[^rosenbaum-evalue]
 
-[^13]: See @Rosenbaum:1983aa for more details. Similar in some ways to the 'e-value' concept from @VanderWeele:2017aa.
+[^rosenbaum-evalue]: See @Rosenbaum:1983aa for more details. Similar in some ways to the 'e-value' concept from @VanderWeele:2017aa.
 
 - Differences in the distribution of $U$ by exposure similar across all strata of measured $X$s.
 
