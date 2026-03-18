@@ -1,0 +1,5 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - EPIB705-Bias-Analysis-2026.qmd

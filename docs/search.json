@@ -1,0 +1,660 @@
+[
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#overview",
+    "href": "EPIB705-Bias-Analysis-2026.html#overview",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Overview",
+    "text": "Overview\nWhy Bias Analysis?\n\nDeterministic Bias Analysis\nUnmeasured confounding\nMisclassification\nSelection bias\n\nMultidimensional Bias Analysis\n\nRecord-level Implementation\n\nSummary"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#overview-1",
+    "href": "EPIB705-Bias-Analysis-2026.html#overview-1",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Overview",
+    "text": "Overview\nWhy Bias Analysis?\n\nDeterministic Bias Analysis\nUnmeasured confounding\nMisclassification\nSelection bias\n\nMultidimensional Bias Analysis\n\nRecord-level Implementation\n\nSummary"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#introduction",
+    "href": "EPIB705-Bias-Analysis-2026.html#introduction",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Introduction",
+    "text": "Introduction\nHow do misclassification, selection bias, and unmeasured confounding create bias in parameter estimation?\n\nBy assuming that all errors are random and that any modeling assumptions (such as homogeneity) are correct, all uncertainty about the effect of errors on estimates is subsumed within conventional standard deviations for the estimates (standard errors), such as those given in earlier chapters (which assume no measurement error), and any discrepancy between an observed association and the target effect may be attributed to chance alone1\n\n\nBias analysis is an attempt to quantify the potential for bias, and reduce the likelihood of mistakenly attributing effects to exposure rather than systematic error.\n\nSee Rothman et al. (2008), p.362."
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#what-are-we-concerned-about",
+    "href": "EPIB705-Bias-Analysis-2026.html#what-are-we-concerned-about",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "What are we concerned about?",
+    "text": "What are we concerned about?\nIn theory."
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#what-are-we-concerned-about-1",
+    "href": "EPIB705-Bias-Analysis-2026.html#what-are-we-concerned-about-1",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "What are we concerned about?",
+    "text": "What are we concerned about?\nIn practice."
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#potential-consequences",
+    "href": "EPIB705-Bias-Analysis-2026.html#potential-consequences",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Potential consequences",
+    "text": "Potential consequences\n\n\n\n\n\n“Bias analysis requires educated guesses about the likely sizes of systematic errors”1\n\n\n\nThe difficulty is that it is challenging to do so quantitatively, thus investigators often rely on qualitative judgments about the likelihood that their estimates are biased.\n\n\n\nA basic problem is that the results of observational studies are likely to be sensitive to choices made by the analyst.\n\n\nRothman, Greenland, Lash, Modern Epidemiology 3rd ed, p,347."
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#example-of-typical-qualitative-analysis",
+    "href": "EPIB705-Bias-Analysis-2026.html#example-of-typical-qualitative-analysis",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Example of typical qualitative analysis",
+    "text": "Example of typical qualitative analysis\nStudy1 assessing the association of vitamin D on age-related macular degeneration (AMD):\n\nSeveral potential limitations of the present investigation must be considered in drawing conclusions from the results. In particular, AMD was ascertained only in one eye, resulting in a possible underestimation of AMD cases; however, studies have shown that AMD development is typically symmetric. Further, AMD was identified using nonmydriatic fundus photography without dilating the pupils, which may have led to potential misclassification of cases. In estimating milk and fish intake, the food frequency questionnaire used in this study was not validated and the measurement error was unknown. The serum 25-hydroxyvitamin D values would reflect sun exposure and food intake over recent weeks, rather than years, which would have enhanced random measurement error. Therefore, associations reported are likely to be biased toward the null.\n\nParekh et al. (2007)"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#section",
+    "href": "EPIB705-Bias-Analysis-2026.html#section",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "",
+    "text": "Which red line is longer?1\n\n\n\n\n\n\n\n\n\n\nhttps://michaelbach.de/ot/sze-muelue/"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#section-1",
+    "href": "EPIB705-Bias-Analysis-2026.html#section-1",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "",
+    "text": "Intuitions are difficult to overcome.1\n\n\n\n\n\n\n\n\n\nhttps://michaelbach.de/ot/sze-muelue/"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#overview-2",
+    "href": "EPIB705-Bias-Analysis-2026.html#overview-2",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Overview",
+    "text": "Overview\nWhy Bias Analysis?\n\nDeterministic Bias Analysis\nUnmeasured confounding\nMeasurement error\nSelection bias\n\nMultidimensional Bias Analysis\n\nRecord-level Implementation\n\nSummary"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#rationale-for-bias-analysis-for-unmeasured-confounding",
+    "href": "EPIB705-Bias-Analysis-2026.html#rationale-for-bias-analysis-for-unmeasured-confounding",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Rationale for bias analysis for unmeasured confounding",
+    "text": "Rationale for bias analysis for unmeasured confounding\n\nWhen should you conduct a bias analysis for unmeasured confounding?\n\nAn important (and well known) confounder was not measured (e.g., too expensive to collect; reliance on secondary data)\nQuantifying the impact of an unknown confounder (e.g., early study of an association; unmeasured confounding seems likely)\n\n. . .\nGoals:\n\nWe want to provide an estimate of the association corrected for the unmeasured confounder (\\(Z\\)).\nAnswers the question of what the association would have been had we controlled for \\(Z\\)."
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#where-did-this-come-from",
+    "href": "EPIB705-Bias-Analysis-2026.html#where-did-this-come-from",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Where did this come from?",
+    "text": "Where did this come from?\n\nEarly ideas formulated in the context of controversy surrounding the link between smoking and lung cancer1\n\n\n\n\nIf a causal agent, A, with no causal effect upon the risk of a disease, nevertheless, because of a positive correlation with some other causal agent, B, shows an apparent risk, r, for those exposed to A, relative to those not so exposed, then the prevalence of B, among those exposed to A, relative to the prevalence among those not so exposed, must be greater than r.\n\n\n\n\n\n\n\n\n\nJerome Cornfield, 1974\n\n\n\n\n\nBross (1954) is credited with implementing the first quantitative bias analyis, but Cornfield et al. (1959) also played an important role."
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#unmeasured-confounding-3",
+    "href": "EPIB705-Bias-Analysis-2026.html#unmeasured-confounding-3",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Unmeasured Confounding",
+    "text": "Unmeasured Confounding\n\nSuppose we want to assess the effect of occupational exposure to resins (\\(X\\)) on lung cancer risk (\\(D\\)) using a case-control design.1\n\n\n\n\n\n\n\nDisease Status\nX=1\nX=0\nTotal\n\n\n\n\nCases (D=1)\n45\n94\n139\n\n\nControls (D=0)\n257\n945\n1202\n\n\nTotal\n302\n1039\n1341\n\n\n\n\n\n\nCrude OR:\n\\(OR_{DX+}=\\frac{(45\\times945)}{(94\\times257)}=1.76\\)\n\n\n\nLikely confounded by smoking \\((Z)\\), but we did not measure it.\nHow can we quantify failing to adjust for \\(Z\\)?\n\nLongstanding example used in Modern Epidemiology from Greenland et al. (1994)"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#data-layout-for-dichotomous-unmeasured-confounder",
+    "href": "EPIB705-Bias-Analysis-2026.html#data-layout-for-dichotomous-unmeasured-confounder",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Data Layout for Dichotomous Unmeasured Confounder",
+    "text": "Data Layout for Dichotomous Unmeasured Confounder\n\n\n\n\n    \n\n    \n    \n      \n        \n\n \nZ=1 Smokers\n \nZ=0 Non-smokers\n \nTotal\n\n        \n              \n                 \n                X=1\n                X=0\n                Total\n                  \n                X=1\n                X=0\n                Total\n                   \n                X=1\n                X=0\n                Total\n              \n        \n        \n        \n                \n                  \\(D=1\\)\n                  \\(A_{11}\\)\n                  \\(A_{01}\\)\n                  \\(M_{11}\\)\n                  \n                  \\(A_{1+}-A_{11}\\)\n                  \\(A_{0+}-A_{01}\\)\n                  \\(M_{A+}-M_{11}\\)\n                  \n                  \\(A_{1+}\\)\n                  \\(A_{0+}\\)\n                  \\(M_{A+}\\)\n                \n                \n                  \\(D=0\\)\n                  \\(B_{11}\\)\n                  \\(B_{01}\\)\n                  \\(M_{01}\\)\n                  \n                  \\(B_{1+}-B_{11}\\)\n                  \\(B_{0+}-B_{01}\\)\n                  \\(M_{B+}-M_{01}\\)\n                  \n                  \\(B_{1+}\\)\n                  \\(B_{0+}\\)\n                  \\(M_{B+}\\)\n                \n                \n                  Total\n                  \\(N_{11}\\)\n                  \\(N_{01}\\)\n                  \\(N_{+1}\\)\n                  \n                  \\(N_{1+}-N_{11}\\)\n                  \\(N_{0+}-N_{01}\\)\n                  \\(N_{++}-N_{+1}\\)\n                  \n                  \\(N_{1+}\\)\n                  \\(N_{0+}\\)\n                  \\(N_{++}\\)\n                \n        \n      \n    \n\n\n\n\n\nThe crude odds ratio is \\(OR_{DX+}=A_{1+}B_{0+}/A_{0+}B_{1+}\\), but to adjust for smoking we need smoking stratum-specific ORs.\nWe can write the exposure-disease OR within strata of \\(Z\\) \\((OR_{DXZ})\\) as:\n\n\n\\(OR_{DX1}=\\dfrac{A_{11}B_{01}}{A_{01}B_{11}}\\quad \\text{and} \\quad OR_{DX0}=\\dfrac{\\left(A_{1+}-A_{11}\\right)\\left(B_{0+}-B_{01}\\right)}{\\left(A_{0+}-A_{01}\\right)\\left(B_{1+}-B_{11}\\right)}\\)"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#data-layout-for-dichotomous-unmeasured-confounder-1",
+    "href": "EPIB705-Bias-Analysis-2026.html#data-layout-for-dichotomous-unmeasured-confounder-1",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Data Layout for Dichotomous Unmeasured Confounder",
+    "text": "Data Layout for Dichotomous Unmeasured Confounder\nWe already know the marginal totals, so only 4 quantities to estimate.\n\n\n\n\n    \n\n    \n    \n      \n        \n\n \nZ=1 Smokers\n \nZ=0 Non-smokers\n \nTotal\n\n        \n              \n                 \n                X=1\n                X=0\n                Total\n                  \n                X=1\n                X=0\n                Total\n                   \n                X=1\n                X=0\n                Total\n              \n        \n        \n        \n                \n                  \\(D=1\\)\n                  \\(A_{11}\\)\n                  \\(A_{01}\\)\n                  \\(M_{11}\\)\n                  \n                  \\(45-A_{11}\\)\n                  \\(94-A_{01}\\)\n                  \\(139-M_{11}\\)\n                  \n                  45\n                  94\n                  139\n                \n                \n                  \\(D=0\\)\n                  \\(B_{11}\\)\n                  \\(B_{01}\\)\n                  \\(M_{01}\\)\n                  \n                  \\(257-B_{11}\\)\n                  \\(945-B_{01}\\)\n                  \\(1202-M_{01}\\)\n                  \n                  257\n                  945\n                  1202\n                \n                \n                  Total\n                  \\(N_{11}\\)\n                  \\(N_{01}\\)\n                  \\(N_{+1}\\)\n                  \n                  \\(302-N_{11}\\)\n                  \\(1039-N_{01}\\)\n                  \\(1341-N_{+1}\\)\n                  \n                  302\n                  1039\n                  1341\n                \n        \n      \n    \n\n\n\n\nThese values may be generated by specifying values for the prevalence of smoking in each exposure group and the association between smoking and disease.\nThe (unknown) smoking prevalence in exposure strata are:\n\n\\[P_{Z1}=N_{11}/N_{1+}\\quad \\text{and} \\quad P_{Z0}=N_{01}/N_{0+}\\]"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#what-do-we-need-1-distribution-of-z-by-exposure",
+    "href": "EPIB705-Bias-Analysis-2026.html#what-do-we-need-1-distribution-of-z-by-exposure",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "What do we need? (1) Distribution of \\(Z\\) by exposure",
+    "text": "What do we need? (1) Distribution of \\(Z\\) by exposure\n\n\n\n\n\n    \n\n    \n    \n      \n        \n\n \nZ=1 Smokers\n \nZ=0 Non-smokers\n \nTotal\n\n        \n              \n                 \n                X=1\n                X=0\n                Total\n                  \n                X=1\n                X=0\n                Total\n                   \n                X=1\n                X=0\n                Total\n              \n        \n        \n        \n                \n                  \\(D=1\\)\n                  \\(A_{11}\\)\n                  \\(A_{01}\\)\n                  \\(M_{11}\\)\n                  \n                  \\(45-A_{11}\\)\n                  \\(94-A_{01}\\)\n                  \\(139-M_{11}\\)\n                  \n                  45\n                  94\n                  139\n                \n                \n                  \\(D=0\\)\n                  \\(B_{11}\\)\n                  \\(B_{01}\\)\n                  \\(M_{01}\\)\n                  \n                  \\(257-B_{11}\\)\n                  \\(945-B_{01}\\)\n                  \\(1202-M_{01}\\)\n                  \n                  257\n                  945\n                  1202\n                \n                \n                  Total\n                  \\(N_{11}\\)\n                  \\(N_{01}\\)\n                  \\(N_{+1}\\)\n                  \n                  \\(302-N_{11}\\)\n                  \\(1039-N_{01}\\)\n                  \\(1341-N_{+1}\\)\n                  \n                  302\n                  1039\n                  1341\n                \n        \n      \n    \n\n\n\n\nWith plausibly valid estimates of \\(P_{Z}\\), we can use this to estimate the number of controls, since \\(B_{11}=P_{Z1}B_{1+}\\) and \\(B_{01}=P_{Z0}B_{0+}\\).\nHowever, \\(A_{11}\\) and \\(A_{01}\\) are still unknown.\nCan be estimated if we specify a plausible value for the association between smoking \\((Z)\\) and disease \\((D)\\)."
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#what-do-we-need-2-effect-of-z-on-d",
+    "href": "EPIB705-Bias-Analysis-2026.html#what-do-we-need-2-effect-of-z-on-d",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "What do we need? (2) Effect of \\(Z\\) on \\(D\\)",
+    "text": "What do we need? (2) Effect of \\(Z\\) on \\(D\\)\n\n\n\n\n\n    \n\n    \n    \n      \n        \n\n \nZ=1 Smokers\n \nZ=0 Non-smokers\n \nTotal\n\n        \n              \n                 \n                X=1\n                X=0\n                Total\n                  \n                X=1\n                X=0\n                Total\n                   \n                X=1\n                X=0\n                Total\n              \n        \n        \n        \n                \n                  \\(D=1\\)\n                  \\({\\color{blue}{A_{11}}}\\)\n                  \\({\\color{red}{A_{01}}}\\)\n                  \\(M_{11}\\)\n                  \n                  \\({\\color{blue}{A_{1+}-A_{11}}}\\)\n                  \\({\\color{red}{A_{0+}-A_{01}}}\\)\n                  \\(M_{A+}-M_{11}\\)\n                  \n                  \\(A_{1+}\\)\n                  \\(A_{0+}\\)\n                  \\(M_{A+}\\)\n                \n                \n                  \\(D=0\\)\n                  \\({\\color{blue}{B_{11}}}\\)\n                  \\({\\color{red}{B_{01}}}\\)\n                  \\(M_{01}\\)\n                  \n                  \\({\\color{blue}{B_{1+}-B_{11}}}\\)\n                  \\({\\color{red}{B_{0+}-B_{01}}}\\)\n                  \\(M_{B+}-M_{01}\\)\n                  \n                  \\(B_{1+}\\)\n                  \\(B_{0+}\\)\n                  \\(M_{B+}\\)\n                \n                \n                  Total\n                  \\(N_{11}\\)\n                  \\(N_{01}\\)\n                  \\(N_{+1}\\)\n                  \n                  \\(N_{1+}-N_{11}\\)\n                  \\(N_{0+}-N_{01}\\)\n                  \\(N_{++}-N_{+1}\\)\n                  \n                  \\(N_{1+}\\)\n                  \\(N_{0+}\\)\n                  \\(N_{++}\\)\n                \n        \n      \n    \n\n\n\n\nBased on the table above, the confounder-disease OR within strata of \\(X\\) \\(\\left(OR_{DZX}\\right)\\) can be calculated as:\n\n\\[{\\color{blue}OR_{DZ1}=\\dfrac{A_{11}\\left(B_{1+}-B_{11}\\right)}{\\left(A_{1+}-A_{11}\\right)B_{11}}},\\quad \\text{and} \\quad {\\color{red}OR_{DZ0}=\\dfrac{A_{01}\\left(B_{0+}-B_{01}\\right)}{\\left(A_{0+}-A_{01}\\right)B_{01}}}\\]"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#estimating-z-among-cases",
+    "href": "EPIB705-Bias-Analysis-2026.html#estimating-z-among-cases",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Estimating \\(Z\\) among cases",
+    "text": "Estimating \\(Z\\) among cases\nRecall our stratum-specific \\(ORs\\):\n\\[OR_{DZ1}=\\dfrac{A_{11}\\left(B_{1+}-B_{11}\\right)}{\\left(A_{1+}-A_{11}\\right)B_{11}}\\quad \\text{and} \\quad OR_{DZ0}=\\dfrac{A_{01}\\left(B_{0+}-B_{01}\\right)}{\\left(A_{0+}-A_{01}\\right)B_{01}}\\]\n\nIf we can substitute reasonable values for these \\(z\\)-specific \\(OR\\)s, we can solve1 the above equations to get the value of \\(A_{11}\\) and \\(A_{01}\\):\n\n\\[A_{11}=OR_{DZ1}A_{1+}B_{11}/(OR_{DZ1}B_{11}+B_{1+}-B_{11})\\]\n\\[A_{01}=OR_{DZ0}A_{0+}B_{01}/(OR_{DZ0}B_{01}+B_{0+}-B_{01})\\]\nSee Rothman et al. (2008), p.350, eq. 19-1 and 19-2"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#worked-example",
+    "href": "EPIB705-Bias-Analysis-2026.html#worked-example",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Worked example",
+    "text": "Worked example\n\nSuppose external studies show a 70% prevalence of smoking among those exposed to resins and 50% among those unexposed.1 We can estimate \\(B_{11}\\) and \\(B_{01}\\) as:\n\n\n\\(B_{11}=P_{Z1}B_{1+}=(.7)({\\color{red}257})\\approx{\\color{red}180}\\)\n\\(B_{01}=P_{Z0}B_{0+}=(.5)({\\color{blue}945})\\approx{\\color{blue}473}\\)\n\n\n\n\n\n\n    \n\n    \n    \n      \n        \n\n \nZ=1 Smokers\n \nZ=0 Non-smokers\n \nTotal\n\n        \n              \n                 \n                X=1\n                X=0\n                Total\n                  \n                X=1\n                X=0\n                Total\n                   \n                X=1\n                X=0\n                Total\n              \n        \n        \n        \n                \n                  \\(D=1\\)\n                  \\(A_{11}\\)\n                  \\(A_{01}\\)\n                  \\(M_{11}\\)\n                  \n                  \\(45-A_{11}\\)\n                  \\(94-A_{01}\\)\n                  \\(139-M_{11}\\)\n                  \n                  45\n                  94\n                  139\n                \n                \n                  \\(D=0\\)\n                  180\n                  473\n                  \\(M_{01}\\)\n                  \n                  \\(257-B_{11}\\)\n                  \\(945-B_{01}\\)\n                  \\(1202-M_{01}\\)\n                  \n                  257\n                  945\n                  1202\n                \n                \n                  Total\n                  \\(N_{11}\\)\n                  \\(N_{01}\\)\n                  \\(N_{+1}\\)\n                  \n                  \\(302-N_{11}\\)\n                  \\(1039-N_{01}\\)\n                  \\(1341-N_{+1}\\)\n                  \n                  302\n                  1039\n                  1341\n                \n        \n      \n    \n\n\n\n\nThis choice needs justification and should be defended on substantive grounds. See Lash et al. (2014)."
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#section-2",
+    "href": "EPIB705-Bias-Analysis-2026.html#section-2",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "",
+    "text": "Z=1 Smokers\n \nZ=0 Non-smokers\n \nTotal\n\n        \n              \n                 \n                X=1\n                X=0\n                Total\n                  \n                X=1\n                X=0\n                Total\n                   \n                X=1\n                X=0\n                Total\n              \n        \n        \n        \n                \n                  \\(D=1\\)\n                  41\n                  77\n                  \\(M_{11}\\)\n                  \n                  \\(45-A_{11}\\)\n                  \\(94-A_{01}\\)\n                  \\(139-M_{11}\\)\n                  \n                  45\n                  94\n                  139\n                \n                \n                  \\(D=0\\)\n                  180\n                  473\n                  \\(M_{01}\\)\n                  \n                  \\(257-B_{11}\\)\n                  \\(945-B_{01}\\)\n                  \\(1202-M_{01}\\)\n                  \n                  257\n                  945\n                  1202\n                \n                \n                  Total\n                  \\(N_{11}\\)\n                  \\(N_{01}\\)\n                  \\(N_{+1}\\)\n                  \n                  \\(302-N_{11}\\)\n                  \\(1039-N_{01}\\)\n                  \\(1341-N_{+1}\\)\n                  \n                  302\n                  1039\n                  1341\n                \n        \n      \n    \n\n\n\n\nPlugging in the estimates of \\(B_{11}\\) and \\(B_{01}\\) along with a plausible estimate of the confounder-disease association \\((OR_{DZ1}=OR_{DZ0}=5)\\), assumed1 to be homogeneous across strata of resin exposure, now allow us to calculate \\(A_{11}\\) and \\(A_{01}\\):\n\n\n\\(A_{11}=\\frac{OR_{DZ1}A_{1+}B_{11}}{OR_{DZ1}B_{11}+B_{1+}-B_{11}}=\\frac{5(45)(180)}{5(180)+257-180}\\approx{\\color{red}41}\\)\n\\(A_{01}=\\frac{OR_{DZ0}A_{0+}B_{01}}{OR_{DZ0}B_{01}+B_{0+}-B_{01}}=\\frac{5(94)(473)}{5(473)+945-473}\\approx{\\color{blue}77}\\)\n\nNot necessary to assume homogeneity if there is evidence to the contrary."
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#section-3",
+    "href": "EPIB705-Bias-Analysis-2026.html#section-3",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "",
+    "text": "We can now fill out the table and calculate an \\(OR\\) standardized for smoking:\n\n\n\n\n    \n\n    \n    \n      \n        \n\n \nZ=1 Smokers\n \nZ=0 Non-smokers\n \nTotal\n\n        \n              \n                 \n                X=1\n                X=0\n                Total\n                  \n                X=1\n                X=0\n                Total\n                   \n                X=1\n                X=0\n                Total\n              \n        \n        * Row and column totals in Z strata may not sum due to rounding.\n        \n                \n                  \\(D=1\\)\n                  41\n                  78\n                  120\n                  \n                  4\n                  16\n                  19\n                  \n                  45\n                  94\n                  139\n                \n                \n                  \\(D=0\\)\n                  180\n                  473\n                  652\n                  \n                  77\n                  473\n                  550\n                  \n                  257\n                  945\n                  1202\n                \n                \n                  Total*\n                  221\n                  551\n                  772\n                  \n                  81\n                  488\n                  569\n                  \n                  302\n                  1039\n                  1341\n                \n        \n      \n    \n\n\n\n\nIf we standardize to the exposed population, we get:\n\n\\(OR_{DXZ(E)}=\\dfrac{\\sum_{z}B_{1z}(A_{1z}/B_{1z})}{\\sum_{z}B_{1z}(A_{0z}/B_{0z})}=\\dfrac{180(41/180)+77(4/77)}{180(78/473)+77(16/473)}=1.39\\)"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#simplifying-formula",
+    "href": "EPIB705-Bias-Analysis-2026.html#simplifying-formula",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Simplifying formula",
+    "text": "Simplifying formula\n\nBias relative to the crude estimate:\n\n\n\\(Bias(OR)=\\dfrac{OR_{DX+}}{OR_{DXZ(E)}}=\\dfrac{1.76}{1.39}=1.27\\)\n\n\n\nArah et al.1 also give an alternative estimator using only 1) prevalence of \\(Z\\) in each exposure stratum and 2) association between \\(Z\\) and \\(D\\)\n\n\\(Bias(OR)=\\dfrac{OR_{DX+}}{OR_{DXZ(E)}}=\\dfrac{OR_{DZ0}P_{11}+1-P_{11}}{OR_{DZ0}P_{10}+1-P_{10}}=\\dfrac{5(.7)+1-.7}{5(.5)+1-.5}=1.27\\)\nwhere \\(P_{11}=P(Z=1|X=1)\\), \\(P_{10}=P(Z=1|X=0)\\), and \\(OR_{DZ0}\\) is the \\(Z\\rightarrow D\\) association in the unexposed.\n→ See appendix for extensions to RR, RD, and general formulas\n\nSee Arah et al. (2008)"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#simple-implementation-via-episensrepisensr-conf",
+    "href": "EPIB705-Bias-Analysis-2026.html#simple-implementation-via-episensrepisensr-conf",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Simple implementation via episensr1",
+    "text": "Simple implementation via episensr1\n\n\n\nlibrary(episensr)\n# observed data\nconfounders(\n  matrix(c(45, 94, 257, 945),\n  dimnames = list(\n    c(\"D+\", \"D-\"),\n    c(\"E+\", \"E- \")),\n  nrow = 2, byrow = TRUE),\n  type = \"OR\",\n\n# bias parameters (ORdz, Pz1, Pz0)\n  bias_parms = c(5, 0.7, 0.5))\n\n\n\n\n    E+ E- \nD+  45  94\nD- 257 945\n                                       2.5%    97.5%\n        Crude Odds Ratio: 1.760286 1.202457 2.576898\nOdds Ratio, Confounder +: 1.389700                  \nOdds Ratio, Confounder -: 1.389700                  \n\n\n                                       OR due to confounding\nStandardized Morbidity Ratio: 1.389700              1.266667\n             Mantel-Haenszel: 1.389700              1.266667\n\n\n\nSee package by Haine (2021)"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#all-the-parameters-matter-not-an-e-value",
+    "href": "EPIB705-Bias-Analysis-2026.html#all-the-parameters-matter-not-an-e-value",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "All the parameters matter (not an E-value)",
+    "text": "All the parameters matter (not an E-value)\n\nWhat if we change the \\(OR_{DZ}\\) from 5 to 1.5?\n\n\n\n\n\nlibrary(episensr)\n# observed data\nconfounders(matrix(c(45, 94, 257, 945),\n  dimnames = list(c(\"D+\", \"D-\"),\n  c(\"E+\", \"E- \")),\n  nrow = 2, byrow = TRUE),\n  type = \"OR\",\n\n# bias parameters (ORdz, Pz1, Pz0)\n  bias_parms = c(1.5, 0.7, 0.5))\n\n\n\n\n    E+ E- \nD+  45  94\nD- 257 945\n                                       2.5%    97.5%\n        Crude Odds Ratio: 1.760286 1.202457 2.576898\nOdds Ratio, Confounder +: 1.629895                  \nOdds Ratio, Confounder -: 1.629895                  \n\n\n                                       OR due to confounding\nStandardized Morbidity Ratio: 1.629895              1.080000\n             Mantel-Haenszel: 1.629895              1.080000"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#overview-3",
+    "href": "EPIB705-Bias-Analysis-2026.html#overview-3",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Overview",
+    "text": "Overview\nWhy Bias Analysis?\n\nDeterministic Bias Analysis\nUnmeasured confounding\nMisclassification\nSelection bias\n\nMultidimensional Bias Analysis\n\nRecord-level Implementation\n\nSummary"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#section-5",
+    "href": "EPIB705-Bias-Analysis-2026.html#section-5",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "",
+    "text": "Epidemiology Monitor:1\n\nThat was one of the criticisms of your article. Epidemiologists said it is unbalanced and that you were only talking about our warts. What about our victories?\n\nGary Taubes:\n\nWell, what I am saying is the warts are huge. The victories are few, and at this point, a whole field may be on the verge of propagating pathological science, which means they cannot get good enough resolution to identify the effects they’re studying. Epidemiologists may be seeing and reporting that there are canals on Mars because they’re looking at Mars through Galileo’s telescope. And that’s the nature of the field and all the statistical wizardry in the world isn’t going to change that because the experimental subjects are messy and the artifacts and biases found are so huge and the signals are small. Epidemiologists have to be willing to confront that. That’s the problem.\n\nInterview in Epidemiology Monitor of Gary Taubes, who published “Epidemiology Faces its Limits” in Science 1995."
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#section-6",
+    "href": "EPIB705-Bias-Analysis-2026.html#section-6",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "",
+    "text": "You may recall1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nhttps://www.buzzfeednews.com/article/stephaniemlee/coronavirus-antibody-test-santa-clara-los-angeles-stanford"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#basic-quantities-you-already-know",
+    "href": "EPIB705-Bias-Analysis-2026.html#basic-quantities-you-already-know",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Basic quantities you already know",
+    "text": "Basic quantities you already know\nExposure or disease classification table:\n\n\n\n\n    \n\n    \n    \n      \n        \n\n \nTrue Status of Exposure or Disease\n\n        \n              \n                Measured Status\n                Positive\n                Negative\n              \n        \n        \n        \n                \n                  Positive\n                  a\n                  b\n                \n                \n                  Negative\n                  c\n                  d\n                \n        \n      \n    \n\n\n\n\n\nSensitivity (Se) = a / (a + c)\nSpecificity (Sp) = d / (b + d)\nPositive Predictive Value (PPV) = a / (a + b)\nNegative Predictive Value (NPV) = d / (c + d)"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#relation-between-true-and-expected-observed-data",
+    "href": "EPIB705-Bias-Analysis-2026.html#relation-between-true-and-expected-observed-data",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Relation between “true” and expected observed data",
+    "text": "Relation between “true” and expected observed data\nThe number of individuals expected to be observed in a given study is a function of the “true” exposure status and the bias parameters (i.e., sensitivity and specificity):\n\n\n\n\n    \n\n    \n    \n      \n        \n\n \nTrue\n \nExpected Observed Cells\n\n        \n              \n                 \n                \\(E_1\\)\n                \\(E_0\\)\n                  \n                \\(E_1\\)\n                \\(E_0\\)\n              \n        \n        \n        \n                \n                  \\(D_1\\)\n                  \\(A\\)\n                  \\(B\\)\n                  \n                  \\(a=A(Se_{D_1})+B(1-Sp_{D_1})\\)\n                  \\(b=A(1-Se_{D_1})+B(Sp_{D_1})\\)\n                \n                \n                  \\(D_0\\)\n                  \\(C\\)\n                  \\(D\\)\n                  \n                  \\(c=C(Se_{D_0})+D(1-Sp_{D_0})\\)\n                  \\(d=C(1-Se_{D_0})+D(Sp_{D_0})\\)\n                \n        \n      \n    \n\n\n\nWho is in the observed “\\(a\\)” cell? It is a mixture of:\n\nTruly exposed individuals correctly classified: \\(A(Se_{D_{1}})\\)\nTruly unexposed individuals misclassified as exposed: \\(B(1-Sp_{D_{1}})\\)\n\n\nNote that observed data implicitly assumes 100% Se and Sp"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#section-7",
+    "href": "EPIB705-Bias-Analysis-2026.html#section-7",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "",
+    "text": "Suppose we have 85% Se and 95% Sp, which is non-differential with respect to disease:\n\n\n\n\n\n    \n\n    \n    \n      \n        \n\n \nTrue\n \nExpected Observed\n\n        \n              \n                 \n                \\(E_1\\)\n                \\(E_0\\)\n                  \n                \\(E_1\\)\n                \\(E_0\\)\n              \n        \n        \n        \n                \n                  \\(D_1\\)\n                  200\n                  100\n                  \n                  \\(200(.85)+100(.05)=175\\)\n                  \\(200(.15)+100(.95)=125\\)\n                \n                \n                  \\(D_0\\)\n                  800\n                  900\n                  \n                  \\(800(.85)+900(.05)=725\\)\n                  \\(800(.15)+900(.95)=975\\)\n                \n                \n                  Total\n                  1000\n                  1000\n                  \n                  900\n                  1100\n                \n        \n      \n    \n\n\n\n\nThe observed \\(a\\) cell has 175 individuals, of which:\n\n170 (\\(200\\times0.85\\)) are truly exposed and correctly classified: \\(A(Se_{D_{1}})\\)\n5 \\((100\\times0.05)\\) are truly unexposed but misclassified: \\(B(1-Sp_{D_{0}})\\)\n\n\n\n\\(RR_{true}=\\dfrac{200/1000}{100/900}=2.0\\)\n\n\\(RR_{obs}=\\dfrac{175/900}{125/1100}=1.7\\)"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#going-from-observed-to-true-data",
+    "href": "EPIB705-Bias-Analysis-2026.html#going-from-observed-to-true-data",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Going from observed to “true” data",
+    "text": "Going from observed to “true” data\n\nWe often have “observed” data and want to know what the corrected effect would be.\nRe-arrange the equations above to go from “observed” to “true” cells:\nRecall that the observed \\(a\\) cell is: \\(a=A(Se_{D_{1}})+B(1-Sp_{D_{1}})\\), and we know that the “true” B cell must be \\(B=D_{1Tot}-A\\)\nNow we can substitute: \\(a=A(Se_{D_{1}})+(D_{1Tot}-A)(1-Sp_{D_{1}})\\) and solve for \\(A\\)\n\n\n\\(\\begin{aligned} a & = A(Se_{D1})+D_{1Tot}-A-D_{1Tot}(Sp_{D1})+A(Sp_{D1})\\\\ a-D_{1Tot}+D_{1Tot}(Sp_{D1}) & = A(Se_{D1})-A+A(Sp_{D1})\\\\ a-D_{1Tot}(1-Sp_{D1}) & = A(Se_{D1}-1+Sp_{D1})\\\\ \\frac{a-D_{1Tot}(1-Sp_{D1})}{(Se_{D1}-1+Sp_{D1})} & = A\\end{aligned}\\)"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#going-from-observed-to-true-data-1",
+    "href": "EPIB705-Bias-Analysis-2026.html#going-from-observed-to-true-data-1",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Going from observed to “true” data",
+    "text": "Going from observed to “true” data\n\n\n\n\n    \n\n    \n    \n      \n        \n\n \nObserved\n \nCorrected\n\n        \n              \n                 \n                \\(E_1\\)\n                \\(E_0\\)\n                Total\n                  \n                \\(E_1\\)\n                \\(E_0\\)\n              \n        \n        \n        \n                \n                  \\(D_1\\)\n                  \\(a\\)\n                  \\(b\\)\n                  \\(D_{1Tot}\\)\n                  \n                  \\(\\dfrac{a-D_{1Tot}(1-Sp_{D_1})}{Se_{D_1}-(1-Sp_{D_1})}\\)\n                  \\(D_{1Tot}-A\\)\n                \n                \n                  \\(D_0\\)\n                  \\(c\\)\n                  \\(d\\)\n                  \\(D_{0Tot}\\)\n                  \n                  \\(\\dfrac{c-D_{0Tot}(1-Sp_{D_0})}{Se_{D_0}-(1-Sp_{D_0})}\\)\n                  \\(D_{0Tot}-C\\)\n                \n        \n      \n    \n\n\n\nIn our earlier example Se=85% and Sp=95%, we observed \\(a=175\\), so to get the “true” estimate we have:\n\\[A=\\frac{a-D_{1Tot}(1-Sp_{D1})}{(Se_{D1}-1+Sp_{D1})}=\\frac{175-300(0.05)}{(0.85-1+0.95)}=200\\]"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#what-can-be-done-about-misclassification",
+    "href": "EPIB705-Bias-Analysis-2026.html#what-can-be-done-about-misclassification",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "What can be done about misclassification?",
+    "text": "What can be done about misclassification?\n\nValidation study\n\nMeasurement using a “gold standard” on a random sub-sample.\nNeed to make assumptions about who “complies” with additional measurements and participation.\nMight still be infeasible to conduct a validation study for other reasons (e.g., data already collected).\nHowever, for many kinds of exposures (e.g., Personality tests, social class, etc.) there are no “gold standard” tests.\n\n\n\n\nOne option in these cases is to try and quantify the potential role that misclassification may have played in your study.\nIf misclassification is ignored entirely, you are assuming 100% Sensitivity and 100% Specificity."
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#implications-of-validation-for-bias-parameters",
+    "href": "EPIB705-Bias-Analysis-2026.html#implications-of-validation-for-bias-parameters",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Implications of validation for bias parameters",
+    "text": "Implications of validation for bias parameters\nChoices for internal validation study:\n\n\n\nSample by misclassified exposure and obtain “gold standard”:\n\nDirectly estimates PPV/NPV, but not Se/SP.\nNeed to consider outcome and confounders.\n\nSample by “true” exposure:\n\nDirectly estimates Se/Sp but not PPV/NPV.\n\nOften not feasible.\n\nSample randomly:\n\nCan estimate Se/Sp/PPV/NPV.\nNeed adequate samples for rare exposures or outcomes.\n\n\n\n\n\n\n\n    \n\n    \n    \n      \n        \n\n \nTrue Status\n\n        \n              \n                Measured Status\n                Positive\n                Negative\n              \n        \n        \n        \n                \n                  Positive\n                  a\n                  b\n                \n                \n                  Negative\n                  c\n                  d"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#example-non-differential-misclassification-of-exposure",
+    "href": "EPIB705-Bias-Analysis-2026.html#example-non-differential-misclassification-of-exposure",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Example: non-differential misclassification of exposure",
+    "text": "Example: non-differential misclassification of exposure\nExample of coronary heart disease (\\(D\\)) and “Type A” personality (\\(E\\)):\n\n\n\n\n    \n\n    \n    \n      \n        \n\n \nTrue\n \nObserved Cells\n\n        \n              \n                 \n                \\(E_1\\)\n                \\(E_0\\)\n                  \n                \\(E_1\\)\n                \\(E_0\\)\n                Total\n              \n        \n        \n        \n                \n                  \\(D_1\\)\n                  \\(A\\)\n                  \\(B\\)\n                  \n                  150\n                  107\n                  257\n                \n                \n                  \\(D_0\\)\n                  \\(C\\)\n                  \\(D\\)\n                  \n                  1277\n                  1620\n                  2897\n                \n        \n      \n    \n\n\n\n\\[RR_{obs}=(150/1427)/(107/1727)=1.7\\]\n\nSuppose we have good reasons for assuming 80% Se and 90% Sp.\nWhat is the true association?"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#calculating-true-values-from-observed",
+    "href": "EPIB705-Bias-Analysis-2026.html#calculating-true-values-from-observed",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Calculating “true” values from observed",
+    "text": "Calculating “true” values from observed\nIn our example Se=80% and Sp=90%, we observed \\(a=150\\), so to get the “true” estimate for \\(A\\) we have:\n\\[A=\\frac{a-D_{1Tot}(1-Sp_{D1})}{(Se_{D1}-1+Sp_{D1})}=\\frac{150-257(0.10)}{(0.80-1+0.90)}=177.6\\] \nSimilar calculations for “true” \\(C\\):\n\\[C=\\frac{c-D_{0Tot}(1-Sp_{D0})}{(Se_{D0}-1+Sp_{D0})}=\\frac{1277-2897(0.10)}{(0.80-1+0.90)}=1410.4\\]"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#example-non-differential-misclassification-of-exposure-1",
+    "href": "EPIB705-Bias-Analysis-2026.html#example-non-differential-misclassification-of-exposure-1",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Example: non-differential misclassification of exposure",
+    "text": "Example: non-differential misclassification of exposure\n\nTrue \\(B\\) and \\(D\\) are then calculated by subtraction from marginal totals:\n\n\\(B=D_{1Tot}-a=257-177.5=79.4\\)\n\\(D=D_{0Tot}-b=2897-1410.4=1486.6\\)\n\nNow fill in the “true” table:\n\n\n\n\n\n    \n\n    \n    \n      \n        \n\n \nTrue\n \nObserved Cells\n\n        \n              \n                 \n                \\(E_1\\)\n                \\(E_0\\)\n                  \n                \\(E_1\\)\n                \\(E_0\\)\n                Total\n              \n        \n        \n        \n                \n                  \\(D_1\\)\n                  177.6\n                  79.4\n                  \n                  150\n                  107\n                  257\n                \n                \n                  \\(D_0\\)\n                  1410.4\n                  1486.6\n                  \n                  1277\n                  1620\n                  2897\n                \n        \n      \n    \n\n\n\n\n\\[RR_{true}=(177.6/1588)/(79.4/1566)=2.2\\]"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#simple-implementation-via-episensrepisensr-misc",
+    "href": "EPIB705-Bias-Analysis-2026.html#simple-implementation-via-episensrepisensr-misc",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Simple implementation via episensr1",
+    "text": "Simple implementation via episensr1\n\n\n\nlibrary(episensr)\n# observed data\nmisclassification(\n  matrix(c(150, 107,\n           1277, 1620),\n  dimnames = list(\n    c(\"D+\", \"D-\"),\n    c(\"E+\", \"E- \")),\n  nrow = 2, byrow = TRUE),\n  type = \"exposure\",\n\n# bias parameters\n  bias_parms = c(0.80, 0.80,\n                 0.90, 0.90))\n\n\n\n\n     E+  E- \nD+  150  107\nD- 1277 1620\n                                     2.5%    97.5%\nObserved Relative Risk: 1.696586 1.337392 2.152252\n   Observed Odds Ratio: 1.778409 1.373122 2.303319\n\n\n                                                             2.5%    97.5%\nMisclassification Bias Corrected Relative Risk: 2.204640                  \n   Misclassification Bias Corrected Odds Ratio: 2.356302 1.554052 3.572700\n\n\n\nSee package by Haine (2021)"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#simpler-implementation-using-ppvnpvsfox-ch6-ppvnpv",
+    "href": "EPIB705-Bias-Analysis-2026.html#simpler-implementation-using-ppvnpvsfox-ch6-ppvnpv",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Simpler implementation using PPV/NPVs1",
+    "text": "Simpler implementation using PPV/NPVs1\n\n\n\n\n\n\n\n\n\nSee Ch.6 in Fox et al. (2022)"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#misclassification-of-confounders",
+    "href": "EPIB705-Bias-Analysis-2026.html#misclassification-of-confounders",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Misclassification of confounders",
+    "text": "Misclassification of confounders\n\nEven if exposure and disease have 100% Se and 100% Sp, misclassification of confounders can lead to biased estimates.\nIf the confounding is strong and the exposure-disease relation is weak or null, confounder misclassification can produce misleading results, even if independent and non-differential.\nNeed bias parameters for misclassified confounder data (validation, literature, etc.)"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#stratified-analysis-implementation",
+    "href": "EPIB705-Bias-Analysis-2026.html#stratified-analysis-implementation",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Stratified analysis implementation",
+    "text": "Stratified analysis implementation\n\nEstimates for Se and Sp are applied to measurement of confounder rather than exposure.1\n\n\n\n\n\n\n\n\n\n\nOr both. See examples in Ch.6 of Fox et al. (2022)."
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#example-effect-of-coffee-consumption-on-bladder-cancerslattery-coffee",
+    "href": "EPIB705-Bias-Analysis-2026.html#example-effect-of-coffee-consumption-on-bladder-cancerslattery-coffee",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Example: Effect of coffee consumption on bladder cancer1",
+    "text": "Example: Effect of coffee consumption on bladder cancer1\nWe might draw a model like this, indicating that true smoking status is unmeasured but may still confound the association between coffee and bladder cancer:\n\n\n\n\n\n\n\n\n\nSlattery et al. (1988)"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#section-8",
+    "href": "EPIB705-Bias-Analysis-2026.html#section-8",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "",
+    "text": "library(episensr)\n# observed data\nmisclass_cov(array(\n  c(202, 124, 322, 360, \n    144, 56, 203, 98,\n    58, 68, 119, 262),\ndimnames = list(\n  c(\"Cancer+\", \"Cancer-\"),\n  c(\"Coffee+\", \"Coffee-\"), \n  c(\"Total\", \"Smoking+\", \"Smoking-\")),\ndim = c(2, 2, 3)),\nbias_parms = c(.85, .85, .95, .95))\n\n\n\n\n, , Total\n\n        Coffee+ Coffee-\nCancer+     202     322\nCancer-     124     360\n\n, , Smoking+\n\n        Coffee+ Coffee-\nCancer+     144     203\nCancer-      56      98\n\n, , Smoking-\n\n        Coffee+ Coffee-\nCancer+      58     119\nCancer-      68     262\n\n                                     2.5%    97.5%\nObserved Relative Risk: 1.312388 1.168273 1.474281\n   Observed Odds Ratio: 1.821278 1.391107 2.384472\n\n\n                                                      Observed Corrected\n                      SMR RR adjusted for confounder: 1.159333  1.090442\n   RR due to confounding by misclassified confounder: 1.132020  1.203537\n          Mantel-Haenszel RR adjusted for confounder: 1.176192  1.103741\nMH RR due to confounding by misclassified confounder: 1.115795  1.189036\n                      SMR OR adjusted for confounder: 1.375221  1.213792\n   OR due to confounding by misclassified confounder: 1.324353  1.500487\n          Mantel-Haenszel OR adjusted for confounder: 1.504225  1.311560\nMH OR due to confounding by misclassified confounder: 1.210775  1.388635"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#overview-4",
+    "href": "EPIB705-Bias-Analysis-2026.html#overview-4",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Overview",
+    "text": "Overview\nWhy Bias Analysis?\n\nDeterministic Bias Analysis\nUnmeasured confounding\nMisclassification\nSelection bias\n\nMultidimensional Bias Analysis\n\nRecord-level Implementation\n\nSummary"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#bias-analysis-for-selection-bias",
+    "href": "EPIB705-Bias-Analysis-2026.html#bias-analysis-for-selection-bias",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Bias analysis for selection bias",
+    "text": "Bias analysis for selection bias\n\nResults from conditioning on a common effect of exposure and disease.\n\nDifferential baseline participation\nDifferential losses to follow-up\nEMM across selection factor\n\n\n\n\nOr when the cells of the 2 x 2 table in your study are sampled with different probabilities from the 2 x 2 table in the target population:"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#differential-baseline-participation",
+    "href": "EPIB705-Bias-Analysis-2026.html#differential-baseline-participation",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Differential baseline participation",
+    "text": "Differential baseline participation\n\n\nWhat do you need?\n\nSelection probabilities\n\nIdeally, by exposure and disease status.\n\nWhere can you get it?\n\nValidation (internal or external).\nInternal probably better.\nEducated guesses (largely based on experience or prior data).\n\n\nExample: mobile phone use and uveal melanoma1\n\n\n\n\n\n\n\n\n\n\nExample from Stang et al. (2009) described in Fox et al. (2022)"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#section-9",
+    "href": "EPIB705-Bias-Analysis-2026.html#section-9",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "",
+    "text": "Participants\n \nNon-participants+Q\n \n\n        \n              \n                 \n                E+\n                E−\n                  \n                E+\n                E−\n                Refusals\n              \n        \n        \n        \n                \n                  Cases\n                  136\n                  107\n                  \n                  3\n                  7\n                  17\n                \n                \n                  Controls\n                  297\n                  165\n                  \n                  72\n                  212\n                  379\n                \n        \n      \n    \n\n\n\n\nOR among participants: (136/297)/(107/165) = 0.71\nOR among non-participants w/Q: (3/72)/(7/212) = 1.25\nWho’s missing? 3 exposed cases we know from the questionnaire, but what about the other non-participants? Assume the exposure distribution similar to the other non-participants (3/10)*17. Same for controls.\nNow we can get an adjusted OR:\n\n\\(OR_{adj}=\\dfrac{136+3+(3/10)*17}{297+72+(72/284)*379}/\\dfrac{107+7+(7/10)*17}{165+212+(212/284)*379}=1.63\\)"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#using-selection-probabilities",
+    "href": "EPIB705-Bias-Analysis-2026.html#using-selection-probabilities",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Using selection probabilities",
+    "text": "Using selection probabilities\n\nMore generally, if we know or can estimate, or have reasonable guesses about the selection probabilities, we can create an adjusted OR using the selection probabilities:\n\nE+ Cases = 136/(136+3+(3/10)*17) = 0.94\nE- Cases = 107/(107+7+(7/10)*17) = 0.85\nE+ Controls = 297/(297+72+(72/284)*379) = 0.64\nE- Controls = 165/(165+212+(212/294)*379) = 0.25\n\n\n\\[OR_{adj}=\\hat{OR}\\times\\dfrac{S_{caseE-}\\times S_{controlE+}}{S_{caseE+}\\times S_{controlE-}}\\]\n\\[OR_{adj}=0.71\\times\\dfrac{0.85\\times0.64}{0.94\\times0.25}=1.63\\]"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#using-inverse-probability-of-selection-weighting",
+    "href": "EPIB705-Bias-Analysis-2026.html#using-inverse-probability-of-selection-weighting",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Using inverse-probability of selection weighting",
+    "text": "Using inverse-probability of selection weighting\n\nCould also just reweight each group by the inverse of its probability of selection:\n\nWeighted E+ Cases = 136 * (1 / 0.94)\nWeighted E- Cases = 107 * (1 / 0.85)\nWeighted E+ Controls = 297 * (1 / 0.64)\nWeighted E- Controls = 165 * (1 / 0.25)\n\n\n\\[OR_{adj}=\\dfrac{136*(1/S_{caseE+}) / 297*(1/S_{controlE+})}{107*(1/S_{caseE-})/165*(1/S_{controlE-})}\\]\n\\[OR_{adj}=\\dfrac{136*(1/0.94) / 297*(1/0.64)}{107*(1/0.85)/165*(1/0.25)}=1.63\\]"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#differential-loss-to-follow-up",
+    "href": "EPIB705-Bias-Analysis-2026.html#differential-loss-to-follow-up",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Differential loss-to-follow up",
+    "text": "Differential loss-to-follow up\n\nHow to account for potential bias among those lost?\nExample of impact of treatment guidelines on breast cancer mortality.\nOverall loss-to-follow of 13%, initial baseline treatment status of those lost is known."
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#section-10",
+    "href": "EPIB705-Bias-Analysis-2026.html#section-10",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "",
+    "text": "How to estimate the rates among those lost?\n\n\n\n\n    \n\n    \n    \n      \n        \n\n \nWith follow-up\n \nLost to follow-up\n\n        \n              \n                 \n                E+\n                E−\n                  \n                E+\n                E−\n              \n        \n        \n        \n                \n                  Deaths\n                  40\n                  65\n                  \n                  \n                  \n                \n                \n                  Persons\n                  104\n                  286\n                  \n                  13\n                  46\n                \n                \n                  Person-years\n                  687\n                  2560\n                  \n                  \n                  \n                \n                \n                  Crude rate\n                  5.8/100py\n                  2.5/100py\n                  \n                  \n                  \n                \n                \n                  Crude RD\n                  3.3/100py\n                  0\n                  \n                  \n                  \n                \n                \n                  Crude RR\n                  2.3\n                  1.0\n                  \n                  \n                  \n                \n        \n      \n    \n\n\n\n\n\nFirst, let’s assume that they would have accrued similar person years as those with follow-up:"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#section-11",
+    "href": "EPIB705-Bias-Analysis-2026.html#section-11",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "",
+    "text": "With follow-up\n \nLost to follow-up\n\n        \n              \n                 \n                E+\n                E−\n                  \n                E+\n                E−\n              \n        \n        \n        \n                \n                  Deaths\n                  40\n                  65\n                  \n                  \n                  \n                \n                \n                  Persons\n                  104\n                  286\n                  \n                  13\n                  46\n                \n                \n                  Person-years\n                  687\n                  2560\n                  \n                  85.9\n                  411.7\n                \n                \n                  Crude rate\n                  5.8/100py\n                  2.5/100py\n                  \n                  \n                  \n                \n                \n                  Crude RD\n                  3.3/100py\n                  0\n                  \n                  \n                  \n                \n                \n                  Crude RR\n                  2.3\n                  1.0\n                  \n                  \n                  \n                \n        \n      \n    \n\n\n\n\n\\(PY_{E+}=\\color{red}{(687/104)\\times{13}=85.9py}\\)\n\\(PY_{E-}=\\color{blue}{(2560/286)\\times{46}=411.7py}\\)\n\n\nWhat should we assume about their mortality risks?\nWhat if we assume similar to those with follow-up?"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#section-12",
+    "href": "EPIB705-Bias-Analysis-2026.html#section-12",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "",
+    "text": "Missing individuals were diagnosed at 2 specific hospitals, so use observed rates among those non-missing in hospitals where those LTF were diagnosed\n\n\n\\(Deaths_{E+}=\\color{blue}{.049}\\color{black}{\\times{85.9}=}\\color{red}{4.2}\\)\n\\(Deaths_{E-}=\\color{blue}{.045}\\color{black}{\\times{411.7}=}\\color{red}{18.7}\\)\n\n\n\n\n\n    \n\n    \n    \n      \n        \n\n \nAt 2 hospitals\n \nEstimated for those lost\n\n        \n              \n                 \n                E+\n                E−\n                  \n                E+\n                E−\n              \n        \n        \n        \n                \n                  Deaths\n                  3\n                  5\n                  \n                  4.2\n                  18.7\n                \n                \n                  Person-years\n                  60.8\n                  110.2\n                  \n                  85.9\n                  411.7\n                \n                \n                  Crude rate\n                  4.9/100py\n                  4.5/100py\n                  \n                  \n                  \n                \n                \n                  Crude RD\n                  0.4/100py\n                  0\n                  \n                  \n                  \n                \n                \n                  Crude RR\n                  1.1\n                  1.0"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#bias-corrected-estimates-with-assumptions",
+    "href": "EPIB705-Bias-Analysis-2026.html#bias-corrected-estimates-with-assumptions",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Bias-corrected estimates (with assumptions)",
+    "text": "Bias-corrected estimates (with assumptions)\n\n\n\n\n    \n\n    \n    \n      \n        \n\n \nWith follow-up\n \nLost to follow-up\n\n        \n              \n                 \n                E+\n                E−\n                  \n                E+\n                E−\n              \n        \n        \n        \n                \n                  Deaths\n                  40\n                  65\n                  \n                  4.2\n                  18.7\n                \n                \n                  Persons\n                  104\n                  286\n                  \n                  13\n                  46\n                \n                \n                  Person-years\n                  687\n                  2560\n                  \n                  85.9\n                  411.7\n                \n                \n                  Crude rate\n                  5.8/100py\n                  2.5/100py\n                  \n                  \n                  \n                \n                \n                  Crude RD\n                  3.3/100py\n                  0\n                  \n                  \n                  \n                \n                \n                  Crude RR\n                  2.3\n                  1.0\n                  \n                  \n                  \n                \n        \n      \n    \n\n\n\n\n\\(IR_{E+}=(40 + 4.2)/(687py+85.9py) = 5.7/100py\\)\n\\(IR_{E-}=(65+18.7)(2560py+411.7py)=2.8/100py\\)\n\\(RD=2.9/100py\\quad \\text{and} \\quad RR=2.0\\)"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#worst-case-scenario-still-suggests-some-impact.",
+    "href": "EPIB705-Bias-Analysis-2026.html#worst-case-scenario-still-suggests-some-impact.",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Worst case scenario still suggests some impact.",
+    "text": "Worst case scenario still suggests some impact.\n\n\n\n\n    \n\n    \n    \n      \n        \n\n \nWith follow-up\n \nLost to follow-up\n\n        \n              \n                 \n                E+\n                E−\n                  \n                E+\n                E−\n              \n        \n        \n        \n                \n                  Deaths\n                  40\n                  65\n                  \n                  0\n                  46\n                \n                \n                  Persons\n                  104\n                  286\n                  \n                  13\n                  46\n                \n                \n                  Person-years\n                  687\n                  2560\n                  \n                  85.9\n                  411.7\n                \n                \n                  Crude rate\n                  5.8/100py\n                  2.5/100py\n                  \n                  \n                  \n                \n                \n                  Crude RD\n                  3.3/100py\n                  0\n                  \n                  \n                  \n                \n                \n                  Crude RR\n                  2.3\n                  1.0\n                  \n                  \n                  \n                \n        \n      \n    \n\n\n\n\n\\(IR_{E+}=(40 + 0)/(687py+85.9py) = 5.2/100py\\)\n\\(IR_{E-}=(65+46)(2560py+411.7py)=3.7/100py\\)\n\\(RD=1.4/100py\\quad \\text{and} \\quad RR=1.4\\)"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#ip-weighting-for-selection-bias",
+    "href": "EPIB705-Bias-Analysis-2026.html#ip-weighting-for-selection-bias",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "IP weighting for selection bias",
+    "text": "IP weighting for selection bias"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#break",
+    "href": "EPIB705-Bias-Analysis-2026.html#break",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Break! ☕",
+    "text": "Break! ☕\n\n\n\n−+\n10:00"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#overview-5",
+    "href": "EPIB705-Bias-Analysis-2026.html#overview-5",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Overview",
+    "text": "Overview\nWhy Bias Analysis?\n\nDeterministic Bias Analysis\nUnmeasured confounding\nMisclassification\nSelection bias\n\nMultidimensional Bias Analysis\n\nRecord-level Implementation\n\nSummary"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#multidimensional-bias-analysis-6",
+    "href": "EPIB705-Bias-Analysis-2026.html#multidimensional-bias-analysis-6",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Multidimensional bias analysis",
+    "text": "Multidimensional bias analysis\n\nOften, bias parameters are only educated guesses.\nMultidimensional bias analysis uses a range of plausible values for bias parameters.\nEspecially useful if there are no known validation data for your parameters of interest.\n\n\nWhat to vary?\n\nUnmeasured confounding\n\nVary strength of Z-Exp and Z-Dis associations.\n\nMisclassification:\n\nRange of Se/Sp values, including differential.\n\nSelection bias\n\nRange of different selection proportions or selection bias factor."
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#section-13",
+    "href": "EPIB705-Bias-Analysis-2026.html#section-13",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "",
+    "text": "Example\nPeri-operative consultation and 30d mortality Confounder-adjusted RR=1.16 (1.07,1.26).1\n\n\n\n\n\n\n\n\n\n\n\nAn unmeasured confounder could render the association between consultation and 30-day mortality statistically nonsignificant but only if it at least doubled the odds of mortality and was present in 20% of patients who underwent consultation as compared with 10% of those who did not.\n\n\nWijeysundera et al. (2010)"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#probabilistic-bias-analysis",
+    "href": "EPIB705-Bias-Analysis-2026.html#probabilistic-bias-analysis",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Probabilistic Bias Analysis",
+    "text": "Probabilistic Bias Analysis\n\nThe major limitation of the previous methods for analyzing study bias is that they treat the bias parameters (sensitivity, specificity, confounder-disease association, prevalence of unmeasured confounders, etc.) as known quantities that are perfectly measured.\nThus, the analyses above are referred to as deterministic, and they only account for systematic error (i.e., they do not account for measurement error in the estimates of the prevalence of the unmeasured confounder or the confounder-disease association.\nAn alternative would be to assign a probability distribution to bias parameters."
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#basic-steps-for-probabilistic-bias-analysisfox-prob",
+    "href": "EPIB705-Bias-Analysis-2026.html#basic-steps-for-probabilistic-bias-analysisfox-prob",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Basic steps for probabilistic bias analysis1",
+    "text": "Basic steps for probabilistic bias analysis1\n\n\n\n\n\n\n\n\n\nSee Ch.8 in Fox et al. (2022)"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#example-distributions-for-sensitivity",
+    "href": "EPIB705-Bias-Analysis-2026.html#example-distributions-for-sensitivity",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Example distributions for sensitivity",
+    "text": "Example distributions for sensitivity\nFive distributions all centered near 0.57 and spread around 0.42 and 0.71."
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#example-unmeasured-confounding-of-resins-and-cancer",
+    "href": "EPIB705-Bias-Analysis-2026.html#example-unmeasured-confounding-of-resins-and-cancer",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Example: Unmeasured confounding of resins and cancer",
+    "text": "Example: Unmeasured confounding of resins and cancer\n\nSetup using the episensr package\n\n\n# set the seed for reproducible results\nset.seed(39569)\n\n# define the observed 2x2 data\npc &lt;- probsens_conf(matrix(c(45, 94, 257, 945),\n  dimnames = list(c(\"D+\", \"D-\"), c(\"D+\", \"D-\")), nrow = 2, byrow = TRUE),\n\n# number of replications\n  reps = 5000,\n\n# bias parameters and distributions\n\n# prevalence of U among exposed\n  prev_exp = list(\"triangular\", c(.6, .8, .7)),\n\n# prevalence of U among unexposed\n  prev_nexp = list(\"triangular\", c(.4, .6, .5)),\n\n# association of U with outcome\n  risk = list(\"log-normal\", c(1.522, 0.216)),\n\n# correlation between exposure prevalences\n  corr_p = 0.01)"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#probability-distributions-for-each-parameter",
+    "href": "EPIB705-Bias-Analysis-2026.html#probability-distributions-for-each-parameter",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Probability distributions for each parameter",
+    "text": "Probability distributions for each parameter"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#generates-a-distribution-of-corrected-estimates",
+    "href": "EPIB705-Bias-Analysis-2026.html#generates-a-distribution-of-corrected-estimates",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Generates a distribution of corrected estimates",
+    "text": "Generates a distribution of corrected estimates"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#bias-corrected-estimates",
+    "href": "EPIB705-Bias-Analysis-2026.html#bias-corrected-estimates",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Bias-corrected estimates",
+    "text": "Bias-corrected estimates\n\n\n\n\n    \n\n    \n    \n      \n        \n        \n              \n                Estimate\n                Median\n                2.5th pctile\n                97.5th pctile\n              \n        \n        \n        \n                \n                  OR: Crude\n                  1.8\n                  1.2\n                  2.6\n                \n                \n                  OR: Corrected (systematic)\n                  1.4\n                  1.17\n                  1.6\n                \n                \n                  OR: Corrected (systematic + random)\n                  1.4\n                  0.96\n                  2\n                \n        \n      \n    \n\n\n\n\nUsing probabilistic analysis gives a similar adjusted OR (1.38) relative to our deterministic bias analysis (1.39), but provides empirical confidence limits.\nIntroduction of additional random error via the simulation by choosing a standard normal deviate (\\(z_{i}\\)) for each iteration (\\(i\\)), multiply by \\(SE\\)\n\n\n\\(estimate^{total}_{i}=estimate^{adj}_{i}-z_{i}\\times SE^{adj}_{i}\\)\n\\(OR^{total}_{i}=e^{ln(OR^{adj}_{i})-z_{i}\\times SE^{adj}_{i}}\\)"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#multiple-bias-analysis",
+    "href": "EPIB705-Bias-Analysis-2026.html#multiple-bias-analysis",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Multiple bias analysis",
+    "text": "Multiple bias analysis\n\nExtension of simple bias analysis in which we assign bias parameters, either deterministically or probabilistically, but now we examine the impact of more than one bias at a time.\nDifficult to ascertain quantitatively how multiple biases may work together.\nOrder matters, and corrections should be made in the reverse of the order in which they occurred as the data were generated.\n\n\n\nGenerally (but not a rule):\n\nMisclassification\nSelection bias\nUnmeasured confounding"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#multiple-bias-analysis-examplejohnson-multibias",
+    "href": "EPIB705-Bias-Analysis-2026.html#multiple-bias-analysis-examplejohnson-multibias",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Multiple bias analysis example1",
+    "text": "Multiple bias analysis example1\n\n\n\n\n\n\n\n\n\nJohnson et al. (2018)"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#overview-6",
+    "href": "EPIB705-Bias-Analysis-2026.html#overview-6",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Overview",
+    "text": "Overview\nWhy Bias Analysis?\n\nDeterministic Bias Analysis\nUnmeasured confounding\nMisclassification\nSelection bias\n\nProbabilistic Bias Analysis\n\nRecord-level Implementation\n\nSummary"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#record-level-implementation-7",
+    "href": "EPIB705-Bias-Analysis-2026.html#record-level-implementation-7",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Record level implementation",
+    "text": "Record level implementation\n\nApplications to summaries have limitations (stratified analyses)\nOften need QBA on estimates adjusted for multiple covariates\n\n\n\n\nBenefits\n\nMore complex models (regression)\nMore ‘realistic’\n\n\nDrawbacks\n\nMore complex programming\nAdded computing time\n100K simulations on 10K obs = 100m records"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#basic-workflow-for-record-level-analysisfox-ch9",
+    "href": "EPIB705-Bias-Analysis-2026.html#basic-workflow-for-record-level-analysisfox-ch9",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Basic workflow for record-level analysis1",
+    "text": "Basic workflow for record-level analysis1\n\nBasic idea is to take one realization of bias parameters, apply it to record-level data, then save estimates and repeat.\n\n\n\n\n\n\n\n\n\n\nSee Fox et al. (2022) Chapter 9."
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#steps-for-record-level-implementation",
+    "href": "EPIB705-Bias-Analysis-2026.html#steps-for-record-level-implementation",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Steps for record-level implementation",
+    "text": "Steps for record-level implementation\n\nStep 1: Identify the Source of Bias\nStep 2: Select the Bias Parameters\nStep 3: Assign Probability Distributions to Each Bias Parameter\nStep 4: Use Simple Bias Analysis Methods to Incorporate Uncertainty in the Bias Parameters and Random Error\n\nStep 4a: Randomly Sample from the Bias Parameter Distributions\nStep 4b: Use Simple Bias Analysis Methods and Incorporate Uncertainty and Conventional Random Error\nStep 4c: Sample the Bias-Adjusted Effect Estimate\n\nStep 5: Save the Bias-Adjusted Estimate and Repeat Steps 4a–c"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#example-for-unmeasured-confounding",
+    "href": "EPIB705-Bias-Analysis-2026.html#example-for-unmeasured-confounding",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Example for Unmeasured Confounding",
+    "text": "Example for Unmeasured Confounding\n\nStep 3: Assign Probability Distributions to Each Bias Parameter\nChoose triangular distributions for \\(P_1\\), \\(P_0\\), and \\(RR_{cd}\\), which leads to the following realizations for a single set of parameters:\n\n\\[RR_{cd}= 0.567\\] \\[P_1=75.1\\%\\]\n\\[P_0=7.2\\%\\]"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#section-14",
+    "href": "EPIB705-Bias-Analysis-2026.html#section-14",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "",
+    "text": "Collapse record-level data to contingency table, i.e.,\n\n\nFrom\n\n\n\n\n\n\n\n\n\n\nTo:"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#section-15",
+    "href": "EPIB705-Bias-Analysis-2026.html#section-15",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "",
+    "text": "Perform simple QBA:1\n\n\n\n\n\n\n\n\n\nNote that the values in the table are in the first observation row."
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#section-16",
+    "href": "EPIB705-Bias-Analysis-2026.html#section-16",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "",
+    "text": "Generate predicted probabilities for the unmeasured confounder:"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#section-17",
+    "href": "EPIB705-Bias-Analysis-2026.html#section-17",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "",
+    "text": "Merge back into the record-level data\nGenerate the confounder via a Bernoulli trial based on the predicted probability for each cell. Something like c=rbinom(n,1,p).\nIf the trial returns a 1, set \\(c=1\\), if not, then \\(c=0\\), i.e., does not have the confounder."
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#section-18",
+    "href": "EPIB705-Bias-Analysis-2026.html#section-18",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "",
+    "text": "Estimate the parameter for each iteration, save, and summarize:"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#the-core-tension-in-record-level-qba",
+    "href": "EPIB705-Bias-Analysis-2026.html#the-core-tension-in-record-level-qba",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "The core tension in record-level QBA",
+    "text": "The core tension in record-level QBA\n\nFox et al. still collapse to a marginal 2×2 table at the bias-correction step — the formulas for misclassification, confounding, and selection bias were derived for cell counts\nBut if your final model adjusts for \\(W\\) and \\(Z\\), you care about the conditional \\(X\\)–\\(Y\\) association, not the marginal one — these are different quantities\n\n\n\nMatters most when bias is differential across levels of \\(W\\) or \\(Z\\) (e.g. \\(P(U=1 \\mid X)\\) varies by \\(W\\))\nFix: stratify the correction within strata of \\(W\\) and \\(Z\\) — Fox et al. call this “collapsing with reweighting”"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#a-cleaner-approach-direct-record-level-simulation",
+    "href": "EPIB705-Bias-Analysis-2026.html#a-cleaner-approach-direct-record-level-simulation",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "A cleaner approach: direct record-level simulation",
+    "text": "A cleaner approach: direct record-level simulation\nSkip the contingency table entirely. For unmeasured confounding, simulate \\(U\\) directly:\n\nSpecify \\(P(U=1 \\mid X)\\) and \\(OR_{UY}\\) as bias parameters\nCompute \\(P(U=1 \\mid X_i, Y_i)\\) per record via Bayes’ theorem\nSample \\(U_i \\sim \\text{Bernoulli}\\bigl(P(U=1 \\mid X_i, Y_i)\\bigr)\\)\nFit \\(Y \\sim X + W + Z + U\\) — the coefficient on \\(X\\) is now bias-adjusted\n\n\n\nThis is just multiple imputation of an unobserved variable — no PPV/NPV formulas, no merging\nExtends to differential bias: if \\(P(U=1 \\mid X)\\) varies by \\(W\\), use \\(W\\)-stratified bias parameters and compute \\(P(U=1 \\mid X_i, Y_i, W_i)\\) in step 2\nThe Fox et al. contingency-table route is one way to derive the per-record posterior — not the only way1\n\n\nSee Brendel et al. (2023) and Desai et al. (2024) for more recent examples"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#summary-7",
+    "href": "EPIB705-Bias-Analysis-2026.html#summary-7",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Summary",
+    "text": "Summary\n\nBias analysis is a method for trying to quantify systematic sources of bias not captured in sampling error.\nGenerally, don’t rely on intuitions, especially the idea that “non-differential” bias will lead to bias toward the null.\nConsider implementing validation studies to help ground your choice of bias parameters.\nBe humble and honest about uncertainty.\nLikely that simple, plausible, deterministic QBA is better than nothing."
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#section-19",
+    "href": "EPIB705-Bias-Analysis-2026.html#section-19",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "",
+    "text": "Is it worth it?\nResults of systematic review of QBAs.1 Graph shows original and revised estimates for:\n\nmisclassification\nunmeasured confounding\nselection bias\nmultiple biases\n\n\n\n\n\n\n\n\n\n\n\n\nPetersen et al. (2021)"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#best-practices",
+    "href": "EPIB705-Bias-Analysis-2026.html#best-practices",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Best practices",
+    "text": "Best practices\nTry to get through all of this:"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#references",
+    "href": "EPIB705-Bias-Analysis-2026.html#references",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "References",
+    "text": "References\n\n\nArah OA, Chiba Y, Greenland S. Bias formulas for external adjustment and sensitivity analysis of unmeasured confounders. Ann Epidemiol. 2008 Aug;18(8):637–46.\n\n\nBrendel P, Torres A, Arah OA. Simultaneous adjustment of uncontrolled confounding, selection bias and misclassification in multiple-bias modelling. International Journal of Epidemiology. 2023;52(4):1220–30.\n\n\nBross I. Misclassification in 2 x 2 tables. Biometrics. 1954;10(4):478–86.\n\n\nCornfield J, Haenszel W, Hammond EC, Lilienfeld AM, Shimkin MB, Wynder EL. Smoking and lung cancer: Recent evidence and a discussion of some questions. J Natl Cancer Inst. 1959 Jan;22(1):173–203.\n\n\nDesai RJ, Bradley MC, Lee H, Eworuke E, Weberpals J, Wyss R, et al. A simulation-based bias analysis to assess the impact of unmeasured confounding when designing nonrandomized database studies. American journal of epidemiology. 2024;193(11):1600–8.\n\n\nEpidemiology Monitor. Gary taubes faces epidemiology [published 1996] [Internet]. [cited 2011]. Available from: http://www.digitalsmarttools.com/eEpiMon/Interview_Taubes.htm\n\n\nFox MP, MacLehose RF, Lash TL. Applying quantitative bias analysis to epidemiologic data. Springer; 2022.\n\n\nGreenland S, Salvan A, Wegman DH, Hallock MF, Smith TJ. A case-control study of cancer mortality at a transformer-assembly facility. International archives of occupational and environmental health. 1994;66:49–54.\n\n\nHaine D. The episensr package: Basic sensitivity analysis of epidemiological results [Internet]. 2021. Available from: https://dhaine.github.io/episensr/\n\n\nJohnson CY, Howards PP, Strickland MJ, Waller DK, Flanders WD, National Birth Defects Prevention Study. Multiple bias analysis using logistic regression: An example from the national birth defects prevention study. Ann Epidemiol. 2018 Aug;28(8):510–4.\n\n\nLash TL, Fox MP, MacLehose RF, Maldonado G, McCandless LC, Greenland S. Good practices for quantitative bias analysis. International journal of epidemiology. 2014;43(6):1969–85.\n\n\nParekh N, Chappell RJ, Millen AE, Albert DM, Mares JA. Association between vitamin d and age-related macular degeneration in the third national health and nutrition examination survey, 1988 through 1994. Arch Ophthalmol. 2007 May;125(5):661–9.\n\n\nPetersen JM, Ranker LR, Barnard-Mayers R, MacLehose RF, Fox MP. A systematic review of quantitative bias analysis applied to epidemiological research. Int J Epidemiol. 2021 Nov;50(5):1708–30.\n\n\nRosenbaum PR, Rubin DB. Assessing sensitivity to an unobserved binary covariate in an observational study with binary outcome. Journal of the Royal Statistical Society: Series B (Methodological). 1983;45(2):212–8.\n\n\nRothman KJ, Greenland S, Lash TL, et al. Modern epidemiology. Vol. 3. Wolters Kluwer Health/Lippincott Williams & Wilkins Philadelphia; 2008.\n\n\nSlattery ML, Schumacher MC, West DW, Robison LM. Smoking and bladder cancer. The modifying effect of cigarettes on other factors. Cancer. 1988 Jan;61(2):402–8.\n\n\nStang A, Schmidt-Pokrzywniak A, Lash TL, Lommatzsch PK, Taubert G, Bornfeld N, et al. Mobile phone use and risk of uveal melanoma: Results of the risk factors for uveal melanoma case-control study. J Natl Cancer Inst. 2009 Jan;101(2):120–3.\n\n\nVanderweele TJ, Arah OA. Bias formulas for sensitivity analysis of unmeasured confounding for general outcomes, treatments, and confounders. Epidemiology. 2011 Jan;22(1):42–52.\n\n\nVanderWeele TJ, Ding P. Sensitivity analysis in observational research: Introducing the e-value. Ann Intern Med. 2017 Aug;167(4):268–74.\n\n\nWijeysundera DN, Austin PC, Beattie WS, Hux JE, Laupacis A. Outcomes and processes of care related to preoperative medical consultation. Arch Intern Med. 2010 Aug;170(15):1365–74."
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#app-extensions",
+    "href": "EPIB705-Bias-Analysis-2026.html#app-extensions",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Unmeasured confounding for other effect measures",
+    "text": "Unmeasured confounding for other effect measures\n← Back to main deck\n\nThe logic for adjusting the OR above applies equally to other effect measures (\\(RD\\), \\(RR\\)), with minor alterations.\nFor both \\(RD\\) and \\(RR\\) you need to specify the difference in the prevalence of \\(Z\\) by exposure\nFor \\(RR\\) need to specify the association between \\(Z\\) and \\(D\\) on the \\(RR\\) scale.\nIn our example above, we specified \\(OR=5\\) for \\(Z\\rightarrow D\\) association, roughly \\(RR=4.32\\).\nThe bias in the crude \\(RR\\) is therefore:\n\n\\(Bias(RR)=\\dfrac{RR_{DX+}}{RR_{DXZ(E)}}=\\dfrac{RR_{DZ0}P_{11}+1-P_{11}}{RR_{DZ0}P_{10}+1-P_{10}}=\\dfrac{4.3(.7)+1-.7}{4.3(.5)+1-.5}=1.25\\)"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#what-about-the-risk-differencecc-illustration",
+    "href": "EPIB705-Bias-Analysis-2026.html#what-about-the-risk-differencecc-illustration",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "What about the risk difference?1",
+    "text": "What about the risk difference?1\n\nStill need the prevalence of the unmeasured confounder by exposure, but now we need the risk difference \\(RD_{DZ}\\) for the confounder-disease association.\n\n\n\n\n\n    \n\n    \n    \n      \n        \n\n \nZ=1 Smokers\n \nZ=0 Non-smokers\n \nTotal\n\n        \n              \n                 \n                X=1\n                X=0\n                Total\n                  \n                X=1\n                X=0\n                Total\n                   \n                X=1\n                X=0\n                Total\n              \n        \n        \n        \n                \n                  \\(D=1\\)\n                  \\(A_{11}\\)\n                  \\(A_{01}\\)\n                  \\(M_{11}\\)\n                  \n                  \\(45-A_{11}\\)\n                  \\(94-A_{01}\\)\n                  \\(139-M_{11}\\)\n                  \n                  45\n                  94\n                  139\n                \n                \n                  \\(D=0\\)\n                  \\(B_{11}\\)\n                  \\(B_{01}\\)\n                  \\(M_{01}\\)\n                  \n                  \\(257-B_{11}\\)\n                  \\(945-B_{01}\\)\n                  \\(1202-M_{01}\\)\n                  \n                  257\n                  945\n                  1202\n                \n                \n                  Total\n                  \\(N_{11}\\)\n                  \\(N_{01}\\)\n                  \\(N_{+1}\\)\n                  \n                  \\(302-N_{11}\\)\n                  \\(1039-N_{01}\\)\n                  \\(1341-N_{+1}\\)\n                  \n                  302\n                  1039\n                  1341\n                \n        \n      \n    \n\n\n\n\n\nThe crude association is \\(RD_{DX+}=(45/302)-(94/1039)=0.06\\)\nDifference for \\(Z\\) by exposure (70% \\(X=1\\), 50% \\(X=0\\))\nChoose \\(RD\\) for \\(Z\\rightarrow D\\) among the unexposed as \\(RD_{DZ0}=0.10\\).\n\n\nThese data are derived from a case-control study, so this is just for illustration."
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#section-20",
+    "href": "EPIB705-Bias-Analysis-2026.html#section-20",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "",
+    "text": "Revised table for RD:\n\n\n\n\n    \n\n    \n    \n      \n        \n\n \nZ=1 Smokers\n \nZ=0 Non-smokers\n \nTotal\n\n        \n              \n                 \n                X=1\n                X=0\n                Total\n                  \n                X=1\n                X=0\n                Total\n                   \n                X=1\n                X=0\n                Total\n              \n        \n        * Row and column totals in Z strata may not sum due to rounding.\n        \n                \n                  \\(D=1\\)\n                  38\n                  73\n                  111\n                  \n                  7\n                  21\n                  28\n                  \n                  45\n                  94\n                  139\n                \n                \n                  \\(D=0\\)\n                  174\n                  447\n                  620\n                  \n                  83\n                  499\n                  582\n                  \n                  257\n                  945\n                  1202\n                \n                \n                  Total*\n                  211\n                  520\n                  731\n                  \n                  91\n                  520\n                  610\n                  \n                  302\n                  1039\n                  1341\n                \n        \n      \n    \n\n\n\n\n\nStandardize to exposed, we get:\n\n\n\\(RD_{DXZ(E)}=\\sum_{z}w_{z}RD_{DXZ}/\\sum_{z}w_{z}=0.04\\)\n\n\nBias is \\(RD_{DX+}-RD_{DXZ(E)}=0.06-0.04=0.02\\)\nArah et al. show how to calculate simply as: \\(Bias=RD_{DX+}-RD_{DXZ(E)}=RD_{DZ0}\\left(P_{Z1}-P_{Z0}\\right)=0.10\\left(0.7-0.5\\right)=0.02\\)"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#general-formulas-based-on-counterfactual-notation",
+    "href": "EPIB705-Bias-Analysis-2026.html#general-formulas-based-on-counterfactual-notation",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "General formulas based on counterfactual notation",
+    "text": "General formulas based on counterfactual notation\n\nWhat to do for more complex, regression-based models?1\nVanderWeele and Arah (2011) provided some general formulas.\nThe average causal effect among those exposed, which would be adjusted for both measured \\(X\\)s and unmeasured \\(U\\) is:\n\n\\[E\\left(Y_{a1}|a_{1}\\right)-E\\left(Y_{a0}|a_{1}\\right)\\]\n\\[=\\sum_{x}\\sum_{u}\\left\\{ E(Y|a_{1},x,u)-E(Y|a_{0},x,u)\\right\\} P(u|x,a_{1})P(x|a_{1})\\]\nFar more likely what you’ll be using in practice. See Vanderweele and Arah (2011). More on this later."
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#general-formulas-for-unmeasured-confounding",
+    "href": "EPIB705-Bias-Analysis-2026.html#general-formulas-for-unmeasured-confounding",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "General formulas for unmeasured confounding",
+    "text": "General formulas for unmeasured confounding\n\nBut, without adjustment for \\(U\\) we get an \\(X\\)-adjusted effect of:\n\n\\[\\sum_{x}\\left\\{ E(Y|a_{1},x)-E(Y|a_{0},x)\\right\\} P(x|a_{1})\\]\n\nSo, the difference between these two estimates, \\(d_{a1}\\), is\n\n\\[d_{a1}=\\sum_{x}\\left\\{ E(Y|a_{1},x)-E(Y|a_{0},x)\\right\\} P(x|a_{1})-\\left\\{ E\\left(Y_{a1}|a_{1}\\right)-E\\left(Y_{a0}|a_{1}\\right)\\right\\}\\]"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#general-formulas-for-unmeasured-confounding-1",
+    "href": "EPIB705-Bias-Analysis-2026.html#general-formulas-for-unmeasured-confounding-1",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "General formulas for unmeasured confounding",
+    "text": "General formulas for unmeasured confounding\n\nThe bias is (still) a function of the prevalence of the unknown confounder and its effect on the outcome (reference level=\\(u'\\)):\n\n\\[d_{a1}=\\sum_{x}\\sum_{u}\\left\\{ E(Y|a_{0},x,u)-E(Y|a_{0},x,u')\\right\\} \\left\\{ P(u|a_{1},x)-P\\left(u|a_{0},x\\right)\\right\\} P\\left(x|a_{1}\\right)\\]\n\nWe thus need to specify:\n\nThe \\(U\\rightarrow Y\\) relationship among the unexposed:\n\n\\(E(Y|a_{0},x,u)-E(Y|a_{0},x,u')\\)\n\nDistribution of \\(U\\) among exposed and unexposed within strata of X:\n\n\\(\\left\\{ P(u|a_{1},x)-P(u|a_{0},x)\\right\\} P(x|a_{1})\\)"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#complications-for-the-general-formula",
+    "href": "EPIB705-Bias-Analysis-2026.html#complications-for-the-general-formula",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "Complications for the general formula",
+    "text": "Complications for the general formula\n\nThese formulas require a lot of knowledge.\n\nAssociation between \\(U\\) and \\(Y\\) at each level of measured confounders \\(X\\).\nAssociation between \\(U\\) and \\(A\\) at each level of measured confounders \\(X\\).\n\n\n\n\nHow many measured confounders do you have? 2? 10?\nEven for 2 age groups and gender, for example, you would need to specify the \\(U\\rightarrow Y\\) and \\(U\\rightarrow A\\) relations for:\n\nyounger women, older women\nyounger men, older men\n\nIs this information available? Can you make educated guesses?"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#general-formulas-for-unmeasured-confounding-2",
+    "href": "EPIB705-Bias-Analysis-2026.html#general-formulas-for-unmeasured-confounding-2",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "General formulas for unmeasured confounding",
+    "text": "General formulas for unmeasured confounding\nSimplifying assumptions could be useful. Assuming no heterogeneity across \\(X\\), we could posit:\n\nconstant prevalence difference between exposed and unexposed:\n\n\\[\\delta=P(U=1|a_{1},x)-P(U=1|a_{0},x)\\]\n\nconstant RD for exposure to U across strata of exposure and \\(X\\):\n\n\\[\\gamma=E(Y|a,x,U=1)-E(Y|a,x,U=0)\\]\nThen the extent of bias is the product of these two terms:\n\\[d_{a1}=\\gamma\\delta\\]"
+  },
+  {
+    "objectID": "EPIB705-Bias-Analysis-2026.html#external-adjustment-for-unmeasured-confounding",
+    "href": "EPIB705-Bias-Analysis-2026.html#external-adjustment-for-unmeasured-confounding",
+    "title": "Bias Analysis:  Basic Concepts and Methods",
+    "section": "External adjustment for unmeasured confounding",
+    "text": "External adjustment for unmeasured confounding\nAssumptions:1\n\nDifferences in the distribution of \\(U\\) by exposure similar across all strata of measured \\(X\\)s.\nEffect of \\(U\\) on \\(Y\\) similar across all strata of measured \\(X\\)s.\n\n\n\n\n\n    \n\n    \n    \n      \n        \n\n \nRosenbaum & Rubin (1983)\n\n        \n              \n                 \n                Enough to nullify\n                More plausible\n              \n        \n        \n        \n                \n                  Adjusted estimate (0.67--0.36)\n                  0.31 (0.17, 0.45)\n                  0.31 (0.17, 0.45)\n                \n                \n                  \\(\\delta=P(U|a_1)-P(U|a_0)\\) all strata\n                  0.6\n                  0.3\n                \n                \n                  \\(\\gamma=E(Y|U=1)-E(Y|U=0)\\) all strata\n                  0.517\n                  0.5217\n                \n                \n                  Bias\\((\\gamma\\delta)\\)\n                  0.310\n                  0.155\n                \n                \n                  Bias-corrected effect\n                  0.0 (−0.14, 0.14)\n                  0.16 (0.01, 0.30)\n                \n        \n      \n    \n\n\n\n\n\nSee Rosenbaum and Rubin (1983) for more details. Similar in some ways to the ‘e-value’ concept from VanderWeele and Ding (2017)."
+  }
+]
