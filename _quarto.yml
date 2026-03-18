@@ -3,3 +3,5 @@ project:
   output-dir: docs
   render:
     - EPIB705-Bias-Analysis-2026.qmd
+  resources:
+    - docs/.nojekyll
