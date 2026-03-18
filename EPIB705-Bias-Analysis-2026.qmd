@@ -821,20 +821,6 @@ $$A=\frac{a-D_{1Tot}(1-Sp_{D1})}{(Se_{D1}-1+Sp_{D1})}=\frac{175-300(0.05)}{(0.85
 - One option in these cases is to try and quantify the potential role that misclassification may have played in your study.
 
 - If misclassification is ignored entirely, you are assuming 100% Sensitivity and 100% Specificity.
-
-## Implications of validation for bias parameters
-
-Choices for internal validation study:
-
-1. Sample by misclassified exposure and obtain "gold standard":
-    - Directly estimates PPV/NPV, but not Se/SP.
-    - Need to consider outcome and confounders.
-2. Sample by "true" exposure:
-    - Directly estimates Se/Sp but not PPV/NPV.\
-    - Often not feasible.
-3. Sample randomly:
-    - Can estimate Se/Sp/PPV/NPV.
-    - Need adequate samples for rare exposures or outcomes, potentially stratified by covariates.
     
 ## Implications of validation for bias parameters
 
@@ -945,8 +931,9 @@ library(episensr)
 misclassification(
   matrix(c(150, 107,
            1277, 1620),
-  dimnames = list(c("D+", "D-"),
-  c("E+", "E- ")),
+  dimnames = list(
+    c("D+", "D-"),
+    c("E+", "E- ")),
   nrow = 2, byrow = TRUE),
   type = "exposure",
 
@@ -988,7 +975,7 @@ knitr::include_graphics(here("images", "fox-ppv.png"))
 
 - Estimates for Se and Sp are applied to measurement of confounder rather than exposure.[^fox-ch6-conf]
 
-[^fox-ch6-conf]: See examples in Ch.6 of @Fox:2022aa.
+[^fox-ch6-conf]: Or both. See examples in Ch.6 of @Fox:2022aa.
 
 ```{r, out.width="80%"}
 #| fig-align: center
@@ -1017,23 +1004,38 @@ We might draw a model like this, indicating that true smoking status is unmeasur
 
 ##
 
-Excel resources at <https://sites.google.com/site/biasanalysis/>
-
-::: {style="text-align: center;"}
-```{r, out.width="70%"}
-#| fig-align: center
-knitr::include_graphics(here("images", "coffee-cancer-crude.png"))
+::::: columns
+::: {.column width="35%"}
+```{r, echo=TRUE, results='hide'}
+library(episensr)
+# observed data
+misclass_cov(array(
+  c(202, 124, 322, 360, 
+    144, 56, 203, 98,
+    58, 68, 119, 262),
+dimnames = list(
+  c("Cancer+", "Cancer-"),
+  c("Coffee+", "Coffee-"), 
+  c("Total", "Smoking+", "Smoking-")),
+dim = c(2, 2, 3)),
+bias_parms = c(.85, .85, .95, .95))
 ```
-
-$OR_{crude}=1.8\quad \textrm{and} \quad OR_{MHadj}=1.5\quad 95\%\text{CI}=[1.1,2.0]$
-
-```{r, out.width="70%"}
-#| fig-align: center
-knitr::include_graphics(here("images", "coffee-cancer-adj.png"))
-```
-
-$OR_{MHadj}=1.3\quad 95\%\text{CI}=[0.95,1.7]$
 :::
+::: {.column width="65%"}
+```{r, echo=FALSE}
+misclass_cov(array(
+  c(202, 124, 322, 360, 
+    144, 56, 203, 98,
+    58, 68, 119, 262),
+dimnames = list(
+  c("Cancer+", "Cancer-"),
+  c("Coffee+", "Coffee-"), 
+  c("Total", "Smoking+", "Smoking-")),
+dim = c(2, 2, 3)),
+bias_parms = c(.85, .85, .95, .95))
+```
+:::
+:::::
 
 ## Overview {.h2center}
 
@@ -1066,6 +1068,7 @@ $OR_{MHadj}=1.3\quad 95\%\text{CI}=[0.95,1.7]$
 - Results from conditioning on a common effect of exposure and disease.
     - Differential baseline participation
     - Differential losses to follow-up
+    - EMM across selection factor
 
 ::::: columns
 ::: {.column width="40%"}
@@ -1074,7 +1077,7 @@ Or when the cells of the 2 x 2 table in your study are sampled with different pr
 ::: {.column width="60%"}
 ```{r}
 #| fig-align: center
-#| out-width: 80%
+#| out-width: 60%
 knitr::include_graphics(here("images", "selection-bias.png"))
 ```
 :::
@@ -1416,6 +1419,17 @@ knitr::include_graphics(here("images", "mba-confounding.png"))
 
 - An alternative would be to assign a probability distribution to bias parameters.
 
+## Basic steps for probabilistic bias analysis[^fox-prob]
+
+[^fox-prob]: See Ch.8 in @Fox:2022aa
+
+```{r}
+#| fig-align: center
+#| out-width: 80%
+knitr::include_graphics(here("images",
+  "prob-qba-steps.png"))
+```
+
 ## Example distributions for sensitivity
 
 Five distributions all centered near 0.57 and spread around 0.42 and 0.71.
@@ -1729,8 +1743,10 @@ Skip the contingency table entirely. For unmeasured confounding, simulate $U$ di
 . . .
 
 - This is just **multiple imputation of an unobserved variable** — no PPV/NPV formulas, no merging
-- Naturally handles multivariable models and differential bias (condition on $W$ in step 2)
-- The Fox et al. contingency-table route is one way to derive the per-record posterior — not the only way
+- Extends to differential bias: if $P(U=1 \mid X)$ varies by $W$, use $W$-stratified bias parameters and compute $P(U=1 \mid X_i, Y_i, W_i)$ in step 2
+- The Fox et al. contingency-table route is one way to derive the per-record posterior — not the only way[^rl]
+
+[^rl]: See @Brendel:2023aa and @Desai:2024aa for more recent examples
 
 ## Summary
 
